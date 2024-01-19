@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\System\Admin\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,15 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return view('admin.home');
 });
+
+/**
+ *  Admin routes
+ */
+
+Route::prefix('system')->group(function () {
+    Route::prefix('admin')->group(function (){
+        Route::get('/dashboard',                 [HomeController::class, 'index'])->name('system.home');
+    });
+});
+
+//Route::get('/user', [HomeCont::class, 'index']);
