@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     $(".s-lm-wrapper").click(function () {
         $(".inside-links").each(function () {
-            $(this).css('height', '0px');
+            $(this).css('height', '0px').css('padding-bottom', '0px');
         });
         $(".fa-angle-right").each(function () {
             $(this).css('transform', 'rotate(0deg)');
@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 
         if(!$(this).hasClass('active')){
-            $(this).find(".inside-links").css('height', (height * 34) + 'px');
+            $(this).find(".inside-links").css('height', (height * 34) + 'px').css('padding-bottom', '10px');
             $(this).find(".fa-angle-right").css('transform', 'rotate(90deg)');
             $(this).addClass('active');
         }else{

@@ -159,7 +159,33 @@
                 </div>
             </div>
         </a>
-
+        <a href="#" class="menu-a-link">
+            <div class="s-lm-wrapper">
+                <div class="s-lm-s-elements">
+                    <div class="s-lms-e-img">
+                        <i class="far fa-file-alt"></i>
+                    </div>
+                    <p>{{__('Moje narudžbe')}}</p>
+                    <div class="extra-elements">
+                        <div class="rotate-element"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+                <div class="inside-links active-links">
+                    <a href="#">
+                        <div class="inside-lm-link">
+                            <div class="ilm-l"></div><div class="ilm-c"></div>
+                            <p>{{__('Pregled svih narudžbi')}}</p>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div class="inside-lm-link">
+                            <div class="ilm-l"></div><div class="ilm-c"></div>
+                            <p> {{__('Uputstva za korištenje')}} </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </a>
         <a href="#" class="menu-a-link">
             <div class="s-lm-wrapper">
                 <div class="s-lm-s-elements">
