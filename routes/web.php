@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\Admin\HomeController;
 
@@ -19,6 +20,17 @@ Route::get('/', function () {
 });
 Route::get('/test', function () {
     return view('admin.home');
+});
+
+/**
+ *  Auth routes
+ */
+
+Route::prefix('auth')->group(function () {
+    Route::get('/',                              [AuthController::class, 'auth'])->name('auth');
+
+    /* Create an account */
+    Route::get('/create-account',                [AuthController::class, 'createAccount'])->name('auth.create-account');
 });
 
 /**
