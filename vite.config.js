@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import sass from 'sass';
+// import sass from 'sass';
+// import 'jquery-ui/ui/core';
+// import 'jquery-ui/ui/widgets/datepicker';
 
 export default defineConfig({
     plugins: [

@@ -10,9 +10,13 @@ window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /* Import jQuery and other libraries */
-import jQuery from 'jquery';
-window.$ = jQuery;
+// import jQuery from 'jquery';
+// window.$ = jQuery;
 
+import $ from 'jquery';
+window.jQuery = window.$ = $;
+
+// import 'jquery-ui/dist/jquery-ui';
 
 /**
  *  Include lodash (npm install lodash)

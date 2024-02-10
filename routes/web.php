@@ -27,10 +27,11 @@ Route::get('/test', function () {
  */
 
 Route::prefix('auth')->group(function () {
-    Route::get('/',                              [AuthController::class, 'auth'])->name('auth');
+    Route::get ('/',                              [AuthController::class, 'auth'])->name('auth');
 
     /* Create an account */
-    Route::get('/create-account',                [AuthController::class, 'createAccount'])->name('auth.create-account');
+    Route::get ('/create-account',                [AuthController::class, 'createAccount'])->name('auth.create-account');
+    Route::post('/save-account',                  [AuthController::class, 'saveAccount'])->name('auth.save-account');
 });
 
 /**
