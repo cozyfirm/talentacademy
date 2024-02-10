@@ -17,6 +17,12 @@ Ubuntu commands
 
     - npx vite build --watch
 
+### Important notes
+
+ENV File should be defined as:
+
+    - SESSION_DRIVER=database
+
 
 
 

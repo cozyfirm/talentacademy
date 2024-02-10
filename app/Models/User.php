@@ -25,6 +25,7 @@ class User extends Authenticatable{
         'username',
         'email',
         'password',
+        'api_token',
         'prefix',
         'phone',
         'birth_date',

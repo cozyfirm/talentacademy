@@ -86,6 +86,11 @@
 
 {{--                @include('system.template.menu.menu-includes.notifications')--}}
             </div>
+            <div class="single-li main-search-w" title="">
+                <a href="{{ route('auth.logout') }}">
+                    <i class="fas fa-power-off" title="{{__('Odjavite se')}}"></i>
+                </a>
+            </div>
             <a href="#">
                 <div class="single-li user-name">
                     <p><b> {{ __('Root Admin') }} </b></p>

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller{
@@ -20,6 +21,47 @@ class AuthController extends Controller{
     public function auth(){
         return view($this->_path. 'auth');
     }
+
+    public function authenticate(Request $request){
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $user = Auth::user();
+
+            return json_encode([
+                'code' => '0000',
+                'message' => __('Uspješno ste se prijavili!'),
+                'url' => route('system.home')
+            ]);
+
+//            if(!($user->active ?? '')){
+//                return json_encode(array('code' => '0001', 'message' => __('Pristup za korisnika '. ($user->name ?? '') .' nije dozvoljen!')));
+//            }else{
+//                return json_encode([
+//                    'code' => '0000',
+//                    'message' => __('Uspješno ste se prijavili!'),
+//                    'url' => route('system.users.profile')
+//                ]);
+//            }
+        }else {
+            return json_encode([
+                'code' => '4001',
+                'message' => __('Pogrešni pristupni podaci. Molimo pokušajte ponovo!')
+            ]);
+        }
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     * Destroy sessions and log user out
+     */
+    public function logout(): \Illuminate\Http\RedirectResponse{
+        Auth::logout();
+        return redirect()->route('auth');
+    }
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     *  Register Form
+     */
 
     /**
      *  Return view for account creation
@@ -50,7 +92,7 @@ class AuthController extends Controller{
             $request['username'] = $this->getSlug($request->name);
 
             /* Hash password and add token */
-            $request['password'] = Hash::make('init_psw' . time());
+            $request['password'] = Hash::make($request->password);
             $request['api_token'] = hash('sha256', 'root'. '+'. time());
 
             /* When user is created, UserObserver is called and email was sent */

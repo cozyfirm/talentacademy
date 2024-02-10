@@ -28,6 +28,8 @@ Route::get('/test', function () {
 
 Route::prefix('auth')->group(function () {
     Route::get ('/',                              [AuthController::class, 'auth'])->name('auth');
+    Route::post('/authenticate',                  [AuthController::class, 'authenticate'])->name('auth.authenticate');
+    Route::get ('/logout',                        [AuthController::class, 'logout'])->name('auth.logout');
 
     /* Create an account */
     Route::get ('/create-account',                [AuthController::class, 'createAccount'])->name('auth.create-account');
@@ -38,7 +40,7 @@ Route::prefix('auth')->group(function () {
  *  Admin routes
  */
 
-Route::prefix('system')->group(function () {
+Route::prefix('system')->middleware('auth')->group(function () {
     Route::prefix('admin')->group(function (){
         Route::get('/dashboard',                 [HomeController::class, 'index'])->name('system.home');
     });

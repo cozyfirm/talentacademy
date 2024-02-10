@@ -2,7 +2,7 @@ import { Notify } from './../../style/layout/notify.ts';
 import { Validator } from "../../style/layout/validator.ts";
 
 $( document ).ready(function() {
-    let loginUrl = '/auth/log-me-in';
+    let loginUrl = '/auth/authenticate';
 
     /* Save account - Register form */
     let saveAccUri  = '/auth/save-account';
@@ -17,7 +17,7 @@ $( document ).ready(function() {
         let email    = $("#email").val();
         let password = $("#password").val();
 
-        if(!validator.email(email)){
+        if(!Validator.email(email)){
             Notify.Me(["Uneseni email nije validan!", "warn"]);
             return;
         }
