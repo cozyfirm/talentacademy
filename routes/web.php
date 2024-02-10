@@ -34,6 +34,12 @@ Route::prefix('auth')->group(function () {
     /* Create an account */
     Route::get ('/create-account',                [AuthController::class, 'createAccount'])->name('auth.create-account');
     Route::post('/save-account',                  [AuthController::class, 'saveAccount'])->name('auth.save-account');
+
+    /* Restart password */
+    Route::get ('/restart-password',              [AuthController::class, 'restartPassword'])->name('auth.restart-password');
+    Route::post('/generate-restart-token',        [AuthController::class, 'generateRestartToken'])->name('auth.generate-restart-token');
+    Route::get ('/new-password/{token}',          [AuthController::class, 'newPassword'])->name('auth.new-password');
+    Route::post('/generate-new-password',         [AuthController::class, 'generateNewPassword'])->name('auth.generate-new-password');
 });
 
 /**

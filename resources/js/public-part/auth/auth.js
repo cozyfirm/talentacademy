@@ -3,9 +3,12 @@ import { Validator } from "../../style/layout/validator.ts";
 
 $( document ).ready(function() {
     let loginUrl = '/auth/authenticate';
-
     /* Save account - Register form */
     let saveAccUri  = '/auth/save-account';
+    /* Restart password token */
+    let generateTokenUri = '/auth/generate-restart-token';
+    /* Generate new password */
+    let generatePasswordUri = '/auth/generate-new-password';
 
     $.ajaxSetup({
         headers: {
@@ -36,9 +39,8 @@ $( document ).ready(function() {
                 if(code === '0000'){
                     window.location = response['url'];
                 }else{
-                    notify.Me([response['message'], "warn"]);
+                    Notify.Me([response['message'], "warn"]);
                 }
-                console.log(response);
             }
         });
     };
@@ -180,5 +182,93 @@ $( document ).ready(function() {
         progressElements();
     });
 
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     *  Restart password functions
+     */
 
+    let generateToken = function(){
+        let email  = $("#email");
+        let loader = $(".loading-gif");
+
+        if(!Validator.email(email.val())){
+            Notify.Me(["Uneseni email nije validan!", "warn"]);
+            return;
+        }
+
+        /* Show loading gif */
+        loader.removeClass('d-none');
+
+        $.ajax({
+            url: generateTokenUri,
+            method: 'POST',
+            dataType: "json",
+            data: {
+                email: email.val()
+            },
+            success: function success(response) {
+                let code = response['code'];
+
+                /* Hide back */
+                loader.addClass('d-none');
+
+                if(code === '0000'){
+                    Notify.Me([response['message'], "success"]);
+                    email.val("");
+                }else{
+                    Notify.Me([response['message'], "warn"]);
+                }
+            }
+        });
+    };
+    $(".generate-token-btn").click(function (){
+       generateToken();
+    });
+
+    /**
+     *  Generate new password
+     */
+    let generatePassword = function(){
+        let email  = $("#email");
+        let loader = $(".loading-gif");
+        let password = $("#password");
+        let repeat   = $("#passwordRepeat");
+
+        if(!Validator.email(email.val())){
+            Notify.Me(["Uneseni email nije validan!", "warn"]);
+            return;
+        }
+
+        console.log("wee");
+
+        /* Show loading gif */
+        // loader.removeClass('d-none');
+
+        $.ajax({
+            url: generatePasswordUri,
+            method: 'POST',
+            dataType: "json",
+            data: {
+                email: email.val(),
+                password: password,
+                repeat: repeat,
+                // token: $("#token").val()
+            },
+            success: function success(response) {
+                let code = response['code'];
+
+                /* Hide back */
+                // loader.addClass('d-none');
+
+                if(code === '0000'){
+                    window.location = response['url'];
+                }else{
+                    Notify.Me([response['message'], "warn"]);
+                }
+            }
+        });
+    };
+    $(".generate-password-btn").click(function (){
+        generatePassword();
+    });
 });

@@ -19,39 +19,26 @@
 
                 <div class="aff-short">
                     <p>
-                        {{ __('Dobrodošli nazad. Unesite Vaše kredincijale i prijavite se na sistem www.alkaris.com. Enjoy using it !') }}
+                        {{ __('Unesite Vašu email adresu za oporavak korisničke šifre. Uputstvo za oporavak šifre će biti automatski poslano putem email-a!') }}
                     </p>
                 </div>
                 <hr>
                 <div class="aff-form">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="email" class="mb-2"> <b> {{ __('Vaš email') }} </b> </label>
                                 <input type="email" name="email" class="form-control form-control-sm mb-2" id="email" aria-describedby="emailHelp">
                                 <small id="emailHelp" class="form-text text-muted"> {{__('Molimo da unesete Vaš email!')}} </small>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="password" class="mb-2"> <b> {{ __('Vaša šifra / lozinka') }} </b> </label>
-                                <input type="password" name="password" class="form-control form-control-sm mb-2" id="password" aria-describedby="passwordHelp">
-                                <small id="passwordHelp" class="form-text text-muted"> {{ __('Vaša korisnička šifra / lozinka') }} </small>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="row aff-links">
-                        <div class="col-md-6 mt-3 d-inline-flex">
-                            <div class="stay-logged-in">
-                                <input type="checkbox" name="stay_logged" id="stay_logged">
-                                <label for="stay_logged">{{ __('Ostanite prijavljeni') }}</label>
-                            </div>
-                            <span>|</span>
-                            <a href="{{ route('auth.restart-password') }}"> {{ __('Zaboravili ste šifru?') }} </a>
-                        </div>
+                        <!-- It will stay empty for now -->
+                        <div class="col-md-6 mt-3 d-inline-flex"> </div>
                         <div class="col-md-6 mt-3 d-flex justify-content-end">
-                            <button type="submit" class="btn auth-btn"> {{ __('PRIJAVITE SE') }} </button>
+                            <button type="submit" class="btn generate-token-btn"> {{ __('OPORAVAK ŠIFRE') }} </button>
                         </div>
                     </div>
 
