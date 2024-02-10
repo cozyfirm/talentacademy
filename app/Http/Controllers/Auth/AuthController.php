@@ -9,7 +9,6 @@ use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller{
     use UserBaseTrait, ResponseTrait;
@@ -22,7 +21,6 @@ class AuthController extends Controller{
         return view($this->_path. 'auth');
     }
 
-
     /**
      *  Return view for account creation
      */
@@ -32,6 +30,13 @@ class AuthController extends Controller{
             'countries' => Country::orderBy('name_ba')->get()->pluck('name_ba', 'id'),
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @return bool|\Illuminate\Http\JsonResponse|string|void
+     *
+     * Ajax END-Point; Create new profile
+     */
     public function saveAccount(Request $request){
         try{
             /* Password cannot be empty */
