@@ -228,9 +228,10 @@ $( document ).ready(function() {
     /**
      *  Generate new password
      */
-    let generatePassword = function(){
-        let email  = $("#email");
+    let generateNewPassword = function(){
         let loader = $(".loading-gif");
+
+        let email  = $("#email");
         let password = $("#password");
         let repeat   = $("#passwordRepeat");
 
@@ -238,8 +239,6 @@ $( document ).ready(function() {
             Notify.Me(["Uneseni email nije validan!", "warn"]);
             return;
         }
-
-        console.log("wee");
 
         /* Show loading gif */
         // loader.removeClass('d-none');
@@ -250,9 +249,9 @@ $( document ).ready(function() {
             dataType: "json",
             data: {
                 email: email.val(),
-                password: password,
-                repeat: repeat,
-                // token: $("#token").val()
+                password: password.val(),
+                repeat: repeat.val(),
+                token: $("#token").val()
             },
             success: function success(response) {
                 let code = response['code'];
@@ -263,12 +262,17 @@ $( document ).ready(function() {
                 if(code === '0000'){
                     window.location = response['url'];
                 }else{
+                    /* If there is try to hack, redirect */
+                    // if(code === '11416'){
+                    //     window.location = response['data']['url'];
+                    // }else Notify.Me([response['message'], "warn"]);
+
                     Notify.Me([response['message'], "warn"]);
                 }
             }
         });
     };
     $(".generate-password-btn").click(function (){
-        generatePassword();
+        generateNewPassword();
     });
 });

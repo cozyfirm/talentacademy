@@ -109,7 +109,6 @@ class AuthController extends Controller{
 
             if($user) return $this->jsonSuccess(__('Uspješno ste se kreirali korisnički račun!'), route('auth'));
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonResponse('1101', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
@@ -133,7 +132,11 @@ class AuthController extends Controller{
      */
     public function generateRestartToken(Request $request){
         try{
-            $token = RestartToken::create(['email' => $request->email, 'token' => Hash::make(time())]);
+            /* Delete previous tokens */
+            RestartToken::where('email', $request->email)->delete();
+
+
+            $token = RestartToken::create(['email' => $request->email, 'token' => md5(time())]);
             $user  = User::where('email', $request->email)->first();
 
             /* Set email with instructions */
@@ -155,5 +158,41 @@ class AuthController extends Controller{
         return view($this->_path. 'new-password', [
             'token' => $token
         ]);
+    }
+
+    public function generateNewPassword(Request $request){
+        try{
+            if(!isset($request->email)) return $this->jsonResponse('1142', __('Molimo da unesete Vaš email'));
+            if(!isset($request->password)) return $this->jsonResponse('11413', __('Unesite Vašu šifru'));
+            if(!isset($request->repeat)) return $this->jsonResponse('11414', __('Potvrdite Vašu šifru'));
+
+            if($request->password != $request->repeat) return $this->jsonResponse('11415', __('Unesene šifre se ne podudaraju!'));
+
+            /* Get sample from DB */
+            $token = RestartToken::where('email', $request->email)->where('token', $request->token)->first();
+
+            /* Check if token is valid */
+            if(!$token) return $this->jsonResponse('11416', __('Token nije važeći!'), ['url' => route('auth')]);
+
+            /* Update user password */
+            User::where('email', $request->email)->update([
+                'password' => Hash::make($request->password)
+            ]);
+
+            /* Remove token from DB; Query Again since there is no PK */
+            RestartToken::where('email', $request->email)->delete();
+
+            return json_encode([
+                'code' => '0000',
+                'message' => __('Korisnička šifra uspješno izmijenjena!'),
+                'url' => route('auth')
+            ]);
+        }catch (\Exception $e){
+            dd($e);
+            return json_encode([
+                'code' => '1141',
+                'message' => __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!')
+            ]);
+        }
     }
 }
