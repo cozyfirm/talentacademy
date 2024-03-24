@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\Admin\HomeController;
+use App\Http\Controllers\PublicPart\HomeController as HomepageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +15,6 @@ use App\Http\Controllers\System\Admin\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/test', function () {
-    return view('admin.home');
-});
 
 /**
  *  Auth routes
@@ -40,6 +34,13 @@ Route::prefix('auth')->group(function () {
     Route::post('/generate-restart-token',        [AuthController::class, 'generateRestartToken'])->name('auth.generate-restart-token');
     Route::get ('/new-password/{token}',          [AuthController::class, 'newPassword'])->name('auth.new-password');
     Route::post('/generate-new-password',         [AuthController::class, 'generateNewPassword'])->name('auth.generate-new-password');
+});
+
+/**
+ *  Public routes
+ */
+Route::prefix('')->group(function () {
+    Route::get ('/',                              [HomepageController::class, 'home'])->name('public-part.home');
 });
 
 /**

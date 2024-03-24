@@ -1,0 +1,15 @@
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import "bootstrap/scss/bootstrap";
+
+/*
+ *  Include layouts snippets into main file
+ */
+
+@import "snippets/menu";
+@import "snippets/footer";
+
+/*
+ *  Other APP Styles
+ */
+
+@import "app/home/home";
