@@ -45,4 +45,49 @@
             </div>
         </div>
     </div>
+    <div class="features">
+        <div class="features__container">
+            <div class="features__content">
+                <h2 class="features__heading">PROŠIRI SVOJA ZNANJA O KREATIVNIM INDUSTRIJAMA</h2>
+                <p class="features__text">Kroz Intenzivni sedmodnevni program Akademije, uz učešće preko 50 predavača, mentora i voditelja radionica koji će sa tobom podijeliti svoje relevantna naučna znanja i iskustva pomažemo razvoju  tvojih vještina i pružamo ti stvarni uvid u svijet kreativnih industrija</p>
+                <a href="#" class="features__button">
+                    <img src="/files/images/public-part/twisted-arrow.svg" alt="Twisted arrow">
+                    Programi Akademije
+                </a>
+            </div>
+            <div class="features__image">
+                <img src="/files/images/public-part/features-1.svg" alt="Features image">
+            </div>
+        </div>
+    </div>
+    <div class="features features--variant-one">
+        <div class="features__container">
+            <div class="features__content">
+                <h2 class="features__heading">POSJETE STUDIJIMA, REDAKCIJAMA, FIRMAMA...</h2>
+                <p class="features__text">Kroz Intenzivni sedmodnevni program Akademije, uz učešće preko 50 predavača, mentora i voditelja radionica koji će sa tobom podijeliti svoje relevantna naučna znanja i iskustva pomažemo razvoju  tvojih vještina i pružamo ti stvarni uvid u svijet kreativnih industrija</p>
+                <a href="#" class="features__button">
+                    <img src="/files/images/public-part/twisted-arrow.svg" alt="Twisted arrow">
+                    Lokacije Akademije
+                </a>
+            </div>
+            <div class="features__image">
+                <img src="/files/images/public-part/features-2.svg" alt="Features image">
+            </div>
+        </div>
+    </div>
+    <div class="features features--variant-two">
+        <div class="features__container">
+            <div class="features__content">
+                <h2 class="features__heading">STVARANJE BOLJEG DRUŠTVA I ZAJEDNICE</h2>
+                <p class="features__text">Kroz Intenzivni sedmodnevni program Akademije, uz učešće preko 50 predavača, mentora i voditelja radionica koji će sa tobom podijeliti svoje relevantna naučna znanja i iskustva pomažemo razvoju  tvojih vještina i pružamo ti stvarni uvid u svijet kreativnih industrija</p>
+                <a href="#" class="features__button">
+                    <img src="/files/images/public-part/twisted-arrow.svg" alt="Twisted arrow">
+                    Predavači
+                </a>
+            </div>
+            <div class="features__image">
+                <img src="/files/images/public-part/features-3.svg" alt="Features image">
+            </div>
+        </div>
+    </div>
 @endsection
