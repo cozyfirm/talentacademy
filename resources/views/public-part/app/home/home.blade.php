@@ -90,4 +90,41 @@
             </div>
         </div>
     </div>
+    <div class="programs">
+        <div class="programs__container">
+            <h2 class="programs__heading">Programi</h2>
+            <div class="programs__content">
+                <a href="#" class="programs__program">
+                    <img src="/files/images/public-part/programs-1.svg" alt="Programs image #1" class="programs__program-image">
+                    <h3 class="programs__program-heading">Pisanje za 21. stoljeće</h3>
+                    <img src="/files/images/public-part/programs-icon.svg" alt="Programs icon" class="programs__program-icon">
+                </a>
+                <a href="#" class="programs__program">
+                    <img src="/files/images/public-part/programs-2.svg" alt="Programs image #2" class="programs__program-image">
+                    <h3 class="programs__program-heading">Novinarstvo i društvene mreže</h3>
+                    <img src="/files/images/public-part/programs-icon.svg" alt="Programs icon" class="programs__program-icon">
+                </a>
+                <a href="#" class="programs__program">
+                    <img src="/files/images/public-part/programs-3.svg" alt="Programs image #3" class="programs__program-image">
+                    <h3 class="programs__program-heading">Primijenjena muzička produkcija</h3>
+                    <img src="/files/images/public-part/programs-icon.svg" alt="Programs icon" class="programs__program-icon">
+                </a>
+                <a href="#" class="programs__program">
+                    <img src="/files/images/public-part/programs-4.svg" alt="Programs image #4" class="programs__program-image">
+                    <h3 class="programs__program-heading">Odgovorno kodiranje i Civic Tech</h3>
+                    <img src="/files/images/public-part/programs-icon.svg" alt="Programs icon" class="programs__program-icon">
+                </a>
+                <a href="#" class="programs__program">
+                    <img src="/files/images/public-part/programs-5.svg" alt="Programs image #5" class="programs__program-image">
+                    <h3 class="programs__program-heading">Grafički dizajn i animacija</h3>
+                    <img src="/files/images/public-part/programs-icon.svg" alt="Programs icon" class="programs__program-icon">
+                </a>
+                <a href="#" class="programs__program">
+                    <img src="/files/images/public-part/programs-6.svg" alt="Programs image #6" class="programs__program-image">
+                    <h3 class="programs__program-heading">Angažovani rad  i kritičko razmišljanje</h3>
+                    <img src="/files/images/public-part/programs-icon.svg" alt="Programs icon" class="programs__program-icon">
+                </a>
+            </div>
+        </div>
+    </div>
 @endsection

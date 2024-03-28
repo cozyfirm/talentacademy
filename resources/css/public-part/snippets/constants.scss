@@ -7,6 +7,10 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    color: inherit;
+}
+
 // Colors
 $dark: #070600;
 $primary: #EA8BF3;

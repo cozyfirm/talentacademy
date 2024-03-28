@@ -274,7 +274,7 @@
 
         .features__container {
             flex-direction: row-reverse;
-            
+
             @media (max-width: $mobile-width) {
                 flex-direction: column;
                 justify-content: flex-start;
@@ -293,5 +293,106 @@
 
     &.features--variant-two {
         background: #EA8BF3;
+    }
+}
+
+.programs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $dark;
+
+    .programs__container {
+        width: 100%;
+        max-width: $container-width;
+        padding: 64px 0;
+
+        @media (max-width: $container-width) {
+            padding: 64px 24px;
+        }
+
+        .programs__heading {
+            color: $text-white;
+            font-size: 56px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%;
+        }
+
+        .programs__content {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 32px;
+            flex-shrink: 0;
+            margin-top: 32px;
+
+            .programs__program {
+                height: 350px;
+                position: relative;
+                width: calc(33.33% - 22px);
+                padding: 32px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                background: #EEF0F2;
+                border-radius: 30px;
+                border: 1px solid #000;
+                cursor: pointer;
+
+                @media (max-width: 900px) {
+                    width: calc(50% - 22px);
+                }
+
+                @media (max-width: 600px) {
+                    width: 100%;
+
+                    &:nth-child(1) {
+                        background: #DAC0FB;
+                    }
+
+                    &:nth-child(2) {
+                        background: #757BF6;
+                    }
+
+                    &:nth-child(3) {
+                        background: #DBFF8F;
+                    }
+
+                    &:nth-child(4) {
+                        background: #0E8C80;
+                    }
+
+                    &:nth-child(5) {
+                        background: #F45B69;
+                    }
+
+                    &:nth-child(6) {
+                        background: #DAC0FB;
+                    }
+                }
+
+                .programs__program-heading {
+                    font-size: 32px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 130%;
+                    text-align: center;
+                }
+
+                .programs__program-image {
+                    margin-top: 50px;
+                }
+
+                .programs__program-icon {
+                    position: absolute;
+                    top: 32px;
+                    right: 32px;
+                }
+            }
+        }
     }
 }
