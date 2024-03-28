@@ -396,3 +396,109 @@
         }
     }
 }
+
+.how-to-apply {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #EA8BF3;
+
+    .how-to-apply__container {
+        width: 100%;
+        max-width: $container-width;
+        padding: 64px 0;
+
+        @media (max-width: $container-width) {
+            padding: 64px 24px;
+        }
+
+        .how-to-apply__heading {
+            color: $dark;
+            font-size: 56px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%;
+            text-align: center;
+            padding-bottom: 32px;
+
+            @media (max-width: $mobile-width) {
+                font-size: 48px;
+            }
+        }
+
+        .how-to-apply__step {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 64px;
+
+            @media (max-width: $mobile-width) {
+                flex-direction: column-reverse;
+
+                .how-to-apply__step-image {
+                    width: 100%;
+                }
+
+                .how-to-apply__step-heading {
+                    font-size: 24px;
+                }
+            }
+        }
+
+        .how-to-apply__step-image {
+            width: calc(50% - 64px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .how-to-apply__step-heading {
+            font-size: 56px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%;
+        }
+
+        .how-to-apply__step-text {
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+        }
+    }
+
+    .how-to-apply__pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+        margin-top: 32px;
+
+        .how-to-apply__pagination-item {
+            height: 40px;
+            width: 40px;
+            border: 1px solid $dark;
+            border-radius: 8px;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            @media (max-width: $mobile-width) {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+
+            &.how-to-apply__pagination-item--active {
+                background: $dark;
+                color: #EA8BF3;
+            }
+        }
+    }
+}
+
