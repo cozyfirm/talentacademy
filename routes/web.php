@@ -41,6 +41,14 @@ Route::prefix('auth')->group(function () {
  */
 Route::prefix('')->group(function () {
     Route::get ('/',                              [HomepageController::class, 'home'])->name('public-part.home');
+
+
+    /*
+     *  Programs
+     */
+    Route::prefix('programs')->group(function () {
+        Route::get ('/restart-password',              [AuthController::class, 'restartPassword'])->name('auth.restart-password');
+    });
 });
 
 /**

@@ -18,7 +18,7 @@
         <a href="#">{{ __('Stipendije') }}</a>
         <a href="#">{{ __('Blog') }}</a>
         <a href="#">{{ __('Lokacije') }}</a>
-        <a href="#">
+        <a class="show-header-submenu">
             {{ __('Programi akademije') }}
             <i class="fas fa-chevron-down"></i>
         </a>
@@ -27,31 +27,31 @@
     <div class="header__submenu">
         <a href="">
             <div class="header__submenu_elem">
-                <img src="{{ asset('files/images/public-part/programs-1.svg') }}" alt="">
+                <img src="{{ asset('files/images/public-part/writing.svg') }}" alt="">
                 <p>{{ __('Novinarstvo i društvene mreže') }}</p>
             </div>
         </a>
         <a href="">
             <div class="header__submenu_elem">
-                <img src="{{ asset('files/images/public-part/programs-1.svg') }}" alt="">
+                <img src="{{ asset('files/images/public-part/civic.svg') }}" alt="">
                 <p>{{ __('Pisanje za 21. stoljeće') }}</p>
             </div>
         </a>
         <a href="">
             <div class="header__submenu_elem">
-                <img src="{{ asset('files/images/public-part/programs-1.svg') }}" alt="">
+                <img src="{{ asset('files/images/public-part/socal.svg') }}" alt="">
                 <p>{{ __('Odgovorno kodiranje i Civic Tech') }}</p>
             </div>
         </a>
         <a href="">
             <div class="header__submenu_elem">
-                <img src="{{ asset('files/images/public-part/programs-1.svg') }}" alt="">
+                <img src="{{ asset('files/images/public-part/design.svg') }}" alt="">
                 <p>{{ __('Grafički dizajn animacija') }}</p>
             </div>
         </a>
         <a href="">
             <div class="header__submenu_elem">
-                <img src="{{ asset('files/images/public-part/programs-1.svg') }}" alt="">
+                <img src="{{ asset('files/images/public-part/music.svg') }}" alt="">
                 <p>{{ __('Primijenjena muzička produkcija') }}</p>
             </div>
         </a>
