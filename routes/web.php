@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PublicPart\ProgramsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\Admin\HomeController;
 use App\Http\Controllers\PublicPart\HomeController as HomepageController;
@@ -47,7 +48,7 @@ Route::prefix('')->group(function () {
      *  Programs
      */
     Route::prefix('programs')->group(function () {
-        Route::get ('/restart-password',              [AuthController::class, 'restartPassword'])->name('auth.restart-password');
+        Route::get ('/preview',                   [ProgramsController::class, 'preview'])->name('public-part.programs.preview');
     });
 });
 

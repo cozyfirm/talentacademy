@@ -1,0 +1,85 @@
+.preview__cover{
+    position: relative; width: 100%; background: $p1_bcg;
+    align-items: center;  display: flex;
+    .preview__cover_iw{
+        position: relative; padding: 96px 0px;
+        left: calc(50% - $container-width-half); width: $container-width; display: inline-flex; justify-content: space-between;
+        align-items: center;
+        .p__c_iw_img{
+            width: calc(50% - 24px);
+            img{
+                width: 100%;
+            }
+        }
+        .p__c_iw_text{
+            width: calc(50% - 24px);
+            h1{
+                font-weight: bold; font-size: 60px; max-width: 80%;
+            }
+            p{
+                font-size: 20px; font-weight: bold;
+            }
+        }
+        .p__c_iw_buttons{
+            position: relative; width: 100%; height: 40px; gap:24px;
+
+            a{
+                margin-right: 15px;
+                button{
+                    border-radius: 8px; font-size: 16px; font-weight: bold; padding: 8px 24px; height: 40px;
+
+                    border: 2px solid $p1_primary;
+                    background: $p1_pac;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: $container-width){
+        .preview__cover_iw{
+            left: 40px; width: calc(100% - 80px);
+
+            .p__c_iw_img{
+
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1000px){
+        .preview__cover_iw{
+            flex-wrap: wrap; left: 20px; width: calc(100% - 40px);
+
+            .p__c_iw_img, .p__c_iw_text{
+                width: 100%;
+            }
+
+            .p__c_iw_text{
+                margin-top: 48px;
+                h1{
+                    font-size: 40px; max-width: 100%;
+                }
+                p{
+                    font-size: 16px;
+                }
+            }
+            .p__c_iw_buttons{
+                a{
+                    button{
+                        padding: 8px 14px; margin: 0px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.presenters__scrollbar{
+    position: relative; width: 100%; display: flex; padding: 96px 0px; display: flex; flex-wrap: wrap;
+
+    .presenters__scrollbar_w{
+        position: relative; left: calc(50% - $container-width-half); width: $container-width;  min-height: 700px; background: red;
+
+        margin-top: 48px;
+    }
+}

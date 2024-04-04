@@ -24,8 +24,8 @@
         </a>
     </div>
 
-    <div class="header__submenu header__submenu_visible">
-        <a href="">
+    <div class="header__submenu">
+        <a href="{{ route('public-part.programs.preview') }}">
             <div class="header__submenu_elem">
                 <img src="{{ asset('files/images/public-part/writing.svg') }}" alt="">
                 <p>{{ __('Novinarstvo i društvene mreže') }}</p>
