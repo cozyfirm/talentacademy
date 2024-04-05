@@ -1,17 +1,22 @@
 .header {
     width: 100%;
-    display: flex;
-    justify-content: center;
+    //display: flex;
+    //justify-content: center;
     align-items: center;
     background: $dark;
 
     .header__container {
         width: 100%;
+        margin-left: calc(50% - 750px);
         max-width: $container-width;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 24px 0;
+
+        .header__logo{
+            width: 173px;
+        }
 
         @media (max-width: $container-width) {
             padding: 24px;
@@ -22,6 +27,7 @@
             justify-content: center;
             align-items: center;
             gap: 16px;
+            width: 286px;
 
             .header__auth-button {
                 display: flex;
@@ -44,7 +50,7 @@
                 }
             }
 
-            @media (max-width: $mobile-width) {
+            @media (max-width: $menu-mobile-width) {
                 display: none;
             }
         }
@@ -52,8 +58,88 @@
         .header__mobile-menu-button {
             display: none;
 
-            @media (max-width: $mobile-width) {
+            @media (max-width: $menu-mobile-width) {
                 display: block;
+            }
+        }
+    }
+
+    .header__links{
+        position: absolute; left: calc(50% - 560px); top: 0px; z-index: 100; width: 1000px;
+        display: inline-flex; justify-content: center;
+        gap: 18px; padding: 24px 0px;
+
+        a{
+            color:#ffffff; font-weight: bold; display: inline-flex; margin-top: 18px;
+            i{
+                margin-left: 10px; margin-top: 3px; transition: 0.2s all;
+            }
+        }
+        a:hover{cursor: pointer;}
+    }
+
+    /* Menu second part */
+    .header__submenu{
+        position: relative; width: $container-width; left: calc(50% - 750px); display: inline-flex; justify-content: space-between; background: $dark;
+        a{
+            .header__submenu_elem{
+                display: inline-flex;
+                img{
+                    height: 30px; margin-top: 8px; margin-left: 24px;
+                }
+                p{
+                    color: #ffffff; font-weight: bold; margin: 0px 24px;
+                }
+            }
+        }
+        height: 0px; overflow: hidden;
+        transition: 0.3s all;
+    }
+    .header__submenu_visible{
+        padding: 24px 0px; gap: 24px;
+        border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 48px;
+
+        height: auto; overflow: initial;
+        transition: 0.3s all;
+    }
+
+    @media only screen and (max-width: 1500px){
+        .header__container, .header__submenu{
+            margin-left: 20px; width: calc(100% - 40px);
+        }
+
+        .header__submenu{
+            left: 20px;
+        }
+    }
+
+    @media only screen and (max-width: 1200px){
+        .header__container{
+            margin-left: 20px; width: calc(100% - 40px); padding-left: 0px; padding-right: 0px;
+        }
+
+        .header__links{
+            position: relative; left: 20px; width: calc(100% - 40px); display: none;
+            flex-wrap: wrap; padding: 0px 0px; gap: 0px;
+            a{
+                width: 100%;
+            }
+        }
+
+        .header__submenu{
+            flex-wrap: wrap; display: none;
+            left: 20px; width: calc(100% - 40px); margin: 0px;
+            a{
+                .header__submenu_elem{
+                    width: 100%; align-items: center;
+                    img, p{margin: 0px;}
+                    p{
+                        font-size: 18px; margin-left: 15px; margin-top: 4px;
+                    }
+                    img{
+                        width: 24px; height: auto;
+                    }
+                }
             }
         }
     }

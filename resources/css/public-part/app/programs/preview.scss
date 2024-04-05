@@ -1,0 +1,138 @@
+.preview__cover{
+    position: relative; width: 100%; background: $p1_bcg;
+    align-items: center;  display: flex;
+    .preview__cover_iw{
+        position: relative; padding: 96px 0px;
+        left: calc(50% - $container-width-half); width: $container-width; display: inline-flex; justify-content: space-between;
+        align-items: center;
+        .p__c_iw_img{
+            width: calc(50% - 24px);
+            img{
+                width: 100%;
+            }
+        }
+        .p__c_iw_text{
+            width: calc(50% - 24px);
+            h1{
+                font-weight: bold; font-size: 60px; max-width: 80%;
+            }
+            p{
+                font-size: 20px; font-weight: bold;
+            }
+        }
+        .p__c_iw_buttons{
+            position: relative; width: 100%; height: 40px; gap:24px;
+
+            a{
+                margin-right: 15px;
+                button{
+                    border-radius: 8px; font-size: 16px; font-weight: bold; padding: 8px 24px; height: 40px;
+
+                    border: 2px solid $p1_primary;
+                    background: $p1_pac;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: $container-width){
+        .preview__cover_iw{
+            left: 40px; width: calc(100% - 80px);
+
+            .p__c_iw_img{
+
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1000px){
+        .preview__cover_iw{
+            flex-wrap: wrap; left: 20px; width: calc(100% - 40px);
+
+            .p__c_iw_img, .p__c_iw_text{
+                width: 100%;
+            }
+
+            .p__c_iw_text{
+                margin-top: 48px;
+                h1{
+                    font-size: 40px; max-width: 100%;
+                }
+                p{
+                    font-size: 16px;
+                }
+            }
+            .p__c_iw_buttons{
+                a{
+                    button{
+                        padding: 8px 14px; margin: 0px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//VARIABLES BECAUSE CSS PREPROCESSORS ARE COOL
+$gray: #555;
+$yellow: #f2e968;
+$white: #efefef;
+
+.presenters__scrollbar{
+    position: relative; width: 100%; display: flex; padding: 96px 0px; display: flex; flex-wrap: wrap;
+
+    .presenters__scrollbar_w{
+        position: relative; left: calc(50% - $container-width-half); width: $container-width;  min-height: 700px;
+
+        margin-top: 48px;
+
+        .single__presenter{
+            //position: relative; width: 532px; height: 700px; background: grey; border: 1px solid $dark; border-radius: 8px;
+        }
+    }
+}
+
+//ENABLE CSS GRID FOR LIFT OFF  🚀
+@supports(display: grid) {
+    .slider_w {
+        position: relative;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        transition: all 0.2s;
+        transform: scale(0.98);
+        will-change: transform;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    .items.active {
+        background: rgba(255,255,255,0.3);
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
+        transform: scale(1);
+    }
+
+    .single__presenter {
+        display: inline-block;
+        overflow: hidden;
+        background: skyblue;
+
+        position: relative; width: 532px; height: 700px; border: 1px solid $dark; border-radius: 8px;
+        margin-right: 15px;
+
+        .sp__image{
+            position: relative; width: 100%;
+            img{
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            min-height: 200px;
+            min-width: 200px;
+        }
+    }
+    .single__presenter:last-child{margin-right: 0px;}
+}

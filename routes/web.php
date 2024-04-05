@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PublicPart\ProgramsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\Admin\HomeController;
 use App\Http\Controllers\PublicPart\HomeController as HomepageController;
@@ -41,6 +42,14 @@ Route::prefix('auth')->group(function () {
  */
 Route::prefix('')->group(function () {
     Route::get ('/',                              [HomepageController::class, 'home'])->name('public-part.home');
+
+
+    /*
+     *  Programs
+     */
+    Route::prefix('programs')->group(function () {
+        Route::get ('/preview',                   [ProgramsController::class, 'preview'])->name('public-part.programs.preview');
+    });
 });
 
 /**

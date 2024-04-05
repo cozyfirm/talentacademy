@@ -17,3 +17,6 @@ import './admin/layout/menu.js'
 import "./public-part/auth/auth.js";
 
 // notify();
+
+import "./public-part/core/menu.js";
+import "./public-part/core/grid-slider.js";
