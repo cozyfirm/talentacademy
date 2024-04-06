@@ -1,6 +1,7 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import "bootstrap/scss/bootstrap";
 
+@import url('https://store.typenetwork.com/cart/eula/djr');
 
 html{
     height: 100%;
@@ -45,3 +46,9 @@ body{
 
 @import "app/home/home";
 @import "app/programs/preview";
+
+
+/*
+ *  Shared SCSS files
+ */
+@import "app/includes/shared";

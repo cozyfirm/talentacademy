@@ -13,7 +13,8 @@
             <div class="p__c_iw_text">
                 <h1> Pisanje za 21. stoljeće </h1>
                 <p>
-                    Od antičke komedije do rada na animiranom youtube serijalu BBBB, program Pisanje za 21. stoljeće pokazuje značaj komedije u ljudskoj
+                    Od antičke komedije do rada na animiranom youtube serijalu BBBB, program Pisanje za 21. stoljeće
+                    pokazuje značaj komedije u ljudskoj
                     historiji, njenu ulogu u društvenoj kritici i njenu moć da načini promjene u svijetu.
                 </p>
 
@@ -29,5 +30,16 @@
         </div>
     </div>
 
-    @include('public-part.app.base-includes.presenters_scroll')
+    @include('public-part.app.base-includes.presenters.presenters_scroll')
+
+    <!-- Programs preview -->
+    @include('public-part.app.base-includes.programs.grid')
+
+    <!-- Blog section; Scroll-bar lattest news -->
+    @include('public-part.app.base-includes.blog.blog_scroll')
+
+    <!-- Generic element; How to apply -->
+    <div class="how-to-apply how-to-apply-bg-white">
+        @include('public-part.app.base-includes.generic.how-to-apply')
+    </div>
 @endsection

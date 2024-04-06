@@ -1,6 +1,6 @@
 <header class="header">
     <div class="header__container">
-        <a href="#" class="header__logo">
+        <a href="{{ route('public-part.home') }}" class="header__logo">
             <img src="{{ asset('files/images/public-part/logo.svg') }}" alt="Talent Akademija" class="header__logo-image">
         </a>
         <div class="header__auth-buttons">

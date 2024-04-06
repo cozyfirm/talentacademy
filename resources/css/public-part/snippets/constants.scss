@@ -15,6 +15,7 @@ a:hover {
 $dark: #070600;
 $primary: #EA8BF3;
 $text-white: #EEF0F2;
+$white: #E7E7E7;
 
 // Constants
 $container-width: 1500px;
@@ -32,3 +33,7 @@ $p1_pac : #F45B69;
 $p1_bps : #F45B69;
 $p1_pas : #F45B69;
 $p1_pc  : #DAC0FB;
+
+
+/* Transition constants */
+$transition02 : 0.2s all;

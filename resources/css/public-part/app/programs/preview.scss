@@ -80,7 +80,7 @@
  */
 
 .presenters__scrollbar{
-    position: relative; width: 100%; display: flex; padding: 96px 0px; display: flex; flex-wrap: wrap;
+    position: relative; width: 100%; display: flex; padding: 96px 0px 48px 0px; display: flex; flex-wrap: wrap;
 
     .presenters__scrollbar_w{
         position: relative; left: calc(50% - $container-width-half); width: $container-width;  min-height: 700px;
@@ -188,5 +188,92 @@
     }
     @media only screen and (max-width: $break-width){
         .presenters__scrollbar_w, .presenters__scrollbar_btn_w { left: 20px; width: calc(100% - 40px); }
+    }
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*
+ * Programs
+ */
+.programs__grid{
+    position: relative; width: 100%; display: flex; padding: 48px 0px 96px 0px; display: flex; flex-wrap: wrap;
+
+    .programs__grid_iw{
+        position: relative; left: calc(50% - $container-width-half); width: $container-width;
+        display: inline-flex; justify-content: flex-start; flex-wrap: wrap; gap: 20px; margin-top: 32px;
+
+        .pg__sample{
+            position: relative; width: calc(33.33% - 20px); border: 1px solid $dark; border-radius: 16px;
+            padding: 32px; transition: $transition02;
+            h1{
+                font-weight: bold; font-size: 50px; transition: $transition02;
+            }
+            .pg_sample__row{
+                position: relative; width: 100%; display: inline-flex; justify-content: flex-start;
+                padding: 8px 0px;
+                img{
+                    height: 24px;
+                }
+                h5{
+                    font-size: 24px; font-weight: bold; margin-left: 16px; transition: $transition02;
+                }
+            }
+            p{
+                font-weight: bold; font-size: 18px; transition: $transition02;
+            }
+        }
+        .pg__sample:hover{
+            background: $dark; cursor: pointer;
+            h1{
+                color: $p1_bcg;
+            }
+            .pg_sample__row{
+                h5{
+                    color: $p1_pac;
+                }
+            }
+            p{
+                color: $p1_pac;
+            }
+        }
+    }
+
+    /* Pagination */
+    .programs__grid_pagination{
+        position:relative; left: calc(50% - $container-width-half); width: $container-width; display: inline-flex; justify-content: center; gap: 16px;
+        margin-top: 32px;
+
+        .page-w{
+            width: 40px; height: 40px; border-radius: 8px; border: 1px solid $dark;
+            display: flex;
+            justify-content: center;
+            align-items: center;   /* <---- NEW    */
+
+            background: $p1_pac;
+
+            p{margin: 0px; padding: 0px; font-weight: bold;}
+        }
+    }
+
+    @media only screen and (max-width: $container-width){
+        .programs__grid_iw{
+            left: 40px; width: calc(100% - 80px);
+        }
+    }
+    @media only screen and (max-width: $break-width){
+        .programs__grid_iw{
+            left: 20px; width: calc(100% - 40px);
+
+            .pg__sample{
+                width: calc(50% - 10px);
+            }
+        }
+    }
+    @media only screen and (max-width: $mobile-width){
+        .programs__grid_iw{
+            .pg__sample{
+                width: 100%;
+            }
+        }
     }
 }
