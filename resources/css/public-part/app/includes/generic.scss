@@ -12,3 +12,14 @@
         background: $p1_pac;
     }
 }
+
+@media only screen and (max-width: $container-width){
+    .generic__header{
+        left: 40px; width: calc(100% - 80px);
+    }
+}
+@media only screen and (max-width: $break-width){
+    .generic__header{
+        left: 20px; width: calc(100% - 40px); flex-wrap: wrap;
+    }
+}
