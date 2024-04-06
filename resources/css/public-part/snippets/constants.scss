@@ -1,0 +1,33 @@
+body {
+    font-family: gimlet-sans-variable, sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: inherit;
+}
+
+// Colors
+$dark: #070600;
+$primary: #EA8BF3;
+$text-white: #EEF0F2;
+
+// Constants
+$container-width: 1500px;
+$container-width-half: 750px;
+$menu-mobile-width: 1200px;
+$mobile-width: 800px;
+
+// Font sizes
+$headerSize : 60px;
+
+$p1_primary : #070600;
+$p1_bcg : #DAC0FB;
+$p1_pac : #F45B69;
+$p1_bps : #F45B69;
+$p1_pas : #F45B69;
+$p1_pc  : #DAC0FB;

@@ -1,0 +1,17 @@
+/* Authentication style */
+
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import "bootstrap/scss/bootstrap";
+
+$primaryColor : #3D1F5F;
+$secondaryColor : #F86624;
+
+/* Layout styles */
+@import "style/layout/notify";
+@import 'style/layout/jquery-ui.css';
+
+/* Snippets */
+@import "style/snippets/classes";
+
+@import "public-part/auth/auth";
+@import "public-part/auth/create-account";

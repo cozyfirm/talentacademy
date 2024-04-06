@@ -1,0 +1,14 @@
+.generic__header{
+    position: relative; left: calc(50% - $container-width-half); width: $container-width; min-height: 50px;
+    display:inline-flex; justify-content:space-between;
+
+    h2{
+        font-weight: bold; font-size: $headerSize; margin: 0px;
+    }
+    button{
+        border-radius: 8px; font-size: 16px; font-weight: bold; padding: 8px 24px; height: 40px; margin-top: 15px;
+
+        border: 2px solid $p1_primary;
+        background: $p1_pac;
+    }
+}
