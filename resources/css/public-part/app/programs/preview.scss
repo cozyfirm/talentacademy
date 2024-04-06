@@ -128,6 +128,16 @@ $white: #efefef;
                 width: 100%;
             }
         }
+        .sp__btn_w{
+            position: relative; width: 100%;
+            button{
+                height: 36px; border-radius: 18px; background: $p1_pac; font-weight: bold;
+                border: none; padding: 0px 20px; margin-top: 15px; margin-bottom: 15px; margin-left: 15px;
+            }
+        }
+        .sp__text_w{
+            position: relative; width: 100%;
+        }
 
         @media screen and (max-width: 500px) {
             min-height: 200px;
