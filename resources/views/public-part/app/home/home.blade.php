@@ -90,43 +90,9 @@
             </div>
         </div>
     </div>
-    <div class="programs">
-        <div class="programs__container">
-            <h2 class="programs__heading">{{ __('Programi') }}</h2>
-            <div class="programs__content">
-                <a href="#" class="programs__program">
-                    <img src="{{ asset('files/images/public-part/programs-1.svg') }}" alt="{{ __('Programs image #1') }}" class="programs__program-image">
-                    <h3 class="programs__program-heading">{{ __('Pisanje za 21. stoljeće') }}</h3>
-                    <img src="{{ asset('files/images/public-part/programs-icon.svg') }}" alt="{{ __('Programs icon') }}" class="programs__program-icon">
-                </a>
-                <a href="#" class="programs__program">
-                    <img src="{{ asset('/files/images/public-part/programs-2.svg') }}" alt="{{ __('Programs image #2') }}" class="programs__program-image">
-                    <h3 class="programs__program-heading">{{ __('Novinarstvo i društvene mreže') }}</h3>
-                    <img src="{{ asset('/files/images/public-part/programs-icon.svg') }}" alt="{{ __('Programs icon') }}" class="programs__program-icon">
-                </a>
-                <a href="#" class="programs__program">
-                    <img src="{{ asset('/files/images/public-part/programs-3.svg') }}" alt="{{ __('Programs image #3') }}" class="programs__program-image">
-                    <h3 class="programs__program-heading">{{ __('Primijenjena muzička produkcija') }}</h3>
-                    <img src="{{ asset('/files/images/public-part/programs-icon.svg') }}" alt="{{ __('Programs icon') }}" class="programs__program-icon">
-                </a>
-                <a href="#" class="programs__program">
-                    <img src="{{ asset('/files/images/public-part/programs-4.svg') }}" alt="{{ __('Programs image #4') }}" class="programs__program-image">
-                    <h3 class="programs__program-heading">{{ __('Odgovorno kodiranje i Civic Tech') }}</h3>
-                    <img src="{{ asset('/files/images/public-part/programs-icon.svg') }}" alt="{{ __('Programs icon') }}" class="programs__program-icon">
-                </a>
-                <a href="#" class="programs__program">
-                    <img src="{{ asset('/files/images/public-part/programs-5.svg') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
-                    <h3 class="programs__program-heading">{{ __('Grafički dizajn i animacija') }}</h3>
-                    <img src="{{ asset('/files/images/public-part/programs-icon.svg') }}" alt="{{ __('Programs icon') }}" class="programs__program-icon">
-                </a>
-                <a href="#" class="programs__program">
-                    <img src="{{ asset('/files/images/public-part/programs-6.svg') }}" alt="{{ __('Programs image #6') }}" class="programs__program-image">
-                    <h3 class="programs__program-heading">{{ __('Angažovani rad  i kritičko razmišljanje') }}</h3>
-                    <img src="{{ asset('/files/images/public-part/programs-icon.svg') }}" alt="{{ __('Programs icon') }}" class="programs__program-icon">
-                </a>
-            </div>
-        </div>
-    </div>
+
+    <!-- All 6 programs -->
+    @include('public-part.app.base-includes.programs.all')
 
     <!-- Generic element; How to apply -->
     <div class="how-to-apply">
@@ -141,46 +107,10 @@
     <!-- Blog section; Scroll-bar lattest news -->
     @include('public-part.app.base-includes.blog.blog_scroll')
 
-    <div class="faq">
-        <div class="faq__container">
-            <h2 class="faq__title">{{ __('FAQs') }}</h2>
-            <p class="faq__description">{{ __('Lorem ipsum dolor sit amet consectetur. Rhoncus at quis faucibus magna augue. Ipsum duis aliquet mauris facilisis mattis pellentesque quis non proin. Viverra sapien scelerisque suscipit proin. Sit massa feugiat ultrices diam eu.') }}</p>
-            <div class="faq__list">
-                <div class="faq__list-item">
-                    <div class="faq__list-item-question">{{ __('Ko sve može aplicirati za Helem nejse Talent Akademiju?') }}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5303 21.5157C16.2374 21.8086 15.7626 21.8086 15.4697 21.5157L7.82318 13.8692C7.53029 13.5763 7.53029 13.1015 7.82318 12.8086L8.17674 12.455C8.46963 12.1621 8.9445 12.1621 9.2374 12.455L16 19.2176L22.7626 12.455C23.0555 12.1621 23.5303 12.1621 23.8232 12.455L24.1768 12.8086C24.4697 13.1015 24.4697 13.5763 24.1768 13.8692L16.5303 21.5157Z" fill="#070600"/>
-                        </svg>
-                    </div>
-                    <div class="faq__list-item-answer">{{ __('Lorem ipsum dolor sit amet consectetur. Rhoncus at quis faucibus magna augue. Ipsum duis aliquet mauris facilisis mattis pellentesque quis non proin. Viverra sapien scelerisque suscipit proin. Sit massa feugiat ultrices diam eu.') }}</div>
-                </div>
-                <div class="faq__list-item">
-                    <div class="faq__list-item-question">{{ __('Da li se akademija plaća  ili su svi programi akademije besplatni?') }}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5303 21.5157C16.2374 21.8086 15.7626 21.8086 15.4697 21.5157L7.82318 13.8692C7.53029 13.5763 7.53029 13.1015 7.82318 12.8086L8.17674 12.455C8.46963 12.1621 8.9445 12.1621 9.2374 12.455L16 19.2176L22.7626 12.455C23.0555 12.1621 23.5303 12.1621 23.8232 12.455L24.1768 12.8086C24.4697 13.1015 24.4697 13.5763 24.1768 13.8692L16.5303 21.5157Z" fill="#070600"/>
-                        </svg>
-                    </div>
-                    <div class="faq__list-item-answer">{{ __('Lorem ipsum dolor sit amet consectetur. Rhoncus at quis faucibus magna augue. Ipsum duis aliquet mauris facilisis mattis pellentesque quis non proin. Viverra sapien scelerisque suscipit proin. Sit massa feugiat ultrices diam eu.') }}</div>
-                </div>
-                <div class="faq__list-item">
-                    <div class="faq__list-item-question">{{ __('Kako mogu ostvariti pravo na učešće na akademiji?') }}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5303 21.5157C16.2374 21.8086 15.7626 21.8086 15.4697 21.5157L7.82318 13.8692C7.53029 13.5763 7.53029 13.1015 7.82318 12.8086L8.17674 12.455C8.46963 12.1621 8.9445 12.1621 9.2374 12.455L16 19.2176L22.7626 12.455C23.0555 12.1621 23.5303 12.1621 23.8232 12.455L24.1768 12.8086C24.4697 13.1015 24.4697 13.5763 24.1768 13.8692L16.5303 21.5157Z" fill="#070600"/>
-                        </svg>
-                    </div>
-                    <div class="faq__list-item-answer">{{ __('Lorem ipsum dolor sit amet consectetur. Rhoncus at quis faucibus magna augue. Ipsum duis aliquet mauris facilisis mattis pellentesque quis non proin. Viverra sapien scelerisque suscipit proin. Sit massa feugiat ultrices diam eu.') }}</div>
-                </div>
-                <div class="faq__list-item">
-                    <div class="faq__list-item-question">{{ __('Da li se akademija plaća  ili su svi programi akademije besplatni?') }}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5303 21.5157C16.2374 21.8086 15.7626 21.8086 15.4697 21.5157L7.82318 13.8692C7.53029 13.5763 7.53029 13.1015 7.82318 12.8086L8.17674 12.455C8.46963 12.1621 8.9445 12.1621 9.2374 12.455L16 19.2176L22.7626 12.455C23.0555 12.1621 23.5303 12.1621 23.8232 12.455L24.1768 12.8086C24.4697 13.1015 24.4697 13.5763 24.1768 13.8692L16.5303 21.5157Z" fill="#070600"/>
-                        </svg>
-                    </div>
-                    <div class="faq__list-item-answer">{{ __('Lorem ipsum dolor sit amet consectetur. Rhoncus at quis faucibus magna augue. Ipsum duis aliquet mauris facilisis mattis pellentesque quis non proin. Viverra sapien scelerisque suscipit proin. Sit massa feugiat ultrices diam eu.') }}</div>
-                </div>
-            </div>
-        </div>
-    </div><div class="locations">
+    <!-- FAQ section -->
+    @include('public-part.app.base-includes.generic.faq')
+
+    <div class="locations">
         <div class="locations__container">
             <h2 class="locations__title">{{ __('Lokacije') }}</h2>
             <div class="locations__list">
@@ -253,37 +183,8 @@
         </div>
     </div>
 
-    <div class="contact">
-        <div class="contact__container">
-            <h2 class="contact__title">{{ __('Imate dodatna pitanja?') }}</h2>
-            <div class="contact__description">{{ __('Za sva pitanja o ovom studiskom programu ili Akademiji u cjelini molimo vas da koristite ovaj link:') }}</div>
-            <form class="contact__form">
-                <div class="contact__form-input-container">
-                    <label for="name" class="contact__form-label">{{ __('Ime') }}</label>
-                    <input type="text" class="contact__form-input" />
-                </div>
-                <div class="contact__form-input-container">
-                    <label for="name" class="contact__form-label">{{ __('Prezime') }}</label>
-                    <input type="text" class="contact__form-input" />
-                </div>
-                <div class="contact__form-input-container">
-                    <label for="name" class="contact__form-label">{{ __('Mail') }}</label>
-                    <input type="email" class="contact__form-input" />
-                </div>
-                <div class="contact__form-input-container">
-                    <label for="name" class="contact__form-label">{{ __('Program') }}</label>
-                    <select class="contact__form-input">
-                        <option value="Pisanje za 21. stoljeće">{{ __('Pisanje za 21. stoljeće') }}</option>
-                        <option value="Novinarstvo i društvene mreže">{{ __('Novinarstvo i društvene mreže') }}</option>
-                        <option value="Primijenjena muzička produkcija">{{ __('Primijenjena muzička produkcija') }}</option>
-                        <option value="Odgovorno kodiranje i Civic Tech">{{ __('Odgovorno kodiranje i Civic Tech') }}</option>
-                        <option value="Grafički dizajn i animacija">{{ __('Grafički dizajn i animacija') }}</option>
-                        <option value="Angažovani rad  i kritičko razmišljanje">{{ __('Angažovani rad  i kritičko razmišljanje') }}</option>
-                    </select>
-                </div>
-                <textarea class="contact__form-textarea">{{ __('Tvoja poruka...') }}</textarea>
-                <button class="contact__form-button">{{ __('Pošalji') }}</button>
-            </form>
-        </div>
+    <!-- Contact us form -->
+    <div class="contact-us">
+        @include('public-part.app.base-includes.generic.contact-us')
     </div>
 @endsection

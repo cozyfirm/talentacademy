@@ -71,4 +71,20 @@
             </div>
         </div>
     </div>
+
+    <div class="snake">
+        <img src="{{ asset('/files/images/public-part/snake-desktop.svg') }}" alt="{{ __('Snake') }}" class="snake__image">
+        <img src="{{ asset('/files/images/public-part/snake-mobile.svg') }}" alt="{{ __('Snake mobile') }}" class="snake__image snake__image--mobile">
+    </div>
+
+    <!-- FAQ section -->
+    @include('public-part.app.base-includes.generic.faq')
+
+    <!-- All 6 programs -->
+    @include('public-part.app.base-includes.programs.all')
+
+    <!-- Contact us form -->
+    <div class="contact-us contact-us-program cu_1">
+        @include('public-part.app.base-includes.generic.contact-us')
+    </div>
 @endsection
