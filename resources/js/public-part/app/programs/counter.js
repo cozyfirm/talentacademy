@@ -1,14 +1,19 @@
 $(document).ready(function (){
     /* Format is: month / day / year */
     let td = new Date("06/10/2024");
+    // let td = new Date("04/06/2024");
 
     function TimeCalculator(seconds) {
-        let y = Math.floor(seconds / 31536000);
-        let mo = Math.floor((seconds % 31536000) / 2628000);
-        let d = Math.floor(((seconds % 31536000) % 2628000) / 86400);
-        let h = Math.floor((seconds % (3600 * 24)) / 3600);
-        let m = Math.floor((seconds % 3600) / 60);
-        let s = Math.floor(seconds % 60);
+        let y = 0, mo = 0, d = 0, h = 0, m = 0, s = 0;
+
+        if(seconds > 0){
+            y = Math.floor(seconds / 31536000);
+            mo = Math.floor((seconds % 31536000) / 2628000);
+            d = Math.floor(((seconds % 31536000) % 2628000) / 86400);
+            h = Math.floor((seconds % (3600 * 24)) / 3600);
+            m = Math.floor((seconds % 3600) / 60);
+            s = Math.floor(seconds % 60);
+        }
 
         /* Check if it's right page */
         // noinspection JSJQueryEfficiency
