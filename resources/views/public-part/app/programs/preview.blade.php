@@ -42,4 +42,33 @@
     <div class="how-to-apply how-to-apply-bg-white">
         @include('public-part.app.base-includes.generic.how-to-apply')
     </div>
+
+    <!-- Counter -->
+    <div class="preview__counter">
+        <div class="preview__counter_iw">
+            <h1>{{ __('Rok za prijavu aplikacija:') }}</h1>
+            <h1> 10.06.2024 </h1>
+
+            <p> {{ __("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.") }} </p>
+
+            <div class="counter__w">
+                <div class="c__num"> <p class="c__month"></p> </div>
+                <span>:</span>
+                <div class="c__num"> <p class="c__day"></p> </div>
+                <span>:</span>
+                <div class="c__num"> <p class="c__hour"></p> </div>
+                <span>:</span>
+                <div class="c__num"> <p class="c__min"></p> </div>
+            </div>
+
+            <div class="counter__btn">
+                <a href="#">
+                    <button class="app_btn">
+                        <img src="{{ asset('files/images/public-part/app-btn.png') }}" alt="">
+                        <p>{{ __('Apliciraj za stipendiju') }}</p>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
 @endsection

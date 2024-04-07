@@ -20,3 +20,6 @@ import "./public-part/auth/auth.js";
 
 import "./public-part/core/menu.js";
 import "./public-part/core/grid-slider.js";
+
+/* Counter */
+import "./public-part/app/programs/counter.js";

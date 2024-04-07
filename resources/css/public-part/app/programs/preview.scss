@@ -277,3 +277,95 @@
         }
     }
 }
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*
+ * Live counter
+ */
+.preview__counter{
+    position: relative; width: 100%; display: flex; padding: 48px 0px 96px 0px; display: flex; flex-wrap: wrap; background: $dark;
+    .preview__counter_iw{
+        position: relative; left: calc(50% - $medium-width-half); width: $medium-width; text-align: center;
+
+        h1{
+            font-weight:bold; font-size: 50px; color: $white;
+        }
+        p{
+            font-weight: bold; font-size: 20px; margin-top: 16px;
+
+            color: $p1_bcg;
+        }
+
+        .counter__w{
+            position: relative; width: 100%; display: inline-flex; justify-content: space-between;
+
+            .c__num{
+                width: 170px; height: 170px; justify-content: center; display: flex; align-items: center;
+                border: 2px solid $p1_bcg; border-radius: 50%;
+
+                p{
+                    font-size: 100px; font-weight: bold; margin-top: 35px; padding: 0px;
+
+                    color: $p1_bcg;
+                }
+            }
+            span{
+                font-size: 100px; font-weight: bold; color: $p1_bcg; margin-top: 10px;
+            }
+        }
+        .counter__btn{
+            position: relative; width: 100%; display: inline-flex; justify-content: center; margin-top: 64px;
+            a{
+                .app_btn{
+                    display: inline-flex; padding: 6px 24px; gap: 16px; border-radius: 8px; border: none;
+
+                    background: $p1_pac;
+                    img{
+
+                    }
+                    p{ font-size: 16px; color: $dark; margin: 0px; }
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: $break-width){
+        .preview__counter_iw{
+            left: 40px; width: calc(100% - 80px);
+
+            h1{ font-size: 40px; }
+            p{font-size: 18px;}
+            .counter__w{
+                .c__num{
+                    width: 120px; height: 120px;
+
+                    p{
+                        font-size: 60px; margin-top: 26px;
+                    }
+                }
+                span{
+                    font-size: 60px;
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: $mobile-width){
+        .preview__counter_iw{
+            h1{ font-size: 30px; }
+            p{font-size: 16px;}
+
+            .counter__w{
+                .c__num{
+                    width: 60px; height: 60px;
+
+                    p{
+                        font-size: 26px; margin-top: 20px;
+                    }
+                }
+                span{
+                    font-size: 26px;
+                }
+            }
+        }
+    }
+}
