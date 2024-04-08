@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PublicPart\ContactUsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\Admin\HomeController;
@@ -49,6 +50,13 @@ Route::prefix('')->group(function () {
      */
     Route::prefix('programs')->group(function () {
         Route::get ('/preview',                   [ProgramsController::class, 'preview'])->name('public-part.programs.preview');
+    });
+
+    /*
+     *  Programs
+     */
+    Route::prefix('contact-us')->group(function () {
+        Route::post('/send-us-a-message',                   [ContactUsController::class, 'sendUsAMessage'])->name('public-part.contact-us.send-us-a-message');
     });
 });
 

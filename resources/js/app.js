@@ -23,3 +23,6 @@ import "./public-part/core/grid-slider.js";
 
 /* Counter */
 import "./public-part/app/programs/counter.js";
+
+/* Contact -us */
+import "./public-part/app/contact-us/send-us-a-message.js";

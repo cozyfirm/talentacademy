@@ -33,7 +33,7 @@ body{
 /*
  *  Include layouts snippets into main file
  */
-
+@import "../style/layout/notify";
 @import "snippets/constants";
 @import "snippets/menu";
 @import "snippets/footer";

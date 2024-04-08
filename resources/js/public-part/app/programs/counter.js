@@ -24,7 +24,7 @@ $(document).ready(function (){
             $(".c__min").text(m);
         }
 
-        console.log(`${mo} Months ${d} Days ${h}:${m}:${s}`);
+        // console.log(`${mo} Months ${d} Days ${h}:${m}:${s}`);
     }
     function countDown(){
         setTimeout(function(now){
