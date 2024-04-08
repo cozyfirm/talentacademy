@@ -28,7 +28,7 @@ class ContactUsController extends Controller{
 
             return $this->jsonSuccess(__('Poruka uspješno poslana'));
         }catch (\Exception $e){
-            dd($e);
+            return $this->jsonResponse('1200', __('Poruka uspješno poslana'));
         }
     }
 }
