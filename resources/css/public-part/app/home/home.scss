@@ -581,13 +581,13 @@
 
 
 
-.locations {
+.homepage-locations {
     display: flex;
     justify-content: center;
     align-items: center;
     background: $dark;
 
-    .locations__container {
+    .homepage-locations__container {
         width: 100%;
         max-width: $container-width;
         padding: 64px 0;
@@ -596,7 +596,7 @@
             padding: 64px 24px;
         }
 
-        .locations__title {
+        .homepage-locations__title {
             color: $text-white;
             font-size: 56px;
             font-style: normal;
@@ -604,7 +604,7 @@
             line-height: 120%;
         }
 
-        .locations__list {
+        .homepage-locations__list {
             width: 100%;
             display: flex;
             justify-content: flex-start;
@@ -613,7 +613,7 @@
             gap: 16px;
             padding: 16px 0;
 
-            .locations__list-item {
+            .homepage-locations__list-item {
                 width: calc(33.3% - 11px);
                 border-radius: 16px;
                 border: 1px solid #EEF0F2;
@@ -623,11 +623,11 @@
                     width: 100%;
                 }
 
-                .locations__list-item-image {
+                .homepage-locations__list-item-image {
                     width: 100%;
                 }
 
-                .locations__list-item-heading {
+                .homepage-locations__list-item-heading {
                     padding: 0 16px;
                     font-size: 40px;
                     font-style: normal;
@@ -637,7 +637,7 @@
                     padding-top: 16px;
                 }
 
-                .locations__list-item-address {
+                .homepage-locations__list-item-address {
                     padding: 0 16px;
                     font-size: 24px;
                     font-style: normal;
@@ -646,7 +646,7 @@
                     color: $primary;
                 }
 
-                .locations__list-item-buttons {
+                .homepage-locations__list-item-buttons {
                     padding: 0 16px;
                     display: flex;
                     justify-content: flex-start;
@@ -654,7 +654,7 @@
                     gap: 21px;
                     padding-bottom: 16px;
 
-                    .locations__list-item-button {
+                    .homepage-locations__list-item-button {
                         display: flex;
                         padding: 8px 32px;
                         justify-content: center;
@@ -668,7 +668,7 @@
                         line-height: 150%;
                         gap: 8px;
 
-                        &.locations__list-item-button--outlined {
+                        &.homepage-locations__list-item-button--outlined {
                             border-radius: 8px;
                             border: 1px solid $primary;
                             background: transparent;
@@ -679,20 +679,20 @@
             }
         }
 
-        .locations__navigation {
+        .homepage-locations__navigation {
             width: 100%;
             display: flex;
             justify-content: flex-end;
             align-items: center;
             gap: 8px;
 
-            .locations__navigation-arrows {
+            .homepage-locations__navigation-arrows {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 gap: 8px;
 
-                .locations__navigation-arrow {
+                .homepage-locations__navigation-arrow {
                     display: flex;
                     padding: 8px;
                     justify-content: center;
@@ -704,7 +704,7 @@
                 }
             }
 
-            .locations__navigation-all {
+            .homepage-locations__navigation-all {
                 display: flex;
                 justify-content: center;
                 align-items: center;
