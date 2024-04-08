@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicPart\ContactUsController;
+use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\Admin\HomeController;
@@ -58,6 +59,17 @@ Route::prefix('')->group(function () {
     Route::prefix('contact-us')->group(function () {
         Route::post('/send-us-a-message',                   [ContactUsController::class, 'sendUsAMessage'])->name('public-part.contact-us.send-us-a-message');
     });
+
+    /*
+     * Locations
+     */
+
+    Route::prefix('locations')->group(function () {
+        Route::get('/',                   [LocationsController::class, 'locations'])->name('public-part.locations.locations');
+        Route::get('/{id}',                   [LocationsController::class, 'single_location'])->name('public-part.locations.single-location');
+    });
+
+
 });
 
 /**
