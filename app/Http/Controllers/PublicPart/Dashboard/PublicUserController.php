@@ -44,6 +44,18 @@ class PublicUserController extends Controller{
             return back();
         }
     }
+    public function editLinks($link){
+        if($link == 'instagram') $value = Auth::user()->instagram;
+        else if($link == 'facebook') $value = Auth::user()->facebook;
+        else if($link == 'twitter') $value = Auth::user()->twitter;
+        else$value = Auth::user()->web;
+
+
+        return view($this->_path . 'edit-links', [
+            'link' => ucfirst($link),
+            'value' => $value
+        ]);
+    }
 
     /**
      *  Sign out and redirect to homepage

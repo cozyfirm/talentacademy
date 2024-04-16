@@ -85,6 +85,8 @@ Route::prefix('')->group(function () {
  */
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get ('/my-profile',                              [PublicUserController::class, 'myProfile'])->name('dashboard.my-profile');
+    Route::get ('/edit-links/{link}',                       [PublicUserController::class, 'editLinks'])->name('dashboard.edit-links');
+
     Route::post('/update-profile',                          [PublicUserController::class, 'updateProfile'])->name('dashboard.update-profile');
 
     Route::post('/update-profile-image',                    [PublicUserController::class, 'updateProfileImage'])->name('dashboard.update-profile-image');

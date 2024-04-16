@@ -11,38 +11,7 @@
     <!-- User section -->
     <div class="white__wrapper">
         <div class="profile__wrapper">
-            <div class="profile__wrapper_left">
-                <div class="p__w_l_img_w">
-                    <form action="{{ route('dashboard.update-profile-image') }}" method="POST" id="update-profile-image" enctype="multipart/form-data">
-                        @csrf
-                        <img src="{{ asset('files/images/public-part/users/' . (Auth()->user()->photo_uri)) }}" alt="">
-                        <label for="photo_uri" class="edit-your-photo">
-                            <i class="fas fa-edit"></i>
-                            <p>{{ __('Uredite') }}</p>
-                        </label>
-                        <input name="photo_uri" class="form-control form-control-lg d-none" id="photo_uri" type="file">
-                    </form>
-                </div>
-
-                <div class="p__w_l_links_w">
-                    <h5>{{ __('Društvene mreže') }}</h5>
-
-                    <div class="social_network_wrapper instagram">
-                        <p>{{ __('Instagram') }}</p>
-                    </div>
-                    <div class="social_network_wrapper facebook">
-                        <p>{{ __('Facebook') }}</p>
-                    </div>
-                    <div class="social_network_wrapper twitter">
-                        <p>{{ __('Twitter') }}</p>
-                    </div>
-                    <div class="social_network_wrapper web">
-                        <p>{{ __('Web') }}</p>
-                    </div>
-
-                    <p class="share-your-links">{{ __('Podijelite Vaše društvene mreže sa ostalim članovima Akademije!') }}</p>
-                </div>
-            </div>
+            @include('public-part.dashboard.includes.left-side')
 
             <div class="profile__wrapper_right">
                 <form action="{{ route('dashboard.update-profile') }}" method="POST" id="js-form">
