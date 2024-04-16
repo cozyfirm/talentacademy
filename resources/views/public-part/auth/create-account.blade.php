@@ -6,10 +6,10 @@
 @section('content')
     <div class="auth-form register-form">
         <div class="af-image rf-image">
-            {{--<img src="{{ asset('files/images/default/ekipa.png') }}" alt="">--}}
-            <div class="af-img-text">
-                <h1>ALKARIS</h1>
-            </div>
+            <img src="{{ asset('files/images/public-part/logo.svg') }}" alt="">
+{{--            <div class="af-img-text">--}}
+{{--                <h1>ALKARIS</h1>--}}
+{{--            </div>--}}
         </div>
 
         <div class="af-form rf-form">
