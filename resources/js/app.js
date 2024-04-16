@@ -30,3 +30,7 @@ import "./public-part/app/contact-us/send-us-a-message.js";
 
 /* Import Submit script */
 import "./style/submit.js";
+
+/* Profile scripts */
+import "./public-part/app/profile/profile-image.js";
+

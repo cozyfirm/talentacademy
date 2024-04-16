@@ -29,6 +29,21 @@ class PublicUserController extends Controller{
             return $this->jsonResponse('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
+    public function updateProfileImage (Request $request){
+        try{
+            $file = $request->file('photo_uri');
+            $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+            $name = md5($file->getClientOriginalName().time()).'.'.$ext;
+            $file->move(public_path('files/images/public-part/users'), $name);
+
+            /* Update file name */
+            Auth::user()->update(['photo_uri' => $name]);
+
+            return redirect()->route('dashboard.my-profile');
+        }catch (\Exception $e){
+            return back();
+        }
+    }
 
     /**
      *  Sign out and redirect to homepage

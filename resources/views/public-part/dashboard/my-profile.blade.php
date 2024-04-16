@@ -13,12 +13,14 @@
         <div class="profile__wrapper">
             <div class="profile__wrapper_left">
                 <div class="p__w_l_img_w">
-                    <form >
-                        <img src="{{ asset('files/images/public-part/users/aladeen.jpg') }}" alt="">
-                        <div class="edit-your-photo">
+                    <form action="{{ route('dashboard.update-profile-image') }}" method="POST" id="update-profile-image" enctype="multipart/form-data">
+                        @csrf
+                        <img src="{{ asset('files/images/public-part/users/' . (Auth()->user()->photo_uri)) }}" alt="">
+                        <label for="photo_uri" class="edit-your-photo">
                             <i class="fas fa-edit"></i>
                             <p>{{ __('Uredite') }}</p>
-                        </div>
+                        </label>
+                        <input name="photo_uri" class="form-control form-control-lg d-none" id="photo_uri" type="file">
                     </form>
                 </div>
 
