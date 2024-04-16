@@ -1,11 +1,11 @@
 import './bootstrap';
 
-import 'jquery-ui/dist/jquery-ui';
-$('.datepicker').datepicker({
-    changeMonth: true,
-    changeYear: true,
-    dateFormat: 'dd.mm.yy',
-});
+// import 'jquery-ui/dist/jquery-ui';
+// $('.datepicker').datepicker({
+//     changeMonth: true,
+//     changeYear: true,
+//     dateFormat: 'dd.mm.yy',
+// });
 
 // import { Notify } from './style/layout/notify.ts';
 // import { Validator } from "./style/layout/validator.ts";
@@ -19,10 +19,14 @@ import "./public-part/auth/auth.js";
 // notify();
 
 import "./public-part/core/menu.js";
-import "./public-part/core/grid-slider.js";
+// import "./public-part/core/grid-slider.js";
 
 /* Counter */
-import "./public-part/app/programs/counter.js";
+// import "./public-part/app/programs/counter.js";
 
 /* Contact -us */
 import "./public-part/app/contact-us/send-us-a-message.js";
+
+
+/* Import Submit script */
+import "./style/submit.js";

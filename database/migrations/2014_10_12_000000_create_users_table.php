@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('role', '10')->default('user');
 
             /* User attributes */
-            $table->string('prefix', '10');
+            // $table->string('prefix', '10');
             $table->string('phone', 20);
             $table->date('birth_date');
 
@@ -33,6 +33,21 @@ return new class extends Migration
             $table->string('address', 100);
             $table->string('city', 50);
             $table->integer('country');
+
+            /* About user - text data */
+            $table->text('about')->nullable();
+            /* Profile image */
+            $table->string('photo_uri')->nullable();
+
+            /* Social networks links */
+            $table->string('instagram', 100)->nullable();
+            $table->string('facebook', 100)->nullable();
+            $table->string('twitter', 100)->nullable();
+            $table->string('web', 100)->nullable();
+
+            /* Teacher data */
+            $table->string('title')->nullable();
+            $table->string('institution')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

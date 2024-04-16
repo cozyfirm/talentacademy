@@ -1,0 +1,118 @@
+/*
+ *  Inner wrapper; Shared with multiple pages
+ */
+.inner__menu_w{
+    position: relative; left: 0px; width: 100%; height: 60px; background: #EA8BF3;
+
+    .inner__menu{
+        position: relative; width: $container-width; left: calc(50% - $container-width-half); height: 100%; display: inline-flex; justify-content: space-between;
+
+        .inner__menu_profile{
+            position: relative; height: 60px; display: inline-flex;
+
+            a{
+                display: inline-flex;
+                .inner__menu_profile_img_w{
+                    position: relative; width: 32px; height: 32px; border-radius: 16px; overflow: hidden; margin-top: 12px;
+                    img{
+                        position: absolute; left: 0px; top: 0px; width: 100%;
+                    }
+                }
+                p{
+                    font-size:16px; margin-top:18px; margin-left: 10px;
+                }
+            }
+        }
+
+        .inner__menu_links{
+            position: relative; height: 60px; display: inline-flex;
+            a{
+                position: relative; display: flex;
+                .inner__menu_links_link{
+                    display: inline-flex; position: relative; gap: 10px; padding: 0px 20px; border-left: 1px solid rgba(0,0,0,0.1); border-right: 1px solid rgba(0,0,0,0.1);
+                    img{
+                        //width: auto; height: 20px; position: relative;
+                        margin-top: 20px;
+                    }
+                    .scholarship{
+                        width: 15px; height: 20px;
+                    }
+                    .inbox{
+                        width: 20px; height: 16px; margin-top: 22px;
+                    }
+                    .schedule{
+                        width: 20px; height: 18px;
+                    }
+
+                    p{
+                        margin-top: 18px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*
+ *  User profile
+ */
+.profile__wrapper{
+    position: relative; left: calc(50% - $container-width-half); width: $container-width; display: inline-flex; justify-content: space-between;
+    margin-top: 32px; margin-bottom: 32px;
+    .profile__wrapper_left{
+        position: relative; width: 320px;
+
+        .p__w_l_img_w{
+            position: relative; left: 0px; top: 0px; width: 320px; border-radius: 16px; overflow: hidden;
+            form{
+                img{
+                    position: relative; left: 0px; top: 0px; width: 100%; border-radius: 16px;
+                }
+
+                .edit-your-photo{
+                    position: absolute; right: 20px; top:0px; margin-top: 20px; display: inline-flex; padding: 6px 20px; background: #EEF0F2; gap: 8px; border-radius: 4px;
+                    opacity: 0; transition: 0.2s all;
+                    i{font-size: 14px; margin-top: 2px;}
+                    p{
+                        margin: 0px; font-size: 14px;
+                    }
+                }
+            }
+        }
+        .p__w_l_img_w:hover{
+            form{
+                .edit-your-photo{opacity: 1; cursor: pointer;}
+            }
+        }
+
+        .p__w_l_links_w{
+            position: relative; left: 0px; width: 100%; border-radius: 16px; border: 1px solid rgba(0,0,0,0.1); margin-top: 16px;
+            padding: 16px;
+
+            .social_network_wrapper{
+                position: relative; width: 100%; padding: 6px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; margin-bottom: 8px;
+                p{
+                    margin: 0px;
+                }
+            }
+
+            .share-your-links{
+                margin: 0px;
+            }
+        }
+    }
+
+    .profile__wrapper_right{
+        position: relative; width: calc(100% - 352px);
+
+
+        .form-control{
+            background: #FFFFFF; border-radius: 8px;
+        }
+        textarea{min-height: 120px !important; }
+        .btn{
+            background: #EA8BF3; color: #000000;
+        }
+    }
+}

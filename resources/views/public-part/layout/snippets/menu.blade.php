@@ -4,8 +4,13 @@
             <img src="{{ asset('files/images/public-part/logo.svg') }}" alt="Talent Akademija" class="header__logo-image">
         </a>
         <div class="header__auth-buttons">
-            <a href="#" class="header__auth-button header__auth-button--outlined"><img src="{{ asset('files/images/public-part/login.svg') }}" alt="Login"><span>Log in</span></a>
-            <a href="#" class="header__auth-button header__auth-button--contained">Registruj se</a>
+            @if(Auth()->check())
+                <a href="{{ route('dashboard.my-profile') }}" class="header__auth-button header__auth-button--outlined"><img src="{{ asset('files/images/public-part/login.svg') }}" alt="Login"><span>{{ __('Moj račun') }}</span></a>
+                <a href="{{ route('dashboard.sing-out') }}" class="header__auth-button header__auth-button--contained">{{ __('Odjavi se') }}</a>
+            @else
+                <a href="{{ route('auth') }}" class="header__auth-button header__auth-button--outlined"><img src="{{ asset('files/images/public-part/login.svg') }}" alt="Login"><span>{{ __('Log in') }}</span></a>
+                <a href="{{ route('auth.create-account') }}" class="header__auth-button header__auth-button--contained">{{ __('Registruj se') }}</a>
+            @endif
         </div>
         <div class="header__mobile-menu-button">
             <img src="{{ asset('files/images/public-part/mobile-menu-button.svg') }}" alt="Mobile menu button">

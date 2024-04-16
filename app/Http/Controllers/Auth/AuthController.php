@@ -33,10 +33,13 @@ class AuthController extends Controller{
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
 
+            $uri = route('system.home');
+            if($user->role == 'user') $uri = route('dashboard.my-profile');
+
             return json_encode([
                 'code' => '0000',
                 'message' => __('Uspješno ste se prijavili!'),
-                'url' => route('system.home')
+                'url' => $uri
             ]);
 
 //            if(!($user->active ?? '')){

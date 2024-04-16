@@ -76,13 +76,9 @@
 
                         <div class="row mt-3">
                             <div class="col-md-6">
-                                <div class="c-bootstrap-field">
+                                <div class="form-group">
                                     {{ html()->label(__('Broj telefona'))->for('phone')->class('bold') }}
-
-                                    <div class="input-elements">
-                                        {{ html()->select('prefix', $prefixes, '21')->class('form-control form-control-sm mt-1 w-80 mr-10') }}
-                                        {{ html()->number('phone')->class('form-control form-control-sm mt-1')->maxlength(13)->value('62225883') }}
-                                    </div>
+                                    {{ html()->number('phone')->class('form-control form-control-sm mt-2')->maxlength(13)->value('62225883') }}
                                     <small id="prefixHelp" class="form-text text-muted"> {{ __('Unesite Vaš broj telefona') }} </small>
                                 </div>
                             </div>

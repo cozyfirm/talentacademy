@@ -5,6 +5,7 @@ use App\Http\Controllers\PublicPart\ContactUsController;
 use App\Http\Controllers\PublicPart\LecturersController;
 use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
+use App\Http\Controllers\PublicPart\Dashboard\PublicUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\Admin\HomeController;
 use App\Http\Controllers\PublicPart\HomeController as HomepageController;
@@ -77,6 +78,17 @@ Route::prefix('')->group(function () {
         Route::get('/',                   [LecturersController::class, 'lecturers'])->name('public-part.lecturers.lecturers');
         Route::get('/{id}',                   [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer');
     });
+});
+
+/**
+ *  User routes / Public part routes for classic users
+ */
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get ('/my-profile',                              [PublicUserController::class, 'myProfile'])->name('dashboard.my-profile');
+    Route::post('/update-profile',                          [PublicUserController::class, 'updateProfile'])->name('dashboard.update-profile');
+
+    /* Sign out */
+    Route::get ('/sign-out',                                [PublicUserController::class, 'signOut'])->name('dashboard.sing-out');
 });
 
 /**

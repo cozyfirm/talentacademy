@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -31,7 +32,15 @@ class User extends Authenticatable{
         'birth_date',
         'address',
         'city',
-        'country'
+        'country',
+        'about',
+        'photo_uri',
+        'instagram',
+        'facebook',
+        'twitter',
+        'web',
+        'title',
+        'institution',
     ];
 
     /**
@@ -53,4 +62,8 @@ class User extends Authenticatable{
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function birthDate(){
+        return Carbon::parse($this->birth_date)->format('d.m.Y');
+    }
 }
