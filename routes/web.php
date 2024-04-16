@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicPart\ContactUsController;
+use App\Http\Controllers\PublicPart\LecturersController;
 use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
 use Illuminate\Support\Facades\Route;
@@ -69,7 +70,13 @@ Route::prefix('')->group(function () {
         Route::get('/{id}',                   [LocationsController::class, 'single_location'])->name('public-part.locations.single-location');
     });
 
-
+    /*
+     *  Lecturers
+     */
+    Route::prefix('lecturers')->group(function () {
+        Route::get('/',                   [LecturersController::class, 'lecturers'])->name('public-part.lecturers.lecturers');
+        Route::get('/{id}',                   [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer');
+    });
 });
 
 /**

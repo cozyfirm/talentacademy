@@ -1,0 +1,172 @@
+.lecturers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $white;
+
+    .lecturers__container {
+        width: 100%;
+        max-width: $container-width;
+
+        @media (max-width: $container-width) {
+            padding: 0px 24px;
+        }
+
+        .lecturers__header {
+            margin-top: 64px;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h2 {
+                font-size: 56px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 120%;
+            }
+
+            .lecturers__search {
+                display: flex;
+                width: 400px;
+                padding: 10px;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 8px;
+                border: 1px solid rgba(7, 6, 0, 0.30);
+                background: rgba(238, 240, 242, 0.10);
+
+                .lecturers__search-input {
+                    background: none;
+                    outline: none;
+                    border: none;
+                }
+            }
+        }
+
+        .lecturers__categories {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            .lecturers__category {
+                display: flex;
+                padding: 8px 32px;
+                justify-content: center;
+                align-items: center;
+                border-radius: 8px;
+                border: 1px solid $primary;
+                background: $primary;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 150%;
+            }
+        }
+
+        .lecturers__list {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-top: 32px;
+
+            .lecturers__list-item {
+                width: calc(33.3% - 21px);
+                display: flex;
+                flex-direction: column;
+                border-radius: 10px;
+                border: 1px solid rgba(7, 6, 0, 0.30);
+                overflow: hidden;
+
+                .lecturers__list-item-image {
+                    height: 320px;
+                    width: 100%;
+                    object-fit: cover;
+                    object-position: top;
+                }
+
+                .lecturers__list-item-category {
+                    margin-top: 24px;
+                    margin-left: 16px;
+                    margin-right: 16px;
+                    width: fit-content;
+                    display: flex;
+                    padding: 4px 16px;
+                    align-items: flex-start;
+                    border-radius: 32px;
+                    background: var(--Program-Pisanje-bg-program-secondary, #F45B69);
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 150%;
+                }
+
+                .lecturers__list-item-name {
+                    font-size: 40px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 120%;
+                    margin-top: 16px;
+                    margin-left: 16px;
+                    margin-right: 16px;
+                }
+
+                .lecturers__list-item-subtitle {
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 140%;
+                    margin-left: 16px;
+                    margin-right: 16px;
+                }
+
+                .lecturers__list-item-description {
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 150%;
+                    margin-top: 16px;
+                    margin-left: 16px;
+                    margin-right: 16px;
+                }
+
+                .lecturers__list-item-social-icons {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: 14px;
+                    margin-top: 16px;
+                    margin-left: 16px;
+                    margin-right: 16px;
+                    margin-bottom: 36px;
+
+                    .lecturers__list-item-social-icon {
+
+                    }
+                }
+            }
+        }
+
+        .lecturers__more-button {
+            width: fit-content;
+            display: flex;
+            padding: 8px 32px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            border: 1px solid $primary;
+            background: $primary;
+            margin: 0 auto;
+            margin-top: 32px;
+            margin-bottom: 64px;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 150%;
+        }
+    }
+}
