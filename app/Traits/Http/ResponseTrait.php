@@ -18,6 +18,13 @@ trait ResponseTrait{
             'url' => $url
         ]);
     }
+    public function jsonError($code, $message, $url = null): \Illuminate\Http\JsonResponse {
+        return response()->json([
+            'code' => $code,
+            'message' => $message,
+            'url' => $url
+        ]);
+    }
 
     /**
      * @param $code

@@ -14,7 +14,7 @@
     <div class="p__w_l_links_w">
         <h5>{{ __('Društvene mreže') }}</h5>
 
-        <div class="social_network_wrapper instagram">
+        <div class="social_network_wrapper instagram mt-3">
             <a href="{{ route('dashboard.edit-links', ['link' => 'instagram']) }}">
                 <p>{{ __('Instagram') }}</p>
             </a>
@@ -36,5 +36,13 @@
         </div>
 
         <p class="share-your-links">{{ __('Podijelite Vaše društvene mreže sa ostalim članovima Akademije!') }}</p>
+
+        <hr>
+
+        <div class="social_network_wrapper bg-dark text-center">
+            <a href="{{ route('dashboard.change-password') }}">
+                <p class="text-white">{{ __('Izmijenite šifru') }}</p>
+            </a>
+        </div>
     </div>
 </div>
