@@ -64,7 +64,7 @@
         position: relative; width: 320px;
 
         .p__w_l_img_w{
-            position: relative; left: 0px; top: 0px; width: 320px; border-radius: 16px; overflow: hidden;
+            position: relative; left: 0px; top: 0px; width: 320px; border-radius: 16px; overflow: hidden; min-height: 160px; border: 1px solid rgba(0,0,0,0.1);
             form{
                 img{
                     position: relative; left: 0px; top: 0px; width: 100%; border-radius: 16px;

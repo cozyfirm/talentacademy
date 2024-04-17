@@ -191,26 +191,25 @@
                 </div>
             </div>
         </a>
-        <a href="#" class="menu-a-link">
+
+        <a href="{{ route('system.admin.users') }}" class="menu-a-link">
             <div class="s-lm-wrapper">
                 <div class="s-lm-s-elements">
                     <div class="s-lms-e-img">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-users"></i>
                     </div>
-                    <p>{{__('Dashboard')}}</p>
+                    <p>{{__('Korisnici')}}</p>
                     <div class="extra-elements">
-                        <div class="ee-t ee-t-b"><p>{{__('Main')}}</p></div>
+                        <div class="ee-t ee-t-b"><p>{{__('All')}}</p></div>
                     </div>
                 </div>
             </div>
         </a>
 
-
-
         <div class="subtitle">
-            <h4> {{__('Historija kupovanja')}} </h4>
+            <h4> {{__('Ostalo')}} </h4>
             <div class="subtitle-icon">
-                <i class="fas fa-history"></i>
+                <i class="fas fa-box"></i>
             </div>
         </div>
 

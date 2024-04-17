@@ -11,7 +11,8 @@ import './bootstrap';
 // import { Validator } from "./style/layout/validator.ts";
 
 /* Import Admin JavaScript data */
-import './admin/layout/menu.js'
+import './admin/layout/menu.js';
+import './admin/layout/filters.js';
 
 /* Authentication data */
 import "./public-part/auth/auth.js";

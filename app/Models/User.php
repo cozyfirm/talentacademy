@@ -3,8 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Models\Core\Country;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -27,6 +29,7 @@ class User extends Authenticatable{
         'email',
         'password',
         'api_token',
+        'role',
         'prefix',
         'phone',
         'birth_date',
@@ -63,7 +66,10 @@ class User extends Authenticatable{
         'password' => 'hashed',
     ];
 
-    public function birthDate(){
+    public function birthDate(): string {
         return Carbon::parse($this->birth_date)->format('d.m.Y');
+    }
+    public function countryRel(): HasOne{
+        return $this->hasOne(Country::class, 'id', 'country');
     }
 }

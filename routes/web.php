@@ -6,6 +6,7 @@ use App\Http\Controllers\PublicPart\LecturersController;
 use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
 use App\Http\Controllers\PublicPart\Dashboard\PublicUserController;
+use App\Http\Controllers\System\Admin\Users\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\Admin\HomeController;
 use App\Http\Controllers\PublicPart\HomeController as HomepageController;
@@ -103,6 +104,18 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 Route::prefix('system')->middleware('auth')->group(function () {
     Route::prefix('admin')->group(function (){
         Route::get('/dashboard',                 [HomeController::class, 'index'])->name('system.home');
+
+        /**
+         *  Users routes;
+         *  ToDo - Add admin middleware
+         */
+        Route::prefix('users')->middleware('auth')->group(function () {
+            Route::get ('/',                          [UsersController::class, 'index'])->name('system.admin.users');
+            Route::get ('/create',                    [UsersController::class, 'create'])->name('system.admin.users.create');
+            Route::get ('/preview/{username}',        [UsersController::class, 'preview'])->name('system.admin.users.preview');
+            Route::get ('/edit/{username}',           [UsersController::class, 'edit'])->name('system.admin.users.edit');
+            Route::post('/update',                    [UsersController::class, 'update'])->name('system.admin.users.update');
+        });
     });
 });
 

@@ -2,7 +2,9 @@
     <div class="p__w_l_img_w">
         <form action="{{ route('dashboard.update-profile-image') }}" method="POST" id="update-profile-image" enctype="multipart/form-data">
             @csrf
-            <img src="{{ asset('files/images/public-part/users/' . (Auth()->user()->photo_uri)) }}" alt="">
+            @if(isset(Auth()->user()->photo_uri))
+                <img src="{{ asset('files/images/public-part/users/' . (Auth()->user()->photo_uri)) }}" alt="">
+            @endif
             <label for="photo_uri" class="edit-your-photo">
                 <i class="fas fa-edit"></i>
                 <p>{{ __('Uredite') }}</p>

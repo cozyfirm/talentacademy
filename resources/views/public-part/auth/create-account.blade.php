@@ -51,7 +51,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {{ html()->label(__('Ime i prezime'))->for('name')->class('bold') }}
-                                    {{ html()->text('name')->class('form-control form-control-sm mt-2')->maxlength(100)->value('John Doe') }}
+                                    {{ html()->text('name')->class('form-control form-control-sm mt-2')->maxlength(100)->value('') }}
                                     <small id="nameHelp" class="form-text text-muted">{{ __('Unesite Vaše ime prezime') }}</small>
                                 </div>
                             </div>
@@ -61,14 +61,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {{ html()->label(__('Email adresa'))->for('email')->class('bold') }}
-                                    {{ html()->email('email')->class('form-control form-control-sm mt-2')->maxlength(50)->value('john@doe.com') }}
+                                    {{ html()->email('email')->class('form-control form-control-sm mt-2')->maxlength(50)->value('') }}
                                     <small id="emailHelp" class="form-text text-muted">{{ __('Unesite Vašu email adresu') }}</small>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {{ html()->label(__('Šifra'))->for('password')->class('bold') }}
-                                    {{ html()->password('password')->class('form-control form-control-sm mt-2')->value('password') }}
+                                    {{ html()->password('password')->class('form-control form-control-sm mt-2')->value('') }}
                                     <small id="passwordHelp" class="form-text text-muted">{{ __('Unesite Vašu korisničku šifru') }}</small>
                                 </div>
                             </div>
@@ -78,14 +78,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {{ html()->label(__('Broj telefona'))->for('phone')->class('bold') }}
-                                    {{ html()->number('phone')->class('form-control form-control-sm mt-2')->maxlength(13)->value('62225883') }}
+                                    {{ html()->number('phone')->class('form-control form-control-sm mt-2')->maxlength(13)->value('') }}
                                     <small id="prefixHelp" class="form-text text-muted"> {{ __('Unesite Vaš broj telefona') }} </small>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {{ html()->label(__('Datum rođenja'))->for('birth_date')->class('bold') }}
-                                    {{ html()->text('birth_date')->class('form-control form-control-sm mt-2 datepicker')->maxlength('10')->value('01.01.2000') }}
+                                    {{ html()->text('birth_date')->class('form-control form-control-sm mt-2 datepicker')->maxlength('10')->value('') }}
                                     <small id="birth_dateHelp" class="form-text text-muted">{{ __('Unesite Vaš datum rođenja') }}</small>
                                 </div>
                             </div>
@@ -96,12 +96,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 {{ html()->label(__('Adresa stanovanja'))->for('address')->class('bold') }}
-                                {{ html()->text('address')->class('form-control form-control-sm mt-2')->maxlength('100')->value('Jonhs address') }}
+                                {{ html()->text('address')->class('form-control form-control-sm mt-2')->maxlength('100')->value('') }}
                                 <small id="addressHelp" class="form-text text-muted">{{ __('Vaša adresa stanovanja') }}</small>
                             </div>
                             <div class="col-md-6">
                                 {{ html()->label(__('Grad'))->for('city')->class('bold') }}
-                                {{ html()->text('city')->class('form-control form-control-sm mt-2')->maxlength('50')->value('New York') }}
+                                {{ html()->text('city')->class('form-control form-control-sm mt-2')->maxlength('50')->value('') }}
                                 <small id="living_placeHelp" class="form-text text-muted">{{ __('Grad u kojem trenutno živite') }}</small>
                             </div>
                         </div>
