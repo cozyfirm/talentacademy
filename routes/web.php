@@ -129,6 +129,10 @@ Route::prefix('system')->middleware('auth')->group(function () {
             Route::get ('/edit/{id}',                 [AdminLocationsController::class, 'edit'])->name('system.admin.locations.edit');
             Route::post('/update',                    [AdminLocationsController::class, 'update'])->name('system.admin.locations.update');
             Route::get ('/delete/{id}',               [AdminLocationsController::class, 'delete'])->name('system.admin.locations.delete');
+
+            /* Location images */
+            Route::get ('/change-image/{id}/{what}',               [AdminLocationsController::class, 'changeImage'])->name('system.admin.locations.change-image');
+            Route::post('/update-image',                           [AdminLocationsController::class, 'updateImage'])->name('system.admin.locations.update-image');
         });
     });
 });

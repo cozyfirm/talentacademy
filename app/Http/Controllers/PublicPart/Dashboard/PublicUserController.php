@@ -37,7 +37,6 @@ class PublicUserController extends Controller{
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('dashboard.my-profile'));
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
@@ -61,7 +60,6 @@ class PublicUserController extends Controller{
         else if($link == 'facebook') $value = Auth::user()->facebook;
         else if($link == 'twitter') $value = Auth::user()->twitter;
         else$value = Auth::user()->web;
-
 
         return view($this->_path . 'edit-links', [
             'link' => ucfirst($link),

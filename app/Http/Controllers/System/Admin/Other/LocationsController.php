@@ -77,10 +77,38 @@ class LocationsController extends Controller{
             $location = Location::where('id', $id)->first();
             $name = $location->title;
             $location->delete();
-            
+
             return redirect()->route('system.admin.locations')->with('success', __('Uspješno obrisana lokacija ' . $name . "!"));
         }catch (\Exception $e){
             return redirect()->route('system.admin.locations')->with('error', __('Desila se greška!'));
+        }
+    }
+
+    public function changeImage($id, $what): View{
+        if($what == 'map_img') $title = 'Map Image';
+        else if($what == 'main_img') $title = 'Main Image';
+        else if($what == 'cover_img') $title = 'Cover Image';
+
+        return view($this->_path . 'change-image', [
+            'location' => Location::where('id', $id)->first(),
+            'what' => $what,
+            'title' => $title,
+            'id' => $id
+        ]);
+    }
+    public function updateImage (Request $request){
+        try{
+            $file = $request->file('photo_uri');
+            $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+            $name = md5($file->getClientOriginalName().time()).'.'.$ext;
+            $file->move(public_path('files/images/public-part/locations'), $name);
+
+            Location::where('id', $request->id)->update([$request->what => $name]);
+
+            return redirect()->route('system.admin.locations.preview', ['id' => $request->id ])->with('success', __('Uspješno spašena fotografija!'));
+            dd($request->all());
+        }catch (\Exception $e){
+            dd($e);
         }
     }
 }

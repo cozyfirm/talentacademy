@@ -23,6 +23,23 @@
                 <i class="fas fa-edit"></i>
             </button>
         </a>
+
+        <a href="{{ route('system.admin.locations.change-image', ['id' => $location, 'what' => 'map_img']) }}" title="{{ __('Fotografija lokacije') }}">
+            <button class="pm-btn btn pm-btn-edit">
+                <i class="fas fa-map-pin"></i>
+            </button>
+        </a>
+        <a href="{{ route('system.admin.locations.change-image', ['id' => $location, 'what' => 'main_img']) }}" title="{{ __('Naslovna fotografija') }}">
+            <button class="pm-btn btn pm-btn-5 pm-btn-edit">
+                <i class="fas fa-image"></i>
+            </button>
+        </a>
+        <a href="{{ route('system.admin.locations.change-image', ['id' => $location, 'what' => 'cover_img']) }}" title="{{ __('Cover fotografija') }}">
+            <button class="pm-btn btn pm-btn-5 pm-btn-edit">
+                <i class="fas fa-images"></i>
+            </button>
+        </a>
+    @elseif(isset($edit))
         <a href="{{ route('system.admin.locations.delete', ['id' => $location->id ]) }}">
             <button class="pm-btn btn pm-btn-trash">
                 <i class="fas fa-trash"></i>
@@ -58,7 +75,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -73,7 +89,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -88,7 +103,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-group">
