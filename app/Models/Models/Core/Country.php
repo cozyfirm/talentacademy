@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static orderBy(string $string)
+ * @method static pluck(string $string, string $string1)
  */
 class Country extends Model{
     use HasFactory;

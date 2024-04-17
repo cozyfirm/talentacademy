@@ -7,6 +7,7 @@ use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
 use App\Http\Controllers\PublicPart\Dashboard\PublicUserController;
 use App\Http\Controllers\System\Admin\Users\UsersController;
+use App\Http\Controllers\System\Admin\Other\LocationsController as AdminLocationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\Admin\HomeController;
 use App\Http\Controllers\PublicPart\HomeController as HomepageController;
@@ -115,6 +116,19 @@ Route::prefix('system')->middleware('auth')->group(function () {
             Route::get ('/preview/{username}',        [UsersController::class, 'preview'])->name('system.admin.users.preview');
             Route::get ('/edit/{username}',           [UsersController::class, 'edit'])->name('system.admin.users.edit');
             Route::post('/update',                    [UsersController::class, 'update'])->name('system.admin.users.update');
+        });
+
+        /**
+         *  Locations routes
+         */
+        Route::prefix('locations')->middleware('auth')->group(function () {
+            Route::get ('/',                          [AdminLocationsController::class, 'index'])->name('system.admin.locations');
+            Route::get ('/create',                    [AdminLocationsController::class, 'create'])->name('system.admin.locations.create');
+            Route::post('/save',                      [AdminLocationsController::class, 'save'])->name('system.admin.locations.save');
+            Route::get ('/preview/{id}',              [AdminLocationsController::class, 'preview'])->name('system.admin.locations.preview');
+            Route::get ('/edit/{id}',                 [AdminLocationsController::class, 'edit'])->name('system.admin.locations.edit');
+            Route::post('/update',                    [AdminLocationsController::class, 'update'])->name('system.admin.locations.update');
+            Route::get ('/delete/{id}',               [AdminLocationsController::class, 'delete'])->name('system.admin.locations.delete');
         });
     });
 });

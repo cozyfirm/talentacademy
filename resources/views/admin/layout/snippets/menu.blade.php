@@ -213,30 +213,16 @@
             </div>
         </div>
 
-        <a href="#" class="menu-a-link">
+        <a href="{{ route('system.admin.locations') }}" class="menu-a-link">
             <div class="s-lm-wrapper">
                 <div class="s-lm-s-elements">
                     <div class="s-lms-e-img">
-                        <i class="far fa-file-alt"></i>
+                        <i class="fas fa-map-pin"></i>
                     </div>
-                    <p>{{__('Moje narudžbe')}}</p>
+                    <p>{{__('Lokacije')}}</p>
                     <div class="extra-elements">
-                        <div class="rotate-element"><i class="fas fa-angle-right"></i></div>
+                        <div class="ee-t ee-t-b"><p>{{__('Other')}}</p></div>
                     </div>
-                </div>
-                <div class="inside-links active-links">
-                    <a href="#">
-                        <div class="inside-lm-link">
-                            <div class="ilm-l"></div><div class="ilm-c"></div>
-                            <p>{{__('Pregled svih narudžbi')}}</p>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div class="inside-lm-link">
-                            <div class="ilm-l"></div><div class="ilm-c"></div>
-                            <p> {{__('Uputstva za korištenje')}} </p>
-                        </div>
-                    </a>
                 </div>
             </div>
         </a>
