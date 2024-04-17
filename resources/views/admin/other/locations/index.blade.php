@@ -42,7 +42,7 @@
                     <td> {{ $location->address ?? ''}} </td>
                     <td> {{ $location->city ?? ''}} </td>
                     <td> {{ $location->countryRel->name_ba ?? ''}} </td>
-                    <td> {{ $location->location ?? ''}} </td>
+                    <td><a href="{{ $location->location ?? ''}}" target="_blank">{{ __('Lokacija') }}</a> </td>
 
                     <td class="text-center">
                         <a href="{{route('system.admin.locations.preview', ['id' => $location->id] )}}" title="{{ __('Više informacija') }}">
