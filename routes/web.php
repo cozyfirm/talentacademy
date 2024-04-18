@@ -69,7 +69,7 @@ Route::prefix('')->group(function () {
      */
 
     Route::prefix('locations')->group(function () {
-        Route::get('/',                   [LocationsController::class, 'locations'])->name('public-part.locations.locations');
+        Route::get('/',                       [LocationsController::class, 'locations'])->name('public-part.locations.locations');
         Route::get('/{id}',                   [LocationsController::class, 'single_location'])->name('public-part.locations.single-location');
     });
 
@@ -77,7 +77,7 @@ Route::prefix('')->group(function () {
      *  Lecturers
      */
     Route::prefix('lecturers')->group(function () {
-        Route::get('/',                   [LecturersController::class, 'lecturers'])->name('public-part.lecturers.lecturers');
+        Route::get('/',                       [LecturersController::class, 'lecturers'])->name('public-part.lecturers.lecturers');
         Route::get('/{id}',                   [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer');
     });
 });

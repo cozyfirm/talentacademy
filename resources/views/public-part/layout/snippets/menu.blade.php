@@ -23,10 +23,10 @@
 
     <div class="header__links">
         <a href="#">{{ __('Programi') }}</a>
-        <a href="#">{{ __('Predavači') }}</a>
+        <a href="{{ route('public-part.lecturers.lecturers') }}">{{ __('Predavači') }}</a>
         <a href="#">{{ __('Stipendije') }}</a>
         <a href="#">{{ __('Blog') }}</a>
-        <a href="#">{{ __('Lokacije') }}</a>
+        <a href="{{ route('public-part.locations.locations') }}">{{ __('Lokacije') }}</a>
         <a class="show-header-submenu">
             {{ __('Programi akademije') }}
             <i class="fas fa-chevron-down"></i>

@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static where(string $string, string $string1, int $int)
  * @method static create(array $all)
  * @method static pluck(string $string, string $string1)
+ * @method static get()
+ * @method static take(int $int)
  */
 class Location extends Model{
     use HasFactory;
