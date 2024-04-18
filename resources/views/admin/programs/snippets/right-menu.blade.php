@@ -33,11 +33,13 @@
                         <small>{{ __('Spisak svih predavača na kursu') }}</small>
                     </h6>
 
-                    <p class="card-text mt-2 mb-1" title="{{ __('Preuzmite ispit u .xlxs formatu') }}">
-                        <a href="#" class="m-0 p-0 get-gke-exam" attr-id="12">
-                            <small>1. John Doe</small>
-                        </a>
-                    </p>
+                    @foreach($program->uniquePresenterSessions() as $sessionRel)
+                        <p class="card-text mt-2 mb-1" title="{{ __('Više informacija o predavaču') }}">
+                            <a href="{{ route('system.admin.users.preview', ['username' => $sessionRel->presenterRel->username ]) }}" class="m-0 p-0 get-gke-exam" target="_blank">
+                                <small>{{ $sessionRel->presenterRel->name ?? '' }}</small>
+                            </a>
+                        </p>
+                    @endforeach
                 </div>
             </div>
 

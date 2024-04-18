@@ -56,9 +56,11 @@ class ProgramsController extends Controller{
         }
     }
     public function preview($id): View{
+        $program = Program::where('id', $id)->first();
+
         return view($this->_path . 'create', [
             'preview' => true,
-            'program' => Program::where('id', $id)->first()
+            'program' => $program
         ]);
     }
     public function edit($id): View{
@@ -114,7 +116,7 @@ class ProgramsController extends Controller{
     public function saveSession(Request $request): JsonResponse{
         try{
             $this->calculateDuration($request);
-            
+
             $request['date'] = Carbon::parse($request->date)->format('Y-m-d');
             ProgramSession::create($request->all());
 
