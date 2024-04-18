@@ -7,17 +7,21 @@ use App\Http\Controllers\System\Core\Filters;
 use App\Models\Other\Location;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramSession;
+use App\Models\Programs\ProgramSessionFile;
 use App\Models\User;
+use App\Traits\Common\CommonTrait;
+use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use MongoDB\Driver\Session;
 
 class ProgramsController extends Controller{
-    use UserBaseTrait, ResponseTrait;
+    use UserBaseTrait, ResponseTrait, FileTrait, CommonTrait;
     protected string $_path = 'admin.programs.';
     protected array $_session_types = [
         'workshop' => 'Workshop',
@@ -63,7 +67,7 @@ class ProgramsController extends Controller{
             'program' => Program::where('id', $id)->first()
         ]);
     }
-    public function update(Request $request){
+    public function update(Request $request): JsonResponse{
         try{
             Program::where('id', $request->id)->update($request->except(['id']));
 
@@ -72,7 +76,7 @@ class ProgramsController extends Controller{
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
-    public function delete($id){
+    public function delete($id): RedirectResponse{
         try{
             $program = Program::where('id', $id)->first();
             $name = $program->title;
@@ -88,17 +92,29 @@ class ProgramsController extends Controller{
     /**
      *  Program sessions
      */
-    public function createSession($program_id){
+    protected function calculateDuration(Request $request): void{
+        $start = explode(':', $request->time_from);
+        $end   = explode(':', $request->time_to);
+
+        try{
+            $request['duration'] = (($end[0] * 60) + $end[1]) - (($start[0] * 60) + $start[1]);
+        }catch (\Exception $e){  }
+    }
+
+    public function createSession($program_id): View{
         return view($this->_path . 'sessions.create', [
             'create' => true,
             'program' => Program::where('id', $program_id)->first(),
             'types' => $this->_session_types,
             'locations' => Location::pluck('title', 'id'),
-            'presenters' => User::where('role', 'presenter')->pluck('name', 'id')
+            'presenters' => User::where('role', 'presenter')->pluck('name', 'id'),
+            'timeArr' => self::formTimeArr()
         ]);
     }
     public function saveSession(Request $request): JsonResponse{
         try{
+            $this->calculateDuration($request);
+            
             $request['date'] = Carbon::parse($request->date)->format('Y-m-d');
             ProgramSession::create($request->all());
 
@@ -117,7 +133,8 @@ class ProgramsController extends Controller{
             'types' => $this->_session_types,
             'locations' => Location::pluck('title', 'id'),
             'presenters' => User::where('role', 'presenter')->pluck('name', 'id'),
-            'session' => $session
+            'session' => $session,
+            'timeArr' => self::formTimeArr()
         ]);
     }
     public function editSession($id): View{
@@ -130,21 +147,23 @@ class ProgramsController extends Controller{
             'types' => $this->_session_types,
             'locations' => Location::pluck('title', 'id'),
             'presenters' => User::where('role', 'presenter')->pluck('name', 'id'),
-            'session' => $session
+            'session' => $session,
+            'timeArr' => self::formTimeArr()
         ]);
     }
-    public function updateSession(Request $request){
+    public function updateSession(Request $request): JsonResponse{
         try{
+            $this->calculateDuration($request);
+
             $request['date'] = Carbon::parse($request->date)->format('Y-m-d');
             ProgramSession::where('id', $request->id)->update($request->except(['id']));
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.programs.sessions.preview', ['id' => $request->id]));
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
-    public function deleteSession($id){
+    public function deleteSession($id): RedirectResponse{
         try{
             $session = ProgramSession::where('id', $id)->first();
 
@@ -155,6 +174,42 @@ class ProgramsController extends Controller{
             return redirect()->route('system.admin.programs.preview', ['id' => $program->id ])->with('success', __('Uspješno obrisana sesija ' . $name . "!"));
         }catch (\Exception $e){
             return redirect()->route('system.admin.programs')->with('error', __('Desila se greška!'));
+        }
+    }
+
+    /**
+     * @param $session_id
+     * @return View
+     * Work with files
+     */
+    public function uploadFile($session_id): View{
+        return view($this->_path . 'sessions.upload-file', [
+            'session' => ProgramSession::where('id', $session_id)->first()
+        ]);
+    }
+    public function saveSessionFile (Request $request): RedirectResponse{
+        try{
+            /* Add path */
+            $request['path'] = ('files/programs/sessions');
+            $file = $this->saveFile($request, 'file_uri', 'session_file');
+
+            ProgramSessionFile::create(['session_id' => $request->session_id, 'file_id' => $file->id]);
+
+            return redirect()->route('system.admin.programs.sessions.preview', ['id' => $request->session_id]);
+        }catch (\Exception $e){
+            return back()->with('error', __('Desila se greška!'));
+        }
+    }
+    public function removeSessionFile ($id): RedirectResponse{
+        try{
+            $file = ProgramSessionFile::where('id', $id)->first();
+            $fileName = $file->file;
+
+            $file->delete();
+
+            return back()->with('success', __('Uspješno obrisan dokument ' . $fileName . "!"));
+        }catch (\Exception $e){
+            return back();
         }
     }
 }

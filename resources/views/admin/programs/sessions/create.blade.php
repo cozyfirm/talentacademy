@@ -33,6 +33,17 @@
 
 @section('content')
     <div class="content-wrapper content-wrapper-p-15">
+        @if(session()->has('success'))
+            <div class="alert alert-success mt-3">
+                {{ session()->get('success') }}
+            </div>
+        @elseif(session()->has('error'))
+            <div class="alert alert-danger mt-3">
+                {{ session()->get('error') }}
+            </div>
+        @endif
+
+
         <div class="row">
             <div class="col-md-9">
                 <form action="@if(isset($edit)) {{ route('system.admin.programs.sessions.update') }} @else {{ route('system.admin.programs.sessions.save') }} @endif" method="POST" id="js-form">
@@ -60,11 +71,20 @@
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ html()->label(__('Vrijeme'))->for('time')->class('bold') }}
-                                {{ html()->text('time')->class('form-control form-control-sm mt-1')->required()->value((isset($session) ? $session->time : ''))->placeholder('10:30')->isReadonly(isset($preview)) }}
+                                {{ html()->label(__('Vrijeme od'))->for('time_from')->class('bold') }}
+                                {{ html()->select('time_from', $timeArr, isset($session) ? $session->time_from : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <div class="form-group">
+                                {{ html()->label(__('Vrijeme do'))->for('time_to')->class('bold') }}
+                                {{ html()->select('time_to', $timeArr, isset($session) ? $session->time_to : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 {{ html()->label(__('Datum'))->for('date')->class('bold') }}
                                 {{ html()->text('date')->class('form-control form-control-sm mt-1 datepicker')->required()->value((isset($session) ? $session->date() : ''))->placeholder('10.08.2024')->isReadonly(isset($preview)) }}
@@ -72,7 +92,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Lokacija'))->for('location_id')->class('bold') }}

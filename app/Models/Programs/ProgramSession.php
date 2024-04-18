@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -24,5 +25,8 @@ class ProgramSession extends Model{
     }
     public function presenterRel(): HasOne{
         return $this->hasOne(User::class, 'id', 'presenter_id');
+    }
+    public function sessionFileRel(): HasMany{
+        return $this->hasMany(ProgramSessionFile::class, 'session_id', 'id');
     }
 }

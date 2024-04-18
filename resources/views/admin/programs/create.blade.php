@@ -93,7 +93,7 @@
                                 <tr>
                                     <th scope="col" width="40px" class="text-center">{{ $counter++ }}</th>
                                     <th scope="col"> {{ $session->title ?? '' }} </th>
-                                    <th scope="col"> {{ $session->date() }} {{ $session->time }} </th>
+                                    <th scope="col"> {{ $session->date() }} {{ $session->time_from }}h </th>
                                     <th scope="col" width="120px" class="text-center">
                                         <a href="{{ route('system.admin.programs.sessions.preview', ['id' => $session->id ]) }}">
                                             <button class="btn-dark btn-xs">{{ __('Pregled') }}</button>

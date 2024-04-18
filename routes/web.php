@@ -158,7 +158,9 @@ Route::prefix('system')->middleware('auth')->group(function () {
                 Route::post('/update',                         [AdminProgramsController::class, 'updateSession'])->name('system.admin.programs.sessions.update');
                 Route::get ('/delete/{id}',                    [AdminProgramsController::class, 'deleteSession'])->name('system.admin.programs.sessions.delete');
 
-                Route::get ('/upload-file/{session_id}',       [AdminProgramsController::class, 'uploadFile'])->name('system.admin.programs.sessions.upload-file');
+                Route::get ('/upload-file/{session_id}',               [AdminProgramsController::class, 'uploadFile'])->name('system.admin.programs.sessions.upload-file');
+                Route::post('/save-session-file',                      [AdminProgramsController::class, 'saveSessionFile'])->name('system.admin.programs.sessions.save-session-file');
+                Route::get ('/remove-session-file/{id}',               [AdminProgramsController::class, 'removeSessionFile'])->name('system.admin.programs.sessions.remove-file');
             });
         });
     });

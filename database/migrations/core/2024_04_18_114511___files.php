@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('file', 100);
             $table->string('name', 100);
             $table->string('ext', 10);
-            $table->string('type', 5)->default('img');
+            $table->string('type', 20)->default('img');
             $table->string('path', 200);
 
             $table->timestamps();

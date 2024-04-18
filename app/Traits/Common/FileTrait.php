@@ -14,7 +14,7 @@ trait FileTrait{
      *
      * Save file to storage
      */
-    public function save(Request $request, $key, string $type = 'img'){
+    public function saveFile(Request $request, $key, string $type = 'img'){
         if($request->has($key)){
             try{
                 $file = $request->file($key);

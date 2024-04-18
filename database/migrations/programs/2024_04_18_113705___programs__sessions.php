@@ -21,7 +21,9 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('title', 200);
             $table->string('type', 20)->default('workshop');
-            $table->string('time', 10);
+            $table->string('time_from', 10);
+            $table->string('time_to', 10);
+            $table->string('duration', 20);
             $table->date('date');
 
             $table->unsignedBigInteger('location_id');

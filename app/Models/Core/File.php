@@ -13,4 +13,8 @@ class File extends Model{
 
     protected $table = '__files';
     protected $guarded = ['id'];
+
+    public function getFile(): string {
+        return '/' . $this->path . '/' . $this->name;
+    }
 }

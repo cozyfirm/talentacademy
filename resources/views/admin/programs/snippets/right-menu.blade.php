@@ -15,50 +15,32 @@
                         <i class="fas fa-plus"></i>
                     </div>
                 </a>
-
-                <div class="card-body">
-                    <ul>
-                        <li>Wsadas</li>
-                        <li>sadsaodpas</li>
-                    </ul>
-                </div>
             </div>
 
-            <div class="card">
+            <div class="card mt-3">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-10">
-                            <h5 class="card-title m-0 p-0"><b>{{ __('Pregled ispita') }}</b></h5>
+                            <h5 class="card-title m-0 p-0"><b>{{ __('Pregled predavača') }}</b></h5>
                         </div>
-                        <div class="col-md-2 text-right">
+                        <div class="col-md-2 text-end">
                             <a href="#">
                                 <i class="fas fa-book-reader"></i>
                             </a>
                         </div>
                     </div>
                     <h6 class="card-subtitle mb-3 text-muted mt-2">
-                        <small>{{ __('Preuzmite ispite bez odgovora') }}</small>
+                        <small>{{ __('Spisak svih predavača na kursu') }}</small>
                     </h6>
+
                     <p class="card-text mt-2 mb-1" title="{{ __('Preuzmite ispit u .xlxs formatu') }}">
                         <a href="#" class="m-0 p-0 get-gke-exam" attr-id="12">
-                            <b>Grupa 123</b>
+                            <small>1. John Doe</small>
                         </a>
                     </p>
                 </div>
             </div>
 
-            <div class="card" title="#">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-2 text-right">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="col-md-10">
-                            <h5 class="card-title m-0 p-0"><b> {{ $exam->userRel->name ?? 'Jeej' }} </b></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             {{--                        <div class="card" title="{{ __('Unesite polaznika') }}">--}}
             {{--                            <div class="card-body">--}}
@@ -74,7 +56,7 @@
             {{--                        </div>--}}
 
 
-            <div class="card" title=" {{ __('Historija izmjena') }} ">
+            <div class="card mt-3" title=" {{ __('Historija izmjena') }} ">
                 <div class="card-body">
                     <div class="row mb-1">
                         <div class="col-md-10">
