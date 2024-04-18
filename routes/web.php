@@ -6,6 +6,7 @@ use App\Http\Controllers\PublicPart\LecturersController;
 use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
 use App\Http\Controllers\PublicPart\Dashboard\PublicUserController;
+use App\Http\Controllers\System\Admin\Other\OtherController;
 use App\Http\Controllers\System\Admin\Users\UsersController;
 use App\Http\Controllers\System\Admin\Other\LocationsController as AdminLocationsController;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,11 @@ Route::prefix('')->group(function () {
         Route::get('/',                       [LecturersController::class, 'lecturers'])->name('public-part.lecturers.lecturers');
         Route::get('/{id}',                   [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer');
     });
+
+    /*
+     *  Other single pages
+     */
+    Route::get ('/scholarship',                              [HomepageController::class, 'scholarship'])->name('public-part.scholarship');
 });
 
 /**
@@ -165,6 +171,16 @@ Route::prefix('system')->middleware('auth')->group(function () {
                 Route::post('/save-session-file',                      [AdminProgramsController::class, 'saveSessionFile'])->name('system.admin.programs.sessions.save-session-file');
                 Route::get ('/remove-session-file/{id}',               [AdminProgramsController::class, 'removeSessionFile'])->name('system.admin.programs.sessions.remove-file');
             });
+        });
+
+        /**
+         *  Single pages
+         */
+        Route::prefix('pages')->middleware('auth')->group(function () {
+            Route::get ('/',                          [OtherController::class, 'index'])->name('system.admin.pages');
+            Route::get ('/edit/{id}',                 [OtherController::class, 'edit'])->name('system.admin.pages.edit');
+            Route::post('/update',                    [OtherController::class, 'update'])->name('system.admin.pages.update');
+            Route::post('/update-image',              [OtherController::class, 'updateImage'])->name('system.admin.pages.update-image');
         });
     });
 });

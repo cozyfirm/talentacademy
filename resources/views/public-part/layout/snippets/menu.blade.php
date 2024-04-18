@@ -24,7 +24,7 @@
     <div class="header__links">
         <a href="#">{{ __('Programi') }}</a>
         <a href="{{ route('public-part.lecturers.lecturers') }}">{{ __('Predavači') }}</a>
-        <a href="#">{{ __('Stipendije') }}</a>
+        <a href="{{ route('public-part.scholarship') }}">{{ __('Stipendije') }}</a>
         <a href="#">{{ __('Blog') }}</a>
         <a href="{{ route('public-part.locations.locations') }}">{{ __('Lokacije') }}</a>
         <a class="show-header-submenu">

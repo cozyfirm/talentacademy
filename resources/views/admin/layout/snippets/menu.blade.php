@@ -226,6 +226,19 @@
                 </div>
             </div>
         </a>
+        <a href="{{ route('system.admin.pages') }}" class="menu-a-link">
+            <div class="s-lm-wrapper">
+                <div class="s-lm-s-elements">
+                    <div class="s-lms-e-img">
+                        <i class="fas fa-file"></i>
+                    </div>
+                    <p>{{__('Single Pages')}}</p>
+                    <div class="extra-elements">
+                        <div class="ee-t ee-t-b"><p>{{__('Page')}}</p></div>
+                    </div>
+                </div>
+            </div>
+        </a>
     </div>
 
 {{--    @include('system.template.menu.menu-includes.bottom-icons')--}}
