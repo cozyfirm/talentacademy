@@ -73,7 +73,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Uloga'))->for('supplier_id')->class('bold') }}
-                                {{ html()->select('role', ['user' => 'User', 'teacher' => 'Teacher', 'admin' => 'Admin' ], isset($user) ? $user->role : '')->class('form-control form-control-sm')->required()->disabled(isset($preview)) }}
+                                {{ html()->select('role', ['user' => 'User', 'presenter' => 'Presenter', 'admin' => 'Admin' ], isset($user) ? $user->role : '')->class('form-control form-control-sm')->required()->disabled(isset($preview)) }}
                             </div>
                         </div>
                     </div>

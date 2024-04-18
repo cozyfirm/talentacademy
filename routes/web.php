@@ -11,7 +11,7 @@ use App\Http\Controllers\System\Admin\Other\LocationsController as AdminLocation
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\System\Admin\HomeController;
 use App\Http\Controllers\PublicPart\HomeController as HomepageController;
-
+use App\Http\Controllers\System\Admin\Programs\ProgramsController as AdminProgramsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -133,6 +133,31 @@ Route::prefix('system')->middleware('auth')->group(function () {
             /* Location images */
             Route::get ('/change-image/{id}/{what}',               [AdminLocationsController::class, 'changeImage'])->name('system.admin.locations.change-image');
             Route::post('/update-image',                           [AdminLocationsController::class, 'updateImage'])->name('system.admin.locations.update-image');
+        });
+
+        /**
+         *  Programs
+         */
+        Route::prefix('programs')->middleware('auth')->group(function () {
+            Route::get ('/',                          [AdminProgramsController::class, 'index'])->name('system.admin.programs');
+            Route::get ('/create',                    [AdminProgramsController::class, 'create'])->name('system.admin.programs.create');
+            Route::post('/save',                      [AdminProgramsController::class, 'save'])->name('system.admin.programs.save');
+            Route::get ('/preview/{id}',              [AdminProgramsController::class, 'preview'])->name('system.admin.programs.preview');
+            Route::get ('/edit/{id}',                 [AdminProgramsController::class, 'edit'])->name('system.admin.programs.edit');
+            Route::post('/update',                    [AdminProgramsController::class, 'update'])->name('system.admin.programs.update');
+            Route::get ('/delete/{id}',               [AdminProgramsController::class, 'delete'])->name('system.admin.programs.delete');
+
+            /**
+             *  Sessions
+             */
+            Route::prefix('sessions')->middleware('auth')->group(function () {
+                Route::get ('/create/{program_id}',            [AdminProgramsController::class, 'createSession'])->name('system.admin.programs.sessions.create');
+                Route::post('/save',                           [AdminProgramsController::class, 'saveSession'])->name('system.admin.programs.sessions.save');
+                Route::get ('/preview/{id}',                   [AdminProgramsController::class, 'previewSession'])->name('system.admin.programs.sessions.preview');
+                Route::get ('/edit/{id}',                      [AdminProgramsController::class, 'editSession'])->name('system.admin.programs.sessions.edit');
+                Route::post('/update',                         [AdminProgramsController::class, 'updateSession'])->name('system.admin.programs.sessions.update');
+                Route::get ('/delete/{id}',                    [AdminProgramsController::class, 'deleteSession'])->name('system.admin.programs.sessions.delete');
+            });
         });
     });
 });

@@ -14,6 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @property mixed $email
  * @property mixed $name
+ * @method static where(string $string, string $string1)
  */
 class User extends Authenticatable{
     use HasApiTokens, HasFactory, Notifiable;

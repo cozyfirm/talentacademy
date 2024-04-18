@@ -6,6 +6,11 @@
 
         .textarea-120{height: 120px;}
         .textarea-240{height: 240px;}
+
+        input[readonly], textarea[readonly], select[disabled] {
+            background-color: #FFFFFF;
+        }
+
     }
     .content-wrapper-bs{border:none;}
     .content-wrapper-p-15{padding: 15px;}

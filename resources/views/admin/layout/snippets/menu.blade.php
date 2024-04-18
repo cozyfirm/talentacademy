@@ -170,22 +170,22 @@
                     <div class="s-lms-e-img">
                         <i class="far fa-file-alt"></i>
                     </div>
-                    <p>{{__('Moje narudžbe')}}</p>
+                    <p>{{__('Programi')}}</p>
                     <div class="extra-elements">
                         <div class="rotate-element"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
                 <div class="inside-links active-links">
-                    <a href="#">
+                    <a href="{{ route('system.admin.programs') }}">
                         <div class="inside-lm-link">
                             <div class="ilm-l"></div><div class="ilm-c"></div>
-                            <p>{{__('Pregled svih narudžbi')}}</p>
+                            <p>{{__('Pregled programa')}}</p>
                         </div>
                     </a>
                     <a href="">
                         <div class="inside-lm-link">
                             <div class="ilm-l"></div><div class="ilm-c"></div>
-                            <p> {{__('Uputstva za korištenje')}} </p>
+                            <p> {{__('Ostale informacije')}} </p>
                         </div>
                     </a>
                 </div>

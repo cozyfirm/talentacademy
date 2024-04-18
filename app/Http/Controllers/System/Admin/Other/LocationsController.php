@@ -106,9 +106,6 @@ class LocationsController extends Controller{
             Location::where('id', $request->id)->update([$request->what => $name]);
 
             return redirect()->route('system.admin.locations.preview', ['id' => $request->id ])->with('success', __('Uspješno spašena fotografija!'));
-            dd($request->all());
-        }catch (\Exception $e){
-            dd($e);
-        }
+        }catch (\Exception $e){ }
     }
 }

@@ -20,7 +20,7 @@ return new class extends Migration
                 ->on('programs')
                 ->onDelete('cascade');
             $table->string('title', 200);
-            $table->integer('type');
+            $table->string('type', 20)->default('workshop');
             $table->string('time', 10);
             $table->date('date');
 

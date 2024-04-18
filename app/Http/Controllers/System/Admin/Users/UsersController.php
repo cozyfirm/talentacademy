@@ -57,7 +57,7 @@ class UsersController extends Controller{
             $request['birth_date'] = Carbon::parse($request->birth_date)->format('Y-m-d');
             $user = User::where('id', $request->id)->first();
 
-            if($request->role != 'teacher'){
+            if($request->role != 'presenter'){
                 $request['title'] = '';
                 $request['institution'] = '';
             }
