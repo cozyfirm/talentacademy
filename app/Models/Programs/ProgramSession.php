@@ -2,9 +2,11 @@
 
 namespace App\Models\Programs;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -19,5 +21,8 @@ class ProgramSession extends Model{
 
     public function date(): string{
         return Carbon::parse($this->date)->format('d.m.Y');
+    }
+    public function presenterRel(): HasOne{
+        return $this->hasOne(User::class, 'id', 'presenter_id');
     }
 }

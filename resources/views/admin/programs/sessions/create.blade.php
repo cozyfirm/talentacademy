@@ -107,7 +107,7 @@
             </div>
 
             <!-- Other information -->
-            @include('admin.programs.snippets.right-menu')
+            @include('admin.programs.snippets.sessions-right-menu')
         </div>
     </div>
 @endsection
