@@ -147,6 +147,9 @@ Route::prefix('system')->middleware('auth')->group(function () {
             Route::post('/update',                    [AdminProgramsController::class, 'update'])->name('system.admin.programs.update');
             Route::get ('/delete/{id}',               [AdminProgramsController::class, 'delete'])->name('system.admin.programs.delete');
 
+            Route::get ('/upload-image/{id}',                      [AdminProgramsController::class, 'uploadImage'])->name('system.admin.programs.upload-image');
+            Route::post('/save-image',                             [AdminProgramsController::class, 'saveImage'])->name('system.admin.programs.save-image');
+
             /**
              *  Sessions
              */

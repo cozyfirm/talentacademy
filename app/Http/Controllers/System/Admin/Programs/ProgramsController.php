@@ -89,6 +89,17 @@ class ProgramsController extends Controller{
             return redirect()->route('system.admin.programs')->with('error', __('Desila se greška!'));
         }
     }
+    public function saveImage (Request $request) : RedirectResponse{
+        try{
+            $request['path'] = ('files/programs');
+            $file = $this->saveFile($request, 'photo_uri', 'program_file');
+
+            Program::where('id', $request->id)->update(['image_id' => $file->id]);
+            return redirect()->back()->with('success', __('Uspješno ažurirana fotografija!'));
+        }catch (\Exception $e){
+            return redirect()->back()->with('error', __('Desila se greška!'));
+        }
+    }
 
     /* -------------------------------------------------------------------------------------------------------------- */
     /**

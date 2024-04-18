@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('programs__sessions_attendees', function (Blueprint $table) {
+            $table->id();
+
             $table->unsignedBigInteger('program_id');
             $table->foreign('program_id')
                 ->references('id')
@@ -23,6 +25,8 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+
+            $table->string('app_status')->default('in_queue'); // 1. in_queue; 2. accepted; 3. denied
 
             $table->timestamps();
         });

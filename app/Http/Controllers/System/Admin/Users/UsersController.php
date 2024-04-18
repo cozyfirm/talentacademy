@@ -60,6 +60,7 @@ class UsersController extends Controller{
             if($request->role != 'presenter'){
                 $request['title'] = '';
                 $request['institution'] = '';
+                $request['presenter_role'] = '';
             }
 
             /* Update user */

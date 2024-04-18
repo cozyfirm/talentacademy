@@ -8,7 +8,7 @@
 @endsection
 
 @section('c-buttons')
-    <a href="#">
+    <a href="{{ route('system.admin.users') }}">
         <button class="pm-btn btn pm-btn-info">
             <i class="fas fa-chevron-left"></i>
             <span>{{ __('Nazad') }}</span>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
 
-                    @if($user->role == 'teacher' or isset($edit))
+                    @if($user->role == 'presenter' or isset($edit))
                         <hr class="mt-4">
 
                         <div class="row mt-3">
@@ -134,6 +134,14 @@
                                 </div>
                             </div>
                         </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {{ html()->label(__('Uloga predavača'))->for('presenter_role')->class('bold') }}
+                                        {{ html()->select('presenter_role', ['Lecturer' => 'Lecturer', 'Keynote speaker' => 'Keynote speaker', 'Workshop leader' => 'Workshop leader'], isset($user) ? $user->presenter_role : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
+                                    </div>
+                                </div>
+                            </div>
                     @endif
 
                     @if(!isset($preview))

@@ -4,7 +4,7 @@
             <div class="card p-0 m-0" title="#">
                 <div class="card-body d-flex justify-content-between">
                     <h5 class="p-0 m-0"> {{ __('Ostale informacije') }} </h5>
-                    <i class="fas fa-info"></i>
+                    <i class="fas fa-info mt-1 mr-1"></i>
                 </div>
             </div>
 
@@ -12,10 +12,24 @@
                 <a href="{{ route('system.admin.programs.sessions.create', ['program_id' => $program->id ]) }}">
                     <div class="card-body d-flex justify-content-between">
                         <h6 class="p-0 m-0"> {{ __('Unos sesije') }} </h6>
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-plus mt-1"></i>
                     </div>
                 </a>
             </div>
+
+            <form action="{{ route('system.admin.programs.save-image') }}" method="POST" id="update-profile-image" enctype="multipart/form-data">
+                @csrf
+                {{ html()->hidden('id')->class('form-control')->value($program->id) }}
+                <div class="card p-0 m-0 mt-3" title="{{ __('Nova fotografija za program') }}">
+                    <div class="card-body d-flex justify-content-between">
+                        <label for="photo_uri" >
+                            <p class="m-0">{{ __('Ažurirajte fotografiju') }}</p>
+                        </label>
+                        <i class="fas fa-image mt-1"></i>
+                    </div>
+                    <input name="photo_uri" class="form-control form-control-lg d-none" id="photo_uri" type="file">
+                </div>
+            </form>
 
             <div class="card mt-3">
                 <div class="card-body">

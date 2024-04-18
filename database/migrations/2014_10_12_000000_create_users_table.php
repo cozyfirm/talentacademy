@@ -43,11 +43,13 @@ return new class extends Migration
             $table->string('instagram', 100)->nullable();
             $table->string('facebook', 100)->nullable();
             $table->string('twitter', 100)->nullable();
+            $table->string('linkedin', 100)->nullable();
             $table->string('web', 100)->nullable();
 
             /* Teacher data */
             $table->string('title')->nullable();
             $table->string('institution')->nullable();
+            $table->string('presenter_role', 100)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

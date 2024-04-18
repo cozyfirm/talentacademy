@@ -34,7 +34,7 @@ class AuthController extends Controller{
             $user = Auth::user();
 
             $uri = route('system.home');
-            if($user->role == 'user') $uri = route('dashboard.my-profile');
+            if($user->role == 'user' or $user->role == 'presenter') $uri = route('dashboard.my-profile');
 
             return json_encode([
                 'code' => '0000',
