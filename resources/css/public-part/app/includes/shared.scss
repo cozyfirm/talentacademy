@@ -107,6 +107,13 @@
     }
 }
 
+.how-to-apply_1{ .how-to-apply__pagination{ .how-to-apply__pagination-item{background: $p1_bps; } .how-to-apply__pagination-item--active{ color:$p1_bps !important; } } }
+.how-to-apply_2{ .how-to-apply__pagination{ .how-to-apply__pagination-item{background: $p2_bps; } .how-to-apply__pagination-item--active{ color:$p2_bps !important; } } }
+.how-to-apply_3{ .how-to-apply__pagination{ .how-to-apply__pagination-item{background: $p3_bps; } .how-to-apply__pagination-item--active{ color:$p3_bps !important; } } }
+.how-to-apply_4{ .how-to-apply__pagination{ .how-to-apply__pagination-item{background: $p4_bps; } .how-to-apply__pagination-item--active{ color:$p4_bps !important; } } }
+.how-to-apply_5{ .how-to-apply__pagination{ .how-to-apply__pagination-item{background: $p5_bps; } .how-to-apply__pagination-item--active{ color:$p5_bps !important; } } }
+.how-to-apply_6{ .how-to-apply__pagination{ .how-to-apply__pagination-item{background: $p6_bps; } .how-to-apply__pagination-item--active{ color:$p6_bps !important; } } }
+
 /* ToDo: Rest of colors .. */
 .how-to-apply-bg-white{ background: $white; }
 

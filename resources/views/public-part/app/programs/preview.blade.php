@@ -44,7 +44,7 @@ $items = [1, 2, 3, 4, 5, 6]
     @include('public-part.app.base-includes.blog.blog_scroll')
 
     <!-- Generic element; How to apply -->
-    <div class="how-to-apply how-to-apply-bg-white">
+    <div class="how-to-apply how-to-apply_{{ $program->id }} how-to-apply-bg-white">
         @include('public-part.app.base-includes.generic.how-to-apply')
     </div>
 
@@ -78,8 +78,8 @@ $items = [1, 2, 3, 4, 5, 6]
     </div>
 
     <div class="snake">
-        <img src="{{ asset('/files/images/public-part/snake-desktop.svg') }}" alt="{{ __('Snake') }}" class="snake__image">
-        <img src="{{ asset('/files/images/public-part/snake-mobile.svg') }}" alt="{{ __('Snake mobile') }}" class="snake__image snake__image--mobile">
+        <img src="{{ asset('/files/images/public-part/snake/snake_'.($program->id).'.svg') }}" alt="{{ __('Snake') }}" class="snake__image">
+        <img src="{{ asset('/files/images/public-part/snake_mob_'.($program->id).'.svg') }}" alt="{{ __('Snake mobile') }}" class="snake__image snake__image--mobile">
     </div>
 
     <!-- FAQ section -->
