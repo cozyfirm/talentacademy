@@ -39,3 +39,6 @@ import "./public-part/app/profile/scholarship.js";
 /* How to apply slider */
 import "./public-part/app/homepage/how-to-apply-slider.js";
 
+/* FAQ */
+import "./public-part/app/homepage/faq.js";
+
