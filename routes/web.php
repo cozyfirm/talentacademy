@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PublicPart\BlogController;
 use App\Http\Controllers\PublicPart\ContactUsController;
 use App\Http\Controllers\PublicPart\LecturersController;
 use App\Http\Controllers\PublicPart\LocationsController;
@@ -82,6 +83,14 @@ Route::prefix('')->group(function () {
     Route::prefix('lecturers')->group(function () {
         Route::get('/',                       [LecturersController::class, 'lecturers'])->name('public-part.lecturers.lecturers');
         Route::get('/{id}',                   [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer');
+    });
+
+    /*
+     *  Blog
+     */
+    Route::prefix('blog')->group(function () {
+        Route::get('/',                       [BlogController::class, 'blog'])->name('public-part.blog.blog');
+        Route::get('/{id}',                   [BlogController::class, 'single_blog'])->name('public-part.blog.single-blog');
     });
 
     /*

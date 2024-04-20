@@ -1,0 +1,141 @@
+.blog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $dark;
+
+    .blog__container {
+        width: 100%;
+        max-width: $container-width;
+
+        @media (max-width: $container-width) {
+            padding: 0px 24px;
+        }
+    }
+
+    .blog__featured-article {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 64px;
+        padding: 64px 0;
+
+        .blog__featured-article-image {
+            width: 688px;
+            height: 500px;
+            border-radius: 30px;
+            border: 1px solid rgba(238, 240, 242, 0.30);
+        }
+
+        .blog__featured-article-content {
+            .blog__featured-article-title {
+                font-size: 56px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 120%;
+                color: $text-white;
+                margin-top: 32px;
+            }
+
+            .blog__featured-article-description {
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 150%;
+                color: $text-white;
+                margin-top: 64px;
+            }
+
+            .blog__featured-article-button {
+                display: block;
+                color: $primary;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 150%;
+                text-align: right;
+                margin-top: 64px;
+            }
+        }
+    }
+
+    .blog__items {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 32px;
+        flex-wrap: wrap;
+        padding-top: 104px;
+        padding-bottom: 64px;
+        border-top: 1px solid rgba(238, 240, 242, 0.30);
+
+        .blog__item {
+            width: calc(33.33% - 22px);
+            border-radius: 30px;
+            border: 1px solid rgba(238, 240, 242, 0.30);
+            overflow: hidden;
+
+            .blog__item-image {
+                width: 100%;
+            }
+
+            .blog__item-content {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 16px;
+                flex-direction: column;
+                margin-top: 24px;
+                margin-bottom: 36px;
+                padding: 0 32px;
+
+                .blog__item-content-box {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .blog__item-content-box-category {
+                        font-size: 12px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%;
+                        color: $dark;
+                        border-radius: 300px;
+                        background: $primary;
+                        display: flex;
+                        padding: 4px 16px;
+                        justify-content: center;
+                        align-items: flex-end;
+                    }
+
+                    .blog__item-content-box-read-time {
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%;
+                        color: $primary;
+                    }
+                }
+
+                .blog__item-content-title {
+                    font-size: 32px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 130%;
+                    color: $text-white;
+                }
+
+                .blog__item-content-description {
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 150%;
+                    color: $text-white;
+                }
+            }
+        }
+    }
+}
