@@ -344,6 +344,30 @@
                 border: 1px solid #000;
                 cursor: pointer;
 
+                &.program--1:hover {
+                    background: #DAC0FB;
+                }
+
+                &.program--2:hover {
+                    background: #757BF6;
+                }
+
+                &.program--3:hover {
+                    background: #DBFF8F;
+                }
+
+                &.program--4:hover {
+                    background: #0E8C80;
+                }
+
+                &.program--5:hover {
+                    background: #F45B69;
+                }
+
+                &.program--6:hover {
+                    background: #DAC0FB;
+                }
+
                 @media (max-width: 900px) {
                     width: calc(50% - 22px);
                 }
@@ -392,6 +416,24 @@
                     position: absolute;
                     top: 32px;
                     right: 32px;
+                }
+            }
+        }
+
+        .programs__links {
+            display: flex;
+            gap: 16px;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%;
+            margin-top: 32px;
+
+            .programs__link {
+                color: $primary;
+
+                &.programs__link-alternate {
+                    color: #F45B69;
                 }
             }
         }

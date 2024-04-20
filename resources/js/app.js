@@ -37,3 +37,6 @@ import "./public-part/app/profile/profile-image.js";
 import "./public-part/app/profile/scholarship.js";
 import "./public-part/app/profile/inbox.js";
 
+/* How to apply slider */
+import "./public-part/app/homepage/how-to-apply-slider.js";
+
