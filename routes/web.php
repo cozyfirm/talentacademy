@@ -6,6 +6,7 @@ use App\Http\Controllers\PublicPart\LecturersController;
 use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
 use App\Http\Controllers\PublicPart\Dashboard\PublicUserController;
+use App\Http\Controllers\System\Admin\Other\Inbox\BulkMessagesController;
 use App\Http\Controllers\System\Admin\Other\OtherController;
 use App\Http\Controllers\System\Admin\Users\UsersController;
 use App\Http\Controllers\System\Admin\Other\LocationsController as AdminLocationsController;
@@ -110,6 +111,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
      *  User routes
      */
     Route::get ('/apply-for-scholarship',                   [PublicUserController::class, 'applyForScholarship'])->name('dashboard.apply-for-scholarship');
+    Route::get ('/inbox',                                   [PublicUserController::class, 'inbox'])->name('dashboard.inbox');
 
     /* Sign out */
     Route::get ('/sign-out',                                [PublicUserController::class, 'signOut'])->name('dashboard.sing-out');
@@ -203,6 +205,23 @@ Route::prefix('system')->middleware('auth')->group(function () {
             Route::get ('/edit/{id}',                      [OtherController::class, 'faqEdit'])->name('system.admin.faq.edit');
             Route::post('/update',                         [OtherController::class, 'faqUpdate'])->name('system.admin.faq.update');
             Route::get ('/delete/{id}',                    [OtherController::class, 'faqDelete'])->name('system.admin.faq.delete');
+        });
+
+        /**
+         *  Inbox
+         */
+        Route::prefix('inbox')->middleware('auth')->group(function () {
+            /*
+             *  Bulk messages
+             */
+            Route::prefix('bulk-messages')->middleware('auth')->group(function () {
+                Route::get ('/',                               [BulkMessagesController::class, 'index'])->name('system.admin.inbox.bulk-messages');
+                Route::get ('/create',                         [BulkMessagesController::class, 'create'])->name('system.admin.inbox.bulk-messages.create');
+                Route::post('/save',                           [BulkMessagesController::class, 'save'])->name('system.admin.inbox.bulk-messages.save');
+                Route::get ('/preview/{id}',                   [BulkMessagesController::class, 'preview'])->name('system.admin.inbox.bulk-messages.preview');
+                // Route::post('/update',                         [BulkMessagesController::class, 'faqUpdate'])->name('system.admin.inbox.bulk-messages.update');
+                Route::get ('/delete/{id}',                    [BulkMessagesController::class, 'delete'])->name('system.admin.inbox.bulk-messages.delete');
+            });
         });
     });
 });

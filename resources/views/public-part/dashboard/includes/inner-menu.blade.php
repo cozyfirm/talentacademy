@@ -11,21 +11,21 @@
         <div class="inner__menu_links">
             @if(Auth()->user()->role == 'presenter')
                 <a href="{{ route('dashboard.preview-sessions') }}">
-                    <div class="inner__menu_links_link">
+                    <div class="inner__menu_links_link @if(Route::is('dashboard.preview-sessions')) active @endif">
                         <img src="{{ asset('files/images/public-part/icon.png') }}" class="scholarship" alt="">
                         <p>{{ __('Pregled sesija') }}</p>
                     </div>
                 </a>
             @else
                 <a href="{{ route('dashboard.apply-for-scholarship') }}">
-                    <div class="inner__menu_links_link">
+                    <div class="inner__menu_links_link @if(Route::is('dashboard.apply-for-scholarship')) active @endif">
                         <img src="{{ asset('files/images/public-part/icon.png') }}" class="scholarship" alt="">
                         <p>{{ __('Apliciraj za stipendiju') }}</p>
                     </div>
                 </a>
             @endif
-            <a href="#">
-                <div class="inner__menu_links_link">
+                <a href="{{ route('dashboard.inbox') }}">
+                <div class="inner__menu_links_link @if(Route::is('dashboard.inbox')) active @endif">
                     <img src="{{ asset('files/images/public-part/inbox.png') }}" class="inbox" alt="">
                     <p>{{ __('Inbox') }}</p>
                 </div>
