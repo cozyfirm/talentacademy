@@ -304,14 +304,13 @@
                         button{
                             border-radius: 8px; font-size: 16px; font-weight: bold; padding: 6px 32px; height: 42px; gap: 16px;
 
-                            border: 2px solid $p1_primary;
-                            background: $p1_pac;
+                            border: 1px solid $p1_primary;
 
                             img{
                                 margin-right: 16px;
                             }
                             i{
-                                margin-top: 2px;
+                                margin-top: 2px; margin-right: 16px;
                             }
                         }
                     }
@@ -385,6 +384,73 @@
         }
     }
     .programs__wrapper_colored_1{
-        background: #DBFF8F;
+        background: $p1_bcg;
+        .single__program_wrapper{
+            .single__program_wrapper_left{
+                .buttons-wrapper{
+                    a{
+                        button{
+                            background: $p1_bps;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .programs__wrapper_colored_2{
+        background: $p2_bcg;
+        .single__program_wrapper{
+            .single__program_wrapper_left{
+                .buttons-wrapper{
+                    a{
+                        button{
+                            background: $p2_bps;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .programs__wrapper_colored_3{
+        background: $p3_bcg;
+        .single__program_wrapper{
+            .single__program_wrapper_left{
+                .buttons-wrapper{
+                    a{
+                        button{
+                            background: $p3_bps;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .programs__wrapper_colored_4{
+        background: $p4_bcg;
+        .single__program_wrapper{
+            .single__program_wrapper_left{
+                .buttons-wrapper{
+                    a{
+                        button{
+                            background: $p4_bps;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .programs__wrapper_colored_5{
+        background: $p5_bcg;
+        .single__program_wrapper{
+            .single__program_wrapper_left{
+                .buttons-wrapper{
+                    a{
+                        button{
+                            background: $p5_bps;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
