@@ -35,4 +35,5 @@ import "./style/submit.js";
 /* Profile scripts */
 import "./public-part/app/profile/profile-image.js";
 import "./public-part/app/profile/scholarship.js";
+import "./public-part/app/profile/inbox.js";
 

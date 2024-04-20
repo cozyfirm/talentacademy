@@ -249,6 +249,42 @@
                 </div>
             </div>
         </a>
+
+        <div class="subtitle">
+            <h4> {{__('Inbox')}} </h4>
+            <div class="subtitle-icon">
+                <i class="fas fa-envelope-open"></i>
+            </div>
+        </div>
+        <a href="#" class="menu-a-link">
+            <div class="s-lm-wrapper">
+                <div class="s-lm-s-elements">
+                    <div class="s-lms-e-img">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                    <p>{{__('Messaging system')}}</p>
+                    <div class="extra-elements">
+                        <div class="rotate-element"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+                <div class="inside-links active-links">
+                    <a href="{{ route('system.admin.inbox.bulk-messages') }}">
+                        <div class="inside-lm-link">
+                            <div class="ilm-l"></div><div class="ilm-c"></div>
+                            <p>{{__('Bulk messages')}}</p>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div class="inside-lm-link">
+                            <div class="ilm-l"></div><div class="ilm-c"></div>
+                            <p> {{__('Ostale informacije')}} </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </a>
+
+        <hr>
     </div>
 
 {{--    @include('system.template.menu.menu-includes.bottom-icons')--}}
