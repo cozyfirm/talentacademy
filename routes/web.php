@@ -182,6 +182,18 @@ Route::prefix('system')->middleware('auth')->group(function () {
             Route::post('/update',                    [OtherController::class, 'update'])->name('system.admin.pages.update');
             Route::post('/update-image',              [OtherController::class, 'updateImage'])->name('system.admin.pages.update-image');
         });
+
+        /**
+         *  FAQs section
+         */
+        Route::prefix('faq')->middleware('auth')->group(function () {
+            Route::get ('/',                               [OtherController::class, 'faqIndex'])->name('system.admin.faq');
+            Route::get ('/create',                         [OtherController::class, 'faqCreate'])->name('system.admin.faq.create');
+            Route::post('/save',                           [OtherController::class, 'faqSave'])->name('system.admin.faq.save');
+            Route::get ('/edit/{id}',                      [OtherController::class, 'faqEdit'])->name('system.admin.faq.edit');
+            Route::post('/update',                         [OtherController::class, 'faqUpdate'])->name('system.admin.faq.update');
+            Route::get ('/delete/{id}',                    [OtherController::class, 'faqDelete'])->name('system.admin.faq.delete');
+        });
     });
 });
 
