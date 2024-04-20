@@ -1,0 +1,109 @@
+.single-blog__header-images {
+    background-color: $dark;
+    display: flex;
+    width: 100%;
+    overflow-y: auto;
+    padding-top: 32px;
+    padding-bottom: 64px;
+
+    img {
+        min-width: $container-width;
+        height: 400px;
+        object-fit: cover;
+    }
+}
+
+.single-blog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $dark;
+
+    .single-blog__container {
+        width: 100%;
+        max-width: $container-width;
+
+        @media (max-width: $container-width) {
+            padding: 0px 24px;
+        }
+    }
+
+    .single-blog__title {
+        font-size: 56px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%;
+        color: $text-white;
+    }
+
+    .single-blog__content {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 32px;
+        margin-top: 64px;
+
+        .single-blog__content-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 10px;
+            min-width: 208px;
+
+            .single-blog__content-left-text {
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 140%;
+                color: $primary;
+            }
+
+            .single-blog__content-social-icons {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 16px;
+                margin-top: 32px;
+
+                .single-blog__content-social-icon {
+                    display: flex;
+                    padding: 8px;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 8px;
+                    border-radius: 8px;
+                    border: 1px solid $primary;
+                }
+            }
+        }
+
+        .single-blog__content-right {
+            color: $text-white;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 150%;
+            text-align: justify;
+
+            br {
+                height: 16px;
+                width: 1px;
+            }
+        }
+    }
+
+    .single-blog__images {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 64px 0;
+        border-bottom: 1px solid rgba(238, 240, 242, 0.30);
+
+        img {
+            width: 33.33%;
+            height: 360px;
+        }
+    }
+}
