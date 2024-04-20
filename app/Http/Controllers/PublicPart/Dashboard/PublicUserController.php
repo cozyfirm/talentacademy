@@ -4,6 +4,9 @@ namespace App\Http\Controllers\PublicPart\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Models\Core\Country;
+use App\Models\Programs\ProgramSession;
+use App\Traits\Common\CommonTrait;
+use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Illuminate\Http\JsonResponse;
@@ -12,9 +15,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use MongoDB\Driver\Session;
 
 class PublicUserController extends Controller{
-    use UserBaseTrait, ResponseTrait;
+    use UserBaseTrait, ResponseTrait, FileTrait, CommonTrait;
     protected string $_path = 'public-part.dashboard.';
 
     /**
@@ -70,10 +74,44 @@ class PublicUserController extends Controller{
         return view($this->_path . 'change-password', []);
     }
 
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     *  Presenter routes
+     */
+    public function previewSessions (){
+        /* Redirect if not presenter */
+        if(Auth::user()->role != 'presenter') return redirect()->route('dashboard.my-profile');
+
+        return view($this->_path . 'presenter.preview-sessions', [
+            'sessions' => ProgramSession::where('presenter_id', Auth::user()->id)->get()
+        ]);
+    }
+    public function previewSession ($id){
+        $session = ProgramSession::where('id', $id)->first();
+        /* Redirect if not presenter */
+        if(Auth::user()->role != 'presenter' or $session->presenter_id != Auth::user()->id) return redirect()->route('dashboard.my-profile');
+
+        return view($this->_path . 'presenter.preview-session', [
+            'session' => $session
+        ]);
+    }
+    public function updateSessions(Request $request): JsonResponse{
+        try{
+            $session = ProgramSession::where('id', $request->id)->first();
+            if(Auth::user()->role != 'presenter' or $session->presenter_id != Auth::user()->id)  return $this->jsonError('1500', __('Nemate ovlaštenje za pristup!'));
+
+            $session->update(['presenter_data' => $request->presenter_data]);
+
+            return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('dashboard.preview-session', ['id' => $request->id]));
+        }catch (\Exception $e){
+            return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
+        }
+    }
+
     /**
      *  Sign out and redirect to homepage
      */
-    public function signOut(){
+    public function signOut(): RedirectResponse{
         Auth::logout();
 
         return redirect()->route('public-part.home');

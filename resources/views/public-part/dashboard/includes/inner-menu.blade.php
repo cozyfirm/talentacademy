@@ -3,18 +3,27 @@
         <div class="inner__menu_profile">
             <a href="{{ route('dashboard.my-profile') }}">
                 <div class="inner__menu_profile_img_w">
-                    <img src="{{ asset('files/images/public-part/users/aladeen.jpg') }}" alt="">
+                    <img src="{{ asset('files/images/public-part/users/' . (Auth()->user()->photo_uri)) }}" alt="">
                 </div>
-                <p> John Doe </p>
+                <p> {{ Auth()->user()->name }} </p>
             </a>
         </div>
         <div class="inner__menu_links">
-            <a href="#">
-                <div class="inner__menu_links_link">
-                    <img src="{{ asset('files/images/public-part/icon.png') }}" class="scholarship" alt="">
-                    <p>{{ __('Apliciraj za stipendiju') }}</p>
-                </div>
-            </a>
+            @if(Auth()->user()->role == 'presenter')
+                <a href="{{ route('dashboard.preview-sessions') }}">
+                    <div class="inner__menu_links_link">
+                        <img src="{{ asset('files/images/public-part/icon.png') }}" class="scholarship" alt="">
+                        <p>{{ __('Pregled sesija') }}</p>
+                    </div>
+                </a>
+            @else
+                <a href="#">
+                    <div class="inner__menu_links_link">
+                        <img src="{{ asset('files/images/public-part/icon.png') }}" class="scholarship" alt="">
+                        <p>{{ __('Apliciraj za stipendiju') }}</p>
+                    </div>
+                </a>
+            @endif
             <a href="#">
                 <div class="inner__menu_links_link">
                     <img src="{{ asset('files/images/public-part/inbox.png') }}" class="inbox" alt="">

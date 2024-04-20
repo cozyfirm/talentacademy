@@ -95,10 +95,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get ('/my-profile',                              [PublicUserController::class, 'myProfile'])->name('dashboard.my-profile');
     Route::get ('/edit-links/{link}',                       [PublicUserController::class, 'editLinks'])->name('dashboard.edit-links');
     Route::get ('/change-password',                         [PublicUserController::class, 'changePassword'])->name('dashboard.change-password');
-
     Route::post('/update-profile',                          [PublicUserController::class, 'updateProfile'])->name('dashboard.update-profile');
-
     Route::post('/update-profile-image',                    [PublicUserController::class, 'updateProfileImage'])->name('dashboard.update-profile-image');
+
+    /*
+     *  Presenter routes
+     */
+    Route::get ('/preview-sessions',                        [PublicUserController::class, 'previewSessions'])->name('dashboard.preview-sessions');
+    Route::get ('/preview-session/{id}',                    [PublicUserController::class, 'previewSession'])->name('dashboard.preview-session');
+    Route::post('/update-sessions',                         [PublicUserController::class, 'updateSessions'])->name('dashboard.update-sessions');
 
     /* Sign out */
     Route::get ('/sign-out',                                [PublicUserController::class, 'signOut'])->name('dashboard.sing-out');
@@ -109,12 +114,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
  */
 
 Route::prefix('system')->middleware('auth')->group(function () {
-    Route::prefix('admin')->group(function (){
+    Route::prefix('admin')->middleware('isAdmin')->group(function (){
         Route::get('/dashboard',                 [HomeController::class, 'index'])->name('system.home');
 
         /**
          *  Users routes;
-         *  ToDo - Add admin middleware
          */
         Route::prefix('users')->middleware('auth')->group(function () {
             Route::get ('/',                          [UsersController::class, 'index'])->name('system.admin.users');

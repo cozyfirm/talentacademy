@@ -2,6 +2,7 @@
 
 namespace App\Models\Programs;
 
+use App\Models\Other\Location;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,5 +29,11 @@ class ProgramSession extends Model{
     }
     public function sessionFileRel(): HasMany{
         return $this->hasMany(ProgramSessionFile::class, 'session_id', 'id');
+    }
+    public function programRel(): HasOne{
+        return $this->hasOne(Program::class, 'id', 'program_id');
+    }
+    public function locationRel(): HasOne{
+        return $this->hasOne(Location::class, 'id', 'location_id');
     }
 }
