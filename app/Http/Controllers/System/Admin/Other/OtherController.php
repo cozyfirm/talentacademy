@@ -4,7 +4,9 @@ namespace App\Http\Controllers\System\Admin\Other;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\Core\Filters;
+use App\Models\Other\FAQ;
 use App\Models\Other\SinglePage;
+use App\Models\Programs\Program;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
@@ -56,5 +58,57 @@ class OtherController extends Controller{
         }catch (\Exception $e){
             return redirect()->back()->with('error', __('Desila se greška!'));
         }
+    }
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /**
+     *  FAQs section
+     */
+    public function faqIndex  (): View{
+        $faqs = FAQ::where('id', '>', 0);
+        $faqs = Filters::filter($faqs);
+        $filters = [ 'title' => __('Naziv'), 'what' => __('Sekcija') ];
+
+        return view($this->_path . 'faq.index', [
+            'filters' => $filters,
+            'faqs' => $faqs
+        ]);
+    }
+    public function faqCreate(): View{
+        return view($this->_path . 'faq.create', [
+            'create' => true,
+            'other' => Program::pluck('title', 'id')->prepend('Ostalo', 0)
+        ]);
+    }
+    public function faqSave(Request $request): JsonResponse{
+        try{
+            $faq = FAQ::create($request->all());
+
+            return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.faq.edit', ['id' => $faq->id]));
+        }catch (\Exception $e){
+            return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
+        }
+    }
+    public function faqEdit($id): View{
+        return view($this->_path . 'faq.create', [
+            'edit' => true,
+            'other' => Program::pluck('title', 'id')->prepend('Ostalo', 0),
+            'faq' => FAQ::where('id', $id)->first()
+        ]);
+    }
+    public function faqUpdate(Request $request): JsonResponse{
+        try{
+            FAQ::where('id', $request->id)->update($request->except(['id']));
+
+            return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.faq.edit', ['id' => $request->id]));
+        }catch (\Exception $e){
+            return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
+        }
+    }
+
+    public function faqDelete($id){
+        FAQ::where('id', $id)->delete();
+
+        return redirect()->route('system.admin.faq')->with('success', __('Uspješno obrisano!'));
     }
 }

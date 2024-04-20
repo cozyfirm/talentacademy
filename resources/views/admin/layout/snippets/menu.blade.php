@@ -233,8 +233,18 @@
                         <i class="fas fa-file"></i>
                     </div>
                     <p>{{__('Single Pages')}}</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('system.admin.faq') }}" class="menu-a-link">
+            <div class="s-lm-wrapper">
+                <div class="s-lm-s-elements">
+                    <div class="s-lms-e-img">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <p>{{__('FAQs section')}}</p>
                     <div class="extra-elements">
-                        <div class="ee-t ee-t-b"><p>{{__('Page')}}</p></div>
+                        <div class="ee-t ee-t-b"><p>{{__('Other')}}</p></div>
                     </div>
                 </div>
             </div>
