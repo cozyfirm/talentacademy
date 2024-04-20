@@ -56,10 +56,11 @@ Route::prefix('')->group(function () {
      */
     Route::prefix('programs')->group(function () {
         Route::get ('/preview',                   [ProgramsController::class, 'preview'])->name('public-part.programs.preview');
+        Route::get ('/preview-program/{id}',      [ProgramsController::class, 'preview'])->name('public-part.programs.preview-program');
     });
 
     /*
-     *  Programs
+     *  Contact US
      */
     Route::prefix('contact-us')->group(function () {
         Route::post('/send-us-a-message',                   [ContactUsController::class, 'sendUsAMessage'])->name('public-part.contact-us.send-us-a-message');
@@ -104,6 +105,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get ('/preview-sessions',                        [PublicUserController::class, 'previewSessions'])->name('dashboard.preview-sessions');
     Route::get ('/preview-session/{id}',                    [PublicUserController::class, 'previewSession'])->name('dashboard.preview-session');
     Route::post('/update-sessions',                         [PublicUserController::class, 'updateSessions'])->name('dashboard.update-sessions');
+
+    /*
+     *  User routes
+     */
+    Route::get ('/apply-for-scholarship',                   [PublicUserController::class, 'applyForScholarship'])->name('dashboard.apply-for-scholarship');
 
     /* Sign out */
     Route::get ('/sign-out',                                [PublicUserController::class, 'signOut'])->name('dashboard.sing-out');

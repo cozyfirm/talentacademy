@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PublicPart\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Models\Core\Country;
+use App\Models\Programs\Program;
 use App\Models\Programs\ProgramSession;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Common\FileTrait;
@@ -108,7 +109,22 @@ class PublicUserController extends Controller{
         }
     }
 
-    /**
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     *  User routes
+     */
+    public function applyForScholarship (){
+        /* Redirect if not presenter */
+        if(Auth::user()->role != 'user') return redirect()->route('dashboard.my-profile');
+
+        return view($this->_path . 'user.apply-for-scholarship', [
+            'programs' => Program::where('id', '<', 6)->get()
+        ]);
+    }
+
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
      *  Sign out and redirect to homepage
      */
     public function signOut(): RedirectResponse{
