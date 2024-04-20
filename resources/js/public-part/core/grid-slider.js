@@ -2,7 +2,7 @@ $(document).ready(function (){
     /* ToDo */
     const slider = document.querySelector('.slider_w');
 
-    if(slider.length){
+    if($(".slider_w").length){
         let isDown = false;
         let startX;
         let scrollLeft;

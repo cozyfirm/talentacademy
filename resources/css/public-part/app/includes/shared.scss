@@ -133,6 +133,9 @@
         }
     }
 }
+.snake_1{
+
+}
 
 /*
  *  FAQ
@@ -344,12 +347,25 @@
 /* Define different classes for different programs */
 .cu_1{
     background: $p1_bcg;
-    .contact__container{
-        .contact__form{
-            .contact__form-button{
-                border: 1px solid $dark;
-                background: $p1_pac;
-            }
-        }
-    }
+    .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p1_pac; } } }
+}
+.cu_2{
+    background: $p2_bcg;
+    .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p2_pac; } } }
+}
+.cu_3{
+    background: $p3_bcg;
+    .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p3_pac; } } }
+}
+.cu_4{
+    background: $p4_bcg;
+    .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p4_pac; } } }
+}
+.cu_5{
+    background: $p5_bcg;
+    .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p5_pac; } } }
+}
+.cu_6{
+    background: $p6_bcg;
+    .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p6_pac; } } }
 }

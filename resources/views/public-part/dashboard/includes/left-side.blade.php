@@ -31,6 +31,11 @@
                 <p>{{ __('Twitter') }}</p>
             </a>
         </div>
+        <div class="social_network_wrapper linkedin">
+            <a href="{{ route('dashboard.edit-links', ['link' => 'linkedin']) }}">
+                <p>{{ __('Linkedin') }}</p>
+            </a>
+        </div>
         <div class="social_network_wrapper web">
             <a href="{{ route('dashboard.edit-links', ['link' => 'web']) }}">
                 <p>{{ __('Web') }}</p>

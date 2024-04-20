@@ -44,7 +44,6 @@
             }
         }
     }
-
     @media only screen and (max-width: 1000px){
         .preview__cover_iw{
             flex-wrap: wrap; left: 20px; width: calc(100% - 40px);
@@ -72,7 +71,30 @@
         }
     }
 }
-
+.preview__cover_1{
+    background: $p1_bcg;
+    .preview__cover_iw{ .p__c_iw_buttons{ a{ button{ background: $p1_bps; } } } }
+}
+.preview__cover_2{
+    background: $p2_bcg;
+    .preview__cover_iw{ .p__c_iw_buttons{ a{ button{ background: $p2_bps; } } } }
+}
+.preview__cover_3{
+    background: $p3_bcg;
+    .preview__cover_iw{ .p__c_iw_buttons{ a{ button{ background: $p3_bps; } } } }
+}
+.preview__cover_4{
+    background: $p4_bcg;
+    .preview__cover_iw{ .p__c_iw_buttons{ a{ button{ background: $p4_bps; } } } }
+}
+.preview__cover_5{
+    background: $p5_bcg;
+    .preview__cover_iw{ .p__c_iw_buttons{ a{ button{ background: $p5_bps; } } } }
+}
+.preview__cover_6{
+    background: $p6_bcg;
+    .preview__cover_iw{ .p__c_iw_buttons{ a{ button{ background: $p6_bps; } } } }
+}
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 /*
@@ -129,7 +151,7 @@
             overflow: hidden;
 
             position: relative; width: 532px; border: 1px solid $dark; border-radius: 8px;
-            margin-right: 15px;
+            margin-right: 15px; transition: $transition02;
 
             .sp__image{
                 position: relative; width: 100%;
@@ -191,6 +213,20 @@
     }
 }
 
+.presenters__scrollbar_1{ .single__presenter{ .sp__btn_w{ button{ background: $p1_pac; } } }  }
+.presenters__scrollbar_2{ .single__presenter{ .sp__btn_w{ button{ background: $p2_pac; } } }  }
+.presenters__scrollbar_3{ .single__presenter{ .sp__btn_w{ button{ background: $p3_pac; } } }  }
+.presenters__scrollbar_4{ .single__presenter{ .sp__btn_w{ button{ background: $p4_pac; } } }  }
+.presenters__scrollbar_5{ .single__presenter{ .sp__btn_w{ button{ background: $p5_pac; } } }  }
+.presenters__scrollbar_6{ .single__presenter{ .sp__btn_w{ button{ background: $p6_pac; } } }  }
+
+.presenters__scrollbar_1{ .single__presenter:hover{ background: $p1_bcg; }  }
+.presenters__scrollbar_2{ .single__presenter:hover{ background: $p2_bcg; }  }
+.presenters__scrollbar_3{ .single__presenter:hover{ background: $p3_bcg; }  }
+.presenters__scrollbar_4{ .single__presenter:hover{ background: $p4_bcg; }  }
+.presenters__scrollbar_5{ .single__presenter:hover{ background: $p5_bcg; }  }
+.presenters__scrollbar_6{ .single__presenter:hover{ background: $p6_bcg; }  }
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 /*
  * Programs
@@ -214,6 +250,9 @@
                 img{
                     height: 24px;
                 }
+                svg{
+                    fill: $dark; transition: $transition02;
+                }
                 h5{
                     font-size: 24px; font-weight: bold; margin-left: 16px; transition: $transition02;
                 }
@@ -224,17 +263,36 @@
         }
         .pg__sample:hover{
             background: $dark; cursor: pointer;
-            h1{
-                color: $p1_bcg;
-            }
-            .pg_sample__row{
-                h5{
-                    color: $p1_pac;
-                }
-            }
-            p{
-                color: $p1_pac;
-            }
+        }
+        .pg__sample_1:hover{
+            h1{ color: $p1_bcg; }
+            .pg_sample__row{ h5{ color: $p1_pac; } svg{ fill: $p1_pac !important;} }
+            p{ color: $p1_pac; }
+        }
+        .pg__sample_2:hover{
+            h1{ color: $p2_bcg; }
+            .pg_sample__row{ h5{ color: $p2_pac; } svg{ fill: $p2_pac !important;} }
+            p{ color: $p2_pac; }
+        }
+        .pg__sample_3:hover{
+            h1{ color: $p3_bcg; }
+            .pg_sample__row{ h5{ color: $p3_pac; } svg{ fill: $p3_pac !important;} }
+            p{ color: $p3_pac; }
+        }
+        .pg__sample_4:hover{
+            h1{ color: $p4_bcg; }
+            .pg_sample__row{ h5{ color: $p4_pac; } svg{ fill: $p4_pac !important;} }
+            p{ color: $p4_pac; }
+        }
+        .pg__sample_5:hover{
+            h1{ color: $p5_bcg; }
+            .pg_sample__row{ h5{ color: $p5_pac; } svg{ fill: $p5_pac !important;} }
+            p{ color: $p5_pac; }
+        }
+        .pg__sample_6:hover{
+            h1{ color: $p6_bcg; }
+            .pg_sample__row{ h5{ color: $p6_pac; } svg{ fill: $p6_pac !important;} }
+            p{ color: $p6_pac; }
         }
     }
 
@@ -254,6 +312,12 @@
             p{margin: 0px; padding: 0px; font-weight: bold;}
         }
     }
+    .programs__grid_pagination_1{ .page-w{ background: $p1_bcg; }  }
+    .programs__grid_pagination_2{ .page-w{ background: $p2_bcg; }  }
+    .programs__grid_pagination_3{ .page-w{ background: $p3_bcg; }  }
+    .programs__grid_pagination_4{ .page-w{ background: $p4_bcg; }  }
+    .programs__grid_pagination_5{ .page-w{ background: $p5_bcg; }  }
+    .programs__grid_pagination_6{ .page-w{ background: $p6_bcg; }  }
 
     @media only screen and (max-width: $container-width){
         .programs__grid_iw{
@@ -292,8 +356,6 @@
         }
         p{
             font-weight: bold; font-size: 20px; margin-top: 16px;
-
-            color: $p1_bcg;
         }
 
         .counter__w{
@@ -304,13 +366,11 @@
                 border: 2px solid $p1_bcg; border-radius: 50%;
 
                 p{
-                    font-size: 100px; font-weight: bold; margin-top: 35px; padding: 0px;
-
-                    color: $p1_bcg;
+                    font-size: 100px; font-weight: bold; margin-top: 20px; padding: 0px;
                 }
             }
             span{
-                font-size: 100px; font-weight: bold; color: $p1_bcg; margin-top: 10px;
+                font-size: 100px; font-weight: bold; margin-top: 0px;
             }
         }
         .counter__btn{
@@ -318,8 +378,6 @@
             a{
                 .app_btn{
                     display: inline-flex; padding: 6px 24px; gap: 16px; border-radius: 8px; border: none;
-
-                    background: $p1_pac;
                     img{
 
                     }
@@ -370,6 +428,55 @@
     }
 }
 
+.preview__counter_1{
+    .preview__counter_iw{
+        p{ color: $p1_bcg; }
+        .counter__w{ .c__num{ border: 2px solid $p1_bcg; p{ color: $p1_bcg; } } span{ color: $p1_bcg;  } }
+        .counter__btn{
+            a{ .app_btn{ background: $p1_pac; } } }
+    }
+}
+.preview__counter_2{
+    .preview__counter_iw{
+        p{ color: $p2_bcg; }
+        .counter__w{ .c__num{ border: 2px solid $p2_bcg; p{ color: $p2_bcg; } } span{ color: $p2_bcg;  } }
+        .counter__btn{
+            a{ .app_btn{ background: $p2_pac; } } }
+    }
+}
+.preview__counter_3{
+    .preview__counter_iw{
+        p{ color: $p3_bcg; }
+        .counter__w{ .c__num{ border: 2px solid $p3_bcg; p{ color: $p3_bcg; } } span{ color: $p3_bcg;  } }
+        .counter__btn{
+            a{ .app_btn{ background: $p3_pac; } } }
+    }
+}
+.preview__counter_4{
+    .preview__counter_iw{
+        p{ color: $p4_bcg; }
+        .counter__w{ .c__num{ border: 2px solid $p4_bcg; p{ color: $p4_bcg; } } span{ color: $p4_bcg;  } }
+        .counter__btn{
+            a{ .app_btn{ background: $p4_pac; } } }
+    }
+}
+.preview__counter_5{
+    .preview__counter_iw{
+        p{ color: $p5_bcg; }
+        .counter__w{ .c__num{ border: 2px solid $p5_bcg; p{ color: $p5_bcg; } } span{ color: $p5_bcg;  } }
+        .counter__btn{
+            a{ .app_btn{ background: $p5_pac; } } }
+    }
+}
+.preview__counter_6{
+    .preview__counter_iw{
+        p{ color: $p6_bcg; }
+        .counter__w{ .c__num{ border: 2px solid $p6_bcg; p{ color: $p6_bcg; } } span{ color: $p6_bcg;  } }
+        .counter__btn{
+            a{ .app_btn{ background: $p6_pac; } } }
+    }
+}
+
 .program__timeline {
     .program__timeline-container {
         width: 100%;
@@ -393,7 +500,6 @@
         &.sticky {
             position: sticky;
             top: 0;
-            background-color: #DBFF8F;
         }
     }
 
@@ -415,7 +521,6 @@
             line-height: 150%;
             margin-bottom: 12px;
         }
-
         .program__timeline-top-left-title {
             font-size: 48px;
             font-style: normal;
@@ -423,14 +528,12 @@
             line-height: 120%;
             color: #DBFF8F;
         }
-
         .program__timeline-top-right {
             display: flex;
             justify-content: flex-end;
             align-items: flex-end;
             gap: 32px;
         }
-
         .program__timeline-top-right-day-number {
             color: #DBFF8F;
             font-size: 24px;
@@ -445,7 +548,6 @@
                 line-height: 120%;
             }
         }
-
         .program__timeline-top-right-day-text {
             color: #DBFF8F;
             font-size: 32px;
@@ -461,7 +563,6 @@
                 text-decoration: underline;
             }
         }
-
         .program__timeline-top-right-day {
             display: flex;
             justify-content: flex-end;
@@ -491,7 +592,6 @@
             line-height: 150%;
         }
     }
-
     .program__timeline-items {
 
         .program__timeline-item {
@@ -551,7 +651,6 @@
                 }
             }
         }
-
         .program__timeline-item-right {
             .program__timeline-item-right-title {
                 font-size: 40px;
@@ -579,6 +678,103 @@
                     font-weight: 400;
                     line-height: 150%;
                 }
+            }
+        }
+    }
+}
+
+.program__timeline_1{
+    .program__timeline-section{ &.sticky{ background-color: $p1_bps; } }
+    .program__timeline-top{
+        .program__timeline-top-left-title, .program__timeline-top-right-day-number, .program__timeline-top-right-day-text{
+            color: $p1_pas;
+        }
+        .program__timeline-top-left-category{ background: $p1_pas; }
+    }
+    .program__timeline-items{
+        .program__timeline-item-left{
+            .program__timeline-item-left-tag{
+                background: $p1_bps;
+            }
+        }
+    }
+}
+.program__timeline_2{
+    .program__timeline-section{ &.sticky{ background-color: $p2_bps; } }
+    .program__timeline-top{
+        .program__timeline-top-left-title, .program__timeline-top-right-day-number, .program__timeline-top-right-day-text{
+            color: $p2_pas;
+        }
+        .program__timeline-top-left-category{ background: $p2_pas; }
+    }
+    .program__timeline-items{
+        .program__timeline-item-left{
+            .program__timeline-item-left-tag{
+                background: $p2_bps;
+            }
+        }
+    }
+}
+.program__timeline_3{
+    .program__timeline-section{ &.sticky{ background-color: $p3_bps; } }
+    .program__timeline-top{
+        .program__timeline-top-left-title, .program__timeline-top-right-day-number, .program__timeline-top-right-day-text{
+            color: $p3_pas;
+        }
+        .program__timeline-top-left-category{ background: $p3_pas; }
+    }
+    .program__timeline-items{
+        .program__timeline-item-left{
+            .program__timeline-item-left-tag{
+                background: $p3_bps;
+            }
+        }
+    }
+}
+.program__timeline_4{
+    .program__timeline-section{ &.sticky{ background-color: $p4_bps; } }
+    .program__timeline-top{
+        .program__timeline-top-left-title, .program__timeline-top-right-day-number, .program__timeline-top-right-day-text{
+            color: $p4_pas;
+        }
+        .program__timeline-top-left-category{ background: $p4_pas; }
+    }
+    .program__timeline-items{
+        .program__timeline-item-left{
+            .program__timeline-item-left-tag{
+                background: $p4_bps;
+            }
+        }
+    }
+}
+.program__timeline_5{
+    .program__timeline-section{ &.sticky{ background-color: $p5_bps; } }
+    .program__timeline-top{
+        .program__timeline-top-left-title, .program__timeline-top-right-day-number, .program__timeline-top-right-day-text{
+            color: $p5_pas;
+        }
+        .program__timeline-top-left-category{ background: $p5_pas; }
+    }
+    .program__timeline-items{
+        .program__timeline-item-left{
+            .program__timeline-item-left-tag{
+                background: $p5_bps;
+            }
+        }
+    }
+}
+.program__timeline_6{
+    .program__timeline-section{ &.sticky{ background-color: $p6_bps; } }
+    .program__timeline-top{
+        .program__timeline-top-left-title, .program__timeline-top-right-day-number, .program__timeline-top-right-day-text{
+            color: $p6_pas;
+        }
+        .program__timeline-top-left-category{ background: $p6_pas; }
+    }
+    .program__timeline-items{
+        .program__timeline-item-left{
+            .program__timeline-item-left-tag{
+                background: $p6_bps;
             }
         }
     }

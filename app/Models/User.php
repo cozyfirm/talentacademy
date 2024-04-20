@@ -42,6 +42,7 @@ class User extends Authenticatable{
         'instagram',
         'facebook',
         'twitter',
+        'linkedin',
         'web',
         'title',
         'institution',
