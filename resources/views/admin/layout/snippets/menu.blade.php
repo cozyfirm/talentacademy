@@ -206,6 +206,20 @@
             </div>
         </a>
 
+        <a href="{{ route('system.admin.blog') }}" class="menu-a-link">
+            <div class="s-lm-wrapper">
+                <div class="s-lm-s-elements">
+                    <div class="s-lms-e-img">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <p>{{__('Blog')}}</p>
+                    <div class="extra-elements">
+                        <div class="ee-t ee-t-b"><p>{{__('Other')}}</p></div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
         <div class="subtitle">
             <h4> {{__('Ostalo')}} </h4>
             <div class="subtitle-icon">

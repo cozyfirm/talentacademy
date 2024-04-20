@@ -9,6 +9,7 @@ use App\Http\Controllers\PublicPart\ProgramsController;
 use App\Http\Controllers\PublicPart\Dashboard\PublicUserController;
 use App\Http\Controllers\System\Admin\Other\Inbox\BulkMessagesController;
 use App\Http\Controllers\System\Admin\Other\OtherController;
+use App\Http\Controllers\System\Admin\Other\BlogController as AdminBlogController;
 use App\Http\Controllers\System\Admin\Users\UsersController;
 use App\Http\Controllers\System\Admin\Other\LocationsController as AdminLocationsController;
 use Illuminate\Support\Facades\Route;
@@ -231,6 +232,19 @@ Route::prefix('system')->middleware('auth')->group(function () {
                 // Route::post('/update',                         [BulkMessagesController::class, 'faqUpdate'])->name('system.admin.inbox.bulk-messages.update');
                 Route::get ('/delete/{id}',                    [BulkMessagesController::class, 'delete'])->name('system.admin.inbox.bulk-messages.delete');
             });
+        });
+
+        /**
+         *  Blog
+         */
+        Route::prefix('blog')->middleware('auth')->group(function () {
+            Route::get ('/',                               [AdminBlogController::class, 'index'])->name('system.admin.blog');
+            Route::get ('/create',                         [AdminBlogController::class, 'create'])->name('system.admin.blog.create');
+            Route::post('/save',                           [AdminBlogController::class, 'save'])->name('system.admin.blog.save');
+            Route::get ('/preview/{id}',                   [AdminBlogController::class, 'preview'])->name('system.admin.blog.preview');
+            Route::get ('/edit/{id}',                      [AdminBlogController::class, 'edit'])->name('system.admin.blog.edit');
+            Route::post('/update',                         [AdminBlogController::class, 'update'])->name('system.admin.blog.update');
+            Route::get ('/delete/{id}',                    [AdminBlogController::class, 'delete'])->name('system.admin.blog.delete');
         });
     });
 });

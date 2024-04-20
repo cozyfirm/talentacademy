@@ -14,6 +14,7 @@ use MongoDB\Driver\Session;
 /**
  * @method static create(array $all)
  * @method static where(string $string, $id)
+ * @method static pluck(string $string, string $string1)
  */
 class Program extends Model{
     use HasFactory, SoftDeletes;
