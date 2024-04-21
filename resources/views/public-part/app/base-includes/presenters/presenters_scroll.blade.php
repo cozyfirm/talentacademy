@@ -43,10 +43,10 @@
     </div>
 
     <div class="presenters__scrollbar_btn_w">
-        <div class="p__sbw_btn">
+        <div class="p__sbw_btn p__sbw_btn_previous">
             <img src="{{ asset('files/images/public-part/arrow-left.png') }}" alt="">
         </div>
-        <div class="p__sbw_btn">
+        <div class="p__sbw_btn p__sbw_btn_next">
             <img src="{{ asset('files/images/public-part/arrow-right.png') }}" alt="">
         </div>
     </div>
