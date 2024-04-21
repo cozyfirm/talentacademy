@@ -60,7 +60,7 @@ Route::prefix('')->group(function () {
     Route::prefix('programs')->group(function () {
         Route::get ('/preview',                   [ProgramsController::class, 'preview'])->name('public-part.programs.preview');
         Route::get ('/preview-program/{id}',      [ProgramsController::class, 'preview'])->name('public-part.programs.preview-program');
-        Route::get('/preview-program/{id}/session', [ProgramsController::class, 'preview_session'])->name('public-part.programs.preview-session');
+        Route::get ('/preview-program/{id}/session', [ProgramsController::class, 'preview_session'])->name('public-part.programs.preview-session');
     });
 
     /*
@@ -195,6 +195,10 @@ Route::prefix('system')->middleware('auth')->group(function () {
                 Route::get ('/upload-file/{session_id}',               [AdminProgramsController::class, 'uploadFile'])->name('system.admin.programs.sessions.upload-file');
                 Route::post('/save-session-file',                      [AdminProgramsController::class, 'saveSessionFile'])->name('system.admin.programs.sessions.save-session-file');
                 Route::get ('/remove-session-file/{id}',               [AdminProgramsController::class, 'removeSessionFile'])->name('system.admin.programs.sessions.remove-file');
+
+                Route::get ('/insert-link/{session_id}',               [AdminProgramsController::class, 'insertLink'])->name('system.admin.programs.sessions.insert-session-link');
+                Route::post('/save-session-link',                      [AdminProgramsController::class, 'saveLink'])->name('system.admin.programs.sessions.save-session-link');
+                Route::get ('/remove-session-link/{id}',               [AdminProgramsController::class, 'ProgramSessionLink'])->name('system.admin.programs.sessions.remove-session-link');
             });
         });
 

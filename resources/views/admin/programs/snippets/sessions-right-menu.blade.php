@@ -30,6 +30,28 @@
                 </div>
             @endif
 
+            @if(isset($session))
+                <div class="card p-0 m-0 mt-3" title="{{ __('Zakačite novi link') }}">
+                    <a href="{{ route('system.admin.programs.sessions.insert-session-link', ['session_id' => $session->id ]) }}">
+                        <div class="card-body d-flex justify-content-between">
+                            <h6 class="p-0 m-0"> {{ __('Unos linkova') }} </h6>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </a>
+
+                    <div class="card-body">
+                        <ul>
+                            @foreach($session->sessionLinkRel as $sessionLink)
+                                <li>
+                                    <a>{{ $sessionLink->value }}</a>
+                                    <a href="{{ route('system.admin.programs.sessions.remove-session-link', ['id' => $sessionLink->id ]) }}" title="{{ __('Obrišite dokument') }}"><small class="ml-3"><i class="fas fa-trash"></i></small></a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+
 {{--            <div class="card p-0 m-0 mt-3" title="{{ __('Predavač i ostale sesije') }}">--}}
 {{--                <a href="{{ route('system.admin.programs.sessions.create', ['program_id' => $program->id ]) }}">--}}
 {{--                    <div class="card-body d-flex justify-content-between">--}}
