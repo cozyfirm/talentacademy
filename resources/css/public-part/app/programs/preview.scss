@@ -116,7 +116,7 @@
 
     //ENABLE CSS GRID FOR LIFT OFF 🚀
     @supports(display: grid) {
-        .slider_w {
+        .slider_w, .slider_w_2 {
             position: relative;
             overflow-x: scroll;
             overflow-y: hidden;
@@ -129,12 +129,12 @@
         }
 
         /* Remove slider */
-        .slider_w::-webkit-scrollbar{
+        .slider_w::-webkit-scrollbar, .slider_w_2::-webkit-scrollbar{
             height: 0px;
             width: 0px;
             // background: gray;
         }
-        .slider_w::-webkit-scrollbar-thumb:horizontal{
+        .slider_w::-webkit-scrollbar-thumb:horizontal, .slider_w_2::-webkit-scrollbar-thumb:horizontal{
             // background: #000;
             // border-radius: 10px;
         }

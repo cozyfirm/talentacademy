@@ -75,8 +75,4 @@ $(document).ready(function (){
         });
     });
 
-    /* Go to URI */
-    $(document).on('click','.blog__item, .news__list-item',function(){
-        window.location.href = $(this).attr('uri');
-    });
 });

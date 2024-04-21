@@ -497,6 +497,8 @@
             gap: 40px;
             margin-top: 32px;
             overflow-x: scroll;
+            //transition: $transition02;
+            //scroll-behavior: smooth;
 
             .news__list-item {
                 width: 40%;
