@@ -485,6 +485,10 @@
             }
         }
 
+        @media (max-width: 800px) {
+            .news__title{font-size: 32px}
+        }
+
         .news__list {
             width: 100%;
             display: flex;

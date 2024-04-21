@@ -4,34 +4,18 @@
             <h2 class="news__title">{{ __('Vijesti') }}</h2>
             <a href="#" class="news__all-news-button">{{ __('Sve vijesti') }}</a>
         </div>
-        <div class="news__list">
-            <div class="news__list-item">
-                <img src="{{ asset('/files/images/public-part/news-image-1.jpeg') }}" alt="{{ __('News image') }}" class="news__list-item-image">
-                <div class="news__list-item-info">
-                    <a href="#" class="news__list-item-info-category">{{ __('Pisanje za 21. stoljeće') }}</a>
-                    <div class="news__list-item-info-reading-time">2 min</div>
+        <div class="news__list slider_w">
+            @foreach($blogPosts as $post)
+                <div class="news__list-item" uri="{{ route('public-part.blog.preview', ['id' => $post->id]) }}">
+                    <img src="{{ asset($post->mainImg->getFile()) }}" alt="{{ __('News image') }}" class="news__list-item-image">
+                    <div class="news__list-item-info">
+                        <a href="#" class="news__list-item-info-category">{{ $post->getCategory() }}</a>
+                        <div class="news__list-item-info-reading-time">{{ $post->getDateTime() }}</div>
+                    </div>
+                    <h2 class="news__list-item-heading"> {{ $post->title }} </h2>
+                    <p class="news__list-item-content"> {{ $post->short_desc }} </p>
                 </div>
-                <h2 class="news__list-item-heading">{{ __('JUS project na hnta') }}</h2>
-                <p class="news__list-item-content">{{ __('Lorem ipsum dolor sit amet consectetur. Rhoncus at quis faucibus magna augue. Ipsum duis aliquet mauris facilisis mattis pellentesque quis non proin. Viverra sapien scelerisque suscipit proin. Sit massa feugiat ultrices diam eu.') }}</p>
-            </div>
-            <div class="news__list-item">
-                <img src="{{ asset('/files/images/public-part/news-image-1.jpeg') }}" alt="{{ __('News image') }}" class="news__list-item-image">
-                <div class="news__list-item-info">
-                    <a href="#" class="news__list-item-info-category">{{ __('Pisanje za 21. stoljeće') }}</a>
-                    <div class="news__list-item-info-reading-time">2 min</div>
-                </div>
-                <h2 class="news__list-item-heading">{{ __('JUS project na hnta') }}</h2>
-                <p class="news__list-item-content">{{ __('Lorem ipsum dolor sit amet consectetur. Rhoncus at quis faucibus magna augue. Ipsum duis aliquet mauris facilisis mattis pellentesque quis non proin. Viverra sapien scelerisque suscipit proin. Sit massa feugiat ultrices diam eu.') }}</p>
-            </div>
-            <div class="news__list-item">
-                <img src="{{ asset('/files/images/public-part/news-image-1.jpeg') }}" alt="{{ __('News image') }}" class="news__list-item-image">
-                <div class="news__list-item-info">
-                    <a href="#" class="news__list-item-info-category">{{ __('Pisanje za 21. stoljeće') }}</a>
-                    <div class="news__list-item-info-reading-time">2 min</div>
-                </div>
-                <h2 class="news__list-item-heading">{{ __('JUS project na hnta') }}</h2>
-                <p class="news__list-item-content">{{ __('Lorem ipsum dolor sit amet consectetur. Rhoncus at quis faucibus magna augue. Ipsum duis aliquet mauris facilisis mattis pellentesque quis non proin. Viverra sapien scelerisque suscipit proin. Sit massa feugiat ultrices diam eu.') }}</p>
-            </div>
+            @endforeach
         </div>
         <div class="news__navigation">
             <div class="news__navigation-dots">

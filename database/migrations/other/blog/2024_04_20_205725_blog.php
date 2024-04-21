@@ -20,6 +20,9 @@ return new class extends Migration
             $table->integer('category')->default(0);
             $table->integer('created_by');
 
+            $table->tinyInteger('published')->default(0);
+
+            $table->string('main_img')->nullable();
             $table->string('img_one')->nullable();
             $table->string('img_two')->nullable();
             $table->string('img_three')->nullable();

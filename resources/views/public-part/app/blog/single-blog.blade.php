@@ -10,20 +10,18 @@
     <!-- Page content -->
 @section('public-content')
     <div class="single-blog__header-images">
-        <img src="{{ asset('files/images/public-part/blog-1.jpeg') }}">
-        <img src="{{ asset('files/images/public-part/blog-2.jpeg') }}">
-        <img src="{{ asset('files/images/public-part/blog-3.jpeg') }}">
+        <img class="img-one" src="{{ asset( $post->imgOne->getFile() ) }}">
+        <img class="img-two" src="{{ asset( $post->imgTwo->getFile() ) }}">
+        <img class="img-three" src="{{ asset( $post->imgThree->getFile() ) }}">
     </div>
 
     <div class="single-blog">
         <div class="single-blog__container">
-            <h2 class="single-blog__title">
-                JUS projekat na Helem nejse Talent akademiji
-            </h2>
+            <h2 class="single-blog__title"> {{ $post->title }} </h2>
             <div class="single-blog__content">
                 <div class="single-blog__content-left">
-                    <div class="single-blog__content-left-text">Berin Češkić</div>
-                    <div class="single-blog__content-left-text">07.05.2024.</div>
+                    <div class="single-blog__content-left-text"> {{ $post->createdBy->name }} </div>
+                    <div class="single-blog__content-left-text"> {{ $post->getDate() }} </div>
                     <div class="single-blog__content-social-icons">
                         <div class="single-blog__content-social-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -37,23 +35,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="single-blog__content-right">
-                    Lorem ipsum dolor sit amet consectetur. Suspendisse sapien elementum pellentesque fringilla suspendisse. Eget aenean natoque in commodo consectetur venenatis mi etiam feugiat. Tortor dictumst vel urna vulputate ipsum. Nibh sed arcu in sit risus rhoncus magna urna sit. Arcu tortor pellentesque habitant diam tempor a facilisis. Amet aliquam odio porta arcu. Eget quam turpis facilisi sit sit amet. Viverra malesuada massa venenatis semper suspendisse nisi magnis. Est elit pharetra tristique sem non congue neque egestas magna. Ac aliquet ornare lorem tristique. Vitae id integer id at scelerisque. Sit scelerisque faucibus ac nisl sed pellentesque sed cursus. Natoque tincidunt vivamus neque eu semper est. Feugiat diam dictum nisi enim adipiscing id.
-                    <br />
-                    Nulla egestas mauris volutpat ridiculus cursus in sit tempor aenean. Pharetra tellus lacus arcu commodo iaculis varius. Gravida rhoncus nibh accumsan urna sed. Tortor aliquet fames montes donec habitasse fames molestie interdum pulvinar. Leo luctus risus mauris ut sed lacus lorem bibendum. A eget quis cras pulvinar ornare.
-                    Nisi nec faucibus etiam ut ut massa.
-                    <br />
-                    Integer laoreet amet curabitur malesuada lorem amet dolor feugiat sit. Aliquam dictumst faucibus vitae a proin id. Consequat consequat eu fermentum volutpat. Diam eget hac dignissim risus ultricies in dolor pharetra. Pharetra velit malesuada sapien lacus non massa nunc id scelerisque. Arcu felis euismod sed elit facilisis eu eleifend. Neque id fermentum ultricies porttitor morbi. Viverra at proin ut volutpat ac semper quis. At dignissim massa interdum non etiam. Sed sollicitudin cras cras diam sed. Nulla at massa semper mi.
-                </div>
+                <div class="single-blog__content-right"> {!! nl2br($post->description) !!} </div>
             </div>
             <div class="single-blog__images">
-                @foreach($images as $image)
-                    <img src="{{ asset('files/images/public-part/blog-1.jpeg') }}">
+                @foreach($post->imageRel as $image)
+                    <img src="{{ asset($image->fileRel->getFile()) }}">
                 @endforeach
             </div>
         </div>
     </div>
-    <!-- Blog section; Scroll-bar lattest news -->
+    <!-- Blog section; Scroll-bar latest news -->
     @include('public-part.app.base-includes.blog.blog_scroll')
 
     @include('public-part.app.base-includes.snake.snake')

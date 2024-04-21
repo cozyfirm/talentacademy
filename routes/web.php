@@ -90,8 +90,10 @@ Route::prefix('')->group(function () {
      *  Blog
      */
     Route::prefix('blog')->group(function () {
-        Route::get('/',                       [BlogController::class, 'blog'])->name('public-part.blog.blog');
-        Route::get('/{id}',                   [BlogController::class, 'single_blog'])->name('public-part.blog.single-blog');
+        Route::get ('/',                       [BlogController::class, 'blog'])->name('public-part.blog.blog');
+        Route::get ('/{id}',                   [BlogController::class, 'single_blog'])->name('public-part.blog.single-blog');
+        Route::get ('preview/{id}',            [BlogController::class, 'preview'])->name('public-part.blog.preview');
+        Route::post ('/load-more',             [BlogController::class, 'loadMore'])->name('public-part.blog.load-more');
     });
 
     /*

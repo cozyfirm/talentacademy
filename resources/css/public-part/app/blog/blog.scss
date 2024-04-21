@@ -67,7 +67,7 @@
         align-items: flex-start;
         gap: 32px;
         flex-wrap: wrap;
-        padding-top: 104px;
+        padding-top: 64px;
         padding-bottom: 64px;
         border-top: 1px solid rgba(238, 240, 242, 0.30);
 
@@ -137,5 +137,13 @@
                 }
             }
         }
+    }
+
+    .blog__load_more_w{
+        position: relative; width: 100%; height: 40px; display: inline-flex; justify-content: center; margin-bottom: 64px;
+        .load__more_btn{
+            position: relative; background: $primary; color:$dark; padding: 6px 32px; border-radius: 8px; height: 36px;
+        }
+        .load__more_btn:hover{cursor: pointer;}
     }
 }

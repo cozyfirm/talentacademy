@@ -3,38 +3,43 @@
 <!-- Title of page -->
 @section('Blog') @endsection
 
-@php
-    $blogs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-@endphp
+{{--@php--}}
+{{--    $blogs = [1, 2, 3, 4, 5, 6, 7, 8, 9];--}}
+{{--@endphp--}}
 
     <!-- Page content -->
 @section('public-content')
     <div class="blog">
         <div class="blog__container">
+            <!-- Preview last post -->
             <div class="blog__featured-article">
-                <img src="{{ asset('files/images/public-part/locations-image-1.jpeg') }}" alt="Featured article image" class="blog__featured-article-image">
+                <img src="{{ asset( $last->mainImg->getFile() ) }}" alt="Featured article image" class="blog__featured-article-image">
                 <div class="blog__featured-article-content">
-                    <div class="blog__featured-article-title">JUS porjekat na Helem nejse Talent akademiji</div>
-                    <div class="blog__featured-article-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
-                    <a href="#" class="blog__featured-article-button">{{ __('Više...') }}</a>
+                    <div class="blog__featured-article-title"> {{ $last->title }} </div>
+                    <div class="blog__featured-article-description"> {{ $last->short_desc }} </div>
+                    <a href="{{ route('public-part.blog.preview', ['id' => $last->id ]) }}" class="blog__featured-article-button">{{ __('Više...') }}</a>
                 </div>
             </div>
+
+            <!-- Preview last posts except the last one -->
             <div class="blog__items">
-                @foreach($blogs as $blog)
-                    <div class="blog__item">
-                        <img src="{{ asset('files/images/public-part/locations-image-1.jpeg') }}" alt="Blog image" class="blog__item-image">
+                @foreach($posts as $post)
+                    <div class="blog__item" id="blog__item_id_{{ $post->id }}" itemid="{{ $post->id }}" uri="{{ route('public-part.blog.preview', ['id' => $post->id]) }}">
+                        <img src="{{ asset($post->mainImg->getFile()) }}" alt="Blog image" class="blog__item-image">
                         <div class="blog__item-content">
                             <div class="blog__item-content-box">
-                                <div class="blog__item-content-box-category">Pisanje za 21. stoljeće</div>
-                                <div class="blog__item-content-box-read-time">5 min</div>
+                                <div class="blog__item-content-box-category"> {{ $post->getCategory() }} </div>
+                                <div class="blog__item-content-box-read-time"> {{ $post->getDateTime() }} </div>
                             </div>
-                            <div class="blog__item-content-title">JUS projekat na hnta</div>
-                            <p class="blog__item-content-description">
-                                Lorem ipsum dolor sit amet consectetur. Rhoncus at quis faucibus magna augue. Ipsum duis aliquet mauris facilisis mattis pellentesque quis non proin. Viverra sapien scelerisque suscipit proin. Sit massa feugiat ultrices diam eu.
-                            </p>
+                            <div class="blog__item-content-title"> {{ $post->title }} </div>
+                            <p class="blog__item-content-description"> {{ $post->short_desc }} </p>
                         </div>
                     </div>
                 @endforeach
+            </div>
+
+            <div class="blog__load_more_w">
+                <div class="load__more_btn">{{ __('Još vijesti') }}</div>
             </div>
         </div>
     </div>

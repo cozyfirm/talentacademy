@@ -51,16 +51,24 @@
                     @endif
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 {{ html()->label(__('Naslov'))->for('title')->class('bold') }}
-                                {{ html()->text('title', $post->title ?? '' )->class('form-control form-control-sm')->required()->value((isset($post) ? $post->title : ''))->isReadonly(isset($preview)) }}
+                                {{ html()->text('title', $post->title ?? '' )->class('form-control form-control-sm')->required()->value((isset($post) ? $post->title : ''))->isReadonly(isset($preview))->maxlength(100) }}
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Kategorija'))->for('category')->class('bold') }}
                                 {{ html()->select('category', $other, isset($post) ? $post->what : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ html()->label(__('Objavljeno'))->for('published')->class('bold') }}
+                                {{ html()->select('published', ['0' => 'Ne', '1' => 'Da'], isset($post) ? $post->published : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
                             </div>
                         </div>
                     </div>
@@ -68,7 +76,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 {{ html()->label(__('Kratki opis'))->for('short_desc')->class('bold') }}
-                                {{ html()->text('short_desc', $post->short_desc ?? '' )->class('form-control form-control-sm')->required()->value((isset($post) ? $post->short_desc : ''))->isReadonly(isset($preview)) }}
+                                {{ html()->text('short_desc', $post->short_desc ?? '' )->class('form-control form-control-sm')->required()->value((isset($post) ? $post->short_desc : ''))->isReadonly(isset($preview))->maxlength('191') }}
                             </div>
                         </div>
                     </div>

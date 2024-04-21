@@ -66,6 +66,7 @@ class BlogController extends Controller{
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.blog.preview', ['id' => $request->id]));
         }catch (\Exception $e){
+            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
