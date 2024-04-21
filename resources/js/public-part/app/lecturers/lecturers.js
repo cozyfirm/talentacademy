@@ -11,6 +11,7 @@ $(document).ready(function (){
 
     let loadMoreUri  = '/lecturers/load-more';
     let filterByName = '/lecturers/filter-by-name';
+    let preview      = '/lecturers/preview/';
 
     let loadMoreLocked = false;
 
@@ -26,7 +27,7 @@ $(document).ready(function (){
                         return $("<div>").attr('class', 'lecturers__list-item-category').text(lecturers[i]['presenter_role'])
                     })
                     .append(function (){
-                        return $("<a>").attr('href', '#')
+                        return $("<a>").attr('href', preview + lecturers[i]['id'])
                             .append(function (){
                                 return $("<h3>").attr('class', 'lecturers__list-item-name')
                                     .text(lecturers[i]['name']);

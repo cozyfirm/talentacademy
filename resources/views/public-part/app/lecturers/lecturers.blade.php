@@ -29,7 +29,7 @@
                     <div class="lecturers__list-item" itemid="{{ $lecturer->id }}">
                         <img src="{{ asset('files/images/public-part/users/' . ($lecturer->photo_uri)) }}" alt="Lecturer image" class="lecturers__list-item-image">
                         <div class="lecturers__list-item-category">{{ $lecturer->presenter_role }}</div>
-                        <a href="#">
+                        <a href="{{ route('public-part.lecturers.single-lecturer', ['id' => $lecturer->id ]) }}">
                             <h3 class="lecturers__list-item-name"> {{ $lecturer->name ?? '' }} </h3>
                         </a>
                         <div class="lecturers__list-item-subtitle"> {{ $lecturer->institution }} </div>

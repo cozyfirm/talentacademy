@@ -75,7 +75,6 @@ class LecturersController extends Controller{
 
             return $this->jsonResponse('0000', __(''), ['lecturers' => $lecturers->toArray()]);
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonResponse('1200', __('Desila se greška!'));
         }
     }
