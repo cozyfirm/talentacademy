@@ -3,10 +3,6 @@
 <!-- Title of page -->
 @section('Blog') @endsection
 
-{{--@php--}}
-{{--    $blogs = [1, 2, 3, 4, 5, 6, 7, 8, 9];--}}
-{{--@endphp--}}
-
     <!-- Page content -->
 @section('public-content')
     <div class="blog">
@@ -24,7 +20,7 @@
             <!-- Preview last posts except the last one -->
             <div class="blog__items">
                 @foreach($posts as $post)
-                    <div class="blog__item" id="blog__item_id_{{ $post->id }}" itemid="{{ $post->id }}" uri="{{ route('public-part.blog.preview', ['id' => $post->id]) }}">
+                    <a href="{{ route('public-part.blog.preview', ['id' => $last->id ]) }}" class="blog__item" id="blog__item_id_{{ $post->id }}" itemid="{{ $post->id }}" uri="{{ route('public-part.blog.preview', ['id' => $post->id]) }}">
                         <img src="{{ asset($post->mainImg->getFile()) }}" alt="Blog image" class="blog__item-image">
                         <div class="blog__item-content">
                             <div class="blog__item-content-box">
@@ -34,7 +30,7 @@
                             <div class="blog__item-content-title"> {{ $post->title }} </div>
                             <p class="blog__item-content-description"> {{ $post->short_desc }} </p>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
 
