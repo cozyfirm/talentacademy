@@ -7,6 +7,8 @@ use App\Models\Models\Core\Country;
 use App\Models\Other\Inbox\InboxTo;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramSession;
+use App\Models\Programs\ProgramSessionFile;
+use App\Models\Programs\ProgramSessionLink;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
@@ -81,7 +83,7 @@ class PublicUserController extends Controller{
     /*
      *  Presenter routes
      */
-    public function previewSessions (){
+    public function previewSessions (): View{
         /* Redirect if not presenter */
         if(Auth::user()->role != 'presenter') return redirect()->route('dashboard.my-profile');
 
@@ -89,7 +91,7 @@ class PublicUserController extends Controller{
             'sessions' => ProgramSession::where('presenter_id', Auth::user()->id)->get()
         ]);
     }
-    public function previewSession ($id){
+    public function previewSession ($id): View{
         $session = ProgramSession::where('id', $id)->first();
         /* Redirect if not presenter */
         if(Auth::user()->role != 'presenter' or $session->presenter_id != Auth::user()->id) return redirect()->route('dashboard.my-profile');
@@ -108,6 +110,66 @@ class PublicUserController extends Controller{
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('dashboard.preview-session', ['id' => $request->id]));
         }catch (\Exception $e){
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
+        }
+    }
+    public function addNewFile($session_id): View{
+        $session = ProgramSession::where('id', $session_id)->first();
+
+        return view($this->_path . 'presenter.add-new-file', [
+            'session' => $session
+        ]);
+    }
+    public function saveNewFile (Request $request): RedirectResponse{
+        try{
+            /* Add path */
+            $request['path'] = ('files/programs/sessions');
+            $file = $this->saveFile($request, 'file_uri', 'session_file');
+
+            ProgramSessionFile::create(['session_id' => $request->session_id, 'file_id' => $file->id]);
+
+            return redirect()->route('dashboard.preview-session', ['id' => $request->session_id]);
+        }catch (\Exception $e){
+            return back()->with('error', __('Desila se greška!'));
+        }
+    }
+    public function removeSessionFile ($id): RedirectResponse{
+        try{
+            $file = ProgramSessionFile::where('id', $id)->first();
+            $fileName = $file->file;
+
+            $file->delete();
+
+            return back()->with('success', __('Uspješno obrisan dokument ' . $fileName . "!"));
+        }catch (\Exception $e){
+            return back();
+        }
+    }
+    public function addNewLink($session_id): View{
+        $session = ProgramSession::where('id', $session_id)->first();
+
+        return view($this->_path . 'presenter.add-new-link', [
+            'session' => $session
+        ]);
+    }
+    public function saveNewLink  (Request $request): JsonResponse{
+        try{
+            $link = ProgramSessionLink::create($request->except(['_token']));
+
+            return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('dashboard.preview-session', ['id' => $request->session_id]));
+        }catch (\Exception $e){
+            return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
+        }
+    }
+    public function removeSessionLink ($id): RedirectResponse{
+        try{
+            $link = ProgramSessionLink::where('id', $id)->first();
+            $linkName = $link->value;
+
+            $link->delete();
+
+            return back()->with('success', __('Uspješno obrisan link: ' . $linkName . "!"));
+        }catch (\Exception $e){
+            return back();
         }
     }
 

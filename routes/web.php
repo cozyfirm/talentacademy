@@ -120,6 +120,16 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get ('/preview-session/{id}',                    [PublicUserController::class, 'previewSession'])->name('dashboard.preview-session');
     Route::post('/update-sessions',                         [PublicUserController::class, 'updateSessions'])->name('dashboard.update-sessions');
 
+    Route::prefix('sessions')->group(function () {
+        Route::get ('/add-new-file/{session_id}',               [PublicUserController::class, 'addNewFile'])->name('dashboard.sessions.add-new-file');
+        Route::post('/save-new-file',                           [PublicUserController::class, 'saveNewFile'])->name('dashboard.sessions.save-new-file');
+        Route::get ('/remove-file/{id}',                        [PublicUserController::class, 'removeSessionFile'])->name('dashboard.sessions.remove-file');
+
+        Route::get ('/add-new-link/{session_id}',               [PublicUserController::class, 'addNewLink'])->name('dashboard.sessions.add-new-link');
+        Route::post('/save-new-link',                           [PublicUserController::class, 'saveNewLink'])->name('dashboard.sessions.save-new-link');
+        Route::get ('/remove-link/{id}',                        [PublicUserController::class, 'removeSessionLink'])->name('dashboard.sessions.remove-link');
+    });
+
     /*
      *  User routes
      */

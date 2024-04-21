@@ -14,19 +14,33 @@
             @include('public-part.dashboard.includes.left-side')
 
             <div class="profile__wrapper_right">
+                <div class="sessions_header">
+                    <div class="sessions_header_left">
+                        <p>{{ $session->title }}</p>
+                    </div>
+                    <div class="sessions_header_right">
+                        <a href="{{ route('dashboard.sessions.add-new-file', ['session_id' => $session->id]) }}" title="{{ __('Zakačite novi dokument') }}">
+                            <div class="link_w"> <i class="fas fa-file"></i> </div>
+                        </a>
+                        <a href="{{ route('dashboard.sessions.add-new-link', ['session_id' => $session->id]) }}" title="{{ __('Unesite novi link') }}">
+                            <div class="link_w"> <i class="fas fa-link"></i> </div>
+                        </a>
+                    </div>
+                </div>
+
                 <form action="{{ route('dashboard.update-sessions') }}" method="POST" id="js-form">
                     {{ html()->hidden('id')->class('form-control')->value($session->id) }}
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <b>{{ html()->label(__('Naslov'))->for('title')->class('bold') }}</b>
-                                        {{ html()->text('title')->class('form-control form-control-sm mt-1')->required()->value((isset($session) ? $session->title : ''))->isReadonly(true) }}
-                                    </div>
-                                </div>
-                            </div>
+                            {{--<div class="row">--}}
+                            {{--    <div class="col-md-12">--}}
+                            {{--        <div class="form-group">--}}
+                            {{--            <b>{{ html()->label(__('Naslov'))->for('title')->class('bold') }}</b>--}}
+                            {{--            {{ html()->text('title')->class('form-control form-control-sm mt-1')->required()->value((isset($session) ? $session->title : ''))->isReadonly(true) }}--}}
+                            {{--        </div>--}}
+                            {{--    </div>--}}
+                            {{--</div>--}}
 
                             <div class="row mt-3">
                                 <div class="col-md-6">
@@ -84,6 +98,78 @@
                         </div>
                     </div>
                 </form>
+
+                <br>
+                <hr class="mt-3 mb-3">
+                <br>
+
+                <div class="home-concerts">
+                    <div class="global-inner-wrapper">
+{{--                        <div class="giw-hc-header">--}}
+{{--                            <p>{{ __('Dokumentacija dostupna polaznicima') }}</p>--}}
+{{--                        </div>--}}
+
+                        <div class="giw-hc-table mt-3">
+                            <table class="long-table">
+                                <tr class="header">
+                                    <td> {{ __('#') }} </td>
+                                    <td> {{ __('Naziv dokumenta') }} </td>
+                                    <td class="text-center"> {{ __('Akcije') }} </td>
+                                </tr>
+
+                                @php $counter = 1; @endphp
+                                @foreach($session->sessionFileRel as $sessionFile)
+                                    <tr class="body-tr">
+                                        <td> {{ $counter++ }}. </td>
+                                        <td>
+                                            <a href="{{ $sessionFile->fileRel->getFile() }}" target="_blank" title="{{ __('Pregled dokumenta') }}">{{ $sessionFile->fileRel->file }}</a>
+                                        </td>
+                                        <td class="text-center pt-2">
+                                            <a href="{{ route('dashboard.sessions.remove-file', ['id' => $sessionFile->id ]) }}" title="{{ __('Obrišite dokument') }}">
+                                                <button class="btn session-table-btn"><small>{{ __('Obrišite') }}</small></button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="home-concerts">
+                    <div class="global-inner-wrapper mt-5">
+{{--                        <div class="giw-hc-header">--}}
+{{--                            <p>{{ __('Linkovi dostupni polaznicima') }}</p>--}}
+{{--                        </div>--}}
+
+                        <div class="giw-hc-table mt-3">
+                            <table class="long-table">
+                                <tr class="header">
+                                    <td> {{ __('#') }} </td>
+                                    <td> {{ __('Naziv link-a') }} </td>
+                                    <td class="text-center"> {{ __('Akcije') }} </td>
+                                </tr>
+
+                                @php $counter = 1; @endphp
+                                @foreach($session->sessionLinkRel as $sessionLink)
+                                    <tr class="body-tr">
+                                        <td> {{ $counter++ }}. </td>
+                                        <td> {{ $sessionLink->value }} </td>
+                                        <td class="text-center pt-2">
+                                            <a href="{{ route('dashboard.sessions.remove-link', ['id' => $sessionLink->id ]) }}" title="{{ __('Obrišite link') }}">
+                                                <button class="btn session-table-btn"><small>{{ __('Obrišite') }}</small></button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
