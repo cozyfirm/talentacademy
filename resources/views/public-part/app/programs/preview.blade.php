@@ -22,9 +22,9 @@ $items = [1, 2, 3, 4, 5, 6]
                     <a href="#">
                         <button class="my-c-btn">{{ __('Apliciraj za stipendiju') }}</button>
                     </a>
-                    <a href="#">
-                        <button class="my-c-btn">{{ __('Više o programu') }}</button>
-                    </a>
+                    {{--<a href="#">--}}
+                    {{--    <button class="my-c-btn">{{ __('Više o programu') }}</button>--}}
+                    {{--</a>--}}
                 </div>
             </div>
         </div>

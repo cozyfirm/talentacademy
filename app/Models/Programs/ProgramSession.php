@@ -20,9 +20,28 @@ class ProgramSession extends Model{
 
     protected $table = 'programs__sessions';
     protected $guarded = ['id'];
+    protected array $_week_days = [ 0 => 'ned', 1 => 'pon', 2 => 'uto', 3 => 'sri', 4 => 'čet', 5 => 'pet', 6 => 'sub' ];
+    protected array $_week_days_long = [ 0 => 'Nedjelja', 1 => 'Ponedjeljak', 2 => 'Utorak', 3 => 'Srijeda', 4 => 'Četvrtak', 5 => 'Petak', 6 => 'Subota' ];
 
     public function date(): string{
         return Carbon::parse($this->date)->format('d.m.Y');
+    }
+    public function getDay(): string{
+        return Carbon::parse($this->date)->format('d');
+    }
+    public function getWeekDay(): string{
+        return $this->_week_days[Carbon::parse($this->date)->dayOfWeek];
+    }
+    public function getFullWeekDay(): string{
+        return $this->_week_days_long[Carbon::parse($this->date)->dayOfWeek];
+    }
+    public function timeFrom(): string{
+        try{
+            $time = explode(':', $this->time_from);
+            return $time['0'] . 'H' . $time[1];
+        }catch (\Exception $e){
+            return "09H00";
+        }
     }
     public function presenterRel(): HasOne{
         return $this->hasOne(User::class, 'id', 'presenter_id');
@@ -38,5 +57,15 @@ class ProgramSession extends Model{
     }
     public function locationRel(): HasOne{
         return $this->hasOne(Location::class, 'id', 'location_id');
+    }
+    public function getDayInOrder(){
+        $uniqueSessions = ProgramSession::where('program_id', $this->program_id)->orderBy('date')->get()->unique('date');
+
+        $currentDay = 1;
+        foreach ($uniqueSessions as $date){
+            if($this->date == $date->date) return $currentDay;
+            $currentDay++;
+        }
+        return $currentDay;
     }
 }

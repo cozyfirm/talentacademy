@@ -25,8 +25,13 @@ class ProgramsController extends Controller{
     use UserBaseTrait, ResponseTrait, FileTrait, CommonTrait;
     protected string $_path = 'admin.programs.';
     protected array $_session_types = [
-        'workshop' => 'Workshop',
-        'lecture' => 'Lecture'
+        'Radionica' => 'Radionica',
+        'Predavanje' => 'Predavanje',
+        'Keynote Predavanje' => 'Keynote Predavanje',
+        'Projekcija filma' => 'Projekcija filma',
+        'JAM sesija' => 'JAM sesija',
+        'Posjeta' => 'Posjeta',
+        'Hakaton' => 'Hakaton'
     ];
 
     public function index(): View{

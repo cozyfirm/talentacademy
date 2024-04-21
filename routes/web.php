@@ -58,9 +58,10 @@ Route::prefix('')->group(function () {
      *  Programs
      */
     Route::prefix('programs')->group(function () {
-        Route::get ('/preview',                   [ProgramsController::class, 'preview'])->name('public-part.programs.preview');
-        Route::get ('/preview-program/{id}',      [ProgramsController::class, 'preview'])->name('public-part.programs.preview-program');
-        Route::get ('/preview-program/{id}/session', [ProgramsController::class, 'preview_session'])->name('public-part.programs.preview-session');
+        Route::get ('/preview',                          [ProgramsController::class, 'preview'])->name('public-part.programs.preview');
+        Route::get ('/preview-program/{id}',             [ProgramsController::class, 'preview'])->name('public-part.programs.preview-program');
+        Route::get ('/preview-program/{id}/{date}',      [ProgramsController::class, 'preview'])->name('public-part.programs.preview-program-date');
+        Route::get ('/preview-session/{id}',             [ProgramsController::class, 'preview_session'])->name('public-part.programs.preview-session');
     });
 
     /*
@@ -85,7 +86,7 @@ Route::prefix('')->group(function () {
     Route::prefix('lecturers')->group(function () {
         Route::get ('/',                       [LecturersController::class, 'lecturers'])->name('public-part.lecturers.lecturers');
         Route::get ('/filter/{program_id}',    [LecturersController::class, 'filter'])->name('public-part.lecturers.filter');
-        Route::get ('/preview{id}',            [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer');
+        Route::get ('/preview/{id}',           [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer');
 
         Route::post('/load-more',              [LecturersController::class, 'loadMore'])->name('public-part.lecturers.load-more');
         Route::post('/filter-by-name',         [LecturersController::class, 'filterByName'])->name('public-part.lecturers.filter-by-name');

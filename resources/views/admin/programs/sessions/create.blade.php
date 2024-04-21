@@ -51,7 +51,7 @@
             <div class="col-md-9">
                 <form action="@if(isset($edit)) {{ route('system.admin.programs.sessions.update') }} @else {{ route('system.admin.programs.sessions.save') }} @endif" method="POST" id="js-form">
                     @if(isset($edit))
-                        {{ html()->hidden('id')->class('form-control')->value($program->id) }}
+                        {{ html()->hidden('id')->class('form-control')->value($session->id) }}
                     @endif
                     <!-- Program ID -->
                     {{ html()->hidden('program_id')->class('form-control')->value($program->id) }}
@@ -106,6 +106,15 @@
                             <div class="form-group">
                                 {{ html()->label(__('Predavač'))->for('presenter_id')->class('bold') }}
                                 {{ html()->select('presenter_id', $presenters, isset($session) ? $session->presenter_id : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ html()->label(__('Kratki opis'))->for('short_description')->class('bold') }}
+                                {{ html()->textarea('short_description')->class('form-control form-control-sm mt-2 textarea-120')->maxlength('300')->value(isset($session) ? $session->short_description : '')->isReadonly(isset($preview)) }}
                             </div>
                         </div>
                     </div>

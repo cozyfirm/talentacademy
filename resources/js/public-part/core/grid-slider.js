@@ -3,6 +3,7 @@ $(document).ready(function (){
     const slider = document.querySelector('.slider_w');
     const slider_2 = document.querySelector('.slider_w_2');
 
+    let isPresenterMoved = false;
     let isBlogMoved = false;
 
     if($(".slider_w").length){
@@ -15,6 +16,8 @@ $(document).ready(function (){
             slider.classList.add('active');
             startX = e.pageX - slider.offsetLeft;
             scrollLeft = slider.scrollLeft;
+
+            isPresenterMoved = false;
         });
         slider.addEventListener('mouseleave', () => {
             isDown = false;
@@ -31,6 +34,8 @@ $(document).ready(function (){
             const walk = (x - startX) * 1; //scroll-fast
             slider.scrollLeft = scrollLeft - walk;
             console.log(walk);
+
+            isPresenterMoved = true;
         });
     }
     /* When btn is pressed */
@@ -85,6 +90,10 @@ $(document).ready(function (){
     $(document).on('click','.blog__item, .news__list-item',function(){
         if(!isBlogMoved) window.location.href = $(this).attr('uri');
     });
+    $(document).on('click','.single__presenter',function(){
+        if(!isPresenterMoved) window.location.href = $(this).attr('uri');
+    });
+
 
     /* When btn is pressed */
     $(".blog_scroll_previous").click(function (){

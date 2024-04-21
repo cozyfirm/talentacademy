@@ -32,6 +32,7 @@ return new class extends Migration
                 ->on('__locations')
                 ->onDelete('cascade');
 
+            $table->text('short_description')->nullable();
             $table->text('description')->nullable();
 
             $table->unsignedBigInteger('presenter_id');
