@@ -8,6 +8,7 @@ use App\Models\Other\Location;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionFile;
+use App\Models\Programs\ProgramSessionLink;
 use App\Models\User;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Common\FileTrait;
@@ -221,6 +222,36 @@ class ProgramsController extends Controller{
             $file->delete();
 
             return back()->with('success', __('Uspješno obrisan dokument ' . $fileName . "!"));
+        }catch (\Exception $e){
+            return back();
+        }
+    }
+
+    /**
+     *  Upload links
+     */
+    public function insertLink($session_id): View{
+        return view($this->_path . 'sessions.insert-link', [
+            'session' => ProgramSession::where('id', $session_id)->first()
+        ]);
+    }
+    public function saveLink(Request $request){
+        try{
+            $link = ProgramSessionLink::create($request->except(['_token']));
+
+            return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.programs.sessions.preview', ['id' => $request->session_id]));
+        }catch (\Exception $e){
+            return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
+        }
+    }
+    public function ProgramSessionLink ($id): RedirectResponse{
+        try{
+            $link = ProgramSessionLink::where('id', $id)->first();
+            $linkName = $link->value;
+
+            $link->delete();
+
+            return back()->with('success', __('Uspješno obrisan link: ' . $linkName . "!"));
         }catch (\Exception $e){
             return back();
         }

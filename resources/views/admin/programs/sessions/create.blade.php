@@ -43,6 +43,9 @@
             </div>
         @endif
 
+        {{--@if(isset($session))--}}
+        {{--    @include('admin.programs.sessions.snippets.new-link')--}}
+        {{--@endif--}}
 
         <div class="row">
             <div class="col-md-9">

@@ -30,6 +30,9 @@ class ProgramSession extends Model{
     public function sessionFileRel(): HasMany{
         return $this->hasMany(ProgramSessionFile::class, 'session_id', 'id');
     }
+    public function sessionLinkRel(): HasMany{
+        return $this->hasMany(ProgramSessionLink::class, 'session_id', 'id');
+    }
     public function programRel(): HasOne{
         return $this->hasOne(Program::class, 'id', 'program_id');
     }
