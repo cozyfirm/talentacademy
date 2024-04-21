@@ -60,6 +60,7 @@ Route::prefix('')->group(function () {
     Route::prefix('programs')->group(function () {
         Route::get ('/preview',                   [ProgramsController::class, 'preview'])->name('public-part.programs.preview');
         Route::get ('/preview-program/{id}',      [ProgramsController::class, 'preview'])->name('public-part.programs.preview-program');
+        Route::get('/preview-program/{id}/session', [ProgramsController::class, 'preview_session'])->name('public-part.programs.preview-session');
     });
 
     /*

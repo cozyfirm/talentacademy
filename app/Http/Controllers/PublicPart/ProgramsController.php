@@ -15,4 +15,10 @@ class ProgramsController extends Controller{
             'program' => Program::where('id', $id)->first()
         ]);
     }
+
+    public function preview_session($id): View{
+        return view($this->_path . 'preview-session', [
+            'program' => Program::where('id', $id)->first()
+        ]);
+    }
 }
