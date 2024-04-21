@@ -8,10 +8,10 @@
                 </div>
             </div>
 
-            <form action="{{ route('system.admin.programs.save-image') }}" method="POST" id="update-profile-image" enctype="multipart/form-data">
+            <form action="{{ route('system.admin.blog.add-to-gallery') }}" method="POST" id="update-profile-image" enctype="multipart/form-data">
                 @csrf
                 {{ html()->hidden('id')->class('form-control')->value($post->id) }}
-                <div class="card p-0 m-0" title="{{ __('Nova fotografija za program') }}">
+                <div class="card p-0 m-0" title="{{ __('Nova fotografija za galeriju') }}">
                     <div class="card-body d-flex justify-content-between">
                         <label for="photo_uri" >
                             <p class="m-0">{{ __('Galerija fotografija') }}</p>
@@ -34,14 +34,37 @@
                             </a>
                         </div>
                     </div>
-                    <h6 class="card-subtitle mb-3 text-muted mt-2 d-flex justify-content-between">
-                        <small>1. {{ __('Spisak svih predavača na kursu') }}</small>
-                        <small><i class="fas fa-trash"></i></small>
-                    </h6>
-                    <h6 class="card-subtitle mb-3 text-muted mt-2 d-flex justify-content-between">
-                        <small>2. {{ __('Spisak svih predavača na kursu') }}</small>
-                        <small><i class="fas fa-trash"></i></small>
-                    </h6>
+                    @php $counter = 1 @endphp
+                    @foreach($post->imageRel as $image)
+                        <h6 class="card-subtitle mb-3 text-muted mt-2 d-flex justify-content-between">
+                            <small>{{ $counter++ }}. {{ $image->fileRel->file ?? '' }}</small>
+                            <a href="{{ route('system.admin.blog.delete-from-gallery', ['id' => $image->id ]) }}">
+                                <small><i class="fas fa-trash"></i></small>
+                            </a>
+                        </h6>
+                    @endforeach
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="card p-0 m-0" >
+                <div class="card-body d-flex justify-content-between">
+                    <a href="{{ route('system.admin.blog.edit-image', ['id' => $post->id, 'what' => 'img_one']) }}" class="w-25" title="{{ __('Ažurirajte fotografiju br. 1') }}">
+                        <div class=" text-center border">
+                            <i class="fas fa-image mt-1"></i>
+                        </div>
+                    </a>
+                    <a href="{{ route('system.admin.blog.edit-image', ['id' => $post->id, 'what' => 'img_two']) }}" class="w-25" title="{{ __('Ažurirajte fotografiju br. 2') }}">
+                        <div class="text-center border">
+                            <i class="fas fa-image mt-1"></i>
+                        </div>
+                    </a>
+                    <a href="{{ route('system.admin.blog.edit-image', ['id' => $post->id, 'what' => 'img_three']) }}" class="w-25 title="{{ __('Ažurirajte fotografiju br. 3') }}"">
+                        <div class="text-center border">
+                            <i class="fas fa-image mt-1"></i>
+                        </div>
+                    </a>
                 </div>
             </div>
 
