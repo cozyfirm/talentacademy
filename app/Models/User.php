@@ -4,8 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Models\Core\Country;
+use App\Models\Programs\ProgramSession;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,6 +17,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property mixed $email
  * @property mixed $name
  * @method static where(string $string, string $string1)
+ * @method static whereHas(string $string, \Closure $param)
  */
 class User extends Authenticatable{
     use HasApiTokens, HasFactory, Notifiable;
@@ -46,6 +49,10 @@ class User extends Authenticatable{
         'web',
         'title',
         'institution',
+        'presenter_role',
+        'short_description',
+        'description',
+        'interview'
     ];
 
     /**
@@ -73,5 +80,8 @@ class User extends Authenticatable{
     }
     public function countryRel(): HasOne{
         return $this->hasOne(Country::class, 'id', 'country');
+    }
+    public function sessionsRel(): HasMany{
+        return $this->hasMany(ProgramSession::class, 'presenter_id', 'id');
     }
 }

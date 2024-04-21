@@ -51,6 +51,10 @@ return new class extends Migration
             $table->string('institution')->nullable();
             $table->string('presenter_role', 100)->nullable();
 
+            $table->text('short_description')->nullable();
+            $table->text('description')->nullable();
+            $table->text('interview')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });

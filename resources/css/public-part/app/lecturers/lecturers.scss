@@ -73,6 +73,7 @@
             flex-wrap: wrap;
             gap: 32px;
             margin-top: 32px;
+            margin-bottom: 32px;
 
             .lecturers__list-item {
                 width: calc(33.3% - 21px);
@@ -161,12 +162,16 @@
             border: 1px solid $primary;
             background: $primary;
             margin: 0 auto;
-            margin-top: 32px;
             margin-bottom: 64px;
             font-size: 16px;
             font-style: normal;
             font-weight: 300;
             line-height: 150%;
+
+            p{
+                margin: 0px;
+            }
         }
+        .lecturers__more-button:hover{cursor: pointer;}
     }
 }

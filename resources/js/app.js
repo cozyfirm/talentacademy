@@ -43,4 +43,4 @@ import "./public-part/app/homepage/how-to-apply-slider.js";
 /* FAQ */
 import "./public-part/app/homepage/faq.js";
 import "./public-part/app/blog/blog.js";
-
+import "./public-part/app/lecturers/lecturers.js";

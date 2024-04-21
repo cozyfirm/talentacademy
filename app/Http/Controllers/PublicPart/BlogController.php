@@ -40,9 +40,9 @@ class BlogController extends Controller{
                 $post->createdAt = $post->getDate();
                 $post->createdBy = $post->createdBy->name;
             }
-            return $this->jsonResponse('0000', __('Poruka uspješno poslana'), ['posts' => $posts->toArray()]);
+            return $this->jsonResponse('0000', __(''), ['posts' => $posts->toArray()]);
         }catch (\Exception $e){
-            return $this->jsonResponse('1200', __('Poruka uspješno poslana'));
+            return $this->jsonResponse('1200', __('Desila se greška'));
         }
     }
 }

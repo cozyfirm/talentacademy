@@ -57,14 +57,14 @@
                         </div>
                     </div>
 
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    {{ html()->label(__('Detaljan opis'))->for('description')->class('bold') }}
-                                    {{ html()->textarea('description')->class('form-control form-control-sm mt-2 textarea-240')->value(isset($program) ? $program->description : '')->isReadonly(isset($preview)) }}
-                                </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ html()->label(__('Detaljan opis'))->for('description')->class('bold') }}
+                                {{ html()->textarea('description')->class('form-control form-control-sm mt-2 textarea-240')->value(isset($program) ? $program->description : '')->isReadonly(isset($preview)) }}
                             </div>
                         </div>
+                    </div>
 
                     @if(!isset($preview))
                         <div class="row mt-4">

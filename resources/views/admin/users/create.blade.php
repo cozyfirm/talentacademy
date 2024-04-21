@@ -134,14 +134,39 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        {{ html()->label(__('Uloga predavača'))->for('presenter_role')->class('bold') }}
-                                        {{ html()->select('presenter_role', ['Lecturer' => 'Lecturer', 'Keynote speaker' => 'Keynote speaker', 'Workshop leader' => 'Workshop leader'], isset($user) ? $user->presenter_role : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
-                                    </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ html()->label(__('Uloga predavača'))->for('presenter_role')->class('bold') }}
+                                    {{ html()->select('presenter_role', ['Lecturer' => 'Lecturer', 'Keynote speaker' => 'Keynote speaker', 'Workshop leader' => 'Workshop leader'], isset($user) ? $user->presenter_role : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ html()->label(__('Kratki opis'))->for('short_description')->class('bold') }}
+                                    {{ html()->textarea('short_description')->class('form-control form-control-sm mt-2 textarea-120')->value(isset($user) ? $user->short_description : '')->isReadonly(isset($preview)) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ html()->label(__('Detaljan opis'))->for('description')->class('bold') }}
+                                    {{ html()->textarea('description')->class('form-control form-control-sm mt-2 textarea-240')->value(isset($user) ? $user->description : '')->isReadonly(isset($preview)) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ html()->label(__('Interview'))->for('interview')->class('bold') }}
+                                    {{ html()->textarea('interview')->class('form-control form-control-sm mt-2 textarea-240')->value(isset($user) ? $user->interview : '')->isReadonly(isset($preview)) }}
+                                </div>
+                            </div>
+                        </div>
                     @endif
 
                     @if(!isset($preview))
