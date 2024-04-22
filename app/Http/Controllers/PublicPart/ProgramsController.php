@@ -9,6 +9,7 @@ use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionNote;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -70,5 +71,16 @@ class ProgramsController extends Controller{
         }catch (\Exception $e){
             return $this->jsonResponse('1200', __('Desila se greška'));
         }
+    }
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     * Apply for scholarship
+     */
+    public function applyForScholarship ($id): View | RedirectResponse{
+        if(!Auth::check()) return redirect()->route('auth');
+        return view($this->_path . 'apply-for-scholarship', [
+            'program' => Program::where('id', $id)->first()
+        ]);
     }
 }

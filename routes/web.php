@@ -66,6 +66,9 @@ Route::prefix('')->group(function () {
         /* Session notes */
         Route::post('/save-session-note',                [ProgramsController::class, 'saveSessionNote'])->name('public-part.programs.save-session-note');
         Route::post('/delete-session-note',              [ProgramsController::class, 'deleteSessionNote'])->name('public-part.programs.delete-session-note');
+
+        /* Apply for scholarship */
+        Route::get ('/apply-for-scholarship/{id}',       [ProgramsController::class, 'applyForScholarship'])->name('public-part.programs.apply-for-scholarship');
     });
 
     /*

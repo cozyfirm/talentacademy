@@ -1,11 +1,7 @@
 @extends('public-part.layout.layout')
 
 <!-- Title of page -->
-@section('Welcome') @endsection
-
-@php
-$items = [1, 2, 3, 4, 5, 6]
-@endphp
+@section('title') {{ $program->title }} @endsection
 
 <!-- Page content -->
 @section('public-content')
@@ -19,7 +15,7 @@ $items = [1, 2, 3, 4, 5, 6]
                 <p> {{ $program->description }} </p>
 
                 <div class="p__c_iw_buttons">
-                    <a href="#">
+                    <a href="{{ route('public-part.programs.apply-for-scholarship', ['id' => $program->id ]) }}">
                         <button class="my-c-btn">{{ __('Apliciraj za stipendiju') }}</button>
                     </a>
                     {{--<a href="#">--}}
