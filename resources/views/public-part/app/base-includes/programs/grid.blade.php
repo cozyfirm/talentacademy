@@ -20,7 +20,7 @@
                     </svg>
                     <h5> {{ $session->locationRel->title ?? '' }} </h5>
                 </div>
-                <p> {{ $session->description }} </p>
+                <p> {{ $session->short_description }} </p>
             </div>
         @endforeach
     </div>
