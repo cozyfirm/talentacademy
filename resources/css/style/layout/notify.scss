@@ -8,12 +8,12 @@
 
 
     .notifyMe{
-        position: relative; left:0px; top:0px; margin-bottom: 15px; padding:5px 15px;
+        position: relative; left:0px; top:0px; margin-bottom: 15px; padding:5px 15px; border-radius: 8px;
 
         .nt-inline{
             display: inline-flex;
             .nt-icon{
-                margin-right:10px; font-size:15px; padding-top:0px;
+                margin-right:10px; font-size:15px; padding-top:4px;
             }
             p{
                 margin:0px; font-weight: bold;

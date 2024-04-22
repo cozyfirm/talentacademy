@@ -21,10 +21,11 @@ import "./public-part/auth/auth.js";
 
 import "./public-part/core/menu.js";
 import "./public-part/core/grid-slider.js";
+import "./public-part/core/snippets-grid.js";
 
 /* Counter */
 import "./public-part/app/programs/counter.js";
-
+import "./public-part/app/programs/sessions.js";
 /* Contact -us */
 import "./public-part/app/contact-us/send-us-a-message.js";
 

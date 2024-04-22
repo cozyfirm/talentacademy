@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @method static create(array $all)
@@ -57,6 +58,9 @@ class ProgramSession extends Model{
     }
     public function locationRel(): HasOne{
         return $this->hasOne(Location::class, 'id', 'location_id');
+    }
+    public function noteRel(): HasMany{
+        return $this->hasMany(ProgramSessionNote::class, 'session_id', 'id')->where('attendee_id', Auth::user()->id);
     }
     public function getDayInOrder(){
         $uniqueSessions = ProgramSession::where('program_id', $this->program_id)->orderBy('date')->get()->unique('date');

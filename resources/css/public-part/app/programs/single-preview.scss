@@ -1,6 +1,7 @@
 .preview-session__container {
     width: 100%;
     max-width: 1100px;
+    padding-top: 32px; padding-bottom: 32px;
 
     @media (max-width: 1100px) {
         padding: 0px 24px;
@@ -67,8 +68,7 @@
         font-weight: 500;
         line-height: 120%;
         color: $text-white;
-        margin-top: 22px;
-        margin-bottom: 8px;
+        margin-bottom: 16px;
     }
 
     p {
@@ -147,7 +147,7 @@
             background: #CFB1F6;
 
             .my_note{
-                position: relative; left: 0px; width: 100%; min-height: 50px; display: inline-flex; justify-content: space-between;
+                position: relative; left: 0px; width: 100%; min-height: 50px; display: inline-flex;
                 margin-bottom: 16px;
 
                 .my_note_time{
@@ -166,20 +166,21 @@
                 }
                 .my_note_delete:hover{cursor: pointer;}
                 p{
-                    margin-left: 32px; margin-right: 52px; margin-top: 0px; margin-bottom: 0px;
+                    width: calc(100% - 180px); margin-top: 0px; margin-bottom: 0px; margin-left: 32px;
                 }
             }
             .my_note:last-child{margin-bottom: 0px;}
 
             @media (max-width: 800px){
                 .my_note{
-                    flex-wrap: wrap;
+                    flex-wrap: wrap;  justify-content: space-between;
                     p{
                         margin-left: 0px; margin-right: 0px; width: 100%; margin-top: 16px;
                     }
                 }
             }
         }
+        .my_notes__note_0{display: none;}
         .my_notes_new_note{
             position: relative; left: 0px; width: 100%; margin-top: 32px;
             display: inline-flex; justify-content: space-between;
@@ -188,13 +189,13 @@
                 position: relative; width: calc(100% - 116px); height: 50px; resize: none; background: #CFB1F6; border-radius: 16px;
                 outline: none; padding: 8px 16px; border: 1px solid rgba(0,0,0,0.2);
             }
-            label{
+            .save-note{
                 position: relative; height: 50px; width: 90px; border: 1px solid rgba(0,0,0,0.2); border-radius: 16px; background: #CFB1F6; text-align: center;
                 img{
                     margin-top: 10px;
                 }
             }
-            label:hover{cursor:pointer;}
+            .save-note:hover{cursor:pointer;}
         }
     }
 
@@ -238,11 +239,19 @@
                 overflow-x: scroll;
                 overflow-y: hidden;
                 white-space: nowrap;
-                transition: all 0.2s;
-                //transform: scale(0.98);
+                //transition: all 0.2s;
+                ////transform: scale(0.98);
                 will-change: transform;
                 user-select: none;
-                cursor: pointer;
+                cursor: grab;
+                display: inline-flex;
+
+                flex: 1;
+                display: flex;
+                overflow: auto;
+            }
+            .preview__session_rest_of:focus{
+                cursor: grab;
             }
 
             /* Remove slider */
@@ -252,8 +261,13 @@
             }
 
             .preview__session_single{
-                display: inline-block; position: relative; border: 1px solid $dark; border-radius: 8px; transition: $transition02; min-height: 120px;
-                width: 487px; margin-right: 15px; padding: 32px;
+                //display: inline-block;
+                display: flex;
+                flex-shrink: 0;
+                height: 100%;
+
+                position: relative; border: 1px solid $dark; border-radius: 8px; transition: $transition02;
+                width: 487px; margin-right: 15px; padding: 32px; height: 100% !important;
 
                 .preview__session_single_inner{
                     position: relative; left: 0px; width: 100%; min-height: 60px; white-space: normal;

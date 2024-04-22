@@ -62,6 +62,10 @@ Route::prefix('')->group(function () {
         Route::get ('/preview-program/{id}',             [ProgramsController::class, 'preview'])->name('public-part.programs.preview-program');
         Route::get ('/preview-program/{id}/{date}',      [ProgramsController::class, 'preview'])->name('public-part.programs.preview-program-date');
         Route::get ('/preview-session/{id}',             [ProgramsController::class, 'preview_session'])->name('public-part.programs.preview-session');
+
+        /* Session notes */
+        Route::post('/save-session-note',                [ProgramsController::class, 'saveSessionNote'])->name('public-part.programs.save-session-note');
+        Route::post('/delete-session-note',              [ProgramsController::class, 'deleteSessionNote'])->name('public-part.programs.delete-session-note');
     });
 
     /*
