@@ -35,22 +35,28 @@
                 <div class="hero-section__bottom-section-text">
                     {{ __('02 - 10. Avgust 2024. - Sarajevo') }}
                 </div>
-                <a href="#" class="hero-section__bottom-section-button">
-                    {{ __('Apliciraj za stipendiju') }}
-                </a>
-                <a href="#" class="hero-section__bottom-section-learn-more">
+                @if(auth()->check())
+                    <a href="{{ route('dashboard.my-profile') }}" class="hero-section__bottom-section-button">
+                        {{ __('Apliciraj za stipendiju') }}
+                    </a>
+                @else
+                    <a href="{{ route('auth.create-account') }}" class="hero-section__bottom-section-button">
+                        {{ __('Apliciraj za stipendiju') }}
+                    </a>
+                @endif
+                <a href="#features" class="hero-section__bottom-section-learn-more">
                     {{ __('Saznaj više!') }}
                     <img src="{{ asset('files/images/public-part/down-icon.svg') }}" alt="Down icon">
                 </a>
             </div>
         </div>
     </div>
-    <div class="features">
+    <div class="features" id="features">
         <div class="features__container">
             <div class="features__content">
                 <h2 class="features__heading">{{ __('PROŠIRI SVOJA ZNANJA O KREATIVNIM INDUSTRIJAMA') }}</h2>
                 <p class="features__text">{{ __('Kroz Intenzivni sedmodnevni program Akademije, uz učešće preko 50 predavača, mentora i voditelja radionica koji će sa tobom podijeliti svoje relevantna naučna znanja i iskustva pomažemo razvoju  tvojih vještina i pružamo ti stvarni uvid u svijet kreativnih industrija') }}</p>
-                <a href="#" class="features__button">
+                <a href="#programs" class="features__button">
                     <img src="{{ asset('files/images/public-part/twisted-arrow.svg') }}" alt="Twisted arrow">
                     {{ __('Programi Akademije') }}
                 </a>
@@ -65,7 +71,7 @@
             <div class="features__content">
                 <h2 class="features__heading">{{ __('POSJETE STUDIJIMA, REDAKCIJAMA, FIRMAMA...') }}</h2>
                 <p class="features__text">{{ __('Kroz Intenzivni sedmodnevni program Akademije, uz učešće preko 50 predavača, mentora i voditelja radionica koji će sa tobom podijeliti svoje relevantna naučna znanja i iskustva pomažemo razvoju  tvojih vještina i pružamo ti stvarni uvid u svijet kreativnih industrija') }}</p>
-                <a href="#" class="features__button">
+                <a href="{{ route('public-part.locations.locations') }}" class="features__button">
                     <img src="{{ asset('files/images/public-part/twisted-arrow.svg') }}" alt="Twisted arrow">
                     {{ __('Lokacije Akademije') }}
                 </a>
@@ -80,7 +86,7 @@
             <div class="features__content">
                 <h2 class="features__heading">{{ __('STVARANJE BOLJEG DRUŠTVA I ZAJEDNICE') }}</h2>
                 <p class="features__text">{{ __('Kroz Intenzivni sedmodnevni program Akademije, uz učešće preko 50 predavača, mentora i voditelja radionica koji će sa tobom podijeliti svoje relevantna naučna znanja i iskustva pomažemo razvoju  tvojih vještina i pružamo ti stvarni uvid u svijet kreativnih industrija') }}</p>
-                <a href="#" class="features__button">
+                <a href="{{ route('public-part.lecturers.lecturers') }}" class="features__button">
                     <img src="{{ asset('files/images/public-part/twisted-arrow.svg') }}" alt="Twisted arrow">
                     {{ __('Predavači') }}
                 </a>
@@ -170,7 +176,7 @@
                         </svg>
                     </button>
                 </div>
-                <a href="#" class="homepage-locations__navigation-all">
+                <a href="{{ route('public-part.locations.locations') }}" class="homepage-locations__navigation-all">
                     {{ __('Sve lokacije') }}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                         <path d="M3.00006 13.6319L17.5861 13.6319L12.2931 18.9249L13.7071 20.3389L21.4141 12.6319L13.7071 4.92487L12.2931 6.33887L17.5861 11.6319L3.00006 11.6319V13.6319Z" fill="#EA8BF3"/>

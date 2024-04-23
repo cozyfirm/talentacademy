@@ -1,4 +1,4 @@
-<div class="programs">
+<div class="programs" id="programs">
     <div class="programs__container">
         <h2 class="programs__heading">{{ __('Programi') }}</h2>
         <div class="programs__content">

@@ -2,7 +2,7 @@
     <div class="news__container">
         <div class="news__title-container">
             <h2 class="news__title">{{ __('Vijesti') }}</h2>
-            <a href="#" class="news__all-news-button">{{ __('Sve vijesti') }}</a>
+            <a href="{{ route('public-part.blog.blog') }}" class="news__all-news-button">{{ __('Sve vijesti') }}</a>
         </div>
         <div class="news__list slider_w_2">
             @foreach($blogPosts as $post)

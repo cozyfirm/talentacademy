@@ -251,6 +251,10 @@
                 font-weight: 500;
                 line-height: 150%;
                 color: $dark;
+
+                &:hover {
+                    text-decoration: underline;
+                }
             }
         }
 
@@ -331,7 +335,7 @@
             margin-top: 32px;
 
             .programs__program {
-                height: 350px;
+                height: 450px;
                 position: relative;
                 width: calc(33.33% - 22px);
                 padding: 32px;
@@ -511,6 +515,8 @@
                 gap: 24px;
                 overflow: hidden;
                 flex-shrink: 0;
+                align-self: stretch;
+                cursor: pointer;
 
                 @media (max-width: $mobile-width) {
                     width: 100%;
@@ -586,6 +592,7 @@
 
             .news__navigation-dots {
                 display: flex;
+                visibility: hidden;
                 justify-content: center;
                 align-items: center;
                 gap: 4px;
@@ -700,7 +707,7 @@
                     justify-content: flex-start;
                     align-items: center;
                     gap: 21px;
-                    padding-bottom: 16px;
+                    padding-bottom: 32px;
 
                     .homepage-locations__list-item-button {
                         display: flex;
