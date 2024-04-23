@@ -19,8 +19,10 @@
             <p> {{ __('Važno je da što detaljnije opišeš svoje odgovore u prijavi jer od toga u velikoj mjeri zavisi naša procjena tvog profila i potencijala. Detaljnje informacije koje pružiš pomoći će nam da bolje razumijemo tvoju motivaciju, iskustvo, očekivanja i ciljeve. Na temelju ovih odgovora odlučujemo o mogućnosti dodjele stipendije, stoga je ključno da svoje misli i ambicije izraziš na najbolji mogući način. ') }} </p>
             <p> {{ __('Svoju aplikaciju ili njene dijelove možeš čuvati u ovoj formi. Tvpka finalna aplikacija će biti proslijeđena nama tek kada izabereš opciju "Pošalji aplikaciju".') }} </p>
 
-            <form action="{{ route('system.admin.locations.update-image') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('public-part.programs.update-scholarship') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+
+                {{ html()->hidden('program_id')->class('form-control')->value($program->id) }}
 
                 <div class="apply__for_scholarship_textarea">
                     <label for="motivation">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
@@ -61,11 +63,11 @@
 
                 <div class="terms__and_conditions_w">
                     <div class="terms__and_conditions">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="1" id="criteria" name="criteria">
                         <p>{{ __('Pročitao sam dokument') }} <a href="#">{{ __('Kriterij upisa') }}</a> </p>
                     </div>
                     <div class="terms__and_conditions">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="1" name="privacy" id="privacy">
                         <p>{{ __('Prihvatam') }} <a href="#">{{ __('pravila privatnosti') }}</a> {{ __('talentakademija.ba') }} </p>
                     </div>
                 </div>

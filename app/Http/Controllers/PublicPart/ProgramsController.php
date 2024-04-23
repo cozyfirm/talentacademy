@@ -5,8 +5,10 @@ namespace App\Http\Controllers\PublicPart;
 use App\Http\Controllers\Controller;
 use App\Models\Other\Blog\Blog;
 use App\Models\Programs\Program;
+use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionNote;
+use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ProgramsController extends Controller{
-    use ResponseTrait;
+    use ResponseTrait, FileTrait;
     protected string $_path = 'public-part.app.programs.';
 
     public function getSessionsByDate($program_id, $date){
@@ -77,10 +79,65 @@ class ProgramsController extends Controller{
     /*
      * Apply for scholarship
      */
+    public function getScholarshipApplication(int $program_id){
+        try{
+            $scholarship = ProgramApplication::where('program_id', $program_id)->where('attendee_id', Auth::user()->id)->first();
+
+            if(!$scholarship){
+                $scholarship = ProgramApplication::create([
+                    'program_id' => $program_id,
+                    'attendee_id' => Auth::user()->id
+                ]);
+            }
+
+            return $scholarship;
+        }catch (\Exception $e){ }
+    }
     public function applyForScholarship ($id): View | RedirectResponse{
         if(!Auth::check()) return redirect()->route('auth');
         return view($this->_path . 'apply-for-scholarship', [
-            'program' => Program::where('id', $id)->first()
+            'program' => Program::where('id', $id)->first(),
+            'application' => $this->getScholarshipApplication($id)
         ]);
+    }
+
+    public function updateScholarship(Request $request){
+        try{
+            $scholarship = $this->getScholarshipApplication($request->program_id);
+
+            $scholarship->update([
+                'motivation' => $request->motivation,
+                'interests' => $request->interests,
+                'experience' => $request->experience,
+                'expectations' => $request->expectations,
+                'skills' => $request->skills
+            ]);
+
+            if(isset($request->cv)){
+                $request['path'] = (storage_path('files/programs/applications'));
+                $file = $this->saveFile($request, 'cv', 'app_cv');
+
+                $scholarship->update(['cv' => $file->id ]);
+            }
+            if(isset($request->motivation_letter)){
+                $request['path'] = (storage_path('files/programs/applications'));
+                $file = $this->saveFile($request, 'motivation_letter', 'app_mot_letter');
+
+                $scholarship->update(['motivation_letter' => $file->id ]);
+            }
+            if(isset($request->other)){
+                $request['path'] = (storage_path('files/programs/applications'));
+                $file = $this->saveFile($request, 'other', 'app_other');
+
+                $scholarship->update(['other' => $file->id ]);
+            }
+
+            dd($request->all());
+
+            return back()->with('success', __('Uspješno spremljeno!'));
+        }catch (\Exception $e){
+            dd($e);
+            return back()->with('error', __('Desila se greška!'));
+        }
     }
 }
