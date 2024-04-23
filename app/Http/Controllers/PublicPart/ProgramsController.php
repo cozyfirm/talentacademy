@@ -101,7 +101,7 @@ class ProgramsController extends Controller{
         ]);
     }
 
-    public function updateScholarship(Request $request){
+    public function updateScholarship(Request $request): RedirectResponse{
         try{
             $scholarship = $this->getScholarshipApplication($request->program_id);
 
@@ -132,12 +132,28 @@ class ProgramsController extends Controller{
                 $scholarship->update(['other' => $file->id ]);
             }
 
-            dd($request->all());
+            if(isset($request->criteria) and isset($request->privacy)) $scholarship->update(['checked' => 1]);
+            else $scholarship->update(['checked' => 0]);
 
             return back()->with('success', __('Uspješno spremljeno!'));
         }catch (\Exception $e){
-            dd($e);
             return back()->with('error', __('Desila se greška!'));
         }
+    }
+    public function cancelScholarship ($program_id): RedirectResponse{
+        try{
+            ProgramApplication::where('program_id', $program_id)->where('attendee_id', Auth::user()->id)->delete();
+        }catch (\Exception $e){}
+
+        return redirect()->route('public-part.programs.preview-program', ['id' => $program_id]);
+    }
+    public function submitForScholarship ($program_id){
+        try{
+            ProgramApplication::where('program_id', $program_id)->where('attendee_id', Auth::user()->id)->update([
+                'status' => 'submitted'
+            ]);
+        }catch (\Exception $e){ return back(); }
+
+        return redirect()->route('public-part.programs.preview-program', ['id' => $program_id]);
     }
 }

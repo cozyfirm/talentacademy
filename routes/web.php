@@ -70,6 +70,9 @@ Route::prefix('')->group(function () {
         /* Apply for scholarship */
         Route::get ('/apply-for-scholarship/{id}',       [ProgramsController::class, 'applyForScholarship'])->name('public-part.programs.apply-for-scholarship');
         Route::post('/update-scholarship',               [ProgramsController::class, 'updateScholarship'])->name('public-part.programs.update-scholarship');
+
+        Route::get ('cancel-scholarship/{program_id}',       [ProgramsController::class, 'cancelScholarship'])->name('public-part.programs.cancel-scholarship');
+        Route::get ('submit-for-scholarship/{program_id}',   [ProgramsController::class, 'submitForScholarship'])->name('public-part.programs.submit-for-scholarship');
     });
 
     /*

@@ -39,6 +39,8 @@ return new class extends Migration
             $table->integer('motivation_letter')->nullable();
             $table->integer('other')->nullable();
 
+            $table->tinyInteger('checked')->default(false);
+
             $table->timestamps();
             $table->softDeletes();
         });

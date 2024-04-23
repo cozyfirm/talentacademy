@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use MongoDB\Driver\Session;
 
 /**
@@ -40,5 +41,12 @@ class Program extends Model{
 
     public function imageRel(): HasOne{
         return $this->hasOne(File::class, 'id', 'image_id');
+    }
+    public function isSubmitted(): bool{
+        try{
+            $submitted = ProgramApplication::where('program_id', $this->id)->where('attendee_id', Auth::user()->id)->first();
+            if(!$submitted) return false;
+            if($submitted->status == 'submitted') return true;
+        }catch (\Exception $e){ return false; }
     }
 }

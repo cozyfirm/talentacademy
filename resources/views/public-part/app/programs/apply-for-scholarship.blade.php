@@ -63,24 +63,24 @@
 
                 <div class="terms__and_conditions_w">
                     <div class="terms__and_conditions">
-                        <input class="form-check-input" type="checkbox" value="1" id="criteria" name="criteria">
+                        <input class="form-check-input" type="checkbox" value="1" id="criteria" @if($application->checked) checked @endif name="criteria">
                         <p>{{ __('Pročitao sam dokument') }} <a href="#">{{ __('Kriterij upisa') }}</a> </p>
                     </div>
                     <div class="terms__and_conditions">
-                        <input class="form-check-input" type="checkbox" value="1" name="privacy" id="privacy">
+                        <input class="form-check-input" type="checkbox" value="1" name="privacy" @if($application->checked) checked @endif id="privacy">
                         <p>{{ __('Prihvatam') }} <a href="#">{{ __('pravila privatnosti') }}</a> {{ __('talentakademija.ba') }} </p>
                     </div>
                 </div>
 
                 <div class="other__btns">
-                    <a href="{{ route('public-part.programs.preview-program', ['id' => $program->id ]) }}">
+                    <a href="{{ route('public-part.programs.cancel-scholarship', ['program_id' => $program->id ]) }}">
                         <div class="cancel_btn"><p>{{ __('Odustani') }}</p></div>
                     </a>
                     <button class="submit-btn">
                         <i class="fas fa-save"></i>
                         <p>{{ __('Sačuvaj izmjene') }}</p>
                     </button>
-                    <a href="#">
+                    <a href="{{ route('public-part.programs.submit-for-scholarship', ['program_id' => $program->id ]) }}">
                         <div class="send_app">
                             <i class="fas fa-envelope"></i>
                             <p>{{ __('Pošalji aplikaciju') }}</p>

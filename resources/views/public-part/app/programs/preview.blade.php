@@ -15,9 +15,15 @@
                 <p> {{ $program->description }} </p>
 
                 <div class="p__c_iw_buttons">
-                    <a href="{{ route('public-part.programs.apply-for-scholarship', ['id' => $program->id ]) }}">
-                        <button class="my-c-btn">{{ __('Apliciraj za stipendiju') }}</button>
-                    </a>
+                    @if($program->isSubmitted())
+                        <a href="#">
+                            <button class="my-c-btn">{{ __('Aplikacija poslana') }}</button>
+                        </a>
+                    @else
+                        <a href="{{ route('public-part.programs.apply-for-scholarship', ['id' => $program->id ]) }}">
+                            <button class="my-c-btn">{{ __('Apliciraj za stipendiju') }}</button>
+                        </a>
+                    @endif
                     {{--<a href="#">--}}
                     {{--    <button class="my-c-btn">{{ __('Više o programu') }}</button>--}}
                     {{--</a>--}}
