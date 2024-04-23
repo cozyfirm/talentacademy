@@ -16,31 +16,76 @@
                 <b>{{ $program->title }}</b>.
             </p>
 
-            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-            <p> {{ __('Svoju aplikaciju ili njene dijelove možeš čuvati u ovoj formi. Tvjoa finalna aplikacija će biti proslijeđena nama tek kada izaereš opciju "Pošalji aplikaciju".') }} </p>
+            <p> {{ __('Važno je da što detaljnije opišeš svoje odgovore u prijavi jer od toga u velikoj mjeri zavisi naša procjena tvog profila i potencijala. Detaljnje informacije koje pružiš pomoći će nam da bolje razumijemo tvoju motivaciju, iskustvo, očekivanja i ciljeve. Na temelju ovih odgovora odlučujemo o mogućnosti dodjele stipendije, stoga je ključno da svoje misli i ambicije izraziš na najbolji mogući način. ') }} </p>
+            <p> {{ __('Svoju aplikaciju ili njene dijelove možeš čuvati u ovoj formi. Tvpka finalna aplikacija će biti proslijeđena nama tek kada izabereš opciju "Pošalji aplikaciju".') }} </p>
 
-            <div class="apply__for_scholarship_textarea">
-                <label for="motivation">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
-                {{ html()->textarea('motivation')->class('form-control form-control-sm')->id('motivation')->placeholder('Maksimalno 250 riječi..')->value(isset($application) ? $application->motivation : '')->isReadonly(false) }}
-            </div>
-            <div class="apply__for_scholarship_textarea">
-                <label for="interests">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
-                {{ html()->textarea('interests')->class('form-control form-control-sm')->id('interests')->placeholder('Maksimalno 250 riječi..')->value(isset($application) ? $application->interests : '')->isReadonly(false) }}
-            </div>
-            <div class="apply__for_scholarship_textarea">
-                <label for="experience">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
-                {{ html()->textarea('experience')->class('form-control form-control-sm')->id('experience')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->experience : '')->isReadonly(false) }}
-            </div>
-            <div class="apply__for_scholarship_textarea">
-                <label for="expectations">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
-                {{ html()->textarea('expectations')->class('form-control form-control-sm')->id('expectations')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->expectations : '')->isReadonly(false) }}
-            </div>
-            <div class="apply__for_scholarship_textarea">
-                <label for="skills">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
-                {{ html()->textarea('skills')->class('form-control form-control-sm')->id('skills')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->skills : '')->isReadonly(false) }}
-            </div>
+            <form action="{{ route('system.admin.locations.update-image') }}" method="POST" enctype="multipart/form-data">
+                @csrf
 
+                <div class="apply__for_scholarship_textarea">
+                    <label for="motivation">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
+                    {{ html()->textarea('motivation')->class('form-control form-control-sm')->id('motivation')->placeholder('Maksimalno 250 riječi..')->value(isset($application) ? $application->motivation : '')->isReadonly(false) }}
+                </div>
+                <div class="apply__for_scholarship_textarea">
+                    <label for="interests">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
+                    {{ html()->textarea('interests')->class('form-control form-control-sm')->id('interests')->placeholder('Maksimalno 250 riječi..')->value(isset($application) ? $application->interests : '')->isReadonly(false) }}
+                </div>
+                <div class="apply__for_scholarship_textarea">
+                    <label for="experience">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
+                    {{ html()->textarea('experience')->class('form-control form-control-sm')->id('experience')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->experience : '')->isReadonly(false) }}
+                </div>
+                <div class="apply__for_scholarship_textarea">
+                    <label for="expectations">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
+                    {{ html()->textarea('expectations')->class('form-control form-control-sm')->id('expectations')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->expectations : '')->isReadonly(false) }}
+                </div>
+                <div class="apply__for_scholarship_textarea">
+                    <label for="skills">{{ __('Šta te motivisalo da se prijaviš na akademiju?') }}</label>
+                    {{ html()->textarea('skills')->class('form-control form-control-sm')->id('skills')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->skills : '')->isReadonly(false) }}
+                </div>
 
+                <div class="upload__file_wrapper">
+                    <label for="cv">{{ __('Upload CV') }}</label>
+                    <input name="cv" class="form-control form-control-sm mt-3 d-none" id="cv" type="file">
+                    <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
+                </div>
+                <div class="upload__file_wrapper">
+                    <label for="motivation_letter">{{ __('Motivacijsko pismo') }}</label>
+                    <input name="motivation_letter" class="form-control form-control-sm mt-3 d-none" id="motivation_letter" type="file">
+                    <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
+                </div>
+                <div class="upload__file_wrapper">
+                    <label for="other" title="{{ __('Ovo polje je opcionalno') }}">{{ __('Dodatni dokumenti ili primjeri rada') }}</label>
+                    <input name="other" class="form-control form-control-sm mt-3 d-none" id="other" type="file">
+                    <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
+                </div>
+
+                <div class="terms__and_conditions_w">
+                    <div class="terms__and_conditions">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <p>{{ __('Pročitao sam dokument') }} <a href="#">{{ __('Kriterij upisa') }}</a> </p>
+                    </div>
+                    <div class="terms__and_conditions">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <p>{{ __('Prihvatam') }} <a href="#">{{ __('pravila privatnosti') }}</a> {{ __('talentakademija.ba') }} </p>
+                    </div>
+                </div>
+
+                <div class="other__btns">
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => $program->id ]) }}">
+                        <div class="cancel_btn"><p>{{ __('Odustani') }}</p></div>
+                    </a>
+                    <button class="submit-btn">
+                        <i class="fas fa-save"></i>
+                        <p>{{ __('Sačuvaj izmjene') }}</p>
+                    </button>
+                    <a href="#">
+                        <div class="send_app">
+                            <i class="fas fa-envelope"></i>
+                            <p>{{ __('Pošalji aplikaciju') }}</p>
+                        </div>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 @endsection
