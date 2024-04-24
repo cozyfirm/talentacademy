@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\PublicPart;
 
 use App\Http\Controllers\Controller;
+use App\Models\Other\Blog\Blog;
 use App\Models\Programs\Program;
+use App\Models\Programs\ProgramSession;
 use App\Models\User;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\RedirectResponse;
@@ -33,8 +35,17 @@ class LecturersController extends Controller{
         return $this->getData($lecturers, $program_id);
     }
 
-    public function single_lecturer(): View{
-        return view($this->_path . 'single-lecturer');
+    public function single_lecturer($id, $date = null): View{
+        if($date){
+            $currentDay = ProgramSession::where('program_id', $id)->whereDate('date', $date)->orderBy('date')->first();
+        }else $currentDay = ProgramSession::where('program_id', $id)->orderBy('date')->first();
+
+        return view($this->_path . 'single-lecturer', [
+            'program' => Program::where('id', $id)->first(),
+            'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
+            'currentDay' => $currentDay,
+            'sessions' => [],
+        ]);
     }
 
     /**
