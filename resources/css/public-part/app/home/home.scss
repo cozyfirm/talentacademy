@@ -169,6 +169,11 @@
                 border-radius: 8px;
                 color: $primary;
                 border: 1px solid $primary;
+                transition: $transition;
+
+                &:hover {
+                    background-color: #333333;
+                }
             }
 
             .hero-section__bottom-section-learn-more {
@@ -347,6 +352,7 @@
                 border-radius: 30px;
                 border: 1px solid #000;
                 cursor: pointer;
+                transition: $transition;
 
                 &.program--1:hover {
                     background: #DAC0FB;
@@ -486,6 +492,12 @@
                 border-radius: 8px;
                 border: 1px solid $primary;
                 background: $primary;
+
+                transition: $transition;
+
+                &:hover {
+                    background: lighten($primary, 5%)
+                }
             }
         }
 
@@ -517,6 +529,11 @@
                 flex-shrink: 0;
                 align-self: stretch;
                 cursor: pointer;
+                transition: $transition;
+
+                &:hover {
+                    box-shadow: $box-shadow;
+                }
 
                 @media (max-width: $mobile-width) {
                     width: 100%;
@@ -628,6 +645,12 @@
                     border: 1px solid #000;
                     background: var(--Surface-and-accents-accent, $primary);
                     outline: unset;
+
+                    transition: $transition;
+
+                    &:hover {
+                        background: lighten($primary, 5%)
+                    }
                 }
             }
         }
@@ -723,11 +746,21 @@
                         line-height: 150%;
                         gap: 8px;
 
+                        transition: $transition;
+
+                        &:hover {
+                            background: lighten($primary, 5%)
+                        }
+
                         &.homepage-locations__list-item-button--outlined {
                             border-radius: 8px;
                             border: 1px solid $primary;
                             background: transparent;
                             color: $primary;
+
+                            &:hover {
+                                background: #333;
+                            }
                         }
                     }
                 }
@@ -756,6 +789,12 @@
                     border-radius: 8px;
                     border: 1px solid $primary;
                     background: $primary;
+
+                    transition: $transition;
+
+                    &:hover {
+                        background: lighten($primary, 5%)
+                    }
                 }
             }
 

@@ -28,6 +28,7 @@
             align-items: center;
             gap: 16px;
             width: 300px;
+            z-index: 9999;
 
             .header__auth-button {
                 display: flex;
@@ -38,16 +39,25 @@
                 gap: 8px;
                 border-radius: 8px;
                 cursor: pointer;
+                transition: $transition;
 
                 &.header__auth-button--outlined {
                     color: $primary;
                     border: 1px solid $primary;
+
+                    &:hover {
+                        background-color: #333333;
+                    }
                 }
 
                 &.header__auth-button--contained {
                     color: $dark;
                     background: $primary;
                     border: 1px solid $primary;
+
+                    &:hover {
+                        background-color: lighten($primary, 5%);
+                    }
                 }
             }
 

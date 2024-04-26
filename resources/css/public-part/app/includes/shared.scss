@@ -56,6 +56,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 500px;
+            max-height: 500px;
         }
 
         .how-to-apply__step-heading {
@@ -195,6 +197,7 @@
                 width: 100%;
                 padding: 20px 0;
                 border-top: 1px solid $dark;
+                cursor: pointer;
 
                 &:last-child {
                     border-bottom: 1px solid $dark;
@@ -324,6 +327,12 @@
                 border-radius: 8px;
                 border: 1px solid $primary;
                 background: $primary;
+
+                transition: $transition;
+
+                &:hover {
+                    background: lighten($primary, 5%)
+                }
             }
         }
     }
