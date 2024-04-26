@@ -28,6 +28,15 @@
             align-self: stretch;
         }
     }
+    @media (max-width: $mobile-width){
+        .single-lecturer__container{
+            flex-wrap: wrap;
+
+            img, .single-lecturer__featured-content{
+                width: 100%;
+            }
+        }
+    }
 
     .single-lecturer__featured-content {
         width: calc(50% - 32px);

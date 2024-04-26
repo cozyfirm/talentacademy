@@ -19,7 +19,7 @@ class LocationsController extends Controller{
     public function single_location($id): View{
         return view($this->_path . 'single-location', [
             'location' => Location::where('id', '=', $id)->first(),
-            'similarLocations' => Location::take(3)->get()
+            'similarLocations' => Location::inRandomOrder()->take(6)->get()
         ]);
     }
 }

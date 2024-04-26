@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static pluck(string $string, string $string1)
  * @method static get()
  * @method static take(int $int)
+ * @method static inRandomOrder()
  */
 class Location extends Model{
     use HasFactory;
