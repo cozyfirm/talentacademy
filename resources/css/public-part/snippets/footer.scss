@@ -8,7 +8,7 @@
     .footer__container {
         max-width: $container-width;
         width: 100%;
-        padding: 0 64px;
+        padding: 0 0px;
 
         @media (max-width: $container-width) {
             padding: 0 24px;
@@ -52,7 +52,7 @@
         }
 
         .footer__rest {
-            min-width: 400px;
+            min-width: 500px;
 
             .footer__rest-title {
                 font-size: 16px;
@@ -84,6 +84,13 @@
                     font-weight: 700;
                     line-height: 150%;
                     color: $text-white;
+                }
+            }
+
+            @media (max-width: $mobile-width){
+                min-width: auto; width: 100%;
+                .footer__british-embassy{
+                    min-width: auto; width: 100%;
                 }
             }
         }
