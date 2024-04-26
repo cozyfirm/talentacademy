@@ -22,6 +22,7 @@ import "./public-part/auth/auth.js";
 import "./public-part/core/menu.js";
 import "./public-part/core/grid-slider.js";
 import "./public-part/core/snippets-grid.js";
+import "./public-part/app/locations/locations-slider.js";
 
 /* Counter */
 import "./public-part/app/programs/counter.js";
@@ -45,3 +46,5 @@ import "./public-part/app/homepage/how-to-apply-slider.js";
 import "./public-part/app/homepage/faq.js";
 import "./public-part/app/blog/blog.js";
 import "./public-part/app/lecturers/lecturers.js";
+
+
