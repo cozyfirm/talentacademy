@@ -154,6 +154,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
      */
     Route::get ('/apply-for-scholarship',                   [PublicUserController::class, 'applyForScholarship'])->name('dashboard.apply-for-scholarship');
     Route::get ('/inbox',                                   [PublicUserController::class, 'inbox'])->name('dashboard.inbox');
+    Route::get ('/my-schedule',                             [PublicUserController::class, 'mySchedule'])->name('dashboard.my-schedule');
+    Route::get ('/my-schedule/{date}',                      [PublicUserController::class, 'mySchedule'])->name('dashboard.my-schedule-by-date');
 
     /* Sign out */
     Route::get ('/sign-out',                                [PublicUserController::class, 'signOut'])->name('dashboard.sing-out');

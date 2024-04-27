@@ -30,12 +30,14 @@
                     <p>{{ __('Inbox') }}</p>
                 </div>
             </a>
-            <a href="#">
-                <div class="inner__menu_links_link">
-                    <img src="{{ asset('files/images/public-part/raspored.png') }}" class="schedule" alt="">
-                    <p>{{ __('Raspored') }}</p>
-                </div>
-            </a>
+            @if(Auth()->user()->role == 'presenter' or (Auth()->user()->role == 'user' and Auth()->user()->myProgram()))
+                <a href="{{ route('dashboard.my-schedule') }}">
+                    <div class="inner__menu_links_link @if(Route::is('dashboard.my-schedule')) active @endif">
+                        <img src="{{ asset('files/images/public-part/raspored.png') }}" class="schedule" alt="">
+                        <p>{{ __('Raspored') }}</p>
+                    </div>
+                </a>
+            @endif
         </div>
     </div>
 </div>

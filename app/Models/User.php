@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Models\Core\Country;
+use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -83,5 +84,11 @@ class User extends Authenticatable{
     }
     public function sessionsRel(): HasMany{
         return $this->hasMany(ProgramSession::class, 'presenter_id', 'id');
+    }
+    public function myProgram(): bool{
+        try{
+            $app = ProgramApplication::where('attendee_id', $this->id)->where('app_status', 'accepted')->count();
+            return (bool)$app;
+        }catch (\Exception $e){ return false; }
     }
 }

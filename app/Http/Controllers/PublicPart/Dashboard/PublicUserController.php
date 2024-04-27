@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Models\Core\Country;
 use App\Models\Other\Inbox\InboxTo;
 use App\Models\Programs\Program;
+use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionFile;
 use App\Models\Programs\ProgramSessionLink;
@@ -188,6 +189,26 @@ class PublicUserController extends Controller{
     public function inbox(){
         return view($this->_path . 'user.inbox', [
             'messages' => InboxTo::where('to', Auth::user()->id)->get()
+        ]);
+    }
+    public function mySchedule($date = null): View | RedirectResponse{
+        if(Auth::user()->role == 'user'){
+            $app = ProgramApplication::where('app_status', 'accepted')->where('attendee_id', Auth::user()->id)->first();
+            $program = Program::where('id', $app->program_id)->first();
+
+            if($date){
+                $currentDay = ProgramSession::where('program_id', $app->program_id)->whereDate('date', $date)->orderBy('date')->first();
+            }else $currentDay = ProgramSession::where('program_id', $app->program_id)->orderBy('date')->first();
+
+            $sessions = ProgramSession::where('program_id', $program->id)->whereDate('date', $date ?? $currentDay->date)->get();
+        }else{
+
+        }
+
+        return view($this->_path . 'user.my-schedule', [
+            'program' => $program,
+            'sessions' => $sessions,
+            'currentDay' => $currentDay
         ]);
     }
 

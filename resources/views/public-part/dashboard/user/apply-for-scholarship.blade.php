@@ -19,7 +19,7 @@
                             <h5> {!! nl2br($program->description) !!} </h5>
 
                             <div class="buttons-wrapper">
-                                <a href="#">
+                                <a href="{{ route('public-part.programs.apply-for-scholarship', ['id' => $program->id ]) }}">
                                     <button class="my-c-btn">
                                         <img src="{{ asset('files/images/public-part/icon.png') }}" class="scholarship" alt="">
                                         {{ __('Apliciraj za stipendiju') }}
