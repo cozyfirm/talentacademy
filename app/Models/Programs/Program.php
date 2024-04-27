@@ -55,4 +55,12 @@ class Program extends Model{
             if($submitted->status == 'submitted') return true;
         }catch (\Exception $e){ return false; }
     }
+    public function acceptedStatus(): string{
+        try{
+            $submitted = ProgramApplication::where('program_id', $this->id)->where('attendee_id', Auth::user()->id)->first();
+
+            if(!$submitted) return "not-submitted";
+            else return $submitted->app_status;
+        }catch (\Exception $e){  return "not-submitted"; }
+    }
 }

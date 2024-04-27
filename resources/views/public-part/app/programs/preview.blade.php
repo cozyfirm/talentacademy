@@ -16,9 +16,19 @@
 
                 <div class="p__c_iw_buttons">
                     @if($program->isSubmitted())
-                        <a href="#">
-                            <button class="my-c-btn">{{ __('Aplikacija poslana') }}</button>
-                        </a>
+                        @if($program->acceptedStatus() == 'in_queue')
+                            <a href="#">
+                                <button class="my-c-btn">{{ __('Aplikacija poslana') }}</button>
+                            </a>
+                        @elseif($program->acceptedStatus() == 'accepted')
+                            <a href="#">
+                                <button class="my-c-btn">{{ __('Aplikacija prihvaćena') }}</button>
+                            </a>
+                        @else
+                            <a href="#">
+                                <button class="my-c-btn">{{ __('Aplikacija odbijena') }}</button>
+                            </a>
+                        @endif
                     @else
                         <a href="{{ route('public-part.programs.apply-for-scholarship', ['id' => $program->id ]) }}">
                             <button class="my-c-btn">{{ __('Apliciraj za stipendiju') }}</button>
@@ -69,10 +79,22 @@
             </div>
 
             <div class="counter__btn">
-                <a href="#">
+            <a href="@if(!$program->isSubmitted()) {{ route('public-part.programs.apply-for-scholarship', ['id' => $program->id ]) }} @else # @endif">
                     <button class="app_btn">
                         <img src="{{ asset('files/images/public-part/app-btn.png') }}" alt="">
-                        <p>{{ __('Apliciraj za stipendiju') }}</p>
+                        @if($program->isSubmitted())
+                            @if($program->acceptedStatus() == 'in_queue')
+                                <p>{{ __('Aplikacija poslana') }}</p>
+                            @elseif($program->acceptedStatus() == 'accepted')
+                                <p>{{ __('Aplikacija prihvaćena') }}</p>
+                            @else
+                                <p>{{ __('Aplikacija odbijena') }}</p>
+                            @endif
+                        @else
+                            <p>{{ __('Apliciraj za stipendiju') }}</p>
+                        @endif
+
+
                     </button>
                 </a>
             </div>
