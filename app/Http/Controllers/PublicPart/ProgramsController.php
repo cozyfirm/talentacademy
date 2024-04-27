@@ -13,17 +13,21 @@ use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ProgramsController extends Controller{
     use ResponseTrait, FileTrait;
     protected string $_path = 'public-part.app.programs.';
+    protected int $_pages = 6;
 
     public function getSessionsByDate($program_id, $date){
         return ProgramSession::where('program_id', $program_id)->whereDate('date', $date)->get();
     }
-    public function preview($id, $date = null): View{
+    public function preview($id, $date = null): View | RedirectResponse{
+        if(!Auth::check()) return redirect()->route('public-part.programs.sneak-and-peak', ['id' => $id, 'page' => 1]);
+
         if($date){
             $currentDay = ProgramSession::where('program_id', $id)->whereDate('date', $date)->orderBy('date')->first();
         }else $currentDay = ProgramSession::where('program_id', $id)->orderBy('date')->first();
@@ -32,8 +36,36 @@ class ProgramsController extends Controller{
             'program' => Program::where('id', $id)->first(),
             'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
             'currentDay' => $currentDay,
-            'sessions' => $this->getSessionsByDate($id, $date ?? $currentDay->date)
+            'sessions' => $this->getSessionsByDate($id, $date ?? $currentDay->date),
+            // 'offlineSessions' => $offlineSessions
         ]);
+    }
+    public function sneakAndPeak($id, $page = 1): View{
+        // Make sure that you call the static method currentPageResolver()
+        // before querying users
+        Paginator::currentPageResolver(function () use ($page) {
+            return $page;
+        });
+        $offlineSessions = ProgramSession::where('program_id', $id)->where('public', 1)->paginate($this->_pages);
+
+        return view($this->_path . 'preview', [
+            'program' => Program::where('id', $id)->first(),
+            'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
+            'offlineSessions' => $offlineSessions
+        ]);
+    }
+    public function fetchSessions(Request $request){
+        try{
+            $currentPage = 2;
+            Paginator::currentPageResolver(function () use ($request) {
+                return $request->page;
+            });
+            $offlineSessions = ProgramSession::where('program_id', $request->program)->paginate($this->_pages)->toArray();
+
+            return $this->jsonResponse('0000', __('Bilješka obrisana!'), $offlineSessions);
+        }catch (\Exception $e){
+            return $this->jsonResponse('1200', __('Desila se greška'));
+        }
     }
     public function preview_session($id): View{
         $session = ProgramSession::where('id', $id)->first();

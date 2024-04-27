@@ -1,40 +1,43 @@
 <div class="program__timeline program__timeline_{{ $program->id }}">
-    <div class="program__timeline-section dark">
-        <div class="program__timeline-container">
-            <div class="program__timeline-top">
-                <div class="program__timeline-top-left">
-                    <div class="program__timeline-top-left-category">
-                        {{ $program->title }}
+    <div class="program__timeline__sessions_sticky sticky">
+        <div class="program__timeline-section dark">
+            <div class="program__timeline-container">
+                <div class="program__timeline-top">
+                    <div class="program__timeline-top-left">
+                        <div class="program__timeline-top-left-category">
+                            {{ $program->title }}
+                        </div>
+                        <div class="program__timeline-top-left-title">
+                            {{ __('Program') }}
+                        </div>
                     </div>
-                    <div class="program__timeline-top-left-title">
-                        {{ __('Program') }}
-                    </div>
-                </div>
-                <div class="program__timeline-top-right">
-                    @foreach($program->uniqueDateSessions() as $dates)
-                        <a href="{{ route('public-part.programs.preview-program-date', ['id' => $program->id, 'date' => $dates->date]) }}">
-                            <div class="program__timeline-top-right-day">
-                                <div class="program__timeline-top-right-day-number @if($currentDay->date == $dates->date) active @endif">
-                                    {{ $dates->getDay() }}
+                    <div class="program__timeline-top-right">
+                        @foreach($program->uniqueDateSessions() as $dates)
+                            <a href="{{ route('public-part.programs.preview-program-date', ['id' => $program->id, 'date' => $dates->date]) }}">
+                                <div class="program__timeline-top-right-day">
+                                    <div class="program__timeline-top-right-day-number @if($currentDay->date == $dates->date) active @endif">
+                                        {{ $dates->getDay() }}
+                                    </div>
+                                    <div class="program__timeline-top-right-day-text @if($currentDay->date == $dates->date) active @endif">{{ $dates->getWeekDay() }}</div>
                                 </div>
-                                <div class="program__timeline-top-right-day-text @if($currentDay->date == $dates->date) active @endif">{{ $dates->getWeekDay() }}</div>
-                            </div>
-                        </a>
-                    @endforeach
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="program__timeline-section sticky">
+            <div class="program__timeline-container">
+                <div class="program__timeline-header">
+                    <h3 class="program__timeline-header-title">Dan {{ $currentDay->getDayInOrder() }}</h3>
+                    <div class="program__timeline-header-date">
+                        {{ $currentDay->getFullWeekDay() }}, {{ $currentDay->date() }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="program__timeline-section sticky">
-        <div class="program__timeline-container">
-            <div class="program__timeline-header">
-                <h3 class="program__timeline-header-title">Dan {{ $currentDay->getDayInOrder() }}</h3>
-                <div class="program__timeline-header-date">
-                    {{ $currentDay->getFullWeekDay() }}, {{ $currentDay->date() }}
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="program__timeline-section">
         <div class="program__timeline-container">
             <div class="program__timeline-items">
@@ -57,14 +60,16 @@
                             <a href="{{ route('public-part.programs.preview-session', ['id' => $session->id]) }}">
                                 <h2 class="program__timeline-item-right-title"> {{ $session->title }} </h2>
                             </a>
-                            <div class="program__timeline-item-right-item">
-                                <div class="program__timeline-item-right-item-icon">
-                                    <img src="{{ asset('files/images/svg-icons/program-item-icon-name.svg') }}" alt="">
+                            @if($session->presenter_id)
+                                <div class="program__timeline-item-right-item">
+                                    <div class="program__timeline-item-right-item-icon">
+                                        <img src="{{ asset('files/images/svg-icons/program-item-icon-name.svg') }}" alt="">
+                                    </div>
+                                    <div class="program__timeline-item-right-item-text">
+                                        {{ $session->presenterRel->name ?? '' }}
+                                    </div>
                                 </div>
-                                <div class="program__timeline-item-right-item-text">
-                                    {{ $session->presenterRel->name ?? '' }}
-                                </div>
-                            </div>
+                            @endif
                             <div class="program__timeline-item-right-item">
                                 <div class="program__timeline-item-right-item-icon">
                                     <img src="{{ asset('files/images/svg-icons/program-item-icon-location.svg') }}" alt="">

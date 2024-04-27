@@ -27,6 +27,7 @@ import "./public-part/app/locations/locations-slider.js";
 /* Counter */
 import "./public-part/app/programs/counter.js";
 import "./public-part/app/programs/sessions.js";
+import "./public-part/app/programs/offline-sessions.js";
 /* Contact -us */
 import "./public-part/app/contact-us/send-us-a-message.js";
 

@@ -87,10 +87,16 @@
                     </div>
 
                     <div class="row mt-3">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Datum'))->for('date')->class('bold') }}
                                 {{ html()->text('date')->class('form-control form-control-sm mt-1 datepicker')->required()->value((isset($session) ? $session->date() : ''))->placeholder('10.08.2024')->isReadonly(isset($preview)) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ html()->label(__('Javno'))->for('public')->class('bold') }}
+                                {{ html()->select('public', ['0' => 'Ne', '1' => 'Da'], isset($session) ? $session->public : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
                             </div>
                         </div>
                     </div>
@@ -105,7 +111,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Predavač'))->for('presenter_id')->class('bold') }}
-                                {{ html()->select('presenter_id', $presenters, isset($session) ? $session->presenter_id : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
+                                {{ html()->select('presenter_id', $presenters, isset($session) ? $session->presenter_id : '')->class('form-control form-control-sm mt-1')->disabled(isset($preview)) }}
                             </div>
                         </div>
                     </div>

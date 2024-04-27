@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('time_to', 10);
             $table->string('duration', 20);
             $table->date('date');
+            $table->tinyInteger('public')->default(0);
 
             $table->unsignedBigInteger('location_id');
             $table->foreign('location_id')

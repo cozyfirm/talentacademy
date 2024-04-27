@@ -39,7 +39,6 @@ class LecturersController extends Controller{
         $lecturer = User::where('id', $id)->first();
         if($lecturer->role != 'presenter') return redirect()->route('public-part.home');
 
-
         if($date){
             $currentDay = ProgramSession::where('program_id', $id)->whereDate('date', $date)->orderBy('date')->first();
         }else $currentDay = ProgramSession::where('program_id', $id)->orderBy('date')->first();
@@ -48,7 +47,7 @@ class LecturersController extends Controller{
             'program' => Program::where('id', $id)->first(),
             'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
             'currentDay' => $currentDay,
-            'sessions' => ProgramSession::where('presenter_id', $id)->get(),
+            'sessions' => ProgramSession::where('presenter_id', $id)->where('date', $currentDay->date)->get(),
             'lecturer' => $lecturer
         ]);
     }

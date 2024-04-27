@@ -30,13 +30,19 @@ class Program extends Model{
         /*
          *  First, let's extract sessions
          */
-        return ProgramSession::where('program_id', $this->id)->get()->unique('presenter_id');
+        return ProgramSession::where('program_id', $this->id)->where('presenter_id', '!=', 0)->where('presenter_id', '!=', null)->get()->unique('presenter_id');
     }
     public function uniqueDateSessions(): Collection{
         /*
          *  First, let's extract sessions
          */
         return ProgramSession::where('program_id', $this->id)->orderBy('date')->get()->unique('date');
+    }
+    public function uniqueLecturerDateSessions($presenter_id): Collection{
+        /*
+         *  First, let's extract sessions
+         */
+        return ProgramSession::where('program_id', $this->id)->where('presenter_id', $presenter_id)->orderBy('date')->get()->unique('date');
     }
 
     public function imageRel(): HasOne{

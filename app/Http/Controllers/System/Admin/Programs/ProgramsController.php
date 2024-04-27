@@ -126,7 +126,7 @@ class ProgramsController extends Controller{
             'program' => Program::where('id', $program_id)->first(),
             'types' => $this->_session_types,
             'locations' => Location::pluck('title', 'id'),
-            'presenters' => User::where('role', 'presenter')->pluck('name', 'id'),
+            'presenters' => User::where('role', 'presenter')->pluck('name', 'id')->prepend('Bez predavača', 0),
             'timeArr' => self::formTimeArr()
         ]);
     }
@@ -151,7 +151,7 @@ class ProgramsController extends Controller{
             'program' => $program,
             'types' => $this->_session_types,
             'locations' => Location::pluck('title', 'id'),
-            'presenters' => User::where('role', 'presenter')->pluck('name', 'id'),
+            'presenters' => User::where('role', 'presenter')->pluck('name', 'id')->prepend('Bez predavača', 0),
             'session' => $session,
             'timeArr' => self::formTimeArr()
         ]);
@@ -165,7 +165,7 @@ class ProgramsController extends Controller{
             'program' => $program,
             'types' => $this->_session_types,
             'locations' => Location::pluck('title', 'id'),
-            'presenters' => User::where('role', 'presenter')->pluck('name', 'id'),
+            'presenters' => User::where('role', 'presenter')->pluck('name', 'id')->prepend('Bez predavača', 0),
             'session' => $session,
             'timeArr' => self::formTimeArr()
         ]);

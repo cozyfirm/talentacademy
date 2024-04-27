@@ -487,6 +487,13 @@
         }
     }
 
+    .program__timeline__sessions_sticky{
+        &.sticky {
+            position: sticky;
+            top: 0;
+        }
+    }
+
     .program__timeline-section {
         width: 100%;
         display: flex;
@@ -635,7 +642,7 @@
         }
 
         .program__timeline-item-left {
-            width: 362px;
+            width: 300px;
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;
@@ -684,6 +691,7 @@
             }
         }
         .program__timeline-item-right {
+            width: calc(100% - 0px);
             .program__timeline-item-right-title {
                 font-size: 40px;
                 font-style: normal;
@@ -703,13 +711,13 @@
                     font-weight: 700;
                     line-height: 140%;
                 }
-
-                .program__timeline-item-right-description {
-                    font-size: 20px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 150%;
-                }
+            }
+            .program__timeline-item-right-description {
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 150%;
+                margin-top: 16px;
             }
         }
     }
