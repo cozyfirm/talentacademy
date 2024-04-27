@@ -158,3 +158,135 @@
         }
     }
 }
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $dark;
+    height: 100%;
+    width: 100%;
+    z-index: 99999999;
+    transform: translateX(100%);
+    transition: $transition;
+    overflow-y: auto;
+
+    &.mobile-menu--visible {
+        transform: translateX(0);
+    }
+
+    .mobile-menu__header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+        padding: 32px;
+
+        img {
+            cursor: pointer;
+        }
+    }
+
+    .mobile-menu__content {
+        padding: 32px;
+        padding-top: 0;
+
+        .mobile-menu__content-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 150%;
+            cursor: pointer;
+            transition: $transition;
+            color: #ffffff;
+            margin: 16px 0;
+
+            &:hover {
+                color: $primary;
+            }
+
+            .rotate {
+                transform: rotate(180deg);
+            }
+        }
+
+        .mobile-menu__submenu {
+            display: none;
+
+            &.mobile-menu__submenu--visible {
+                display: block;
+            }
+
+            .mobile-menu__submenu-item {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 150%;
+                color: $text-white;
+                gap: 16px;
+                margin-bottom: 16px;
+
+                img {
+                    min-width: 32px;
+                    max-width: 32px;
+                }
+
+                p {
+                    margin: unset;
+                }
+
+                &:hover {
+                    color: $primary;
+                }
+            }
+        }
+
+        .mobile-menu__auth-buttons {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 32px;
+            gap: 16px;
+            width: 300px;
+            z-index: 9999;
+
+            .header__auth-button {
+                display: flex;
+                height: 37px;
+                padding: 8px 23px;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: $transition;
+
+                &.header__auth-button--outlined {
+                    color: $primary;
+                    border: 1px solid $primary;
+
+                    &:hover {
+                        background-color: #333333;
+                    }
+                }
+
+                &.header__auth-button--contained {
+                    color: $dark;
+                    background: $primary;
+                    border: 1px solid $primary;
+
+                    &:hover {
+                        background-color: lighten($primary, 5%);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -48,4 +48,7 @@ import "./public-part/app/homepage/faq.js";
 import "./public-part/app/blog/blog.js";
 import "./public-part/app/lecturers/lecturers.js";
 
+/* Mobile menu */
+import "./public-part/core/menu.js";
+
 
