@@ -202,7 +202,14 @@ class PublicUserController extends Controller{
 
             $sessions = ProgramSession::where('program_id', $program->id)->whereDate('date', $date ?? $currentDay->date)->get();
         }else{
+            $session  = ProgramSession::where('presenter_id', Auth::user()->id)->first();
+            $program = Program::where('id', $session->program_id)->first();
 
+            if($date){
+                $currentDay = ProgramSession::where('presenter_id', Auth::user()->id)->whereDate('date', $date)->orderBy('date')->first();
+            }else $currentDay = ProgramSession::where('presenter_id', Auth::user()->id)->orderBy('date')->first();
+
+            $sessions = ProgramSession::where('program_id', $program->id)->where('presenter_id', Auth::user()->id)->whereDate('date', $date ?? $currentDay->date)->get();
         }
 
         return view($this->_path . 'user.my-schedule', [
