@@ -37,8 +37,16 @@
             gap: 32px;
             margin-bottom: 64px;
 
+            @media (max-width: 720px) {
+                flex-direction: column;
+            }
+
             .single-location__content-left {
                 min-width: 208px;
+
+                @media (max-width: 720px) {
+                    width: 100%;
+                }
 
                 .single-location__content-left-address {
                     color: $primary;
