@@ -62,5 +62,8 @@ $(document).ready(function (){
         if(!isLocationMoved) window.location.href = $(this).attr('uri');
     });
 
+    $('.locations__map-toggle-icon-container').click(function(){
+        $(this).parent().find('.locations__list-item-map').toggleClass('locations__list-item-map--opened');
+    });
 });
 

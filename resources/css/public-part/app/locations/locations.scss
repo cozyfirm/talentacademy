@@ -56,6 +56,10 @@
                 border-radius: 16px;
                 border: 1px solid $text-white;
                 overflow: hidden;
+
+                @media (max-width: 900px) {
+                    width: 100%;
+                }
             }
 
             .locations__list-image {
@@ -120,6 +124,7 @@
                 width: 100%;
                 object-fit: cover;
                 object-position: center;
+                transition: $transition;
 
                 &.locations__list-item-map--opened {
                     height: 553px;

@@ -28,7 +28,7 @@
                                 {{ __('Lokacija') }}
                             </a>
                         </div>
-                        <img src="{{ asset('files/images/public-part/locations/' . $location->map_img ) }}" class="locations__list-item-map @if($location === 1) locations__list-item-map--opened @endif">
+                        <img src="{{ asset('files/images/public-part/locations/' . $location->map_img ) }}" class="locations__list-item-map">
                         <div class="locations__map-toggle-icon-container">
                             <img src="{{ asset('files/images/svg-icons/exit-fullscreen.svg') }}" class="locations__map-toggle-icon">
                         </div>
