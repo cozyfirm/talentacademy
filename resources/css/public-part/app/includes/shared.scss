@@ -254,11 +254,9 @@
         .contact__title {
             font-size: 56px; font-style: normal; font-weight: 500; line-height: 120%; color: $text-white;
         }
-
         .contact__description {
             font-size: 16px; font-style: normal; font-weight: 400; line-height: 150%; color: $primary;
         }
-
         .contact__form {
             max-width: 816px;
             width: 100%;
@@ -275,7 +273,7 @@
                 justify-content: flex-start;
                 align-items: flex-start;
                 flex-direction: column;
-                gap: 4px;
+                //gap: 4px;
 
                 @media (max-width: $mobile-width) {
                     width: 100%;
@@ -293,22 +291,28 @@
                     height: 35px;
                     width: 100%;
                     border-radius: 8px;
-                    border: 1px solid rgba(238,240,242, 0.5);
-                    background: rgba(238, 240, 242, 0.20);
+                    border: 1px solid rgba(238,240,242, 0.2);
+                    background: rgba(255, 255, 255, 0.10);
                     font-size: 14px;
                     font-style: normal;
                     font-weight: 300;
                     line-height: 150%;
                     padding: 6px 12px;
                     color: #EEF0F2;
+                    outline: none;
+
+                    option{
+                        background-color: #201F1A;
+                    }
                 }
             }
+            .contact__form-input-container-2{width: 100%;}
             .contact__form-textarea {
                 height: 300px;
                 width: 100%;
                 border-radius: 8px;
-                border: 1px solid rgba(238,240,242, 0.5);
-                background: rgba(238, 240, 242, 0.20);
+                border: 1px solid rgba(238,240,242, 0.2);
+                background: rgba(255, 255, 255, 0.10);
                 padding: 16px 10px;
                 font-size: 14px;
                 font-style: normal;
@@ -316,6 +320,7 @@
                 line-height: 150%;
                 color: $text-white;
                 resize: none;
+                outline: none;
             }
             .contact__form-button {
                 margin: 0 auto;
@@ -349,12 +354,12 @@
                     color: $dark;
                 }
                 .contact__form-input{
-                    border: 1px solid var(--text-text-secondary, $dark);
+                    border: 1px solid rgba(0,0,0,0.2);
                     color: $dark;
                 }
             }
             .contact__form-textarea{
-                border: 1px solid var(--text-text-secondary, $dark);
+                border: 1px solid rgba(0,0,0,0.2);
                 color: $dark;
             }
         }
@@ -364,25 +369,31 @@
 /* Define different classes for different programs */
 .cu_1{
     background: $p1_bcg;
+    .contact__container{ .contact__form{ .contact__form-input-container{ .contact__form-input{ option{ background-color: $p1_bcg; } } } }  }
     .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p1_pac; } } }
 }
 .cu_2{
     background: $p2_bcg;
+    .contact__container{ .contact__form{ .contact__form-input-container{ .contact__form-input{ option{ background-color: $p2_bcg; } } } }  }
     .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p2_pac; } } }
 }
 .cu_3{
     background: $p3_bcg;
+    .contact__container{ .contact__form{ .contact__form-input-container{ .contact__form-input{ option{ background-color: $p3_bcg; } } } }  }
     .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p3_pac; } } }
 }
 .cu_4{
     background: $p4_bcg;
+    .contact__container{ .contact__form{ .contact__form-input-container{ .contact__form-input{ option{ background-color: $p4_bcg; } } } }  }
     .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p4_pac; } } }
 }
 .cu_5{
     background: $p5_bcg;
+    .contact__container{ .contact__form{ .contact__form-input-container{ .contact__form-input{ option{ background-color: $p5_bcg; } } } }  }
     .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p5_pac; } } }
 }
 .cu_6{
     background: $p6_bcg;
+    .contact__container{ .contact__form{ .contact__form-input-container{ .contact__form-input{ option{ background-color: $p6_bcg; } } } }  }
     .contact__container{ .contact__form{ .contact__form-button{ border: 1px solid $dark; background: $p6_pac; } } }
 }

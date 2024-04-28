@@ -7,15 +7,15 @@
             <input type="text" class="contact__form-input" id="contact__form-name" maxlength="50" placeholder="{{ __('Tvoje ime...') }}" />
         </div>
         <div class="contact__form-input-container">
-            <label for="name" class="contact__form-label">{{ __('Prezime') }}</label>
+            <label for="contact__form-surname" class="contact__form-label">{{ __('Prezime') }}</label>
             <input type="text" class="contact__form-input" id="contact__form-surname" maxlength="50" placeholder="{{ __('Tvoje prezime...') }}" />
         </div>
         <div class="contact__form-input-container">
-            <label for="name" class="contact__form-label">{{ __('Mail') }}</label>
+            <label for="contact__form-email" class="contact__form-label">{{ __('Mail') }}</label>
             <input type="email" class="contact__form-input" id="contact__form-email" maxlength="50" placeholder="{{ __('Tvoja email adresa...') }}" />
         </div>
         <div class="contact__form-input-container">
-            <label for="name" class="contact__form-label">{{ __('Program') }}</label>
+            <label for="contact__form-program" class="contact__form-label">{{ __('Program') }}</label>
             <select class="contact__form-input" id="contact__form-program">
                 <option value="Pisanje za 21. stoljeće">{{ __('Pisanje za 21. stoljeće') }}</option>
                 <option value="Novinarstvo i društvene mreže">{{ __('Novinarstvo i društvene mreže') }}</option>
@@ -25,7 +25,11 @@
                 <option value="Angažovani rad  i kritičko razmišljanje">{{ __('Angažovani rad  i kritičko razmišljanje') }}</option>
             </select>
         </div>
-        <textarea class="contact__form-textarea" id="contact__form-message" maxlength="600" placeholder="{{ __('Tvoja poruka...') }}"></textarea>
+        <div class="contact__form-input-container contact__form-input-container-2">
+            <label for="contact__form-message" class="contact__form-label">{{ __('Poruka') }}</label>
+            <textarea class="contact__form-textarea" id="contact__form-message" maxlength="600" placeholder="{{ __('Tvoja poruka...') }}"></textarea>
+        </div>
+
         <button class="contact__form-button">{{ __('Pošalji') }}</button>
     </form>
 </div>

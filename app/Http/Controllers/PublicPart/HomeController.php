@@ -23,4 +23,34 @@ class HomeController extends Controller{
             'page' => SinglePage::where('id', 1)->first()
         ]);
     }
+    public function aboutUs (){
+        return view($this->_path . 'single-page', [
+            'page' => SinglePage::where('id', 2)->first()
+        ]);
+    }
+    public function howToApply (){
+        return view($this->_path . 'single-page', [
+            'page' => SinglePage::where('id', 3)->first()
+        ]);
+    }
+    public function hotToReachUs (){
+        return view($this->_path . 'single-page', [
+            'page' => SinglePage::where('id', 4)->first()
+        ]);
+    }
+    public function privacy (){
+        return view($this->_path . 'single-page', [
+            'page' => SinglePage::where('id', 5)->first()
+        ]);
+    }
+    public function terms (){
+        return view($this->_path . 'single-page', [
+            'page' => SinglePage::where('id', 6)->first()
+        ]);
+    }
+    public function cookies (){
+        return view($this->_path . 'single-page', [
+            'page' => SinglePage::where('id', 7)->first()
+        ]);
+    }
 }

@@ -17,7 +17,7 @@
         .footer__upper {
             width: 100%;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: flex-start;
             gap: 32px;
             padding: 64px 0;
@@ -28,31 +28,43 @@
             }
         }
 
-        .footer__nav {
-            width: fit-content;
-            min-width: 200px;
+        .footer__links{
+            display: inline-flex; justify-content: space-between;
+            gap: 64px;
 
-            .footer__nav-title {
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: 150%;
-                color: $text-white;
-            }
+            .footer__nav {
+                //width: fit-content;
+                //min-width: 200px;
 
-            .footer__nav-link {
-                display: block;
-                font-size: 14px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 150%;
-                color: $text-white;
-                padding: 8px 0;
+                .footer__nav-title {
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 150%;
+                    color: $text-white;
+                }
+
+                .footer__nav-link {
+                    display: block;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 150%;
+                    color: $text-white;
+                    padding: 8px 0;
+                }
             }
         }
-
+        @media (max-width: $mobile-width){
+            .footer__links{
+                flex-wrap: wrap;
+                .footer__nav{
+                    width: 100%;
+                }
+            }
+        }
         .footer__rest {
-            min-width: 500px;
+            width: 500px;
 
             .footer__rest-title {
                 font-size: 16px;

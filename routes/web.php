@@ -120,6 +120,13 @@ Route::prefix('')->group(function () {
      *  Other single pages
      */
     Route::get ('/scholarship',                              [HomepageController::class, 'scholarship'])->name('public-part.scholarship');
+    Route::get ('/how-to-apply',                             [HomepageController::class, 'howToApply'])->name('public-part.how-to-apply');
+    Route::get ('/about-us',                                 [HomepageController::class, 'aboutUs'])->name('public-part.about-us');
+    Route::get ('/how-to-reach-us',                          [HomepageController::class, 'hotToReachUs'])->name('public-part.how-to-reach-us');
+
+    Route::get ('/privacy-policy',                           [HomepageController::class, 'privacy'])->name('public-part.privacy');
+    Route::get ('/terms-and-conditions',                     [HomepageController::class, 'terms'])->name('public-part.terms');
+    Route::get ('/cookies',                                  [HomepageController::class, 'cookies'])->name('public-part.cookies');
 });
 
 /**

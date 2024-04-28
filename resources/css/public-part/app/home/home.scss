@@ -8,6 +8,7 @@
     .hero-section__container {
         width: 100%;
         max-width: $container-width;
+        //height: calc(100vh - 90px);
 
         @media (max-width: $container-width) {
             padding: 0 24px;
@@ -74,7 +75,7 @@
         }
 
         .hero-section__arrows {
-            padding: 68px 0;
+            padding: 64px 0px 16px 0px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -338,9 +339,10 @@
             gap: 32px;
             flex-shrink: 0;
             margin-top: 32px;
+            align-items: stretch;
 
             .programs__program {
-                height: 450px;
+                //height: 450px;
                 position: relative;
                 width: calc(33.33% - 22px);
                 padding: 32px;
@@ -348,34 +350,53 @@
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
-                background: #EEF0F2;
+                background: $dark;
                 border-radius: 30px;
-                border: 1px solid #000;
                 cursor: pointer;
                 transition: $transition;
+                border:1px solid rgba(231,231,231,0.5);
+                color:$white;
 
-                &.program--1:hover {
-                    background: #DAC0FB;
-                }
+                //svg{
+                //    .vector-icon{
+                //        color: $white !important;
+                //    }
+                //}
+                //&.program--1:hover {
+                //    background: #DAC0FB;
+                //}
+                //
+                //&.program--2:hover {
+                //    background: #757BF6;
+                //}
+                //
+                //&.program--3:hover {
+                //    background: #DBFF8F;
+                //}
+                //
+                //&.program--4:hover {
+                //    background: #0E8C80;
+                //}
+                //
+                //&.program--5:hover {
+                //    background: #F45B69;
+                //}
+                //
+                //&.program--6:hover {
+                //    background: #DAC0FB;
+                //}
 
-                &.program--2:hover {
-                    background: #757BF6;
-                }
-
-                &.program--3:hover {
-                    background: #DBFF8F;
-                }
-
-                &.program--4:hover {
-                    background: #0E8C80;
-                }
-
-                &.program--5:hover {
-                    background: #F45B69;
-                }
-
-                &.program--6:hover {
-                    background: #DAC0FB;
+                .programs__program_h{
+                    width: 100%; display: flex; flex-direction: row; justify-content: space-between; gap: 16px;
+                    h4{
+                        color:$white; text-align: left; font-weight: 300; font-size: 32px;
+                    }
+                    svg{
+                        width: 26px; height: 24px;
+                    }
+                    img{
+                        width: 26px; height: 24px; top: 0px; margin-top: 0px;
+                    }
                 }
 
                 @media (max-width: 900px) {
@@ -410,22 +431,23 @@
                     }
                 }
 
-                .programs__program-heading {
-                    font-size: 32px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 130%;
-                    text-align: center;
-                }
+                //.programs__program-heading {
+                //    font-size: 32px;
+                //    font-style: normal;
+                //    font-weight: 700;
+                //    line-height: 130%;
+                //    text-align: center;
+                //}
 
                 .programs__program-image {
-                    margin-top: 50px;
+                    margin-top: 50px;  height: 350px;
                 }
 
                 .programs__program-icon {
-                    position: absolute;
-                    top: 32px;
-                    right: 32px;
+                    //position: absolute;
+                    //top: 32px;
+                    //right: 32px;
+                    // width: 26px !important; height: 24px!important;
                 }
             }
         }
@@ -540,7 +562,7 @@
                 }
 
                 .news__list-item-image {
-                    width: 100%;
+                    object-fit: cover; width: 100%; min-height: 427px;
                 }
 
                 .news__list-item-info {

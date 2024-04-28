@@ -76,6 +76,9 @@
                     }
                 }
             }
+            .single_location:last-child{
+                margin-right: 0px;
+            }
             @media (max-width: $mobile-width) {
                 .single_location{
                     width: 100%;

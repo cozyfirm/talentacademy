@@ -4,28 +4,31 @@
             <a href="#" class="footer__logo">
                 <img src="{{ asset('files/images/public-part/logo.svg') }}" alt="Logo">
             </a>
-            <div class="footer__nav">
-                <div class="footer__nav-title">Programi</div>
-                <a href="#" class="footer__nav-link">Novinarstvo i društvene mreže</a>
-                <a href="#" class="footer__nav-link">Pisanje za 21. stoljeće</a>
-                <a href="#" class="footer__nav-link">Odgovorno kodiranje i Civic Tech</a>
-                <a href="#" class="footer__nav-link">Grafički dizajn i animacija</a>
-                <a href="#" class="footer__nav-link">Primijenjena muzička produkcija</a>
-            </div>
-            <div class="footer__nav">
-                <div class="footer__nav-title">Resursi</div>
-                <a href="#" class="footer__nav-link">Kako aplicirati</a>
-                <a href="#" class="footer__nav-link">Stipendija</a>
-                <a href="#" class="footer__nav-link">Predavači</a>
-                <a href="#" class="footer__nav-link">Lokacije</a>
-                <a href="#" class="footer__nav-link">O nama</a>
-            </div>
-            <div class="footer__nav">
-                <div class="footer__nav-title">O nama</div>
-                <a href="#" class="footer__nav-link">Vijesti</a>
-                <a href="#" class="footer__nav-link">Kontakt</a>
-                <a href="#" class="footer__nav-link">Partneri</a>
-                <a href="#" class="footer__nav-link">Helem Nejse</a>
+            <div class="footer__links">
+                <div class="footer__nav">
+                    <div class="footer__nav-title">Programi</div>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 1]) }}" class="footer__nav-link">Pisanje za 21. stoljeće</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 2]) }}" class="footer__nav-link">Novinarstvo i društvene mreže</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 3]) }}" class="footer__nav-link">Primijenjena muzička produkcija</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 4]) }}" class="footer__nav-link">Odgovorno kodiranje i Civic Tech</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 5]) }}" class="footer__nav-link">Grafički dizajn i animacija</a>
+                </div>
+                <div class="footer__nav">
+                    <div class="footer__nav-title">Resursi</div>
+                    <a href="{{ route('public-part.how-to-apply') }}" class="footer__nav-link">Kako aplicirati</a>
+                    <a href="{{ route('public-part.scholarship') }}" class="footer__nav-link">Stipendija</a>
+                    <a href="{{ route('public-part.lecturers.lecturers') }}" class="footer__nav-link">Predavači</a>
+                    <a href="{{ route('public-part.locations.locations') }}" class="footer__nav-link">Lokacije</a>
+                    <a href="{{ route('public-part.about-us') }}" class="footer__nav-link">O nama</a>
+                </div>
+                <div class="footer__nav">
+                    <div class="footer__nav-title">O nama</div>
+                    <a href="{{ route('public-part.blog.blog') }}" class="footer__nav-link">Vijesti</a>
+                    <a href="{{ route('public-part.how-to-reach-us') }}" class="footer__nav-link">Kontakt</a>
+{{--                    <a href="#" class="footer__nav-link">Partneri</a>--}}
+                    <a href="https://helemnejse.ba" class="footer__nav-link">Helem Nejse</a>
+                    <a href="https://fondacijaekipa.ba" class="footer__nav-link">Fondacija EKIPA</a>
+                </div>
             </div>
             <div class="footer__rest">
                 <div class="footer__rest-title">Pod pokroviteljstvom:</div>
@@ -42,9 +45,9 @@
         <div class="footer__lower">
             <div class="footer__copyright">
                 <p>© 2023 Fondacija Ekipa. All rights reserved.</p>
-                <a href="#">Politika privatnosti</a>
-                <a href="#">Uslovi korištenja</a>
-                <a href="#">Kolačići</a>
+                <a href="{{ route('public-part.privacy') }}">Politika privatnosti</a>
+                <a href="{{ route('public-part.terms') }}">Uslovi korištenja</a>
+                <a href="{{ route('public-part.cookies') }}">Kolačići</a>
             </div>
             <div class="footer__icons">
                 <a href="#">
