@@ -403,34 +403,6 @@
                     width: calc(50% - 22px);
                 }
 
-                @media (max-width: 600px) {
-                    width: 100%;
-
-                    &:nth-child(1) {
-                        background: #DAC0FB;
-                    }
-
-                    &:nth-child(2) {
-                        background: #757BF6;
-                    }
-
-                    &:nth-child(3) {
-                        background: #DBFF8F;
-                    }
-
-                    &:nth-child(4) {
-                        background: #0E8C80;
-                    }
-
-                    &:nth-child(5) {
-                        background: #F45B69;
-                    }
-
-                    &:nth-child(6) {
-                        background: #DAC0FB;
-                    }
-                }
-
                 //.programs__program-heading {
                 //    font-size: 32px;
                 //    font-style: normal;
@@ -443,6 +415,36 @@
                     margin-top: 50px;  height: 350px;
                 }
 
+                @media (max-width: 800px) {
+                    width: 100%;
+
+                    .programs__program-image{
+                        height: auto; max-width: 80%;
+                    }
+                    //&:nth-child(1) {
+                    //    background: #DAC0FB;
+                    //}
+                    //
+                    //&:nth-child(2) {
+                    //    background: #757BF6;
+                    //}
+                    //
+                    //&:nth-child(3) {
+                    //    background: #DBFF8F;
+                    //}
+                    //
+                    //&:nth-child(4) {
+                    //    background: #0E8C80;
+                    //}
+                    //
+                    //&:nth-child(5) {
+                    //    background: #F45B69;
+                    //}
+                    //
+                    //&:nth-child(6) {
+                    //    background: #DAC0FB;
+                    //}
+                }
                 .programs__program-icon {
                     //position: absolute;
                     //top: 32px;
@@ -466,6 +468,14 @@
 
                 &.programs__link-alternate {
                     color: #F45B69;
+                }
+            }
+        }
+        @media (max-width: 800px){
+            .programs__links{
+                flex-wrap: wrap;
+                .programs__link{
+                    width: 100%;
                 }
             }
         }
@@ -611,6 +621,7 @@
                 font-weight: 400;
                 line-height: 150%;
                 color: $text-white;
+                margin-bottom: 32px;
 
                 @media (max-width: $mobile-width) {
                     display: none;

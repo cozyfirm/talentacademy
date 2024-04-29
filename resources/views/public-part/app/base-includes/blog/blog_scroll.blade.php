@@ -10,7 +10,7 @@
                     <img src="{{ asset($post->mainImg->getFile()) }}" alt="{{ __('News image') }}" class="news__list-item-image">
                     <div class="news__list-item-info">
                         <a href="#" class="news__list-item-info-category">{{ $post->getCategory() }}</a>
-                        <div class="news__list-item-info-reading-time">{{ $post->getDateTime() }}</div>
+{{--                        <div class="news__list-item-info-reading-time">{{ $post->getDateTime() }}</div>--}}
                     </div>
                     <h2 class="news__list-item-heading"> {{ $post->title }} </h2>
                     <p class="news__list-item-content"> {{ $post->short_desc }} </p>
