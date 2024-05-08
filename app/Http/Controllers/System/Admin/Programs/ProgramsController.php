@@ -77,10 +77,11 @@ class ProgramsController extends Controller{
     }
     public function update(Request $request): JsonResponse{
         try{
-            Program::where('id', $request->id)->update($request->except(['id']));
+            Program::where('id', $request->id)->update([ 'title' => $request->title, 'description' => $request->description ]);
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.programs.preview', ['id' => $request->id]));
         }catch (\Exception $e){
+            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
@@ -175,10 +176,11 @@ class ProgramsController extends Controller{
             $this->calculateDuration($request);
 
             $request['date'] = Carbon::parse($request->date)->format('Y-m-d');
-            ProgramSession::where('id', $request->id)->update($request->except(['id']));
+            ProgramSession::where('id', $request->id)->update($request->except(['id', 'undefined', 'files']));
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.programs.sessions.preview', ['id' => $request->id]));
         }catch (\Exception $e){
+            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }

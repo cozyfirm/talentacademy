@@ -12,7 +12,7 @@
             </div>
             <div class="p__c_iw_text">
                 <h1> {{ $program->title }} </h1>
-                <p> {{ $program->description }} </p>
+                <p> {!! nl2br($program->description) !!} </p>
 
                 <div class="p__c_iw_buttons">
                     @if($program->isSubmitted())
