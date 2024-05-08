@@ -62,7 +62,7 @@ class BlogController extends Controller{
     }
     public function update(Request $request): JsonResponse{
         try{
-            Blog::where('id', $request->id)->update($request->except(['id']));
+            Blog::where('id', $request->id)->update($request->except(['id', 'undefined', 'files']));
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.blog.preview', ['id' => $request->id]));
         }catch (\Exception $e){

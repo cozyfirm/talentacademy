@@ -31,12 +31,17 @@
             border-radius: 30px;
             border: 1px solid rgba(238, 240, 242, 0.30);
 
-            @media (max-width: $container-width) {
+            @media (max-width: 1150px) {
                 width: 100%;
+                height: auto !important;
             }
         }
 
         .blog__featured-article-content {
+            width: calc(100% - 700px);
+            @media (max-width: 1150px) {
+                width: 100%;
+            }
             .blog__featured-article-title {
                 font-size: 56px;
                 font-style: normal;

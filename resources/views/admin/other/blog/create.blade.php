@@ -84,7 +84,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 {{ html()->label(__('Sadržaj posta'))->for('description')->class('bold') }}
-                                {{ html()->textarea('description')->class('form-control form-control-sm mt-2 textarea-240')->value(isset($post) ? $post->description : '')->isReadonly(isset($preview)) }}
+                                {{ html()->textarea('description')->class('form-control form-control-sm mt-2 textarea-240 summernote')->value(isset($post) ? $post->description : '')->isReadonly(isset($preview)) }}
                             </div>
                         </div>
                     </div>
