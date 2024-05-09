@@ -14,6 +14,7 @@ use App\Traits\Common\CommonTrait;
 use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,6 +37,8 @@ class PublicUserController extends Controller{
     }
     public function updateProfile (Request $request): JsonResponse{
         try{
+            $request['birth_date'] = Carbon::parse($request->birth_date)->format('Y-m-d');
+
             /* When updating password */
             if(isset($request->email)){
                 if(empty($request->password)) return $this->jsonError('1501', __('Lozinka ne može biti prazna!'));
@@ -46,6 +49,7 @@ class PublicUserController extends Controller{
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('dashboard.my-profile'));
         }catch (\Exception $e){
+            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }

@@ -15,7 +15,12 @@
                 .inner__menu_profile_img_w{
                     position: relative; width: 32px; height: 32px; border-radius: 16px; overflow: hidden; margin-top: 12px;
                     img{
-                        position: absolute; left: 0px; top: 0px; width: 100%;
+                        position: absolute; left: 0px; top: 0px;
+
+                        object-fit: cover;
+                        min-width: 100%;
+                        min-height: 100%;
+                        max-width:120%;
                     }
                 }
                 p{
@@ -105,8 +110,9 @@
         position: relative; width: 320px;
 
         .p__w_l_img_w{
-            position: relative; left: 0px; top: 0px; width: 320px; border-radius: 16px; overflow: hidden; min-height: 160px; border: 1px solid rgba(0,0,0,0.1);
+            position: relative; left: 0px; top: 0px; width: 320px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(0,0,0,0.1);
             form{
+                margin: 0px;
                 img{
                     position: relative; left: 0px; top: 0px; width: 100%; border-radius: 16px;
                 }
