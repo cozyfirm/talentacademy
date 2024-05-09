@@ -28,7 +28,7 @@ class BlogController extends Controller{
         $post = Blog::where('id', $id)->first();
         return view($this->_path . 'single-blog', [
             'post' => $post,
-            'blogPosts' => Blog::where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get()
+            'blogPosts' => Blog::where('published', '=', 1)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get()
         ]);
     }
     public function loadMore(Request $request): bool|string{

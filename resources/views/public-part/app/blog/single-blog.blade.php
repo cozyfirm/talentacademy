@@ -18,7 +18,7 @@
 
     <div class="single-location">
         <div class="single-location__container">
-            <img src="{{ asset( $post->imgOne->getFile() ) }}" class="single-location__image">
+            <img src="{{ isset($post->imgOne) ? asset( $post->imgOne->getFile() ) : '' }}" class="single-location__image">
 
         </div>
     </div>
