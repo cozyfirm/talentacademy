@@ -16,9 +16,15 @@
             <div class="lecturers__categories">
                 @foreach($lecPrograms as $lecProgram)
                     <a href="{{ route('public-part.lecturers.filter', ['program_id' => $lecProgram->id ]) }}">
-                        <div class="lecturers__category">{{ $lecProgram->title }}</div>
+                        <div class="lecturers__category @if($lecProgram->id == $program_id) active @endif">{{ $lecProgram->title }}</div>
                     </a>
                 @endforeach
+
+                @if($program_id != 0)
+                    <a href="{{ route('public-part.lecturers.lecturers') }}">
+                        <div class="lecturers__category">{{ __('Reset') }}</div>
+                    </a>
+                @endif
             </div>
 
             <!-- This value is used for filters -->

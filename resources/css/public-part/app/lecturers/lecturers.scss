@@ -69,6 +69,17 @@
                 font-style: normal;
                 font-weight: 300;
                 line-height: 150%;
+                transition: 0.2s all;
+                &.active{
+                    background: $dark;
+                    color:$white;
+                    border: 1px solid $dark;
+                }
+            }
+            .lecturers__category:hover{
+                background: $dark;
+                color:$white;
+                border: 1px solid $dark;
             }
         }
 
