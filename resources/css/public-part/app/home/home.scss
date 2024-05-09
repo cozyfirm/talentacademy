@@ -15,10 +15,12 @@
         }
 
         .hero-section__upper-section {
+            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-top: 24px;
+            height: 80px;
 
             .hero-section__upper-section-text {
                 font-size: 24px;
@@ -30,46 +32,88 @@
 
             .hero-section__upper-section-avatars-container {
                 display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 32px;
+                height: 60px;
+                position: absolute; right: 0px;
+                margin-top: 10px;
+                width: 600px;
+                overflow: hidden;
 
-                .hero-section__upper-section-avatars {
+                .hero-section__upper__lecturers{
+                    position: absolute; width: 100%;
+                    right: 0px;
                     display: flex;
-                    justify-content: center;
+                    justify-content: flex-end;
                     align-items: center;
-                    transform: translateX(30px);
+                    gap: 32px;
+                    transition: 0.2s all;
 
-                    .hero-section__upper-section-avatar {
-                        height: 45px;
-                        width: 45px;
-                        border-radius: 100%;
-                        border: 2px solid $text-white;
+                    .hero-section__upper-section-avatars {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transform: translateX(30px);
 
-                        &:nth-child(2) {
-                            transform: translateX(-10px);
+                        .hero-section__upper-section-avatar {
+                            height: 45px;
+                            width: 45px;
+                            border-radius: 100%;
+                            border: 2px solid $text-white;
+                            overflow: hidden;
+
+                            img{
+                                max-height: 70px;
+                                max-width: 70px;
+                                object-fit: contain;
+                                position: relative;
+                                top: 50%;
+                                transform: translateY(-50%);
+                            }
+
+                            &:nth-child(2) {
+                                transform: translateX(-10px);
+                            }
+
+                            &:nth-child(3) {
+                                transform: translateX(-20px);
+                            }
+
+                            &:nth-child(4) {
+                                transform: translateX(-30px);
+                            }
                         }
+                    }
+                    .hero-section__upper-section-lecturers-count {
+                        color: $text-white;
+                        font-size: 24px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 140%;
+                    }
+                }
+                .hero-section__upper__days{
+                    position: absolute; width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    transition: 0.2s all;
 
-                        &:nth-child(3) {
-                            transform: translateX(-20px);
-                        }
-
-                        &:nth-child(4) {
-                            transform: translateX(-30px);
+                    h4{
+                        color:#EA8BF3; font-size: 24px;
+                        font-style: normal;
+                        font-weight: 400;
+                        margin-top: 8px;
+                        span{
+                            font-weight: 700;
                         }
                     }
                 }
 
-                .hero-section__upper-section-lecturers-count {
-                    color: $text-white;
-                    font-size: 24px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 140%;
+                .faded{
+                    left: -600px;
                 }
             }
 
-            @media (max-width: $mobile-width) {
+            @media (max-width: 1000px) {
                 display: none;
             }
         }

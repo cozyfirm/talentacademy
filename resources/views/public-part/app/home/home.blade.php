@@ -12,14 +12,23 @@
                     {{ __('02 - 10. Avgust 2024. - Sarajevo') }}
                 </div>
                 <div class="hero-section__upper-section-avatars-container">
-                    <div class="hero-section__upper-section-avatars">
-                        <img src="https://100k-faces.glitch.me/random-image" alt="Avatar" class="hero-section__upper-section-avatar">
-                        <img src="https://100k-faces.glitch.me/random-image" alt="Avatar" class="hero-section__upper-section-avatar hero-section__upper-section-avatar--translate-left">
-                        <img src="https://100k-faces.glitch.me/random-image" alt="Avatar" class="hero-section__upper-section-avatar hero-section__upper-section-avatar--translate-left">
-                        <img src="https://100k-faces.glitch.me/random-image" alt="Avatar" class="hero-section__upper-section-avatar hero-section__upper-section-avatar--translate-left">
+                    <div class="hero-section__upper__lecturers ">
+                        <div class="hero-section__upper-section-avatars">
+                            @foreach($lecturers as $lecturer)
+                                <div class="hero-section__upper-section-avatar">
+                                    <img src="{{ asset('files/images/public-part/users/' . ($lecturer->photo_uri)) }}" alt="Avatar">
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="hero-section__upper-section-lecturers-count">
+                            {{ __('50+ predavača') }}
+                        </div>
                     </div>
-                    <div class="hero-section__upper-section-lecturers-count">
-                        {{ __('50+ predavača') }}
+                    <div class="hero-section__upper__days faded">
+                        <h4>
+                            <span>45</span>
+                            Dana do kraja roka za upis na Akademiju!!!
+                        </h4>
                     </div>
                 </div>
             </div>

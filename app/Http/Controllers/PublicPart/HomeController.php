@@ -7,6 +7,7 @@ use App\Models\Other\Blog\Blog;
 use App\Models\Other\FAQ;
 use App\Models\Other\Location;
 use App\Models\Other\SinglePage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -17,7 +18,8 @@ class HomeController extends Controller{
         return view($this->_path . 'home', [
             'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
             'locations' => Location::inRandomOrder()->take(6)->get(),
-            'faqs' => FAQ::where('what', 0)->get()
+            'faqs' => FAQ::where('what', 0)->get(),
+            'lecturers' => User::where('role', 'presenter')->inRandomOrder()->take(4)->get()
         ]);
     }
     public function scholarship (){
