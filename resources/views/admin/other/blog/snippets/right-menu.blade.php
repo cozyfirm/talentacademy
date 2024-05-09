@@ -49,28 +49,28 @@
             <hr>
 
             <div class="card p-0 m-0" >
-                <div class="card-body d-flex justify-content-between">
+                <div class="card-body d-flex">
                     <a href="{{ route('system.admin.blog.edit-image', ['id' => $post->id, 'what' => 'main_img']) }}" class="w-25" title="{{ __('Unesite naslovnu fotografiju') }}">
                         <div class=" text-center border">
                             <i class="fas fa-image mt-1"></i>
                         </div>
                     </a>
 
-                    <a href="{{ route('system.admin.blog.edit-image', ['id' => $post->id, 'what' => 'img_one']) }}" class="w-25" title="{{ __('Ažurirajte fotografiju br. 1') }}">
+                    <a href="{{ route('system.admin.blog.edit-image', ['id' => $post->id, 'what' => 'img_one']) }}" class="w-25" title="{{ __('Ažurirajte cover fotografiju') }}">
                         <div class=" text-center border">
                             <i class="fas fa-image mt-1"></i>
                         </div>
                     </a>
-                    <a href="{{ route('system.admin.blog.edit-image', ['id' => $post->id, 'what' => 'img_two']) }}" class="w-25" title="{{ __('Ažurirajte fotografiju br. 2') }}">
-                        <div class="text-center border">
-                            <i class="fas fa-image mt-1"></i>
-                        </div>
-                    </a>
-                    <a href="{{ route('system.admin.blog.edit-image', ['id' => $post->id, 'what' => 'img_three']) }}" class="w-25 title="{{ __('Ažurirajte fotografiju br. 3') }}"">
-                        <div class="text-center border">
-                            <i class="fas fa-image mt-1"></i>
-                        </div>
-                    </a>
+{{--                    <a href="{{ route('system.admin.blog.edit-image', ['id' => $post->id, 'what' => 'img_two']) }}" class="w-25" title="{{ __('Ažurirajte fotografiju br. 2') }}">--}}
+{{--                        <div class="text-center border">--}}
+{{--                            <i class="fas fa-image mt-1"></i>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                    <a href="{{ route('system.admin.blog.edit-image', ['id' => $post->id, 'what' => 'img_three']) }}" class="w-25 title="{{ __('Ažurirajte fotografiju br. 3') }}"">--}}
+{{--                        <div class="text-center border">--}}
+{{--                            <i class="fas fa-image mt-1"></i>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
                 </div>
             </div>
 

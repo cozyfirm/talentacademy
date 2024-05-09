@@ -9,10 +9,18 @@
 
     <!-- Page content -->
 @section('public-content')
-    <div class="single-blog__header-images">
-        <img class="img-one" src="{{ asset( $post->imgOne->getFile() ) }}">
-        <img class="img-two" src="{{ asset( $post->imgTwo->getFile() ) }}">
-        <img class="img-three" src="{{ asset( $post->imgThree->getFile() ) }}">
+{{--    <div class="single-blog__header-images">--}}
+{{--        <img class="img-one" src="{{ asset( $post->imgOne->getFile() ) }}">--}}
+{{--        <img class="img-two" src="{{ asset( $post->imgTwo->getFile() ) }}">--}}
+{{--        <img class="img-three" src="{{ asset( $post->imgThree->getFile() ) }}">--}}
+{{--    </div>--}}
+
+
+    <div class="single-location">
+        <div class="single-location__container">
+            <img src="{{ asset( $post->imgOne->getFile() ) }}" class="single-location__image">
+
+        </div>
     </div>
 
     <div class="single-blog">
