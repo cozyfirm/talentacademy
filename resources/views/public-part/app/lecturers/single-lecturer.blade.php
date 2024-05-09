@@ -6,7 +6,7 @@
 @section('public-content')
     <div class="single-lecturer__featured">
         <div class="single-lecturer__container">
-            <img src="{{ asset('files/images/presenters/ana_krstajic.png') }}">
+            <img src="{{ asset('files/images/public-part/users/' . ($lecturer->photo_uri)) }}">
             <div class="single-lecturer__featured-content">
                 <div class="single-lecturer__featured-category">{{ $lecturer->presenter_role }}</div>
                 <h2>{{ $lecturer->name }}</h2>
