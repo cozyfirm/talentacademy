@@ -33,7 +33,7 @@ class BlogController extends Controller{
     }
     public function loadMore(Request $request): bool|string{
         try{
-            $posts = Blog::where('id', '<', $request->lastID)->orderBy('id', 'DESC')->take(3)->get();
+            $posts = Blog::where('published', '=', 1)->where('id', '<', $request->lastID)->orderBy('id', 'DESC')->take(3)->get();
             foreach ($posts as $post){
                 $post->img = $post->mainImg->getFile();
                 $post->categoryVal = $post->getCategory();
