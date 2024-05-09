@@ -35,7 +35,7 @@ class ProgramsController extends Controller{
 
         return view($this->_path . 'preview', [
             'program' => Program::where('id', $id)->first(),
-            'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
+            'blogPosts' => Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take(6)->get(),
             'currentDay' => $currentDay,
             'sessions' => $this->getSessionsByDate($id, $date ?? $currentDay->date),
             // 'offlineSessions' => $offlineSessions,
