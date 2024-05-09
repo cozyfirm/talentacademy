@@ -99,7 +99,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Lokacija'))->for('location')->class('bold') }}
-                                {{ html()->text('location')->class('form-control form-control-sm mt-1')->required()->maxlength(50)->value((isset($location) ? $location->location : ''))->isReadonly(isset($preview)) }}
+                                {{ html()->text('location')->class('form-control form-control-sm mt-1')->required()->value((isset($location) ? $location->location : ''))->isReadonly(isset($preview)) }}
                             </div>
                         </div>
                     </div>
