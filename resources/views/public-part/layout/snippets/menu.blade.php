@@ -22,7 +22,7 @@
     </div>
 
     <div class="header__links">
-        <a href="#">{{ __('Programi') }}</a>
+        <a href="#">{{ __('Angažovani rad i kritičko razmišljanje') }}</a>
         <a href="{{ route('public-part.lecturers.lecturers') }}">{{ __('Predavači') }}</a>
         <a href="{{ route('public-part.scholarship') }}">{{ __('Stipendije') }}</a>
         <a href="{{ route('public-part.blog.blog') }}">{{ __('Blog') }}</a>
@@ -37,31 +37,31 @@
         <a href="{{ route('public-part.programs.preview-program', ['id' => 1]) }}">
             <div class="header__submenu_elem">
                 <img src="{{ asset('files/images/public-part/civic.svg') }}" alt="">
-                <p>{{ __('Pisanje za 21. stoljeće') }}</p>
+                <p>{{ __('Kreativno pisanje: Komedija') }}</p>
             </div>
         </a>
         <a href="{{ route('public-part.programs.preview-program', ['id' => 2]) }}">
             <div class="header__submenu_elem">
                 <img src="{{ asset('files/images/public-part/writing.svg') }}" alt="">
-                <p>{{ __('Novinarstvo i društvene mreže') }}</p>
+                <p>{{ __('Novinarstvo: novinarstvo i novi mediji') }}</p>
             </div>
         </a>
         <a href="{{ route('public-part.programs.preview-program', ['id' => 3]) }}">
             <div class="header__submenu_elem">
                 <img src="{{ asset('files/images/public-part/music.svg') }}" alt="">
-                <p>{{ __('Primijenjena muzička produkcija') }}</p>
+                <p>{{ __('Muzika: Primijenjena muzička produkcija') }}</p>
             </div>
         </a>
         <a href="{{ route('public-part.programs.preview-program', ['id' => 4]) }}">
             <div class="header__submenu_elem">
                 <img src="{{ asset('files/images/public-part/socal.svg') }}" alt="">
-                <p>{{ __('Odgovorno kodiranje i Civic Tech') }}</p>
+                <p>{{ __('Informacijske tehnologije: odgovorno kodiranje') }}</p>
             </div>
         </a>
         <a href="{{ route('public-part.programs.preview-program', ['id' => 5]) }}">
             <div class="header__submenu_elem">
                 <img src="{{ asset('files/images/public-part/design.svg') }}" alt="">
-                <p>{{ __('Grafički dizajn animacija') }}</p>
+                <p>{{ __('Grafički dizajn i animacija: Istraživanje vizualnih narativa') }}</p>
             </div>
         </a>
     </div>

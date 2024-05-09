@@ -103,7 +103,7 @@
 
     <div class="snake">
         <img src="{{ asset('/files/images/public-part/snake/snake_'.($program->id).'.svg') }}" alt="{{ __('Snake') }}" class="snake__image">
-        <img src="{{ asset('/files/images/public-part/snake_mob_'.($program->id).'.svg') }}" alt="{{ __('Snake mobile') }}" class="snake__image snake__image--mobile">
+        <img src="{{ asset('/files/images/public-part/snake/gtsnake_mob_'.($program->id).'.svg') }}" alt="{{ __('Snake mobile') }}" class="snake__image snake__image--mobile">
     </div>
 
     <!-- FAQ section -->

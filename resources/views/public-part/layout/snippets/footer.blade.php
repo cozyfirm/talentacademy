@@ -7,11 +7,11 @@
             <div class="footer__links">
                 <div class="footer__nav">
                     <div class="footer__nav-title">Programi</div>
-                    <a href="{{ route('public-part.programs.preview-program', ['id' => 1]) }}" class="footer__nav-link">Pisanje za 21. stoljeće</a>
-                    <a href="{{ route('public-part.programs.preview-program', ['id' => 2]) }}" class="footer__nav-link">Novinarstvo i društvene mreže</a>
-                    <a href="{{ route('public-part.programs.preview-program', ['id' => 3]) }}" class="footer__nav-link">Primijenjena muzička produkcija</a>
-                    <a href="{{ route('public-part.programs.preview-program', ['id' => 4]) }}" class="footer__nav-link">Odgovorno kodiranje i Civic Tech</a>
-                    <a href="{{ route('public-part.programs.preview-program', ['id' => 5]) }}" class="footer__nav-link">Grafički dizajn i animacija</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 1]) }}" class="footer__nav-link">Kreativno pisanje: Komedija</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 2]) }}" class="footer__nav-link">Novinarstvo: novinarstvo i novi mediji</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 3]) }}" class="footer__nav-link">Muzika: Primijenjena muzička produkcija</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 4]) }}" class="footer__nav-link">Informacijske tehnologije: odgovorno kodiranje</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 5]) }}" class="footer__nav-link">Grafički dizajn i animacija: Istraživanje vizualnih narativa</a>
                 </div>
                 <div class="footer__nav">
                     <div class="footer__nav-title">Resursi</div>
