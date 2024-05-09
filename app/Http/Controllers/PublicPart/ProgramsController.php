@@ -52,7 +52,7 @@ class ProgramsController extends Controller{
 
         return view($this->_path . 'preview', [
             'program' => Program::where('id', $id)->first(),
-            'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
+            'blogPosts' => Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take(6)->get(),
             'offlineSessions' => $offlineSessions,
             'faqs' => FAQ::where('what', $id)->get()
         ]);
@@ -129,12 +129,13 @@ class ProgramsController extends Controller{
         }catch (\Exception $e){ }
     }
     public function applyForScholarship ($id): View | RedirectResponse{
+        if(!Auth::check()) return redirect()->route('auth');
+
         /* Check does user have other applications */
         $submittedOther = ProgramApplication::where('program_id', '!=', $id)->where('attendee_id', Auth::user()->id)
             ->where('status', 'submitted')
             ->first();
 
-        if(!Auth::check()) return redirect()->route('auth');
         return view($this->_path . 'apply-for-scholarship', [
             'program' => Program::where('id', $id)->first(),
             'application' => $this->getScholarshipApplication($id),

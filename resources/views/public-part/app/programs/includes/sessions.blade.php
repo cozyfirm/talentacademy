@@ -1,4 +1,4 @@
-<div class="program__timeline program__timeline_{{ $program->id }}">
+<div class="program__timeline program__timeline_{{ $program->id }}" id="program-sessions">
     <div class="program__timeline__sessions_sticky sticky">
         <div class="program__timeline-section dark">
             <div class="program__timeline-container">
@@ -13,7 +13,7 @@
                     </div>
                     <div class="program__timeline-top-right">
                         @foreach($program->uniqueDateSessions() as $dates)
-                            <a href="{{ route('public-part.programs.preview-program-date', ['id' => $program->id, 'date' => $dates->date]) }}">
+                            <a href="{{ route('public-part.programs.preview-program-date', ['id' => $program->id, 'date' => $dates->date]) }}#program-sessions">
                                 <div class="program__timeline-top-right-day">
                                     <div class="program__timeline-top-right-day-number @if($currentDay->date == $dates->date) active @endif">
                                         {{ $dates->getDay() }}

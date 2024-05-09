@@ -9,7 +9,10 @@ use App\Models\User;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class UsersController extends Controller{
@@ -38,6 +41,45 @@ class UsersController extends Controller{
             'users' => $users
         ]);
     }
+    public function create (): View{
+        return view($this->_path . 'create', [
+            'create' => true,
+            'countries' => Country::pluck('name_ba', 'id')
+        ]);
+    }
+    public function save(Request $request){
+        try{
+            $request['birth_date'] = Carbon::parse($request->birth_date)->format('Y-m-d');
+
+            if($request->role != 'presenter'){
+                $request['title'] = '';
+                $request['institution'] = '';
+                $request['presenter_role'] = '';
+            }
+
+            $kurac = User::where('email', $request->email)->first();
+            if($kurac){
+                return $this->jsonError('1500', __('Odabrani email već postoji :D'));
+            }
+
+            /* Add username to request */
+            $request['username'] = $this->getSlug($request->name);
+
+            /* Hash password and add token */
+            $request['password'] = Hash::make(md5(time()));
+            $request['api_token'] = hash('sha256', 'root'. '+'. time());
+            $request['birth_date'] = Carbon::parse($request->birth_date)->format('Y-m-d');
+
+            /* Update user */
+            $user = User::create($request->except(['id']));
+
+            return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.users.preview', ['username' => $user->username]));
+        }catch (\Exception $e){
+            dd($e);
+            return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
+        }
+    }
+
     public function preview ($username): View{
         return view($this->_path . 'create', [
             'preview' => true,
@@ -70,5 +112,20 @@ class UsersController extends Controller{
         }catch (\Exception $e){
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
+    }
+
+    public function updateProfileImage (Request $request): RedirectResponse{
+        try{
+            $file = $request->file('photo_uri');
+            $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+            $name = md5($file->getClientOriginalName().time()).'.'.$ext;
+            $file->move(public_path('files/images/public-part/users'), $name);
+
+            /* Update file name */
+            User::where('id', $request->id)->update(['photo_uri' => $name]);
+
+        }catch (\Exception $e){}
+
+        return back();
     }
 }

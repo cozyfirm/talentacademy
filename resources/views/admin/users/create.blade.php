@@ -4,7 +4,11 @@
 @section('c-breadcrumbs')
     <a href="#"> <i class="fas fa-home"></i> <p>{{ __('Dashboard') }}</p> </a> /
     <a href="{{ route('system.admin.users') }}">{{ __('Pregled svih korisnika') }}</a> /
-    <a href="{{ route('system.admin.users.preview', ['username' => $user->username ]) }}">{{ $user->name }}</a>
+    @if(!isset($user))
+        <a href="#">{{ __('Unos') }}</a>
+    @else
+        <a href="{{ route('system.admin.users.preview', ['username' => $user->username ]) }}">{{ $user->name }}</a>
+    @endif
 @endsection
 
 @section('c-buttons')
@@ -37,8 +41,8 @@
         @endif
 
         <div class="row">
-            <div class="col-md-12">
-                <form action="@if(isset($edit)) {{ route('system.admin.users.update') }} @else # @endif" method="POST" id="js-form">
+            <div class="@if(isset($preview)) col-md-9 @else col-md-12 @endif">
+                <form action="@if(isset($edit)) {{ route('system.admin.users.update') }} @else {{ route('system.admin.users.save') }} @endif" method="POST" id="js-form">
                     @if(isset($edit))
                         {{ html()->hidden('id')->class('form-control')->value($user->id) }}
                     @endif
@@ -57,7 +61,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 {{ html()->label(__('Ime i prezime'))->for('supplier_id')->class('bold') }}
-                                {{ html()->text('name', $user->name )->class('form-control form-control-sm')->required()->value((isset($user) ? $user->name : ''))->isReadonly(isset($preview)) }}
+                                {{ html()->text('name', $user->name ?? '' )->class('form-control form-control-sm')->required()->value((isset($user) ? $user->name : ''))->isReadonly(isset($preview)) }}
                             </div>
                         </div>
                     </div>
@@ -65,7 +69,7 @@
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ html()->label(__('Broj fakture'))->for('invoice_no')->class('bold') }}
+                                {{ html()->label(__('Email'))->for('invoice_no')->class('bold') }}
                                 {{ html()->text('email')->class('form-control form-control-sm')->required()->maxlength(150)->value((isset($user) ? $user->email : ''))->isReadonly(isset($preview)) }}
                                 <small id="invoice_noHelp" class="form-text text-muted">{{ __('Unesite broj fakture') }}</small>
                             </div>
@@ -117,7 +121,7 @@
                         </div>
                     </div>
 
-                    @if($user->role == 'presenter' or isset($edit))
+                    @if(isset($create) or $user->role == 'presenter' or isset($edit))
                         <hr class="mt-4">
 
                         <div class="row mt-3">
@@ -179,6 +183,38 @@
                 </form>
             </div>
 
+
+            @if(isset($preview))
+                <div class="col-md-3 border-left">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card p-0 m-0" title="#">
+                                <div class="card-body d-flex justify-content-between">
+                                    <h5 class="p-0 m-0"> {{ __('Ostale informacije') }} </h5>
+                                    <i class="fas fa-info mt-1 mr-1"></i>
+                                </div>
+                            </div>
+
+
+                            <form action="{{ route('system.admin.users.update-profile-image') }}" method="POST" id="update-profile-image" enctype="multipart/form-data">
+                                @csrf
+                                {{ html()->hidden('id')->class('form-control')->value($user->id) }}
+                                <div class="card p-0 m-0 mt-3" title="{{ __('Nova fotografija za program') }}">
+                                    <div class="card-body d-flex justify-content-between">
+                                        <label for="photo_uri" >
+                                            <p class="m-0">{{ __('Ažurirajte fotografiju') }}</p>
+                                        </label>
+                                        <i class="fas fa-image mt-1"></i>
+                                    </div>
+                                    <input name="photo_uri" class="form-control form-control-lg d-none" id="photo_uri" type="file">
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            @endif
         </div>
     </div>
 @endsection
