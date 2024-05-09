@@ -129,10 +129,16 @@ class ProgramsController extends Controller{
         }catch (\Exception $e){ }
     }
     public function applyForScholarship ($id): View | RedirectResponse{
+        /* Check does user have other applications */
+        $submittedOther = ProgramApplication::where('program_id', '!=', $id)->where('attendee_id', Auth::user()->id)
+            ->where('status', 'submitted')
+            ->first();
+
         if(!Auth::check()) return redirect()->route('auth');
         return view($this->_path . 'apply-for-scholarship', [
             'program' => Program::where('id', $id)->first(),
-            'application' => $this->getScholarshipApplication($id)
+            'application' => $this->getScholarshipApplication($id),
+            'submittedOther' => $submittedOther
         ]);
     }
 

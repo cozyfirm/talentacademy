@@ -73,19 +73,25 @@
                 </div>
 
                 <div class="other__btns">
-                    <a href="{{ route('public-part.programs.cancel-scholarship', ['program_id' => $program->id ]) }}">
-                        <div class="cancel_btn"><p>{{ __('Odustani') }}</p></div>
-                    </a>
-                    <button class="submit-btn">
-                        <i class="fas fa-save"></i>
-                        <p>{{ __('Sačuvaj izmjene') }}</p>
-                    </button>
-                    <a href="{{ route('public-part.programs.submit-for-scholarship', ['program_id' => $program->id ]) }}">
-                        <div class="send_app">
-                            <i class="fas fa-envelope"></i>
-                            <p>{{ __('Pošalji aplikaciju') }}</p>
-                        </div>
-                    </a>
+                    @if(isset($submittedOther))
+                        <a href="#">
+                            <div class="cancel_btn"><p>{{ __('Već ste aplicirali za drugi program!') }}</p></div>
+                        </a>
+                    @else
+                        <a href="{{ route('public-part.programs.cancel-scholarship', ['program_id' => $program->id ]) }}">
+                            <div class="cancel_btn"><p>{{ __('Odustani') }}</p></div>
+                        </a>
+                        <button class="submit-btn">
+                            <i class="fas fa-save"></i>
+                            <p>{{ __('Sačuvaj izmjene') }}</p>
+                        </button>
+                        <a href="{{ route('public-part.programs.submit-for-scholarship', ['program_id' => $program->id ]) }}">
+                            <div class="send_app">
+                                <i class="fas fa-envelope"></i>
+                                <p>{{ __('Pošalji aplikaciju') }}</p>
+                            </div>
+                        </a>
+                    @endif
                 </div>
             </form>
         </div>
