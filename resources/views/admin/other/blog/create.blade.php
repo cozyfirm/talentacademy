@@ -8,7 +8,7 @@
 @endsection
 
 @section('c-buttons')
-    <a href="{{ route('system.admin.faq') }}">
+    <a href="{{ route('system.admin.blog') }}">
         <button class="pm-btn btn pm-btn-info">
             <i class="fas fa-chevron-left"></i>
             <span>{{ __('Nazad') }}</span>

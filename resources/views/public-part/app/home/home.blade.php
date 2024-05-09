@@ -26,7 +26,7 @@
                     </div>
                     <div class="hero-section__upper__days faded">
                         <h4>
-                            <span>45</span>
+                            <span>{{ $daysTill }}</span>
                             Dana do kraja roka za upis na Akademiju!!!
                         </h4>
                     </div>

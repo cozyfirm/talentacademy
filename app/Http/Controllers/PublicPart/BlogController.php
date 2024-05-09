@@ -16,7 +16,7 @@ class BlogController extends Controller{
     public function blog(): View{
         $last = Blog::orderBy('id', 'desc')->first();
         return view($this->_path . 'blog', [
-            'posts' => Blog::where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(3)->get(),
+            'posts' => Blog::where('published', '=', 1)->where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(3)->get(),
             'last' => $last
         ]);
     }
