@@ -54,6 +54,7 @@ class Program extends Model{
             if(!$submitted) return false;
             if($submitted->status == 'submitted') return true;
         }catch (\Exception $e){ return false; }
+        return false;
     }
     public function acceptedStatus(): string{
         try{
