@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PublicPart;
 
 use App\Http\Controllers\Controller;
 use App\Models\Other\Blog\Blog;
+use App\Models\Other\FAQ;
 use App\Models\Other\Location;
 use App\Models\Other\SinglePage;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class HomeController extends Controller{
     public function home(): View{
         return view($this->_path . 'home', [
             'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
-            'locations' => Location::inRandomOrder()->take(6)->get()
+            'locations' => Location::inRandomOrder()->take(6)->get(),
+            'faqs' => FAQ::where('what', 0)->get()
         ]);
     }
     public function scholarship (){

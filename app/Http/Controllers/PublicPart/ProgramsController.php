@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PublicPart;
 
 use App\Http\Controllers\Controller;
 use App\Models\Other\Blog\Blog;
+use App\Models\Other\FAQ;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
@@ -37,7 +38,8 @@ class ProgramsController extends Controller{
             'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
             'currentDay' => $currentDay,
             'sessions' => $this->getSessionsByDate($id, $date ?? $currentDay->date),
-            // 'offlineSessions' => $offlineSessions
+            // 'offlineSessions' => $offlineSessions,
+            'faqs' => FAQ::where('what', $id)->get()
         ]);
     }
     public function sneakAndPeak($id, $page = 1): View{
@@ -51,7 +53,8 @@ class ProgramsController extends Controller{
         return view($this->_path . 'preview', [
             'program' => Program::where('id', $id)->first(),
             'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
-            'offlineSessions' => $offlineSessions
+            'offlineSessions' => $offlineSessions,
+            'faqs' => FAQ::where('what', $id)->get()
         ]);
     }
     public function fetchSessions(Request $request){

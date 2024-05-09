@@ -41,7 +41,7 @@ class OtherController extends Controller{
     }
     public function update(Request $request): JsonResponse{
         try{
-            SinglePage::where('id', $request->id)->update($request->except(['id']));
+            SinglePage::where('id', $request->id)->update($request->except(['id', 'undefined', 'files']));
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.pages.edit', ['id' => $request->id]));
         }catch (\Exception $e){
@@ -98,7 +98,7 @@ class OtherController extends Controller{
     }
     public function faqUpdate(Request $request): JsonResponse{
         try{
-            FAQ::where('id', $request->id)->update($request->except(['id']));
+            FAQ::where('id', $request->id)->update($request->except(['id', 'undefined', 'files']));
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.faq.edit', ['id' => $request->id]));
         }catch (\Exception $e){

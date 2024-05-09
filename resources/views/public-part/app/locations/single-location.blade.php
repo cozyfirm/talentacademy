@@ -18,9 +18,9 @@
                         </svg> {{ __('Direkcije') }}
                     </a>
                 </div>
-                <p class="single-location__content-right">
+                <div class="single-location__content-right">
                     {!! nl2br($location->description) !!}
-                </p>
+                </div>
             </div>
 
             <div class="locations__slider_wrapper">

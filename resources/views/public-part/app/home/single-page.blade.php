@@ -9,10 +9,8 @@
         <div class="single-location__container">
             <img src="{{ asset( $page->fileRel->getFile()) }}" class="single-location__image">
             <h2 class="single-location__title"> {{ $page->title }} </h2>
-            <div class="single-location__content">
-                <p class="single-location__content-right">
-                    {!! nl2br($page->description) !!}
-                </p>
+            <div class="single-location__content single-location__content-page">
+                {!! nl2br($page->description) !!}
             </div>
         </div>
     </div>

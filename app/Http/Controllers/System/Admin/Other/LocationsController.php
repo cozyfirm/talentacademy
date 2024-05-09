@@ -65,7 +65,7 @@ class LocationsController extends Controller{
     }
     public function update(Request $request){
         try{
-            Location::where('id', $request->id)->update($request->except(['id', '_token']));
+            Location::where('id', $request->id)->update($request->except(['id', '_token', 'undefined', 'files']));
 
             return $this->jsonSuccess(__('Uspješno ste unijeli lokaciju!'), route('system.admin.locations.preview', ['id' => $request->id]));
         }catch (\Exception $e){
