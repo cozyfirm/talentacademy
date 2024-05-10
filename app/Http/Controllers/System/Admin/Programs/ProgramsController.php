@@ -135,6 +135,8 @@ class ProgramsController extends Controller{
             $this->calculateDuration($request);
 
             $request['date'] = Carbon::parse($request->date)->format('Y-m-d');
+            $request['datetime_from'] = Carbon::parse($request->date . ' ' . $request->time_from);
+
             ProgramSession::create($request->all());
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.programs.preview', ['id' => $request->program_id]));

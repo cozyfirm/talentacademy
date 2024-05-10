@@ -24,7 +24,7 @@ class ProgramsController extends Controller{
     protected int $_pages = 6;
 
     public function getSessionsByDate($program_id, $date){
-        return ProgramSession::where('program_id', $program_id)->whereDate('date', $date)->get();
+        return ProgramSession::where('program_id', $program_id)->whereDate('date', $date)->orderBy('datetime_from')->get();
     }
     public function preview($id, $date = null): View | RedirectResponse{
         if(!Auth::check()) return redirect()->route('public-part.programs.sneak-and-peak', ['id' => $id, 'page' => 1]);
@@ -56,6 +56,28 @@ class ProgramsController extends Controller{
             'offlineSessions' => $offlineSessions,
             'faqs' => FAQ::where('what', $id)->get()
         ]);
+    }
+    public function getAjaxPrivateSessions(Request $request){
+        try{
+            $currentDay = ProgramSession::where('program_id', $request->program)->whereDate('date', $request->date)->orderBy('date')->first();
+            $sessions = $this->getSessionsByDate($request->program, $currentDay->date);
+
+            foreach ($sessions as $session){
+                $session->lecturer = $session->presenterRel->name ?? __('Nije dostupno');
+                $session->location = $session->locationRel->title ?? '';
+                $session->time_from_f = $session->timeFrom();
+            }
+
+            return $this->jsonResponse('0000', __('Bilješka obrisana!'), [
+                'currentDay' => $currentDay,
+                'sessions' => $sessions,
+                'currentNoDay' => $currentDay->getDayInOrder(),
+                'day' => $currentDay->getFullWeekDay(),
+                'date' => $currentDay->date()
+            ]);
+        }catch (\Exception $e){
+            return $this->jsonResponse('1200', __('Desila se greška'));
+        }
     }
     public function fetchSessions(Request $request){
         try{

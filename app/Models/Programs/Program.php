@@ -24,25 +24,25 @@ class Program extends Model{
     protected $guarded = ['id'];
 
     public function sessionsRel(): HasMany{
-        return $this->hasMany(ProgramSession::class, 'program_id', 'id');
+        return $this->hasMany(ProgramSession::class, 'program_id', 'id')->orderBy('datetime_from');
     }
     public function uniquePresenterSessions(): Collection{
         /*
          *  First, let's extract sessions
          */
-        return ProgramSession::where('program_id', $this->id)->where('presenter_id', '!=', 0)->where('presenter_id', '!=', null)->get()->unique('presenter_id');
+        return ProgramSession::where('program_id', $this->id)->where('presenter_id', '!=', 0)->where('presenter_id', '!=', null)->orderBy('datetime_from')->get()->unique('presenter_id');
     }
     public function uniqueDateSessions(): Collection{
         /*
          *  First, let's extract sessions
          */
-        return ProgramSession::where('program_id', $this->id)->orderBy('date')->get()->unique('date');
+        return ProgramSession::where('program_id', $this->id)->orderBy('date')->orderBy('datetime_from')->get()->unique('date');
     }
     public function uniqueLecturerDateSessions($presenter_id): Collection{
         /*
          *  First, let's extract sessions
          */
-        return ProgramSession::where('program_id', $this->id)->where('presenter_id', $presenter_id)->orderBy('date')->get()->unique('date');
+        return ProgramSession::where('program_id', $this->id)->where('presenter_id', $presenter_id)->orderBy('datetime_from')->get()->unique('date');
     }
 
     public function imageRel(): HasOne{
