@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PublicPart;
 
 use App\Http\Controllers\Controller;
 use App\Models\Other\Blog\Blog;
+use App\Models\Other\Blog\BlogImage;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
@@ -41,6 +42,23 @@ class BlogController extends Controller{
                 $post->createdBy = $post->createdBy->name;
             }
             return $this->jsonResponse('0000', __(''), ['posts' => $posts->toArray()]);
+        }catch (\Exception $e){
+            return $this->jsonResponse('1200', __('Desila se greška'));
+        }
+    }
+
+    public function fetchImages(Request $request){
+        try{
+            $current = BlogImage::where('id', $request->attrID)->first();
+
+            $previous = BlogImage::where('blog_id', $request->blog_id)->where('id', '<', $request->attrID)->orderBy('id', 'desc')->first();
+            $next     = BlogImage::where('blog_id', $request->blog_id)->where('id', '>', $request->attrID)->orderBy('id', 'ASC')->first();
+
+            return $this->jsonResponse('0000', __(''), [
+                'next' => $next->id ?? '',
+                'previous' => $previous->id ?? '',
+                'current' => $current->fileRel->getFile()
+            ]);
         }catch (\Exception $e){
             return $this->jsonResponse('1200', __('Desila se greška'));
         }

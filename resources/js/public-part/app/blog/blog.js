@@ -75,4 +75,52 @@ $(document).ready(function (){
         });
     });
 
+
+    /**
+     *  Fetch images
+     */
+
+    $(".img__wrapper, .gallery__navigation-button").click(function (){
+        let attrID = $(this).attr('attr-id');
+
+        $.ajax({
+            url: '/blog/fetch-images',
+            method: 'POST',
+            dataType: "json",
+            data: {
+                attrID: attrID,
+                blog_id : $("#post_id").val()
+            },
+            success: function success(response) {
+                let code = response['code'];
+                let data = response['data'];
+
+                if(code === '0000'){
+                    $(".image__wrapper").removeClass('d-none');
+
+                    $("#gallery_main_img").attr('src', response['data']['current']);
+
+                    if(data['next'] !== ''){
+                        $(".gallery__navigation_next").removeClass('d-none').attr('attr-id', data['next']);
+                    }else{
+                        $(".gallery__navigation_next").addClass('d-none');
+                    }
+                    if(data['previous'] !== ''){
+                        $(".gallery__navigation_previous").removeClass('d-none').attr('attr-id', data['previous']);
+                    }else{
+                        $(".gallery__navigation_previous").addClass('d-none');
+                    }
+
+                    console.log(response, response['data']['current']);
+                }else{
+                    Notify.Me([response['message'], "warn"]);
+                }
+            }
+        });
+        console.log(attrID);
+    })
+
+    $(".close_gallery").click(function (){
+        $(".image__wrapper").addClass('d-none');
+    });
 });

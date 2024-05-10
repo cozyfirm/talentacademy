@@ -114,6 +114,9 @@ Route::prefix('')->group(function () {
         Route::get ('/{id}',                   [BlogController::class, 'single_blog'])->name('public-part.blog.single-blog');
         Route::get ('preview/{id}',            [BlogController::class, 'preview'])->name('public-part.blog.preview');
         Route::post ('/load-more',             [BlogController::class, 'loadMore'])->name('public-part.blog.load-more');
+
+        /* Fetch images */
+        Route::post ('/fetch-images',          [BlogController::class, 'fetchImages'])->name('public-part.blog.fetch-images');
     });
 
     /*
