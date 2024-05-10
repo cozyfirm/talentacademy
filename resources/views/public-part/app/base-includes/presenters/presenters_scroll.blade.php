@@ -19,7 +19,7 @@
                 <div class="sp__text_w">
                     <h1> {{ $presenter->presenterRel->name ?? '' }} </h1>
                     <h2> {{ $presenter->presenterRel->title ?? '' }} </h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                    <p> {{ $presenter->short_description ?? '' }} </p>
                 </div>
                 <div class="sp__icons_w">
                     @if(isset($presenter->presenterRel) and $presenter->presenterRel->linkedin != '')
