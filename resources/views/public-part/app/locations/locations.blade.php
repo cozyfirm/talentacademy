@@ -9,8 +9,8 @@
         <div class="locations__container">
             <div class="locations__header">
                 <h1 class="locations__title">{{ __('Lokacije Akademije') }}</h1>
-                <h3 class="locations__subtitle">{{ __('Akademija se održava na preko 12 lokacija') }}</h3>
-                <p class="locations__description">{{ __('Lorem ipsum dolor sit amet consectetur. Odio amet enim gravida etiam at metus. Mi eu volutpat augue metus eu convallis justo viverra.') }}</p>
+                <h3 class="locations__subtitle">{{ __('Akademija se održava na preko 10 lokacija širom Sarajeva.') }}</h3>
+                <p class="locations__description">{{ __('Sve lokacije izabrane su tako da polaznicima pruže optimalne uslove za učenje i angažman. Naši organizatori su pažljivo odabrali najadekvatnije i najopremljenije prostore kako bismo osigurali kvalitetno iskustvo za sve učesnike Akademije.') }}</p>
             </div>
             <div class="locations__list mb-4">
                 @foreach($locations as $location)
