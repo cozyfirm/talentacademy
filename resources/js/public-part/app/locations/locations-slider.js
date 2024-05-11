@@ -58,9 +58,9 @@ $(document).ready(function (){
 
     /* Go to URI */
 
-    $(document).on('click','.preview__session_single',function(){
-        if(!isLocationMoved) window.location.href = $(this).attr('uri');
-    });
+    // $(document).on('click','.preview__session_single',function(){
+    //     if(!isLocationMoved) window.location.href = $(this).attr('uri');
+    // });
 
     $('.locations__map-toggle-icon-container').click(function(){
         $(this).parent().find('.locations__list-item-map').toggleClass('locations__list-item-map--opened');

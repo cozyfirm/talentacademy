@@ -547,6 +547,9 @@
             justify-content: flex-end;
             align-items: flex-end;
             gap: 32px;
+            .fetch-private-sessions:hover{
+                cursor: pointer;
+            }
         }
         .program__timeline-top-right-day-number {
             color: #DBFF8F;

@@ -104,7 +104,7 @@ $( document ).ready(function() {
                                .append(function (){
                                    return $("<div>").attr('class', 'program__timeline-item-right')
                                        .append(function (){
-                                           return $("<a>").attr('href', "#")
+                                           return $("<a>").attr('href', "/programs/preview-session/" + sessions[i]['id'])
                                                .append(function (){
                                                    return $("<h2>").attr('class', 'program__timeline-item-right-title').text(sessions[i]['title']);
                                                })

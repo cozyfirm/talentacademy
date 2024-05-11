@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="aff-short">
-                        <p>
+                        <p class="my-font">
                             {{ __('Unesite Vaše osnovne informacije, kreirajte Vaš korisnički račun, i uživajte koristeći našu platformu!') }}
                         </p>
                     </div>
@@ -140,7 +140,7 @@
                     <hr>
 
                     <div class="row pt-4">
-                        <div class="col-md-12">
+                        <div class="col-md-12 my-font">
                             {{ __('Imate kreiran račun?') }} <a href="{{ route('auth') }}"><b>{{ __('Prijavite se') }}</b></a>
                         </div>
                     </div>
