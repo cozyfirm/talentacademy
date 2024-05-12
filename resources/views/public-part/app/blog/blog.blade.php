@@ -13,7 +13,7 @@
                 <div class="blog__featured-article-content">
                     <div class="blog__featured-article-title"> {{ $last->title }} </div>
                     <div class="blog__featured-article-description"> {{ $last->short_desc }} </div>
-                    <a href="{{ route('public-part.blog.preview', ['id' => $last->id ]) }}" class="blog__featured-article-button">{{ __('Više...') }}</a>
+                    <a href="{{ route('public-part.blog.preview', ['id' => $last->id ]) }}" class="blog__featured-article-button">{{ __('Više informacija...') }}</a>
                 </div>
             </div>
 
@@ -24,7 +24,7 @@
                         <img src="{{ isset($post->mainImg) ? asset($post->mainImg->getFile()) : '' }}" alt="Blog image" class="blog__item-image">
                         <div class="blog__item-content">
                             <div class="blog__item-content-box">
-                                <div class="blog__item-content-box-category"> {{ $post->getCategory() }} </div>
+{{--                                <div class="blog__item-content-box-category"> {{ $post->getCategory() }} </div>--}}
                                 <div class="blog__item-content-box-read-time"> {{ $post->getDateTime() }} </div>
                             </div>
                             <div class="blog__item-content-title"> {{ $post->title }} </div>

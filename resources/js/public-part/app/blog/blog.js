@@ -48,10 +48,10 @@ $(document).ready(function (){
                                     return $("<div>").attr('class', 'blog__item-content')
                                         .append(function (){
                                             return $("<div>").attr('class', 'blog__item-content-box')
-                                                .append(function (){
-                                                    return $("<div>").attr('class', 'blog__item-content-box-category')
-                                                        .text(posts[i]['categoryVal']);
-                                                })
+                                                // .append(function (){
+                                                //     return $("<div>").attr('class', 'blog__item-content-box-category')
+                                                //         .text(posts[i]['categoryVal']);
+                                                // })
                                                 .append(function (){
                                                     return $("<div>").attr('class', 'blog__item-content-box-read-time')
                                                         .text(posts[i]['createdAt']);
