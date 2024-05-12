@@ -32,7 +32,7 @@
 
             <div class="lecturers__list">
                 @foreach($lecturers as $lecturer)
-                    <div class="lecturers__list-item" itemid="{{ $lecturer->id }}">
+                    <div class="lecturers__list-item" itemid="{{ $lecturer->id }}" uri="{{ route('public-part.lecturers.single-lecturer', ['id' => $lecturer->id ]) }}">
                         <img src="{{ asset('files/images/public-part/users/' . ($lecturer->photo_uri)) }}" alt="Lecturer image" class="lecturers__list-item-image">
                         <div class="lecturers__list-item-category">{{ $lecturer->presenter_role }}</div>
                         <a href="{{ route('public-part.lecturers.single-lecturer', ['id' => $lecturer->id ]) }}">

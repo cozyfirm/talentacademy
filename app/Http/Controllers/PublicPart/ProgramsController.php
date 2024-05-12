@@ -92,7 +92,9 @@ class ProgramsController extends Controller{
             return $this->jsonResponse('1200', __('Desila se greška'));
         }
     }
-    public function preview_session($id): View{
+    public function preview_session($id): View | RedirectResponse{
+        if(!Auth::check()) return back();
+
         $session = ProgramSession::where('id', $id)->first();
         $program = Program::where('id', $session->program_id)->first();
         return view($this->_path . 'preview-session', [

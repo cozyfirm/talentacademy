@@ -18,7 +18,7 @@ $(document).ready(function (){
     let writeLecturers = function (lecturers){
         for(let i=0; i<lecturers.length; i++){
             $(".lecturers__list").append(function (){
-                return $("<div>").attr('class', 'lecturers__list-item').attr('itemid', lecturers[i]['id'])
+                return $("<div>").attr('class', 'lecturers__list-item').attr('itemid', lecturers[i]['id']).attr('uri', '/lecturers/preview/' + lecturers[i]['id'])
                     .append(function (){
                         return $("<img>").attr('src', '/files/images/public-part/users/' + lecturers[i]['photo_uri'])
                             .attr('class', 'lecturers__list-item-image');
@@ -112,8 +112,6 @@ $(document).ready(function (){
             }
         });
     });
-
-
     $(".lecturers__search-input").on( "keyup", function() {
         let value = $(this).val();
 
@@ -144,5 +142,9 @@ $(document).ready(function (){
                 }
             }
         });
+    });
+
+    $("body").on('click', '.lecturers__list-item', function (){
+        window.location.href = $(this).attr('uri');
     });
 });

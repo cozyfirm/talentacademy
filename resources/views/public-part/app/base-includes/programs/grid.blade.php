@@ -1,4 +1,4 @@
-<div class="programs__grid">
+<div class="programs__grid" id="programs__grid">
     <div class="generic__header">
         <h2>{{ __('Program') }}</h2>
     </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="programs__grid_pagination programs__grid_pagination_{{ $program->id }}">
         @for($i=1; $i<=$offlineSessions->lastPage(); $i++)
-            <a href="{{ route('public-part.programs.sneak-and-peak', ['id' => $program->id, 'page' => $i]) }}">
+            <a href="{{ route('public-part.programs.sneak-and-peak', ['id' => $program->id, 'page' => $i]) }}#programs__grid">
                 <div class="page-w"> <p>{{ $i }}</p> </div>
             </a>
         @endfor

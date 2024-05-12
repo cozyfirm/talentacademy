@@ -69,7 +69,7 @@
                                 {{ $program->title }}
                             </div>
                             <div class="program__timeline-top-left-title">
-                                {{ __('Program') }}
+                                {{ __('Sesije predavača') }}
                             </div>
                         </div>
                         <div class="program__timeline-top-right">
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                             <div class="program__timeline-item-right">
-                                <a href="{{ route('public-part.programs.preview-session', ['id' => $session->id]) }}">
+                                <a>
                                     <h2 class="program__timeline-item-right-title"> {{ $session->title }} </h2>
                                 </a>
                                 <div class="program__timeline-item-right-item">
