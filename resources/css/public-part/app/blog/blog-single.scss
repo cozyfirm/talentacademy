@@ -57,10 +57,15 @@
 
     .single-blog__content {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: flex-start;
         gap: 32px;
         margin-top: 64px;
+
+        .sb__text{
+            color: $white;
+            width: 1000px;
+        }
 
         .single-blog__content-left {
             display: flex;
@@ -99,11 +104,14 @@
 
         .single-blog__content-right {
             color: $text-white;
-            font-size: 18px;
+            //font-size: 18px;
             font-style: normal;
             font-weight: 300;
-            line-height: 150%;
-            text-align: justify;
+            //line-height: 150%;
+            //text-align: justify;
+            //line-height: 1.2rem !important;
+            letter-spacing: 1px;
+            width: calc(80% - 208px);
 
             br {
                 height: 16px;

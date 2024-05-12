@@ -15,7 +15,9 @@
             <div class="locations__list mb-4">
                 @foreach($locations as $location)
                     <div class="locations__list-item">
-                        <img src="{{ asset('files/images/public-part/locations/' . $location->main_img ) }}" alt="Locations image" class="locations__list-image">
+                        <div class="image__W">
+                            <img src="{{ asset('files/images/public-part/locations/' . $location->main_img ) }}" alt="Locations image" class="locations__list-image">
+                        </div>
                         <h3 class="locations__list-item-title">{{ $location->title ?? '' }}</h3>
                         <div class="locations__list-item-address"> {{ $location->address }}, {{ $location->city }}</div>
                         <div class="locations__list-item-buttons">

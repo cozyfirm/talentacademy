@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div class="program__timeline-section">
+    <div class="program__timeline-section" id="lu__sessions_wrapper">
         <div class="program__timeline-container">
             <div class="program__timeline-items">
                 @foreach($sessions as $session)

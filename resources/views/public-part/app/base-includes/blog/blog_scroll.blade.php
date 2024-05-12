@@ -7,11 +7,13 @@
         <div class="news__list slider_w_2">
             @foreach($blogPosts as $post)
                 <div class="news__list-item" uri="{{ route('public-part.blog.preview', ['id' => $post->id]) }}">
-                    <img src="{{ isset($post->mainImg) ? asset($post->mainImg->getFile()) : '' }}" alt="{{ __('News image') }}" class="news__list-item-image">
-                    <div class="news__list-item-info">
-                        <a href="#" class="news__list-item-info-category">{{ $post->getCategory() }}</a>
-{{--                        <div class="news__list-item-info-reading-time">{{ $post->getDateTime() }}</div>--}}
+                    <div class="img_ww">
+                        <img src="{{ isset($post->mainImg) ? asset($post->mainImg->getFile()) : '' }}" alt="{{ __('News image') }}" class="news__list-item-image">
                     </div>
+{{--                    <div class="news__list-item-info">--}}
+{{--                        <a href="#" class="news__list-item-info-category">{{ $post->getCategory() }}</a>--}}
+{{--                        <div class="news__list-item-info-reading-time">{{ $post->getDateTime() }}</div>--}}
+{{--                    </div>--}}
                     <h2 class="news__list-item-heading"> {{ $post->title }} </h2>
                     <p class="news__list-item-content"> {{ $post->short_desc }} </p>
                 </div>

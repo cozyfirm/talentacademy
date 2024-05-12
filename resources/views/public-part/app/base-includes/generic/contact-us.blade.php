@@ -1,6 +1,6 @@
 <div class="contact__container">
     <h2 class="contact__title">{{ __('Imate dodatna pitanja?') }}</h2>
-    <div class="contact__description">{{ __('Za sva pitanja o ovom studiskom programu ili Akademiji u cjelini molimo vas da koristite ovaj link:') }}</div>
+    <div class="contact__description">{{ __('Za sva pitanja o ovom studiskom programu ili Akademiji u cjelini molimo vas da koristite ovu formu:') }}</div>
     <form class="contact__form">
         <div class="contact__form-input-container">
             <label for="name" class="contact__form-label">{{ __('Ime') }}</label>

@@ -9,7 +9,10 @@
         max-width: $container-width;
 
         @media (max-width: $container-width) {
-            padding: 0px 24px;
+            left: 40px; width: calc(100% - 80px);
+        }
+        @media (max-width: 1200px) {
+            left: 20px; width: calc(100% - 40px);
         }
 
         .lecturers__header {
@@ -23,6 +26,7 @@
                 justify-content: flex-start;
                 align-items: flex-start;
                 flex-direction: column;
+                margin-top: 32px;
             }
 
             h2 {
@@ -42,6 +46,10 @@
                 border: 1px solid rgba(7, 6, 0, 0.30);
                 background: rgba(238, 240, 242, 0.10);
 
+                @media (max-width: $mobile-width){
+                    width: 100%;
+                }
+
                 .lecturers__search-input {
                     background: none;
                     outline: none;
@@ -56,6 +64,7 @@
             align-items: flex-start;
             flex-wrap: wrap;
             gap: 8px;
+            width: 100%;
 
             .lecturers__category {
                 display: flex;
@@ -80,6 +89,16 @@
                 background: $dark;
                 color:$white;
                 border: 1px solid $dark;
+            }
+
+            @media (max-width: $mobile-width){
+                a{
+                    width: 100%;
+                    .lecturers__category{
+                        width: 100%; justify-content: flex-start;
+                        padding: 8px 16px;
+                    }
+                }
             }
         }
 
@@ -121,7 +140,7 @@
                     padding: 4px 16px;
                     align-items: flex-start;
                     border-radius: 32px;
-                    background: var(--Program-Pisanje-bg-program-secondary, #F45B69);
+                    background: var(--Program-Pisanje-bg-program-secondary, #EA8BF3);
                     font-size: 18px;
                     font-style: normal;
                     font-weight: 700;

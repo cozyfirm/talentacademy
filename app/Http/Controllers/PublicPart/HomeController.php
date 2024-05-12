@@ -16,7 +16,7 @@ class HomeController extends Controller{
     protected string $_path = 'public-part.app.home.';
 
     public function home(): View{
-        $daysTil = Carbon::now()->diffInDays(Carbon::parse('2024-08-02'));
+        $daysTil = Carbon::now()->diffInDays(Carbon::parse('2024-06-06'));
 
         return view($this->_path . 'home', [
             'blogPosts' => Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take(6)->get(),

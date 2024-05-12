@@ -4,7 +4,7 @@
         <div class="programs__content">
             <a href="{{ route('public-part.programs.preview-program', ['id' => 1]) }}" class="programs__program program--1">
                 <div class="programs__program_h">
-                    <h4 class="programs__program-heading">{{ __('Pisanje za 21. stoljeće') }}</h4>
+                    <h4 class="programs__program-heading">{{ __('Kreativno pisanje: Komedija') }}</h4>
                     <img src="{{ asset('/files/images/public-part/strelica.png') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
                 </div>
 
@@ -12,7 +12,7 @@
             </a>
             <a href="{{ route('public-part.programs.preview-program', ['id' => 2]) }}" class="programs__program program--2">
                 <div class="programs__program_h">
-                    <h4 class="programs__program-heading">{{ __('Novinarstvo i društvene mreže') }}</h4>
+                    <h4 class="programs__program-heading">{{ __('Novinarstvo: novinarstvo i novi mediji') }}</h4>
                     <img src="{{ asset('/files/images/public-part/strelica.png') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
                 </div>
                 <img src="{{ asset('/files/images/public-part/jurnalism.svg') }}" alt="{{ __('Programs image #2') }}" class="programs__program-image">
@@ -26,7 +26,7 @@
             </a>
             <a href="{{ route('public-part.programs.preview-program', ['id' => 4]) }}" class="programs__program program--4">
                 <div class="programs__program_h">
-                    <h4 class="programs__program-heading">{{ __('Odgovorno kodiranje i Civic Tech') }}</h4>
+                    <h4 class="programs__program-heading">{{ __('Informacione tehnologije') }}</h4>
                     <img src="{{ asset('/files/images/public-part/strelica.png') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
                 </div>
                 <img src="{{ asset('/files/images/public-part/coding.svg') }}" alt="{{ __('Programs image #4') }}" class="programs__program-image">
@@ -40,7 +40,7 @@
             </a>
             <a href="#" class="programs__program program--6">
                 <div class="programs__program_h">
-                    <h4 class="programs__program-heading">{{ __('Angažovani rad  i kritičko razmišljanje') }}</h4>
+                    <h4 class="programs__program-heading">{{ __('Kritičko razmišljanje') }}</h4>
                     <img src="{{ asset('/files/images/public-part/strelica.png') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
                 </div>
                 <img src="{{ asset('/files/images/public-part/think.svg') }}" alt="{{ __('Programs image #6') }}" class="programs__program-image">

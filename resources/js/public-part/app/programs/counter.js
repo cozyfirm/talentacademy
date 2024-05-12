@@ -1,6 +1,6 @@
 $(document).ready(function (){
     /* Format is: month / day / year */
-    let td = new Date("06/10/2024");
+    let td = new Date("06/06/2024");
     // let td = new Date("04/06/2024");
 
     function TimeCalculator(seconds) {
@@ -18,10 +18,10 @@ $(document).ready(function (){
         /* Check if it's right page */
         // noinspection JSJQueryEfficiency
         if($(".c__month").length){
-            $(".c__month").text(mo);
-            $(".c__day").text(d);
-            $(".c__hour").text(h);
-            $(".c__min").text(m);
+            $(".c__month").text(d);
+            $(".c__day").text(h);
+            $(".c__hour").text(m);
+            $(".c__min").text(s);
         }
 
         // console.log(`${mo} Months ${d} Days ${h}:${m}:${s}`);

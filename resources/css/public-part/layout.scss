@@ -28,6 +28,10 @@ body{
     }
 
     background: #E7E7E7;
+
+    ol li::marker, ul li::marker{
+        color: $white;
+    }
 }
 
 /*

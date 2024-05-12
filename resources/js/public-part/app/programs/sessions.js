@@ -84,4 +84,67 @@ $( document ).ready(function() {
             }
         });
     });
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    const sessions_scroll = document.querySelector('.sessions__scroll_body');
+    let isSessionMoved = false;
+
+    if($(".sessions__scroll_body").length){
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        sessions_scroll.addEventListener('mousedown', (e) => {
+            isDown = true;
+            sessions_scroll.classList.add('active');
+            startX = e.pageX - sessions_scroll.offsetLeft;
+            scrollLeft = sessions_scroll.scrollLeft;
+
+            isSessionMoved = false;
+        });
+        sessions_scroll.addEventListener('mouseleave', () => {
+            isDown = false;
+            sessions_scroll.classList.remove('active');
+        });
+        sessions_scroll.addEventListener('mouseup', () => {
+            isDown = false;
+            sessions_scroll.classList.remove('active');
+        });
+        sessions_scroll.addEventListener('mousemove', (e) => {
+            // alert("wee");
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - sessions_scroll.offsetLeft;
+            const walk = (x - startX) * 1; //scroll-fast
+            sessions_scroll.scrollLeft = scrollLeft - walk;
+
+            isSessionMoved = true;
+        });
+    }
+    /* When btn is pressed */
+    $(".pss_btn").click(function (){
+        let width = $(".sessions__scroll_single").outerWidth();
+
+        if ($(window).width() <= 800){
+            sessions_scroll.scrollLeft = (sessions_scroll.scrollLeft - width - 15);
+        }else{
+            sessions_scroll.scrollLeft = (sessions_scroll.scrollLeft - 505);
+        }
+    });
+    $(".nss_btn").click(function (){
+        let width = $(".sessions__scroll_single").outerWidth();
+
+        if ($(window).width() <= 800){
+            sessions_scroll.scrollLeft = (sessions_scroll.scrollLeft + width + 15);
+        }else{
+            sessions_scroll.scrollLeft = (sessions_scroll.scrollLeft + 505);
+        }
+    });
+
+
+    /* Go to URI */
+
+    $(document).on('click','.sessions__scroll_single',function(){
+        if(!isSessionMoved) window.location.href = $(this).attr('uri');
+    });
 });

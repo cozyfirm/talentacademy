@@ -22,7 +22,7 @@
 
                 @if($program_id != 0)
                     <a href="{{ route('public-part.lecturers.lecturers') }}">
-                        <div class="lecturers__category">{{ __('Reset') }}</div>
+                        <div class="lecturers__category active">{{ __('Reset') }}</div>
                     </a>
                 @endif
             </div>

@@ -44,9 +44,7 @@
                     <i class="fas fa-times"></i>
                 </div>
             </div>
-            <div class="img-wrapper">
-                <img src="{{ asset($post->imageRel[2]->fileRel->getFile()) }}">
-            </div>
+            <div class="img-wrapper"> </div>
             <div class="post-details">
                 <p> <span class="post-date"> 10. Maj 2024 - 09:32h </span> <i class="fas fa-clock"></i> </p>
             </div>
@@ -73,8 +71,12 @@
         <div class="single-blog__container">
             <h2 class="single-blog__title"> {{ $post->title }} </h2>
             <div class="single-blog__content">
+{{--                <div class="sb__text">--}}
+{{--                    {!! nl2br($post->description) !!}--}}
+{{--                </div>--}}
+
                 <div class="single-blog__content-left">
-                    <div class="single-blog__content-left-text"> {{ $post->createdBy->name }} </div>
+{{--                    <div class="single-blog__content-left-text"> {{ $post->createdBy->name }} </div>--}}
                     <div class="single-blog__content-left-text"> {{ $post->getDate() }} </div>
                     <div class="single-blog__content-social-icons">
                         <div class="single-blog__content-social-icon">

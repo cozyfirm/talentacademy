@@ -3,10 +3,7 @@
 <!-- Title of page -->
 @section('Preview session') @endsection
 
-@php
-    $extra_items = [1, 2, 3, 4, 5, 6,];
-@endphp
-    <!-- Page content -->
+<!-- Page content -->
 @section('public-content')
     {{ html()->hidden('session_id')->class('form-control')->value($session->id) }}
 
@@ -100,38 +97,39 @@
         </div>
     @endif
 
-    <div class="preview__session_rest_of_w">
-        <div class="preview__session_rest_of_inn_w">
-            <div class="preview__session_rest_of_header">
-                <h2>{{ __('Ostala predavanja') }}</h2>
+    <div class="sessions__scroll_wrapper">
+        <div class="sessions__scroll_iw">
+            <div class="sessions__scroll_header">
+                <h1>{{ __('Ostala predavanja') }}</h1>
             </div>
 
-            <div class="preview__session_rest_of">
+            <div class="sessions__scroll_body">
                 @foreach($otherSessions as $otherSession)
-                    <div class="preview__session_single" uri="{{ route('public-part.programs.preview-session', ['id' => $otherSession->id]) }}">
-                        <div class="preview__session_single_inner">
-                            <h3> {{ $otherSession->title }} </h3>
-
-                            <div class="preview-session__item-row">
+                    <div class="sessions__scroll_single" uri="{{ route('public-part.programs.preview-session', ['id' => $otherSession->id]) }}">
+                        <h3> {{ $otherSession->title }} </h3>
+                        <div class="sss_www">
+                            <div class="scs_tw">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M14 19V24H0V19C0 17.346 1.346 16 3 16H11C12.654 16 14 17.346 14 19ZM7 14C9.206 14 11 12.206 11 10C11 7.794 9.206 6 7 6C4.794 6 3 7.794 3 10C3 12.206 4.794 14 7 14ZM24 3V18H15.899C15.463 15.861 13.65 14.237 11.433 14.044C12.407 12.977 13 11.558 13 10C13 6.686 10.314 4 7 4C6.299 4 5.626 4.121 5 4.342V3C5 1.346 6.346 0 8 0H21C22.654 0 24 1.346 24 3ZM22 14H17V16H22V14Z" fill="#070600"/>
                                 </svg>
                                 {{ $otherSession->presenterRel->name ?? 'Nije dostupno'}}
                             </div>
-                            <div class="preview-session__item-row">
+                            <div class="scs_tw">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="27" height="24" viewBox="0 0 27 24" fill="none">
                                     <path d="M26.1907 19.999C26.1907 22.205 24.2327 23.999 21.825 23.999H8.56854L10.8005 21.999H21.8261C23.03 21.999 24.009 21.102 24.009 19.999C24.009 18.896 23.03 17.999 21.8261 17.999H16.369C13.9613 17.999 12.0033 16.205 12.0033 13.999C12.0033 12.072 13.4985 10.46 15.4816 10.083L17.6198 11.999H16.369C15.1651 11.999 14.1861 12.896 14.1861 13.999C14.1861 15.102 15.1651 15.999 16.369 15.999H21.8261C24.2338 15.999 26.1907 17.793 26.1907 19.999ZM24.5918 8.535C26.7201 6.585 26.7201 3.413 24.5918 1.464C23.5615 0.52 22.1907 0 20.7336 0C19.2765 0 17.9057 0.52 16.8743 1.464C14.7471 3.414 14.7471 6.586 16.883 8.543L20.7336 11.993L24.5918 8.535ZM23.0485 2.878C24.3255 4.048 24.3255 5.951 23.0573 7.113L20.7336 9.195L18.4176 7.121C17.1417 5.951 17.1417 4.048 18.4176 2.878C19.0364 2.311 19.8583 1.999 20.7336 1.999C21.6089 1.999 22.4308 2.312 23.0485 2.878ZM9.3118 20.535C11.4401 18.585 11.4401 15.413 9.3118 13.464C8.28149 12.52 6.91066 12 5.4536 12C3.99654 12 2.62571 12.52 1.59431 13.464C-0.532888 15.414 -0.532888 18.586 1.60304 20.543L5.4536 23.993L9.3118 20.535ZM7.76852 14.878C9.04549 16.048 9.04549 17.951 7.77725 19.113L5.4536 21.195L3.13759 19.121C1.86171 17.951 1.86171 16.048 3.13759 14.878C3.75643 14.311 4.57827 13.999 5.4536 13.999C6.32892 13.999 7.15077 14.312 7.76852 14.878Z" fill="#070600"/>
                                 </svg>
-                                {{ $otherSession->locationRel->title }}, {{ $otherSession->locationRel->address }} {{ $otherSession->locationRel->city }}
+                                {{ $otherSession->locationRel->title }}
                             </div>
-
-                            <p> {{ $otherSession->short_description }} </p>
+                        </div>
+                        <div class="description">
+                            {{ $otherSession->short_description }}
                         </div>
                     </div>
                 @endforeach
             </div>
-            <div class="news__navigation">
-                <div class="news__navigation-dots">
+
+            <div class="sessions__navigation">
+                <div class="sessions__navigation-dots">
                     <div class="news__navigation-dot"></div>
                     <div class="news__navigation-dot"></div>
                     <div class="news__navigation-dot"></div>
@@ -139,13 +137,13 @@
                     <div class="news__navigation-dot"></div>
                     <div class="news__navigation-dot"></div>
                 </div>
-                <div class="news__navigation-buttons">
-                    <button class="news__navigation-button previous__session_btn">
+                <div class="sessions__navigation-buttons">
+                    <button class="sessions__navigation-button pss_btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="16" viewBox="0 0 34 16" fill="none">
                             <path d="M9.32 5.0516L1 9.77621L9.32 14.06M9.32 9.93879C11.0656 10.0969 10.958 9.96669 12.7084 10.1248C13.2561 10.1759 13.8184 10.2224 14.3415 10.0643C14.9723 9.87369 15.4661 9.40871 15.9306 8.95768C18.6835 6.26079 19.9009 4.31717 22.4582 1.44824C21.5829 5.79116 18.8693 12.8589 18.8693 12.8589H33" stroke="#070600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
-                    <button class="news__navigation-button next__session_btn">
+                    <button class="sessions__navigation-button nss_btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="16" viewBox="0 0 34 16" fill="none">
                             <path d="M24.68 5.0516L33 9.77621L24.68 14.06M24.68 9.93879C22.9344 10.0969 23.042 9.96669 21.2916 10.1248C20.7439 10.1759 20.1816 10.2224 19.6585 10.0643C19.0277 9.87369 18.5339 9.40871 18.0694 8.95768C15.3165 6.26079 14.0991 4.31717 11.5418 1.44824C12.4171 5.79116 15.1307 12.8589 15.1307 12.8589H0.999999" stroke="#070600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -154,6 +152,7 @@
             </div>
         </div>
     </div>
+
 
 {{--    <div class="preview-session__more">--}}
 {{--        <div class="preview-session__more-container">--}}

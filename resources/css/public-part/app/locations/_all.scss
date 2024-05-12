@@ -57,7 +57,7 @@
 
                 width: 490px;
                 display: flex;
-                justify-content: flex-start;
+                justify-content: space-between;
                 align-items: flex-start;
                 flex-direction: column;
                 border-radius: 16px;
@@ -69,23 +69,28 @@
                 cursor: pointer;
                 transition: $transition;
 
-                .img_wrapper{
-                    position: relative; left: 0px; width: 100%; height: 300px; overflow: hidden;
-                    img{
-                        object-fit: cover;
-                        max-height: 100%;
-                        min-width: 100%;
+                .upper_w{
+                    display: flex; flex-direction: column; width: 100%;
+
+                    .img_wrapper{
+                        position: relative; left: 0px; width: 100%; height: 300px; overflow: hidden;
+                        img{
+                            object-fit: cover;
+                            max-height: 100%;
+                            min-width: 100%;
+                        }
+                    }
+                    .text_wrapper{
+                        position: relative; left: 0px; top: 0px; width: 100%; padding: 16px; white-space: normal;
+                        h3{
+                            color:$white; font-size: 40px;
+                        }
+                        p{
+                            font-size: 24px; color:#EA8BF3; font-weight: 500; margin: 0px;
+                        }
                     }
                 }
-                .text_wrapper{
-                    position: relative; left: 0px; top: 0px; width: 100%; padding: 16px; white-space: normal;
-                    h3{
-                        color:$white; font-size: 40px;
-                    }
-                    p{
-                        font-size: 24px; color:#EA8BF3; font-weight: 500; margin: 0px;
-                    }
-                }
+
                 .btns_wrapper{
                     position: relative; left: 0px; width: 100%; display: inline-flex; gap: 16px;
                     padding: 32px 16px;
@@ -100,6 +105,14 @@
                             background: #EA8BF3; color:$dark;
                         }
                     }
+                }
+                .body_w{
+                    display: flex; width: 100%;
+                    align-self: stretch;
+                    justify-content: space-between; flex-direction: column;
+
+
+
                 }
             }
             .single_location:last-child{
@@ -190,8 +203,8 @@
         @supports(display: grid) {
             .preview__session_rest_of {
                 position: relative;
-                overflow-x: scroll;
-                overflow-y: hidden;
+                //overflow-x: scroll;
+                //overflow-y: hidden;
                 white-space: nowrap;
                 will-change: transform;
                 user-select: none;
@@ -202,7 +215,7 @@
                 overflow: auto;
 
                 justify-content: flex-start;
-                align-items: flex-start;
+                flex-direction: row;
 
                 .preview__session_single{
                     //display: inline-block;
@@ -214,8 +227,6 @@
                     width: 487px; margin-right: 15px; padding: 32px;
 
                     display: flex;
-                    justify-content: flex-start;
-                    align-items: flex-start;
                     flex-direction: column;
                     align-self: stretch;
 

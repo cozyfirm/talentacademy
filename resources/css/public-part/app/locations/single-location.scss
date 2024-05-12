@@ -21,78 +21,87 @@
             object-fit: cover;
         }
 
-        .single-location__title {
-            font-size: 56px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 120%;
-            color: white;
-            padding: 64px 0;
-        }
+        .sp_i_w{
+            display: flex; width: 1000px; left: calc(50% - 500px); position: relative; flex-direction: column;
+            flex-wrap: wrap;
 
-        .single-location__content {
-            display: flex;
-            //justify-content: flex-start;
-            //align-items: flex-start;
-            gap: 32px;
-            margin-bottom: 64px;
-            justify-content: space-between;
-            width: 100%;
-
-            @media (max-width: 720px) {
-                flex-direction: column;
+            @media (max-width: 1200px){
+                width: 100%; left: 0px;
             }
 
-            .single-location__content-left {
-                width: 260px;
+            .single-location__title {
+                font-size: 56px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 120%;
+                color: white;
+                padding: 64px 0;
+            }
+
+            .single-location__content {
+                display: flex;
+                //justify-content: flex-start;
+                //align-items: flex-start;
+                gap: 32px;
+                margin-bottom: 64px;
+                justify-content: space-between;
+                width: 100%;
 
                 @media (max-width: 720px) {
-                    width: 100%;
+                    flex-direction: column;
                 }
 
-                .single-location__content-left-address {
-                    color: $primary;
-                    font-size: 24px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 140%;
+                .single-location__content-left {
+                    width: 260px;
+
+                    @media (max-width: 720px) {
+                        width: 100%;
+                    }
+
+                    .single-location__content-left-address {
+                        color: $primary;
+                        font-size: 24px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 140%;
+                    }
+
+                    .single-location__content-left-button {
+                        display: flex;
+                        padding: 8px 32px;
+                        justify-content: center;
+                        align-items: center;
+                        align-self: stretch;
+                        gap: 16px;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%;
+                        border-radius: 30px;
+                        border: 1px solid $primary;
+                        color: $primary;
+                    }
                 }
 
-                .single-location__content-left-button {
-                    display: flex;
-                    padding: 8px 32px;
-                    justify-content: center;
-                    align-items: center;
-                    align-self: stretch;
-                    gap: 16px;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 150%;
-                    border-radius: 30px;
-                    border: 1px solid $primary;
-                    color: $primary;
+                .single-location__content-right {
+                    //font-size: 18px;
+                    //font-style: normal;
+                    //font-weight: 300;
+                    //line-height: 150%;
+                    //color: $text-white;
+                    //text-align: justify;
+                    display: flex; position: relative;
+                    width: calc(100% - 260px);
+                    flex-wrap: wrap;
+
+                }
+                .single-location__content-right-page{
+                    display: flex; flex-wrap: wrap;
                 }
             }
-
-            .single-location__content-right {
-                //font-size: 18px;
-                //font-style: normal;
-                //font-weight: 300;
-                //line-height: 150%;
-                //color: $text-white;
-                //text-align: justify;
-                display: flex; position: relative;
-                width: calc(100% - 260px);
-                flex-wrap: wrap;
-
+            .single-location__content-page{
+                display: initial; position: relative; width: 100%;
             }
-            .single-location__content-right-page{
-                display: flex; flex-wrap: wrap;
-            }
-        }
-        .single-location__content-page{
-            display: initial; position: relative; width: 100%;
         }
     }
 

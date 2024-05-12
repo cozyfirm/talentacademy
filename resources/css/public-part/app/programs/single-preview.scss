@@ -157,9 +157,9 @@
                 margin-bottom: 16px;
 
                 .my_note_time{
-                    position: relative; background: $p1_pac; border-radius: 13px; height: 26px; padding: 0px 8px;
+                    position: relative; background: $p1_pac; border-radius: 13px; height: 26px; padding: 4px 12px;
                     h5{
-                        font-style:normal; font-weight: 700; line-height: 120%; color: $dark; font-size: 20px; margin-top: 3px;
+                        font-style:normal; line-height: 120%; color: $dark; font-size: 16px; margin-top: 0px;
                     }
                 }
 
@@ -661,6 +661,141 @@
                 border-radius: 8px;
                 border: 1px solid $dark;
                 outline: unset;
+            }
+        }
+    }
+}
+
+/* Sessions Scroll Bar */
+.sessions__scroll_wrapper{
+    position: relative; width: 100%; min-height: 120px; padding: 64px 0px;
+    .sessions__scroll_iw{
+        position: relative; left: calc(50% - $container-width-half); width: $container-width; min-height: 120px;
+
+        @media (max-width: $container-width){
+            left: 40px; width: calc(100% - 80px);
+        }
+
+        .sessions__scroll_header{
+            position: relative; width: 100%;
+            h1{
+                font-size: 56px;
+            }
+        }
+
+        .sessions__scroll_body{
+            position: relative;
+            display: flex; width: 100%; flex-direction: row;
+            overflow: auto;
+            overflow-x: scroll;
+            gap: 15px;
+            cursor: grab;
+            margin-top: 16px;
+
+            .sessions__scroll_single{
+                min-width: calc(33.33% - 10px); border: 1px solid $dark; border-radius: 8px;
+                padding: 32px; display: flex; gap: 32px; flex-direction: column;
+
+
+                h3{
+                    font-size:32px; font-weight: 700; font-style: normal; line-height: 120%;
+                }
+                .sss_www{
+                    width: 100%; gap: 8px; display: flex; flex-direction: column;
+                    .scs_tw{
+                        display: flex;
+                        gap: 16px; font-size: 20px; font-style: normal; font-weight: 400; line-height: 140%;
+                    }
+                }
+            }
+
+
+        }
+
+        .sessions__navigation {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+
+            @media (max-width: $mobile-width) {
+                justify-content: flex-end;
+            }
+
+            .sessions__navigation-dots {
+                display: flex;
+                visibility: hidden;
+                justify-content: center;
+                align-items: center;
+                gap: 4px;
+
+                @media (max-width: $mobile-width) {
+                    display: none;
+                }
+
+                .news__navigation-dot {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 100%;
+                    background: $text-white;
+                }
+            }
+
+            .sessions__navigation-buttons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+
+                .sessions__navigation-button {
+                    display: flex;
+                    height: 35.754px;
+                    padding: 8px 16px;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    //background-color: $primary;
+                    border-radius: 8px;
+                    border: 1px solid #000;
+                    //background: var(--Surface-and-accents-accent, $primary);
+                    outline: unset;
+
+                    transition: $transition;
+
+                    &:hover {
+                        //background: lighten($primary, 5%)
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1200px){
+    .sessions__scroll_wrapper{
+        .sessions__scroll_iw{
+            .sessions__scroll_body{
+                .sessions__scroll_single{
+                    min-width: calc(50% - 8px);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 800px){
+    .sessions__scroll_wrapper{
+        padding: 32px 0px;
+        .sessions__scroll_iw{
+            left: 20px; width: calc(100% - 40px);
+            .sessions__scroll_header{
+                h1{font-size: 40px}
+            }
+            .sessions__scroll_body{
+                .sessions__scroll_single{
+                    min-width: 100%; padding: 16px;
+                }
             }
         }
     }

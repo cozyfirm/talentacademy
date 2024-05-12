@@ -49,12 +49,14 @@
             <p> {!! nl2br($lecturer->description) !!} </p>
         </div>
     </div>
-    <div class="single-lecturer__interview">
-        <div class="single-lecturer__container">
-            <h2>{{ __('Intervju') }}</h2>
-            <p class="question">{!! nl2br($lecturer->interview) !!} </p>
+    @if($lecturer->interview != '')
+        <div class="single-lecturer__interview">
+            <div class="single-lecturer__container">
+                <h2>{{ __('Intervju') }}</h2>
+                <p class="question">{!! nl2br($lecturer->interview) !!} </p>
+            </div>
         </div>
-    </div>
+    @endif
 
     <!-- A bit of difference from program in data structure -->
     <div class="program__timeline program__timeline_{{ $program->id }}">

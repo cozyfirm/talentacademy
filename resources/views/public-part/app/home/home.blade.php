@@ -42,7 +42,7 @@
             <div class="hero-section__subheading">{{ __('Intenzivni program usavršavanja iz oblasti kreativnih industrija.') }}</div>
             <div class="hero-section__bottom-section">
                 <div class="hero-section__bottom-section-text">
-                    {{ __('02 - 10. Avgust 2024. - Sarajevo') }}
+                    {{ __('Aplikacije do 06. Juna 2024 godine') }}
                 </div>
                 @if(auth()->check())
                     <a href="{{ route('dashboard.my-profile') }}" class="hero-section__bottom-section-button">
@@ -131,13 +131,16 @@
             <div class="preview__locations_body">
                 @foreach($locations as $location)
                     <div class="single_location">
-                        <div class="img_wrapper">
-                            <img src="{{ asset('files/images/public-part/locations/' . $location->main_img ) }}" alt="Location image" class="single-location__locations-list-item-image">
+                        <div class="upper_w">
+                            <div class="img_wrapper">
+                                <img src="{{ asset('files/images/public-part/locations/' . $location->main_img ) }}" alt="Location image" class="single-location__locations-list-item-image">
+                            </div>
+                            <div class="text_wrapper">
+                                <h3> {{ $location->title }} </h3>
+                                <p>{{ $location->address }}, {{ $location->city }}</p>
+                            </div>
                         </div>
-                        <div class="text_wrapper">
-                            <h3> {{ $location->title }} </h3>
-                            <p>{{ $location->address }}, {{ $location->city }}</p>
-                        </div>
+
                         <div class="btns_wrapper">
                             <a href="{{ route('public-part.locations.single-location', ['id' => $location->id ]) }}">
                                 <div class="btn btn_bcg">
@@ -153,6 +156,11 @@
                                     {{ __('Lokacija') }}
                                 </div>
                             </a>
+                        </div>
+
+                        <div class="body_w">
+
+
                         </div>
                     </div>
                 @endforeach

@@ -152,6 +152,7 @@
 
             position: relative; width: 532px; border: 1px solid $dark; border-radius: 8px;
             margin-right: 15px; transition: $transition02;
+            align-self: stretch;
 
             .sp__image{
                 position: relative; width: 100%;
@@ -242,23 +243,29 @@
             position: relative; width: calc(33.33% - 20px); border: 1px solid $dark; border-radius: 16px;
             padding: 32px; transition: $transition02;
             h1{
-                font-weight: bold; font-size: 50px; transition: $transition02;
+                font-weight: bold; font-size: 32px; transition: $transition02;
             }
-            .pg_sample__row{
-                position: relative; width: 100%; display: inline-flex; justify-content: flex-start;
-                padding: 8px 0px;
-                img{
-                    height: 24px;
-                }
-                svg{
-                    fill: $dark; transition: $transition02;
-                }
-                h5{
-                    font-size: 24px; font-weight: bold; margin-left: 16px; transition: $transition02;
+            .info_w{
+                width: 100%; display: flex; flex-direction: column;
+                padding: 16px 0px;
+                gap: 4px;
+
+                .pg_sample__row{
+                    position: relative; width: 100%; display: inline-flex; justify-content: flex-start;
+
+                    img{
+                        height: 24px;
+                    }
+                    svg{
+                        fill: $dark; transition: $transition02;
+                    }
+                    h5{
+                        font-size: 18px; font-weight: bold; margin-left: 16px; transition: $transition02;
+                    }
                 }
             }
             p{
-                font-weight: bold; font-size: 18px; transition: $transition02;
+                font-weight: bold; font-size: 16px; transition: $transition02;
             }
         }
         .pg__sample:hover{
@@ -301,6 +308,9 @@
         position:relative; left: calc(50% - $container-width-half); width: $container-width; display: inline-flex; justify-content: center; gap: 16px;
         margin-top: 32px;
 
+        @media only screen and (max-width: $container-width){
+            left: 40px; width: calc(100% - 80px);
+        }
         .page-w{
             width: 40px; height: 40px; border-radius: 8px; border: 1px solid $dark;
             display: flex;
@@ -417,11 +427,11 @@
                     width: 60px; height: 60px;
 
                     p{
-                        font-size: 26px; margin-top: 20px;
+                        font-size: 26px; margin-top: 14px;
                     }
                 }
                 span{
-                    font-size: 26px;
+                    font-size: 26px; margin-top: 7px;
                 }
             }
         }
@@ -740,6 +750,7 @@
                 font-weight: 400;
                 line-height: 150%;
                 margin-top: 16px;
+                color: $dark !important;
             }
         }
     }

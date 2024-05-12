@@ -134,7 +134,7 @@ $( document ).ready(function() {
                                                })
                                        })
                                        .append(function (){
-                                           return $("<div>").attr('class', 'program__timeline-item-right-description').text(sessions[i]['description']);
+                                           return $("<div>").attr('class', 'program__timeline-item-right-description').html(sessions[i]['short_description']);
                                        })
                                });
                         });
@@ -150,6 +150,12 @@ $( document ).ready(function() {
                     $this.find('.program__timeline-top-right-day-number').addClass('active');
 
                     $(".program__timeline-header-date").text(response['data']['day'] + ', ' + response['data']['date']);
+
+                    $('html, body').animate({
+                        scrollTop: $("#program-sessions").offset().top
+                    }, 5);
+
+                    // $.scrollTo($('#lu__sessions_wrapper'), 1000);
                 }else{
                     Notify.Me([response['message'], "warn"]);
                 }

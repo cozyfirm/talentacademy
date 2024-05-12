@@ -42,22 +42,29 @@ $(document).ready(function (){
                     .append(function (){
                         return $("<div>").attr('class', 'lecturers__list-item-social-icons')
                             .append(function (){
-                                return $("<a>").attr('href', lecturers[i]['linkedin']).attr('target', '_blank').attr('class', 'lecturers__list-item-social-icon')
-                                    .append(function (){
-                                        return $("<img>").attr('src', '/files/images/svg-icons/linkedin.svg');
-                                    })
+                                if(lecturers[i]['linkedin'] !== null){
+                                    console.log(lecturers[i]['linkedin']);
+                                    return $("<a>").attr('href', lecturers[i]['linkedin']).attr('target', '_blank').attr('class', 'lecturers__list-item-social-icon')
+                                        .append(function (){
+                                            return $("<img>").attr('src', '/files/images/svg-icons/linkedin.svg');
+                                        })
+                                }
                             })
                             .append(function (){
-                                return $("<a>").attr('href', lecturers[i]['twitter']).attr('target', '_blank').attr('class', 'lecturers__list-item-social-icon')
-                                    .append(function (){
-                                        return $("<img>").attr('src', '/files/images/svg-icons/x.svg');
-                                    })
+                                if(lecturers[i]['twitter'] !== null){
+                                    return $("<a>").attr('href', lecturers[i]['twitter']).attr('target', '_blank').attr('class', 'lecturers__list-item-social-icon')
+                                        .append(function (){
+                                            return $("<img>").attr('src', '/files/images/svg-icons/x.svg');
+                                        })
+                                }
                             })
                             .append(function (){
-                                return $("<a>").attr('href', lecturers[i]['web']).attr('target', '_blank').attr('class', 'lecturers__list-item-social-icon')
-                                    .append(function (){
-                                        return $("<img>").attr('src', '/files/images/svg-icons/dribble.svg');
-                                    })
+                                if(lecturers[i]['web'] !== null){
+                                    return $("<a>").attr('href', lecturers[i]['web']).attr('target', '_blank').attr('class', 'lecturers__list-item-social-icon')
+                                        .append(function (){
+                                            return $("<img>").attr('src', '/files/images/svg-icons/dribble.svg');
+                                        })
+                                }
                             });
                     });
 

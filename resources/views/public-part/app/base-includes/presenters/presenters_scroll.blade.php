@@ -14,12 +14,12 @@
                     <img src="{{ asset('files/images/public-part/users/' . ($presenter->presenterRel->photo_uri ?? '') ) }}" alt="">
                 </div>
                 <div class="sp__btn_w">
-                    <button class="sp__btn">{{ __('Keynote speaker') }}</button>
+                    <button class="sp__btn"> {{ $presenter->presenterRel->presenter_role ?? '' }} </button>
                 </div>
                 <div class="sp__text_w">
                     <h1> {{ $presenter->presenterRel->name ?? '' }} </h1>
-                    <h2> {{ $presenter->presenterRel->title ?? '' }} </h2>
-                    <p> {{ $presenter->short_description ?? '' }} </p>
+                    <h2> {{ $presenter->presenterRel->institution ?? '' }} </h2>
+                    <p> {{ $presenter->presenterRel->short_description ?? '' }} </p>
                 </div>
                 <div class="sp__icons_w">
                     @if(isset($presenter->presenterRel) and $presenter->presenterRel->linkedin != '')
