@@ -783,7 +783,6 @@
         }
     }
 }
-
 @media (max-width: 800px){
     .sessions__scroll_wrapper{
         padding: 32px 0px;
@@ -795,6 +794,166 @@
             .sessions__scroll_body{
                 .sessions__scroll_single{
                     min-width: 100%; padding: 16px;
+                }
+            }
+        }
+    }
+}
+
+
+/* Presenters scroll bar */
+.presenters__scroll_wrapper{
+    position: relative; width: 100%; min-height: 120px; padding: 64px 0px;
+    .presenters__scroll_iw{
+        position: relative; left: calc(50% - $container-width-half); width: $container-width; min-height: 120px;
+
+        @media (max-width: $container-width){
+            left: 40px; width: calc(100% - 80px);
+        }
+
+        .presenters__scroll_header{
+            position: relative; width: 100%;
+            h1{
+                font-size: 56px;
+            }
+        }
+
+        .presenters__scroll_body{
+            position: relative;
+            display: flex; width: 100%; flex-direction: row;
+            overflow: auto;
+            overflow-x: scroll;
+            gap: 15px;
+            cursor: grab;
+            margin-top: 16px;
+
+            .presenters__scroll_single{
+                min-width: calc(33.33% - 10px); width: calc(33.33% - 10px); border: 1px solid $dark; border-radius: 8px;
+                display: flex; flex-direction: column; transition: 0.2s all;
+
+                .img_wrapper{
+                    //position: relative; width: 100%; height: 350px; overflow:hidden;
+                    img{
+                        width: 100%;
+                    }
+                }
+
+                .p__s_s_btn{
+                    position: relative; left: 15px; width: calc(100% - 30px);
+                    button{
+                        height: 36px; border-radius: 18px; background: $p1_pac; font-weight: bold;
+                        border: none; padding: 0px 20px; margin: 15px 0px;
+                    }
+                }
+                .sp__text_w{
+                    position: relative; left: 15px; width: calc(100% - 30px);
+                    white-space: normal; min-height: 240px;
+
+                    h1, h2{
+                        font-weight: bold;
+                    }
+                    h2{
+                        font-size: 24px;
+                    }
+                    p{
+                        width: 100%;
+                    }
+                }
+                .sp__icons_w{
+                    position: relative; left: 15px; width: calc(100% - 30px); height: 50px;
+                    a{
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+
+        .presenters__navigation {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 32px;
+
+            @media (max-width: $mobile-width) {
+                justify-content: flex-end;
+            }
+
+
+            .presenters__navigation-buttons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+
+                .presenters__navigation-button {
+                    display: flex;
+                    height: 35.754px;
+                    padding: 8px 16px;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    //background-color: $primary;
+                    border-radius: 8px;
+                    border: 1px solid #000;
+                    //background: var(--Surface-and-accents-accent, $primary);
+                    outline: unset;
+
+                    transition: $transition;
+
+                    &:hover {
+                        //background: lighten($primary, 5%)
+                    }
+                }
+            }
+        }
+    }
+}
+
+.presenters__scroll_wrapper_1{ .presenters__scroll_iw{ .presenters__scroll_body{ .presenters__scroll_single{ .p__s_s_btn{ button{ background: $p1_pac; } } } } } }
+.presenters__scroll_wrapper_2{ .presenters__scroll_iw{ .presenters__scroll_body{ .presenters__scroll_single{ .p__s_s_btn{ button{ background: $p2_pac; } } } } } }
+.presenters__scroll_wrapper_3{ .presenters__scroll_iw{ .presenters__scroll_body{ .presenters__scroll_single{ .p__s_s_btn{ button{ background: $p3_pac; } } } } } }
+.presenters__scroll_wrapper_4{ .presenters__scroll_iw{ .presenters__scroll_body{ .presenters__scroll_single{ .p__s_s_btn{ button{ background: $p4_pac; } } } } } }
+.presenters__scroll_wrapper_5{ .presenters__scroll_iw{ .presenters__scroll_body{ .presenters__scroll_single{ .p__s_s_btn{ button{ background: $p5_pac; } } } } } }
+.presenters__scroll_wrapper_6{ .presenters__scroll_iw{ .presenters__scroll_body{ .presenters__scroll_single{ .p__s_s_btn{ button{ background: $p6_pac; } } } } } }
+
+.presenters__scroll_wrapper_1{.presenters__scroll_body { .presenters__scroll_single:hover{ background: $p1_bcg; } }  }
+.presenters__scroll_wrapper_2{.presenters__scroll_body { .presenters__scroll_single:hover{ background: $p2_bcg; } }  }
+.presenters__scroll_wrapper_3{.presenters__scroll_body { .presenters__scroll_single:hover{ background: $p3_bcg; } }  }
+.presenters__scroll_wrapper_4{.presenters__scroll_body { .presenters__scroll_single:hover{ background: $p4_bcg; } }  }
+.presenters__scroll_wrapper_5{.presenters__scroll_body { .presenters__scroll_single:hover{ background: $p5_bcg; } }  }
+.presenters__scroll_wrapper_6{.presenters__scroll_body { .presenters__scroll_single:hover{ background: $p6_bcg; } }  }
+
+
+@media (max-width: 1200px){
+    .presenters__scroll_wrapper{
+        .presenters__scroll_iw{
+            .presenters__scroll_body{
+                .presenters__scroll_single{
+                    min-width: calc(50% - 8px);
+                }
+            }
+        }
+    }
+}
+@media (max-width: 800px){
+    .presenters__scroll_wrapper{
+        // padding: 32px 0px;
+        .presenters__scroll_iw{
+            left: 20px; width: calc(100% - 40px);
+
+            .presenters__scroll_header{
+                h1{font-size: 40px}
+            }
+            .presenters__scroll_body{
+                .presenters__scroll_single{
+                    min-width: 100%;
+                    .sp__text_w{
+                        h2{
+                            font-size: 18px;
+                        }
+                    }
                 }
             }
         }

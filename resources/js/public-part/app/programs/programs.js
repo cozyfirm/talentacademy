@@ -162,4 +162,68 @@ $( document ).ready(function() {
             }
         });
     });
+
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    const presenters_new_scroll = document.querySelector('.presenters__scroll_body');
+    let arePresentersMoved = false;
+
+    if($(".presenters__scroll_body").length){
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        presenters_new_scroll.addEventListener('mousedown', (e) => {
+            isDown = true;
+            presenters_new_scroll.classList.add('active');
+            startX = e.pageX - presenters_new_scroll.offsetLeft;
+            scrollLeft = presenters_new_scroll.scrollLeft;
+
+            arePresentersMoved = false;
+        });
+        presenters_new_scroll.addEventListener('mouseleave', () => {
+            isDown = false;
+            presenters_new_scroll.classList.remove('active');
+        });
+        presenters_new_scroll.addEventListener('mouseup', () => {
+            isDown = false;
+            presenters_new_scroll.classList.remove('active');
+        });
+        presenters_new_scroll.addEventListener('mousemove', (e) => {
+            // alert("wee");
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - presenters_new_scroll.offsetLeft;
+            const walk = (x - startX) * 1; //scroll-fast
+            presenters_new_scroll.scrollLeft = scrollLeft - walk;
+
+            arePresentersMoved = true;
+        });
+    }
+    /* When btn is pressed */
+    $(".pps_btn").click(function (){
+        let width = $(".presenters__scroll_single").outerWidth();
+
+        if ($(window).width() <= 800){
+            presenters_new_scroll.scrollLeft = (presenters_new_scroll.scrollLeft - width - 15);
+        }else{
+            presenters_new_scroll.scrollLeft = (presenters_new_scroll.scrollLeft - 505);
+        }
+    });
+    $(".nps_btn").click(function (){
+        let width = $(".presenters__scroll_single").outerWidth();
+
+        if ($(window).width() <= 800){
+            presenters_new_scroll.scrollLeft = (presenters_new_scroll.scrollLeft + width + 15);
+        }else{
+            presenters_new_scroll.scrollLeft = (presenters_new_scroll.scrollLeft + 505);
+        }
+    });
+
+
+    /* Go to URI */
+
+    $(document).on('click','.presenters__scroll_single',function(){
+        if(!arePresentersMoved) window.location.href = $(this).attr('uri');
+    });
 });
