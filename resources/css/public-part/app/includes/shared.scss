@@ -28,6 +28,7 @@
 
             @media (max-width: $mobile-width) {
                 font-size: 48px;
+                //text-align: left;
             }
         }
 
@@ -42,6 +43,7 @@
                 flex-direction: column-reverse;
 
                 .how-to-apply__step-image {
+                    display: none;
                     width: 100%;
                     height: auto !important;
                 }

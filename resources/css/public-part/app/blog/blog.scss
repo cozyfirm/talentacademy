@@ -49,6 +49,9 @@
                 line-height: 120%;
                 color: $text-white;
                 margin-top: 32px;
+                @media (max-width: 800px){
+                    font-size: 40px;
+                }
             }
 
             .blog__featured-article-description {
@@ -111,6 +114,11 @@
                 margin-top: 24px;
                 margin-bottom: 36px;
                 padding: 0 32px;
+
+                @media (max-width: 800px){
+                    padding: 0 16px;
+                    margin-bottom: 16px;
+                }
 
                 .blog__item-content-box {
                     width: 100%;

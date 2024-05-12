@@ -33,16 +33,16 @@
                 </div>
             </div>
             <div class="hero-section__arrows">
-                <img src="{{ asset('files/images/public-part/arrow.svg') }}" alt="Arrow" class="hero-section__arrow">
-                <img src="{{ asset('files/images/public-part/arrow.svg') }}" alt="Arrow" class="hero-section__arrow">
-                <img src="{{ asset('files/images/public-part/arrow.svg') }}" alt="Arrow" class="hero-section__arrow">
-                <img src="{{ asset('files/images/public-part/arrow.svg') }}" alt="Arrow" class="hero-section__arrow">
+                <img src="{{ asset('files/images/public-part/hnta_d.png') }}" alt="Arrow" class="hero-section__arrow hero-section__arrow_d">
+                <img src="{{ asset('files/images/public-part/hnta--03- mob.svg') }}" alt="Arrow" class="hero-section__arrow hero-section__arrow_m">
+{{--                <img src="{{ asset('files/images/public-part/arrow.svg') }}" alt="Arrow" class="hero-section__arrow">--}}
+{{--                <img src="{{ asset('files/images/public-part/arrow.svg') }}" alt="Arrow" class="hero-section__arrow">--}}
+{{--                <img src="{{ asset('files/images/public-part/arrow.svg') }}" alt="Arrow" class="hero-section__arrow">--}}
             </div>
-            <h2 class="hero-section__heading">{{ __('Helem Nejse Talent Akademija') }}</h2>
-            <div class="hero-section__subheading">{{ __('Intenzivni program usavršavanja iz oblasti kreativnih industrija.') }}</div>
-            <div class="hero-section__bottom-section">
-                <div class="hero-section__bottom-section-text">
-                    {{ __('Aplikacije do 06. Juna 2024 godine') }}
+            <div class="hero__heading">
+                <div class="boris_wrapper">
+                    <h2 class="hero-section__heading"> {{ __('Helem Nejse Talent Akademija') }} </h2>
+                    <div class="hero-section__subheading">{{ __('Intenzivni program usavršavanja iz oblasti kreativnih industrija.') }}</div>
                 </div>
                 @if(auth()->check())
                     <a href="{{ route('dashboard.my-profile') }}" class="hero-section__bottom-section-button">
@@ -53,6 +53,12 @@
                         {{ __('Apliciraj za stipendiju') }}
                     </a>
                 @endif
+            </div>
+            <div class="hero-section__bottom-section">
+                <div class="hero-section__bottom-section-text">
+                    {{ __('Aplikacije do 06. Juna 2024 godine!') }}
+                </div>
+
                 <a href="#features" class="hero-section__bottom-section-learn-more">
                     {{ __('Saznaj više!') }}
                     <img src="{{ asset('files/images/public-part/down-icon.svg') }}" alt="Down icon">
