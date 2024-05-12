@@ -9,7 +9,7 @@
     <div class="presenters__scroll_iw">
         <div class="presenters__scroll_body">
             @foreach($program->uniquePresenterSessions() as $presenter)
-                <div class="presenters__scroll_single" uri="{{ route('public-part.lecturers.single-lecturer', ['id' => $presenter->id]) }}">
+                <div class="presenters__scroll_single" uri="{{ route('public-part.lecturers.single-lecturer', ['id' => $presenter->presenterRel->id]) }}">
                     <div class="img_wrapper">
                         <img src="{{ asset('files/images/public-part/users/' . ($presenter->presenterRel->photo_uri ?? '') ) }}" alt="">
                     </div>
