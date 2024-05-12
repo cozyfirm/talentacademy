@@ -74,6 +74,13 @@
                     object-fit: fill;
                     height: 100%;
                 }
+
+                @media (max-width: 800px) {
+                    width: 100%; height: auto;
+                    .locations__list-image{
+                        height: auto; width: 100%;
+                    }
+                }
             }
 
             .locations__list-item-title {

@@ -21,7 +21,7 @@
                         <h3 class="locations__list-item-title">{{ $location->title ?? '' }}</h3>
                         <div class="locations__list-item-address"> {{ $location->address }}, {{ $location->city }}</div>
                         <div class="locations__list-item-buttons">
-                            <a href="{{ route('public-part.locations.single-location', ['id' => $location->id ]) }}" class="locations__list-item-button">{{ __('Više informacija') }}</a>
+                            <a href="{{ route('public-part.locations.single-location', ['id' => $location->id ]) }}" class="locations__list-item-button">{{ __('Više..') }}</a>
                             <a href="{{ $location->location }}" target="_blank" class="locations__list-item-button locations__list-item-button--outlined ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                                     <path d="M12.0001 14.6318C14.2061 14.6318 16.0001 12.8378 16.0001 10.6318C16.0001 8.42584 14.2061 6.63184 12.0001 6.63184C9.79406 6.63184 8.00006 8.42584 8.00006 10.6318C8.00006 12.8378 9.79406 14.6318 12.0001 14.6318ZM12.0001 8.63184C13.1031 8.63184 14.0001 9.52884 14.0001 10.6318C14.0001 11.7348 13.1031 12.6318 12.0001 12.6318C10.8971 12.6318 10.0001 11.7348 10.0001 10.6318C10.0001 9.52884 10.8971 8.63184 12.0001 8.63184Z" fill="#EA8BF3"/>
