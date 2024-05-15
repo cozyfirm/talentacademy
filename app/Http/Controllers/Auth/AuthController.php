@@ -33,6 +33,14 @@ class AuthController extends Controller{
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
 
+            if($user->email_verified_at == null){
+                Auth::logout();
+                return json_encode([
+                    'code' => '1102',
+                    'message' => __('Molimo Vas da verifikujete Vaš račun!!')
+                ]);
+            }
+
             $uri = route('system.home');
             if($user->role == 'user' or $user->role == 'presenter') $uri = route('dashboard.my-profile');
 
@@ -103,7 +111,7 @@ class AuthController extends Controller{
 
             /* Hash password and add token */
             $request['password'] = Hash::make($request->password);
-            $request['api_token'] = hash('sha256', 'root'. '+'. time());
+            $request['api_token'] = hash('sha256', $request->email. '+'. time());
             $request['birth_date'] = Carbon::parse($request->birth_date)->format('Y-m-d');
 
             /* When user is created, UserObserver is called and email was sent */
@@ -118,8 +126,11 @@ class AuthController extends Controller{
     public function verifyAccount($token){
         try{
             $user = User::where('api_token', $token)->first();
+            $user->update(['email_verified_at' => Carbon::now()]);
             Auth::login($user);
-        }catch (\Exception $e){}
+        }catch (\Exception $e){
+            dd($e);
+        }
 
         return redirect()->route('public-part.home');
     }
