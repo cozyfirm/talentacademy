@@ -1,7 +1,7 @@
 @extends('public-part.layout.layout')
 
 <!-- Title of page -->
-@section('Locations') @endsection
+@section('title') {{ __('Lokacije') }} @endsection
 
 <!-- Page content -->
 @section('public-content')

@@ -2,6 +2,7 @@
 
 <!-- Title of page -->
 @section('title'){{ $post->title }}@endsection
+@section('meta_uri'){{ route('public-part.blog.preview', ['id' => $post->id]) }}@endsection
 @section('meta_title'){{ $post->title }}@endsection
 @section('meta_desc'){{ $post->short_desc }}@endsection
 @section('meta_img'){{ isset($post->imgOne) ? asset( $post->imgOne->getFile() ) : '' }}@endsection

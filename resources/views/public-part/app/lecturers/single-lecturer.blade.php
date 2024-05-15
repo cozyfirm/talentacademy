@@ -1,7 +1,11 @@
 @extends('public-part.layout.layout')
 
-<!-- Title of page -->
-@section('Single Lecturer') @endsection
+@section('title'){{ $lecturer->name }}@endsection
+@section('meta_uri'){{ route('public-part.lecturers.single-lecturer', ['id' => $lecturer->id]) }}@endsection
+@section('meta_title'){{ $lecturer->name }}@endsection
+@section('meta_desc'){{ $lecturer->short_description }}@endsection
+@section('meta_img'){{ asset('files/images/public-part/users/' . ($lecturer->photo_uri)) }}@endsection
+
 <!-- Page content -->
 @section('public-content')
     <div class="single-lecturer__featured">

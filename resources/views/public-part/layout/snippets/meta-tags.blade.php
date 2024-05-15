@@ -4,7 +4,7 @@
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://talentakademija.ba">
+<meta property="og:url" content="@yield('meta_uri', 'https://talentakademija.ba')">
 <meta property="og:title" content="@yield('meta_title', __('Helem Nejse Talent akademija'))">
 <meta property="og:description" content="@yield('meta_desc', __('Sedmodnevna ljetna škola iz oblasti kreativnih industrija u Sarajevu!'))">
 <meta property="og:image" content="@yield('meta_img', asset('files/images/public-part/HNTAShare.png'))">
@@ -12,7 +12,7 @@
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://talentakademija.ba">
+<meta property="twitter:url" content="@yield('meta_uri', 'https://talentakademija.ba')">
 <meta property="twitter:title" content="@yield('meta_title', __('Helem Nejse Talent akademija'))">
 <meta property="twitter:description" content="@yield('meta_desc', __('Sedmodnevna ljetna škola iz oblasti kreativnih industrija u Sarajevu!'))">
 <meta property="twitter:image" content="@yield('meta_img', asset('files/images/public-part/HNTAShare.png'))">

@@ -1,7 +1,9 @@
 @extends('public-part.layout.layout')
 
-<!-- Title of page -->
-@section('Signle location') @endsection
+@section('title'){{ $location->title }}@endsection
+@section('meta_title'){{ $location->title }}@endsection
+@section('meta_desc'){{ substr(strip_tags($location->description), 0, 150) }}..@endsection
+@section('meta_img'){{ asset('files/images/public-part/locations/' . $location->main_img ) }}@endsection
 
 <!-- Page content -->
 @section('public-content')

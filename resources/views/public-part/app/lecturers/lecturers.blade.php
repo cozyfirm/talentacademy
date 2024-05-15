@@ -1,8 +1,8 @@
 @extends('public-part.layout.layout')
 
 <!-- Title of page -->
-@section('Lecturers') @endsection
-    <!-- Page content -->
+@section('title') {{ __('Predavači') }} @endsection
+<!-- Page content -->
 @section('public-content')
     <div class="lecturers">
         <div class="lecturers__container">
