@@ -201,9 +201,9 @@ class ProgramsController extends Controller{
             if(isset($request->criteria) and isset($request->privacy)) $scholarship->update(['checked' => 1]);
             else $scholarship->update(['checked' => 0]);
 
-            return back()->with('success', __('Uspješno spremljeno!'));
+            return back()->with('success', __('Uspješno spremljeno!'))->with('message', __('Vaše izmjene uspješno sačuvane!'));
         }catch (\Exception $e){
-            return back()->with('error', __('Desila se greška!'));
+            return back()->with('error', __('Desila se greška!'))->with('message', __('Desila se greška!'));
         }
     }
     public function cancelScholarship ($program_id): RedirectResponse{
@@ -215,6 +215,9 @@ class ProgramsController extends Controller{
     }
     public function submitForScholarship ($program_id){
         try{
+            $scholarship = $this->getScholarshipApplication($program_id);
+            if(!$scholarship->checked) return back()->with('error', __('Desila se greška!'))->with('message', __('Molimo da se složite sa "Kriterijem upisa" i prihvatite "Pravila privatnosti"!'));
+
             ProgramApplication::where('program_id', $program_id)->where('attendee_id', Auth::user()->id)->update([
                 'status' => 'submitted'
             ]);

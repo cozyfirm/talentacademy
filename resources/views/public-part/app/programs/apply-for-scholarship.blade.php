@@ -9,6 +9,12 @@
 
     <div class="apply__for_scholarship_w">
         <div class="apply__for_scholarship_inner">
+            @if(session()->has('message'))
+                <div class="saved_successfully">
+                    <p>{{ session()->get('message') }}</p>
+                </div>
+            @endif
+
             <h1>{{ __('Dobro došli!') }}</h1>
 
             <p>
@@ -64,7 +70,7 @@
                 <div class="terms__and_conditions_w">
                     <div class="terms__and_conditions">
                         <input class="form-check-input" type="checkbox" value="1" id="criteria" @if($application->checked) checked @endif name="criteria">
-                        <p>{{ __('Pročitao sam dokument') }} <a href="{{ route('public-part.how-to-apply') }}">{{ __('Kriterij upisa') }}</a> </p>
+                        <p>{{ __('Slažem se sa') }} <a href="{{ route('public-part.how-to-apply') }}">{{ __('Kriterijem upisa') }}</a> </p>
                     </div>
                     <div class="terms__and_conditions">
                         <input class="form-check-input" type="checkbox" value="1" name="privacy" @if($application->checked) checked @endif id="privacy">

@@ -34,9 +34,9 @@
                             <button class="my-c-btn">{{ __('Apliciraj za stipendiju') }}</button>
                         </a>
                     @endif
-                    {{--<a href="#">--}}
-                    {{--    <button class="my-c-btn">{{ __('Više o programu') }}</button>--}}
-                    {{--</a>--}}
+                    <a href="#">
+                        <button class="my-c-btn">{{ __('Detaljno o programu') }}</button>
+                    </a>
                 </div>
             </div>
         </div>

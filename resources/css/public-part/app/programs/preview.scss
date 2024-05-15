@@ -63,9 +63,13 @@
             }
             .p__c_iw_buttons{
                 a{
+                    width: 100%; display: flex; flex-wrap: wrap;
                     button{
-                        padding: 8px 14px; margin: 0px;
+                        padding: 8px 14px; margin: 0px; width: 100%;
                     }
+                }
+                a:last-child{
+                    margin-top: 16px;
                 }
             }
         }

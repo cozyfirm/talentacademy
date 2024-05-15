@@ -4,6 +4,13 @@
     .apply__for_scholarship_inner{
         position: relative; left: calc(50% - $container-width-half); width: $container-width;
 
+        .saved_successfully{
+            width: 100%; padding: 16px; border-radius: 8px; background: #EA8BF3; margin-bottom: 16px;
+            p{
+                margin: 0px;
+            }
+        }
+
         h1{
             position: relative; width: 100%; text-align: center; font-weight: 700; font-size: 56px; margin-bottom: 32px; margin-top: 0px;
         }

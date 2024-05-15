@@ -111,6 +111,16 @@
                             background: #EA8BF3; color:$dark;
                         }
                     }
+
+                    @media (max-width: $mobile-width){
+                        gap: 16px;
+                        a{
+                            width: calc(50% - 8px);
+                            .btn{
+                                padding-left: 0px; padding-right: 0px; width: 100%;
+                            }
+                        }
+                    }
                 }
                 .body_w{
                     display: flex; width: 100%;

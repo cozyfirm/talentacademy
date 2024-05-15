@@ -38,7 +38,7 @@
                 </div>
                 <img src="{{ asset('/files/images/public-part/graphic_design.svg') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
             </a>
-            <a href="#" class="programs__program program--6">
+            <a href="{{ route('public-part.critical-thinking') }}" class="programs__program program--6">
                 <div class="programs__program_h">
                     <h4 class="programs__program-heading">{{ __('Kritičko razmišljanje') }}</h4>
                     <img src="{{ asset('/files/images/public-part/strelica.png') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">

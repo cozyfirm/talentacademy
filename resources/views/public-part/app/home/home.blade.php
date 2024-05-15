@@ -101,7 +101,7 @@
             <div class="features__content">
                 <h2 class="features__heading">{{ __('Kritičko mišljenje') }}</h2>
                 <p class="features__text">{{ __('Pored pet programa Akademiji, svi polaznici slušaju i šesti program nazvan Kritičko mišljenje koji stavlja akcenat na vezu između kreativnih industrija i građanskog aktivizma, spajanja tehnologije i umjetnosti, te stvaranju boljeg društva i zajednice.') }}</p>
-                <a href="#" class="features__button">
+                <a href="{{ route('public-part.critical-thinking') }}" class="features__button">
                     <img src="{{ asset('files/images/public-part/twisted-arrow.svg') }}" alt="Twisted arrow">
                     {{ __('Više') }}
                 </a>

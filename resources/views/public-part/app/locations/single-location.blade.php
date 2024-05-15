@@ -52,7 +52,7 @@
                         <div class="btns_wrapper">
                             <a href="{{ route('public-part.locations.single-location', ['id' => $location->id ]) }}">
                                 <div class="btn btn_bcg">
-                                    {{ __('Više informacija') }}
+                                    {{ __('Više') }}
                                 </div>
                             </a>
                             <a href="{{ $location->city }}" target="_blank">
