@@ -16,7 +16,7 @@ class HomeController extends Controller{
     protected string $_path = 'public-part.app.home.';
 
     public function home(): View{
-        $daysTil = Carbon::now()->diffInDays(Carbon::parse('2024-06-06'));
+        $daysTil = Carbon::now()->diffInDays(Carbon::parse('2024-06-10'));
 
         return view($this->_path . 'home', [
             'blogPosts' => Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take(6)->get(),
@@ -59,6 +59,11 @@ class HomeController extends Controller{
     public function cookies (){
         return view($this->_path . 'single-page', [
             'page' => SinglePage::where('id', 7)->first()
+        ]);
+    }
+    public function criticalThinking (){
+        return view($this->_path . 'single-page', [
+            'page' => SinglePage::where('id', 8)->first()
         ]);
     }
 }

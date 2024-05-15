@@ -1,7 +1,5 @@
 @extends('public-part.layout.layout')
-
-<!-- Title of page -->
-@section('Blog') @endsection
+@section('title') {{ __('Blog') }} @endsection
 
     <!-- Page content -->
 @section('public-content')

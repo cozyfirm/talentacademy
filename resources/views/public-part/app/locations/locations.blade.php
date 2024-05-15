@@ -9,8 +9,8 @@
         <div class="locations__container">
             <div class="locations__header">
                 <h1 class="locations__title">{{ __('Lokacije Akademije') }}</h1>
-                <h3 class="locations__subtitle">{{ __('Akademija se održava na preko 10 lokacija širom Sarajeva.') }}</h3>
-                <p class="locations__description">{{ __('Sve lokacije izabrane su tako da polaznicima pruže optimalne uslove za učenje i angažman. Naši organizatori su pažljivo odabrali najadekvatnije i najopremljenije prostore kako bismo osigurali kvalitetno iskustvo za sve učesnike Akademije.') }}</p>
+                <h3 class="locations__subtitle">{{ __('Akademija se održava na na osam lokacija širom Sarajeva.') }}</h3>
+                <p class="locations__description">{{ __('Helem Nejse Talent Akademija ove godine nudi svoj program na osam različitih lokacija u Sarajevu. Lokacije su pažljivo odabrane kako bi pružile inspirativno okruženje i praktično iskustvo za polaznike iz različitih oblasti kreativnosti. Raznolikost lokacija omogućava polaznicima da istraže različite aspekte kreativnosti i da se povežu sa stručnjacima iz različitih oblasti, te pri tome posjete etablirane studije, agencije i redakcije.') }}</p>
             </div>
             <div class="locations__list mb-4">
                 @foreach($locations as $location)

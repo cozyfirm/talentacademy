@@ -1,7 +1,7 @@
 <div class="faq">
     <div class="faq__container">
         <h2 class="faq__title">{{ __('FAQs') }}</h2>
-        <p class="faq__description">{{ __('Lorem ipsum dolor sit amet consectetur. Rhoncus at quis faucibus magna augue. Ipsum duis aliquet mauris facilisis mattis pellentesque quis non proin. Viverra sapien scelerisque suscipit proin. Sit massa feugiat ultrices diam eu.') }}</p>
+        <p class="faq__description">{{ __('Saznajte odgovore na najčešća pitanja vezana za Helem Nejse Talent Akademiju.') }}</p>
         <div class="faq__list">
             @foreach($faqs as $faq)
                 <div class="faq__list-item">

@@ -66,7 +66,7 @@
             <h1>{{ __('Rok za prijavu aplikacija:') }}</h1>
             <h1> 10.06.2024 </h1>
 
-            <p> {{ __("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.") }} </p>
+            <p> {{ __("Vaše aplikacije prihvatamo do 10.06.2024. godine. Ne propusti priliku da apliciraš za jedan od programa Helem Nejse Talent Akademije. ") }} </p>
 
             <div class="counter__w">
                 <div class="c__num"> <p class="c__month"></p> </div>

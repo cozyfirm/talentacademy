@@ -42,7 +42,7 @@
             <div class="hero__heading">
                 <div class="boris_wrapper">
                     <h2 class="hero-section__heading"> {{ __('Helem Nejse Talent Akademija') }} </h2>
-                    <div class="hero-section__subheading">{{ __('Intenzivni program usavršavanja iz oblasti kreativnih industrija.') }}</div>
+                    <div class="hero-section__subheading">{{ __('Sedmodnevna ljetna škola iz oblasti kreativnih industrija u Sarajevu!') }}</div>
                 </div>
                 @if(auth()->check())
                     <a href="{{ route('dashboard.my-profile') }}" class="hero-section__bottom-section-button">
@@ -56,7 +56,7 @@
             </div>
             <div class="hero-section__bottom-section">
                 <div class="hero-section__bottom-section-text">
-                    {{ __('Aplikacije do 06. Juna 2024 godine!') }}
+                    {{ __('Aplikacije do 10. Juna 2024 godine!') }}
                 </div>
 
                 <a href="#features" class="hero-section__bottom-section-learn-more">
@@ -69,8 +69,8 @@
     <div class="features" id="features">
         <div class="features__container">
             <div class="features__content">
-                <h2 class="features__heading">{{ __('PROŠIRI SVOJA ZNANJA O KREATIVNIM INDUSTRIJAMA') }}</h2>
-                <p class="features__text">{{ __('Kroz Intenzivni sedmodnevni program Akademije, uz učešće preko 50 predavača, mentora i voditelja radionica koji će sa tobom podijeliti svoje relevantna naučna znanja i iskustva pomažemo razvoju  tvojih vještina i pružamo ti stvarni uvid u svijet kreativnih industrija') }}</p>
+                <h2 class="features__heading">{{ __('Proširi svoja znanja i napravi prvi korak prema budućoj karijeri') }}</h2>
+                <p class="features__text">{{ __('Kroz sedmodnevni program Akademije, uz učešće preko 50 predavača iz oblasti književnosti, informacionih tehnologija, dizajna, animacije, novinarstva i muzičke produkcije pomažemo vam u razvoju vaših vještina i pružamo vam stvarni uvid u svijet kreativnih industrija.') }}</p>
                 <a href="#programs" class="features__button">
                     <img src="{{ asset('files/images/public-part/twisted-arrow.svg') }}" alt="Twisted arrow">
                     {{ __('Programi Akademije') }}
@@ -84,8 +84,8 @@
     <div class="features features--variant-one">
         <div class="features__container">
             <div class="features__content">
-                <h2 class="features__heading">{{ __('POSJETE STUDIJIMA, REDAKCIJAMA, FIRMAMA...') }}</h2>
-                <p class="features__text">{{ __('Kroz Intenzivni sedmodnevni program Akademije, uz učešće preko 50 predavača, mentora i voditelja radionica koji će sa tobom podijeliti svoje relevantna naučna znanja i iskustva pomažemo razvoju  tvojih vještina i pružamo ti stvarni uvid u svijet kreativnih industrija') }}</p>
+                <h2 class="features__heading">{{ __('Posjete studijima, redakcijama i firmama') }}</h2>
+                <p class="features__text">{{ __('Pored teoretskih predavanja, polaznici Akademije imaju priliku slušati iskustva i razgovarati s etabliranim profesionalcima iz industrije, raditi praktične radove i posjetiti muzičke studije, novinarske redakcije svih vrsta, moderno opremljene univerzitetske prostorije, te neke od najuspješnijih regionalnih firmi.') }}</p>
                 <a href="{{ route('public-part.locations.locations') }}" class="features__button">
                     <img src="{{ asset('files/images/public-part/twisted-arrow.svg') }}" alt="Twisted arrow">
                     {{ __('Lokacije Akademije') }}
@@ -99,11 +99,11 @@
     <div class="features features--variant-two">
         <div class="features__container">
             <div class="features__content">
-                <h2 class="features__heading">{{ __('STVARANJE BOLJEG DRUŠTVA I ZAJEDNICE') }}</h2>
-                <p class="features__text">{{ __('Kroz Intenzivni sedmodnevni program Akademije, uz učešće preko 50 predavača, mentora i voditelja radionica koji će sa tobom podijeliti svoje relevantna naučna znanja i iskustva pomažemo razvoju  tvojih vještina i pružamo ti stvarni uvid u svijet kreativnih industrija') }}</p>
-                <a href="{{ route('public-part.lecturers.lecturers') }}" class="features__button">
+                <h2 class="features__heading">{{ __('Kritičko mišljenje') }}</h2>
+                <p class="features__text">{{ __('Pored pet programa Akademiji, svi polaznici slušaju i šesti program nazvan Kritičko mišljenje koji stavlja akcenat na vezu između kreativnih industrija i građanskog aktivizma, spajanja tehnologije i umjetnosti, te stvaranju boljeg društva i zajednice.') }}</p>
+                <a href="#" class="features__button">
                     <img src="{{ asset('files/images/public-part/twisted-arrow.svg') }}" alt="Twisted arrow">
-                    {{ __('Predavači') }}
+                    {{ __('Više') }}
                 </a>
             </div>
             <div class="features__image">

@@ -134,6 +134,8 @@ Route::prefix('')->group(function () {
     Route::get ('/privacy-policy',                           [HomepageController::class, 'privacy'])->name('public-part.privacy');
     Route::get ('/terms-and-conditions',                     [HomepageController::class, 'terms'])->name('public-part.terms');
     Route::get ('/cookies',                                  [HomepageController::class, 'cookies'])->name('public-part.cookies');
+
+    Route::get ('/critical-thinking',                        [HomepageController::class, 'criticalThinking'])->name('public-part.critical-thinking');
 });
 
 /**

@@ -1,11 +1,10 @@
 @extends('public-part.layout.layout')
 
 <!-- Title of page -->
-@section('Single blog') @endsection
-
-@php
-    $images = [1, 2, 3, 4, 5, 6];
-@endphp
+@section('title'){{ $post->title }}@endsection
+@section('meta_title'){{ $post->title }}@endsection
+@section('meta_desc'){{ $post->short_desc }}@endsection
+@section('meta_img'){{ isset($post->imgOne) ? asset( $post->imgOne->getFile() ) : '' }}@endsection
 
     <!-- Page content -->
 @section('public-content')

@@ -89,6 +89,7 @@
             }
 
             .footer__helem-nejse {
+                margin-top: 16px;
 
                 h3 {
                     font-size: 16px;
@@ -103,6 +104,12 @@
                 min-width: auto; width: 100%;
                 .footer__british-embassy{
                     min-width: auto; width: 100%;
+                }
+                .footer__helem-nejse{
+                    width: 100%;
+                    img{
+                        max-width: 100%;
+                    }
                 }
             }
         }
