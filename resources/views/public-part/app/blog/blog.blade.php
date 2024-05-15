@@ -18,7 +18,7 @@
             <!-- Preview last posts except the last one -->
             <div class="blog__items">
                 @foreach($posts as $post)
-                    <a href="{{ route('public-part.blog.preview', ['id' => $last->id ]) }}" class="blog__item" id="blog__item_id_{{ $post->id }}" itemid="{{ $post->id }}" uri="{{ route('public-part.blog.preview', ['id' => $post->id]) }}">
+                    <a href="{{ route('public-part.blog.preview', ['id' => $post->id ]) }}" class="blog__item" id="blog__item_id_{{ $post->id }}" itemid="{{ $post->id }}" uri="{{ route('public-part.blog.preview', ['id' => $post->id]) }}">
                         <img src="{{ isset($post->mainImg) ? asset($post->mainImg->getFile()) : '' }}" alt="Blog image" class="blog__item-image">
                         <div class="blog__item-content">
                             <div class="blog__item-content-box">
