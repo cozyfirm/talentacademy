@@ -39,6 +39,7 @@ Route::prefix('auth')->group(function () {
     /* Create an account */
     Route::get ('/create-account',                [AuthController::class, 'createAccount'])->name('auth.create-account');
     Route::post('/save-account',                  [AuthController::class, 'saveAccount'])->name('auth.save-account');
+    Route::get ('/verify-account/{token}',        [AuthController::class, 'verifyAccount'])->name('auth.verify-account');
 
     /* Restart password */
     Route::get ('/restart-password',              [AuthController::class, 'restartPassword'])->name('auth.restart-password');

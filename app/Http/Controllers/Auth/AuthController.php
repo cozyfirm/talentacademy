@@ -115,6 +115,14 @@ class AuthController extends Controller{
             return $this->jsonResponse('1101', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
+    public function verifyAccount($token){
+        try{
+            $user = User::where('api_token', $token)->first();
+            Auth::login($user);
+        }catch (\Exception $e){}
+
+        return redirect()->route('public-part.home');
+    }
 
     /* -------------------------------------------------------------------------------------------------------------- */
     /*
@@ -191,7 +199,6 @@ class AuthController extends Controller{
                 'url' => route('auth')
             ]);
         }catch (\Exception $e){
-            dd($e);
             return json_encode([
                 'code' => '1141',
                 'message' => __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!')

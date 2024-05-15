@@ -12,14 +12,15 @@ use Illuminate\Queue\SerializesModels;
 
 class ConfirmEmail extends Mailable{
     use Queueable, SerializesModels;
-    public $_email, $_name;
+    public $_email, $_name, $_token;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($email, $name){
+    public function __construct($email, $name, $token){
         $this->_email = $email;
         $this->_name = $name;
+        $this->_token = $token;
     }
 
     /**

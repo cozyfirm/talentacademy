@@ -119,7 +119,7 @@
 
                     <div class="rf-body-element rf-body-element-4 pb-4 d-none">
                         <p>
-                            {{ __('Vaš korisnički račun / profil je uspješno kreiran. Za verifikaciju Vašeg email-a, molimo slijedite upute poslane putem email-a.') }}
+                            {{ __('Vaš korisnički račun / profil na sistemu www.talentakademija.ba je uspješno kreiran. Za verifikaciju Vašeg email-a, molimo slijedite upute poslane putem email-a.') }}
                             <br>
                             <b>{{ __('Napomena:') }}</b>
                             {{ __('Ukoliko ne dobijete email unutar 5 minuta, provjerite junk (spam) folder, ili nas kontaktirajte putem email-a!') }}
