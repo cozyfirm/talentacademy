@@ -2,9 +2,11 @@
     <div class="inner__menu">
         <div class="inner__menu_profile">
             <a href="{{ route('dashboard.my-profile') }}">
-                <div class="inner__menu_profile_img_w">
-                    <img src="{{ asset('files/images/public-part/users/' . (Auth()->user()->photo_uri)) }}" alt="">
-                </div>
+                @if(isset(Auth()->user()->photo_uri))
+                    <div class="inner__menu_profile_img_w">
+                        <img src="{{ asset('files/images/public-part/users/' . (Auth()->user()->photo_uri)) }}" alt="">
+                    </div>
+                @endif
                 <p> {{ Auth()->user()->name }} </p>
             </a>
         </div>
@@ -24,13 +26,14 @@
                     </div>
                 </a>
             @endif
-                <a href="{{ route('dashboard.inbox') }}">
+            <a href="{{ route('dashboard.inbox') }}">
                 <div class="inner__menu_links_link @if(Route::is('dashboard.inbox')) active @endif">
                     <img src="{{ asset('files/images/public-part/inbox.png') }}" class="inbox" alt="">
                     <p>{{ __('Inbox') }}</p>
                 </div>
             </a>
-            @if(Auth()->user()->role == 'presenter' or (Auth()->user()->role == 'user' and Auth()->user()->myProgram()))
+{{--                Auth()->user()->role == 'presenter' or--}}
+            @if( (Auth()->user()->role == 'user' and Auth()->user()->myProgram()))
                 <a href="{{ route('dashboard.my-schedule') }}">
                     <div class="inner__menu_links_link @if(Route::is('dashboard.my-schedule')) active @endif">
                         <img src="{{ asset('files/images/public-part/raspored.png') }}" class="schedule" alt="">

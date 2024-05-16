@@ -73,9 +73,34 @@ class ProgramsController extends Controller{
                 'sessions' => $sessions,
                 'currentNoDay' => $currentDay->getDayInOrder(),
                 'day' => $currentDay->getFullWeekDay(),
-                'date' => $currentDay->date()
+                'date' => $currentDay->date(),
+                'auth' => Auth::check()
             ]);
         }catch (\Exception $e){
+            return $this->jsonResponse('1200', __('Desila se greška'));
+        }
+    }
+    public function getAjaxLecturerSessions(Request $request){
+        try{
+            $currentDay = ProgramSession::where('presenter_id', $request->lecturer)->whereDate('date', $request->date)->orderBy('datetime_from')->first();
+            $sessions = ProgramSession::where('presenter_id', $request->lecturer)->whereDate('date', $request->date)->orderBy('datetime_from')->get();
+
+            foreach ($sessions as $session){
+                $session->lecturer = $session->presenterRel->name ?? __('Nije dostupno');
+                $session->location = $session->locationRel->title ?? '';
+                $session->time_from_f = $session->timeFrom();
+            }
+
+            return $this->jsonResponse('0000', __('__'), [
+                'currentDay' => $currentDay,
+                'sessions' => $sessions,
+                'currentNoDay' => $currentDay->getDayInOrder(),
+                'day' => $currentDay->getFullWeekDay(),
+                'date' => $currentDay->date(),
+                'auth' => Auth::check()
+            ]);
+        }catch (\Exception $e){
+            dd($e);
             return $this->jsonResponse('1200', __('Desila se greška'));
         }
     }

@@ -78,7 +78,7 @@
                         </div>
                         <div class="program__timeline-top-right">
                             @foreach($program->uniqueLecturerDateSessions($lecturer->id) as $dates)
-                                <a href="{{ route('public-part.lecturers.single-lecturer-date', ['id' => $lecturer->id, 'date' => $dates->date]) }}">
+                                <a class="program__timeline-top-right__click" lecturer-id="{{ $lecturer->id }}" date="{{ $dates->date }}">
                                     <div class="program__timeline-top-right-day">
                                         <div class="program__timeline-top-right-day-number @if($currentDay->date == $dates->date) active @endif">
                                             {{ $dates->getDay() }}
@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                             <div class="program__timeline-item-right">
-                                <a>
+                                <a @if(Auth()->check()) href="{{ route('public-part.programs.preview-session', ['id' => $session->id ]) }}" @endif>
                                     <h2 class="program__timeline-item-right-title"> {{ $session->title }} </h2>
                                 </a>
                                 <div class="program__timeline-item-right-item">

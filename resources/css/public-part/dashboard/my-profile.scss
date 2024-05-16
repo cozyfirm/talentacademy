@@ -358,11 +358,12 @@
     .profile__wrapper{
         flex-wrap: wrap; left: 20px; width: calc(100% - 40px);
         .profile__wrapper_left{
-            width: 100%;
+            width: 100%; display: none;
             .p__w_l_img_w{
                 width: 100%;
             }
         }
+        .my_profile{display: initial;}
         .profile__wrapper_right{width: 100%; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 16px; margin-top: 16px;}
         .profile__wrapper_right_schedule{
             padding: 0px; border: none;

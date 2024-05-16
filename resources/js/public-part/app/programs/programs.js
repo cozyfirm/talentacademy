@@ -75,6 +75,8 @@ $( document ).ready(function() {
             success: function success(response) {
                 if(response['code'] === '0000'){
                     let sessions = response['data']['sessions'];
+                    let auth = response['data']['auth'];
+
                     wrapper.empty();
 
                     for(let i=0; i<sessions.length; i++){
@@ -104,10 +106,17 @@ $( document ).ready(function() {
                                .append(function (){
                                    return $("<div>").attr('class', 'program__timeline-item-right')
                                        .append(function (){
-                                           return $("<a>").attr('href', "/programs/preview-session/" + sessions[i]['id'])
-                                               .append(function (){
-                                                   return $("<h2>").attr('class', 'program__timeline-item-right-title').text(sessions[i]['title']);
-                                               })
+                                           if(auth){
+                                               return $("<a>").attr('href', "/programs/preview-session/" + sessions[i]['id'])
+                                                   .append(function (){
+                                                       return $("<h2>").attr('class', 'program__timeline-item-right-title').text(sessions[i]['title']);
+                                                   })
+                                           }else{
+                                               return $("<a>")
+                                                   .append(function (){
+                                                       return $("<h2>").attr('class', 'program__timeline-item-right-title').text(sessions[i]['title']);
+                                                   })
+                                           }
                                        })
                                        .append(function (){
                                            return $("<div>").attr('class', 'program__timeline-item-right-item')

@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Mail\Users\ConfirmEmail;
+use App\Models\Other\Inbox\InboxTo;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -23,6 +24,14 @@ class UserObserver{
         }catch (\Exception $e){
             $message .= " was not sent! Error: " . $e->getMessage();
         }
+
+        try{
+            /* Create welcome message */
+            InboxTo::create([
+                'inbox_id' => 1,
+                'to' => $user->id
+            ]);
+        }catch (\Exception $e){}
         Log::info($message);
     }
 }

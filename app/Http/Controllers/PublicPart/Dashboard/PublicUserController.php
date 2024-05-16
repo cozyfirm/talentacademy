@@ -33,6 +33,7 @@ class PublicUserController extends Controller{
     public function myProfile(): View{
         return view($this->_path . 'my-profile', [
             'countries' => Country::orderBy('name_ba')->get()->pluck('name_ba', 'id'),
+            'myProfile' => true
         ]);
     }
     public function updateProfile (Request $request): JsonResponse{
@@ -49,7 +50,6 @@ class PublicUserController extends Controller{
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('dashboard.my-profile'));
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }

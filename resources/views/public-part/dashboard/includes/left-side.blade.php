@@ -1,9 +1,11 @@
-<div class="profile__wrapper_left">
+<div class="profile__wrapper_left @if(isset($myProfile)) my_profile @endif">
     <div class="p__w_l_img_w">
         <form action="{{ route('dashboard.update-profile-image') }}" method="POST" id="update-profile-image" enctype="multipart/form-data">
             @csrf
             @if(isset(Auth()->user()->photo_uri))
                 <img src="{{ asset('files/images/public-part/users/' . (Auth()->user()->photo_uri)) }}" alt="">
+            @else
+                <img src="{{ asset('files/images/public-part/silhouette.png') }}" alt="">
             @endif
             <label for="photo_uri" class="edit-your-photo">
                 <i class="fas fa-edit"></i>

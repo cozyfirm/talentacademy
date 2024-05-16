@@ -66,6 +66,7 @@ Route::prefix('')->group(function () {
 
         /* Load sessions over AJAX */
         Route::post('/get-ajax-private-sessions',        [ProgramsController::class, 'getAjaxPrivateSessions'])->name('public-part.programs.get-ajax-private-sessions');
+        Route::post('/get-ajax-lecturer-sessions',       [ProgramsController::class, 'getAjaxLecturerSessions'])->name('public-part.programs.get-ajax-lecturer-sessions');
 
         Route::post('/fetch-sessions-data',              [ProgramsController::class, 'fetchSessions'])->name('public-part.programs.fetch-sessions-data');
         Route::get ('/preview-session/{id}',             [ProgramsController::class, 'preview_session'])->name('public-part.programs.preview-session');
