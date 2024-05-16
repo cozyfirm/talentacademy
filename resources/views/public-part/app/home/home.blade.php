@@ -56,7 +56,7 @@
             </div>
             <div class="hero-section__bottom-section">
                 <div class="hero-section__bottom-section-text">
-                    {{ __('Aplikacije do 10. Juna 2024 godine!') }}
+                    {{ __('Aplikacije do 03. juna 2024. godine!') }}
                 </div>
 
                 <a href="#features" class="hero-section__bottom-section-learn-more">

@@ -64,7 +64,7 @@
     <div class="preview__counter preview__counter_{{ $program->id }}">
         <div class="preview__counter_iw">
             <h1>{{ __('Rok za prijavu aplikacija:') }}</h1>
-            <h1> 10.06.2024 </h1>
+            <h1> 03.06.2024 </h1>
 
             <p> {{ __("Vaše aplikacije prihvatamo do 10.06.2024. godine. Ne propusti priliku da apliciraš za jedan od programa Helem Nejse Talent Akademije. ") }} </p>
 
