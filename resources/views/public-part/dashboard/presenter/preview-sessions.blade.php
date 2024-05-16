@@ -18,7 +18,7 @@
                     <div class="global-inner-wrapper">
                         <div class="giw-hc-header">
                             <h1>{{ __('Pregled sesija') }}</h1>
-                            <p>{{ __('Lorem Ipsum is simply dummy text of the printing and typesetting industry. ') }}</p>
+{{--                            <p>{{ __('Lorem Ipsum is simply dummy text of the printing and typesetting industry. ') }}</p>--}}
                         </div>
 
                         <div class="giw-hc-table">
