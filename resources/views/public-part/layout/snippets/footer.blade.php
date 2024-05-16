@@ -43,7 +43,8 @@
         </div>
         <div class="footer__lower">
             <div class="footer__copyright">
-                <a href="https://cozyfirm.com">Crafted with <span style="color: #EA8BF3">&hearts;</span> by Cozy Firm</a>
+                <p> Crafter by <a href="https://fondacijaekipa.ba/">Fondacija Ekipa</a> & <a href="https://cozyfirm.com">Cozy Firm</a> </p>
+
                 <p>© {{ date('Y') }} Fondacija Ekipa. All rights reserved.</p>
                 <a href="{{ route('public-part.privacy') }}">Politika privatnosti</a>
                 <a href="{{ route('public-part.terms') }}">Uslovi korištenja</a>

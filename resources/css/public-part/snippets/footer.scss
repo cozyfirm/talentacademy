@@ -23,6 +23,13 @@
             padding: 64px 0;
             border-bottom: 1px solid $text-white;
 
+            .footer__logo{
+                 width: 240px;
+                img{
+                    //width: 160px;
+                }
+            }
+
             @media (max-width: $mobile-width) {
                 flex-direction: column;
             }

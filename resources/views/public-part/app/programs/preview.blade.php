@@ -34,7 +34,7 @@
                             <button class="my-c-btn">{{ __('Apliciraj za stipendiju') }}</button>
                         </a>
                     @endif
-                    <a href="#">
+                    <a href="{{ route('public-part.programs.more-about', ['id' => $program->id ]) }}">
                         <button class="my-c-btn">{{ __('Detaljno o programu') }}</button>
                     </a>
                 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PublicPart;
 use App\Http\Controllers\Controller;
 use App\Models\Other\Blog\Blog;
 use App\Models\Other\FAQ;
+use App\Models\Other\SinglePage;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
@@ -55,6 +56,11 @@ class ProgramsController extends Controller{
             'blogPosts' => Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take(6)->get(),
             'offlineSessions' => $offlineSessions,
             'faqs' => FAQ::where('what', $id)->get()
+        ]);
+    }
+    public function moreAbout ($id){
+        return view('public-part.app.home.single-page', [
+            'page' => SinglePage::where('id', $id + 8)->first()
         ]);
     }
     public function getAjaxPrivateSessions(Request $request){
