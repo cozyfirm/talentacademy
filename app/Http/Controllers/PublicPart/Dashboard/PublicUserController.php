@@ -57,6 +57,9 @@ class PublicUserController extends Controller{
         try{
             $file = $request->file('photo_uri');
             $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+
+            if($ext != 'png' and $ext != 'jpg' and $ext != 'jpeg') return back();
+
             $name = md5($file->getClientOriginalName().time()).'.'.$ext;
             $file->move(public_path('files/images/public-part/users'), $name);
 

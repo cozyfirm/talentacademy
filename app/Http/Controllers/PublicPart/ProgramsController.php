@@ -212,18 +212,27 @@ class ProgramsController extends Controller{
 
             if(isset($request->cv)){
                 $request['path'] = (storage_path('files/programs/applications'));
+                $file = $request->file('cv');
+                $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+                if($ext != 'pdf' and $ext != 'doc' and $ext != 'docx') return back()->with('message', __('Dozvoljeni formati su pdf, doc i docx!'));
                 $file = $this->saveFile($request, 'cv', 'app_cv');
 
                 $scholarship->update(['cv' => $file->id ]);
             }
             if(isset($request->motivation_letter)){
                 $request['path'] = (storage_path('files/programs/applications'));
+                $file = $request->file('motivation_letter');
+                $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+                if($ext != 'pdf' and $ext != 'doc' and $ext != 'docx') return back()->with('message', __('Dozvoljeni formati su pdf, doc i docx!'));
                 $file = $this->saveFile($request, 'motivation_letter', 'app_mot_letter');
 
                 $scholarship->update(['motivation_letter' => $file->id ]);
             }
             if(isset($request->other)){
                 $request['path'] = (storage_path('files/programs/applications'));
+                $file = $request->file('other');
+                $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+                if($ext != 'pdf' and $ext != 'doc' and $ext != 'docx') return back()->with('message', __('Dozvoljeni formati su pdf, doc i docx!'));
                 $file = $this->saveFile($request, 'other', 'app_other');
 
                 $scholarship->update(['other' => $file->id ]);

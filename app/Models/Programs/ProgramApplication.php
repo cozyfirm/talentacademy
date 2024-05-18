@@ -2,8 +2,10 @@
 
 namespace App\Models\Programs;
 
+use App\Models\Core\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -14,4 +16,14 @@ class ProgramApplication extends Model{
 
     protected $table = 'programs__applications';
     protected $guarded = ['id'];
+
+    public function cvRel(): HasOne{
+        return $this->hasOne(File::class, 'id', 'cv');
+    }
+    public function mlRel(): HasOne{
+        return $this->hasOne(File::class, 'id', 'motivation_letter');
+    }
+    public function otherRel(): HasOne{
+        return $this->hasOne(File::class, 'id', 'other');
+    }
 }
