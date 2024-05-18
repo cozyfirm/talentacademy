@@ -19,12 +19,14 @@
                     </div>
                 </a>
             @else
-                <a href="{{ route('dashboard.apply-for-scholarship') }}">
-                    <div class="inner__menu_links_link @if(Route::is('dashboard.apply-for-scholarship')) active @endif">
-                        <img src="{{ asset('files/images/public-part/icon.png') }}" class="scholarship" alt="">
-                        <p>{{ __('Apliciraj za stipendiju') }}</p>
-                    </div>
-                </a>
+                @if(Auth()->user()->submitted())
+                    <a href="{{ route('dashboard.apply-for-scholarship') }}">
+                        <div class="inner__menu_links_link @if(Route::is('dashboard.apply-for-scholarship')) active @endif">
+                            <img src="{{ asset('files/images/public-part/icon.png') }}" class="scholarship" alt="">
+                            <p>{{ __('Apliciraj za stipendiju') }}</p>
+                        </div>
+                    </a>
+                @endif
             @endif
             <a href="{{ route('dashboard.inbox') }}">
                 <div class="inner__menu_links_link @if(Route::is('dashboard.inbox')) active @endif">

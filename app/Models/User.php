@@ -86,6 +86,12 @@ class User extends Authenticatable{
     public function sessionsRel(): HasMany{
         return $this->hasMany(ProgramSession::class, 'presenter_id', 'id');
     }
+    public function submitted(): bool{
+        try{
+            $app = ProgramApplication::where('attendee_id', $this->id)->where('status', 'submitted')->count();
+            return (bool)$app;
+        }catch (\Exception $e){ return false; }
+    }
     public function myProgram(): bool{
         try{
             $app = ProgramApplication::where('attendee_id', $this->id)->where('app_status', 'accepted')->count();
