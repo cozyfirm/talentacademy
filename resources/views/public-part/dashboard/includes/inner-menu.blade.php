@@ -19,7 +19,7 @@
                     </div>
                 </a>
             @else
-                @if(Auth()->user()->submitted())
+                @if(!Auth()->user()->submitted())
                     <a href="{{ route('dashboard.apply-for-scholarship') }}">
                         <div class="inner__menu_links_link @if(Route::is('dashboard.apply-for-scholarship')) active @endif">
                             <img src="{{ asset('files/images/public-part/icon.png') }}" class="scholarship" alt="">
