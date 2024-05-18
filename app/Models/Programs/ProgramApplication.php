@@ -3,6 +3,7 @@
 namespace App\Models\Programs;
 
 use App\Models\Core\File;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -16,6 +17,13 @@ class ProgramApplication extends Model{
 
     protected $table = 'programs__applications';
     protected $guarded = ['id'];
+
+    public function programRel(): HasOne{
+        return $this->hasOne(Program::class, 'id', 'program_id');
+    }
+    public function userRel(): HasOne{
+        return $this->hasOne(User::class, 'id', 'attendee_id');
+    }
 
     public function cvRel(): HasOne{
         return $this->hasOne(File::class, 'id', 'cv');

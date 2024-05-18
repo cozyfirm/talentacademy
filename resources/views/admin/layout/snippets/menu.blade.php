@@ -182,10 +182,10 @@
                             <p>{{__('Pregled programa')}}</p>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="{{ route('system.admin.programs.all-applications') }}">
                         <div class="inside-lm-link">
                             <div class="ilm-l"></div><div class="ilm-c"></div>
-                            <p> {{__('Ostale informacije')}} </p>
+                            <p> {{__('Prijave')}} </p>
                         </div>
                     </a>
                 </div>

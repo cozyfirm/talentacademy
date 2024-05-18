@@ -260,7 +260,7 @@ class ProgramsController extends Controller{
 
             /* Create message */
             InboxTo::create([
-                'inbox_id' => 1,
+                'inbox_id' => 2,
                 'to' => Auth::user()->id
             ]);
 

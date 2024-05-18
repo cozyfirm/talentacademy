@@ -233,6 +233,10 @@ Route::prefix('system')->middleware('auth')->group(function () {
             Route::get ('/upload-image/{id}',                      [AdminProgramsController::class, 'uploadImage'])->name('system.admin.programs.upload-image');
             Route::post('/save-image',                             [AdminProgramsController::class, 'saveImage'])->name('system.admin.programs.save-image');
 
+
+            Route::get ('/all-applications',                       [AdminProgramsController::class, 'allApplications'])->name('system.admin.programs.all-applications');
+            Route::get ('/preview-application/{id}',               [AdminProgramsController::class, 'previewApplication'])->name('system.admin.programs.preview-application');
+            Route::get ('/download-file/{id}',                     [AdminProgramsController::class, 'downloadFile'])->name('system.admin.programs.download-file');
             /**
              *  Sessions
              */

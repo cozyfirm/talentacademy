@@ -4,8 +4,10 @@ namespace App\Http\Controllers\System\Admin\Programs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\Core\Filters;
+use App\Models\Core\File;
 use App\Models\Other\Location;
 use App\Models\Programs\Program;
+use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionFile;
 use App\Models\Programs\ProgramSessionLink;
@@ -104,6 +106,36 @@ class ProgramsController extends Controller{
             return redirect()->back()->with('success', __('Uspješno ažurirana fotografija!'));
         }catch (\Exception $e){
             return redirect()->back()->with('error', __('Desila se greška!'));
+        }
+    }
+
+    public function allApplications(): View{
+        $applications = ProgramApplication::where('status', '=', 'submitted');
+        $applications = Filters::filter($applications);
+
+        $filters = [
+            'programRel.title' => __('Program'),
+            'useRel.name' => __('Ime i prezime'),
+            'app_status' => __('Status aplikacije')
+        ];
+
+        return view($this->_path . 'all-applications', [
+            'filters' => $filters,
+            'applications' => $applications
+        ]);
+    }
+    public function previewApplication ($id){
+        return view($this->_path . 'preview-application', [
+            'application' => ProgramApplication::where('id', $id)->first(),
+        ]);
+    }
+    public function downloadFile ($id){
+        try{
+            $file = File::where('id', $id)->first();
+
+            return response()->download(storage_path('files/programs/applications/' . $file->name));
+        }catch (\Exception $e){
+            return back();
         }
     }
 
