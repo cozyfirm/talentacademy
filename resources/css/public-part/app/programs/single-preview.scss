@@ -711,7 +711,10 @@
 
 
         }
-
+        .sessions__scroll_body::-webkit-scrollbar {
+            width: 0px;
+            height:0px;
+        }
         .sessions__navigation {
             width: 100%;
             display: flex;
@@ -804,6 +807,8 @@
 /* Presenters scroll bar */
 .presenters__scroll_wrapper{
     position: relative; width: 100%; min-height: 120px; padding: 64px 0px;
+
+
     .presenters__scroll_iw{
         position: relative; left: calc(50% - $container-width-half); width: $container-width; min-height: 120px;
 
@@ -826,6 +831,8 @@
             gap: 15px;
             cursor: grab;
             margin-top: 16px;
+
+            //padding-bottom: 20px; margin-bottom: -20px;
 
             .presenters__scroll_single{
                 min-width: calc(33.33% - 10px); width: calc(33.33% - 10px); border: 1px solid $dark; border-radius: 8px;
@@ -867,7 +874,10 @@
                 }
             }
         }
-
+        .presenters__scroll_body::-webkit-scrollbar {
+            width: 0px;
+            height:0px;
+        }
         .presenters__navigation {
             width: 100%;
             display: flex;

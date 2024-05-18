@@ -725,7 +725,10 @@
                 }
             }
         }
-
+        .news__list::-webkit-scrollbar {
+            width: 0px;
+            height:0px;
+        }
         .news__navigation {
             width: 100%;
             display: flex;
