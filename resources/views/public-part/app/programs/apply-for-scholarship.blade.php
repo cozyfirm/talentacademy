@@ -51,18 +51,18 @@
                     {{ html()->textarea('skills')->class('form-control form-control-sm')->id('skills')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->skills : '')->isReadonly(false) }}
                 </div>
 
-                <div class="upload__file_wrapper">
-                    <label for="cv"> @if(isset($application->cvRel)) {{ substr($application->cvRel->file, 0, 30) }} @else {{ __('Upload CV') }} @endif </label>
+                <div class="upload__file_wrapper" title="{{ __('Vaš CV') }}">
+                    <label for="cv"> @if(isset($application->cvRel)) <span>{{ substr($application->cvRel->file, 0, 30) }}</span> @else {{ __('Upload CV') }} @endif </label>
                     <input name="cv" class="form-control form-control-sm mt-3 d-none" id="cv" type="file">
                     <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
                 </div>
-                <div class="upload__file_wrapper">
-                    <label for="motivation_letter"> @if(isset($application->mlRel)) {{ substr($application->mlRel->file, 0, 30) }} @else {{ __('Motivacijsko pismo') }} @endif </label>
+                <div class="upload__file_wrapper" title="{{ __('Vaše motivaciono pismo') }}">
+                    <label for="motivation_letter"> @if(isset($application->mlRel)) <span>{{ substr($application->mlRel->file, 0, 30) }}</span> @else {{ __('Motivacijsko pismo') }} @endif </label>
                     <input name="motivation_letter" class="form-control form-control-sm mt-3 d-none" id="motivation_letter" type="file">
                     <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
                 </div>
-                <div class="upload__file_wrapper">
-                    <label for="other" title="{{ __('Ovo polje je opcionalno') }}"> @if(isset($application->otherRel)) {{ substr($application->otherRel->file, 0, 30) }} @else {{ __('Dodatni dokumenti ili primjeri rada') }} @endif </label>
+                <div class="upload__file_wrapper" title="{{ __('Dodatni dokumenti ili primjeri rada') }}">
+                    <label for="other" title="{{ __('Ovo polje je opcionalno') }}"> @if(isset($application->otherRel)) <span>{{ substr($application->otherRel->file, 0, 30) }}</span> @else {{ __('Dodatni dokumenti ili primjeri rada') }} @endif </label>
                     <input name="other" class="form-control form-control-sm mt-3 d-none" id="other" type="file">
                     <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
                 </div>
