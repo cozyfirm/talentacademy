@@ -331,6 +331,24 @@
                         }
                     }
                 }
+                @media only screen and (max-width: 800px){
+                    .msg_header{
+                        flex-wrap: wrap; height: auto;
+                        .msg_from{
+                            width: 100%;
+                            img{
+                                margin-left: 16px;
+                            }
+                        }
+                        .msg_title{
+                            width: 100%; padding: 0px 16px;
+                        }
+
+                        .msg_arrow{
+                            position: absolute; right: 16px; top: 0px; margin-right: 0px;
+                        }
+                    }
+                }
                 .msg_header_1{ background: $p1_bcg; }
                 .msg_header_2{ background: $p2_bcg; }
                 .msg_header_3{ background: $p3_bcg; }
@@ -368,6 +386,7 @@
         .profile__wrapper_right_schedule{
             padding: 0px; border: none;
         }
+        .profile__wrapper_right_inbox{padding: 0px; border: none;}
     }
 }
 
@@ -376,7 +395,7 @@
  *  Apply for scholarship
  */
 .programs__wrapper{
-    position: relative; left: 0px; top:0px; width: 100%; min-height: 120px;
+    position: relative; left: 0px; top:0px; width: 100%; min-height: 120px; height: auto;
     .programs__wrapper_colored{
         position: relative; left: 0px; top: 0px; width: 100%;
 
@@ -442,7 +461,7 @@
                         font-size: 16px;
                     }
                     .buttons-wrapper{
-                        gap: 0px;
+                        gap: 0px; height: auto;
                         a{
                             button{
                                 font-size: 14px; padding: 6px 16px; gap: 0px; margin-bottom: 8px;
@@ -455,7 +474,11 @@
                     }
                 }
                 .single__program_wrapper_right{
-                    width: 100%;
+                    width: 100%; height: auto;
+
+                    img{
+                        width: 100%; height: auto;
+                    }
                 }
             }
         }
@@ -476,8 +499,12 @@
             }
         }
         @media only screen and (max-width: 1000px){
+            .single__program_wrapper{
+                margin-top: 32px; height: auto;
+            }
             .single__program_wrapper_arrows{
                 left: 20px; width: calc(100% - 40px); position: relative; bottom: 0px; margin-bottom: 32px; justify-content: center;
+                height: auto; margin-top: 32px;
             }
         }
     }

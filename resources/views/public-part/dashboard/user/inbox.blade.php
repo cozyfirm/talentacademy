@@ -12,7 +12,7 @@
         <div class="profile__wrapper">
             @include('public-part.dashboard.includes.left-side')
 
-            <div class="profile__wrapper_right">
+            <div class="profile__wrapper_right profile__wrapper_right_inbox">
                 <div class="inbox_wrapper">
                     @foreach($messages as $message)
                         <div class="msg_wrapper">
@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="msg_body d-none">
-                                <p>{{ $message->messageRel->content ?? '' }}</p>
+                                <p>{!! $message->messageRel->content ?? '' !!}</p>
                             </div>
                         </div>
                     @endforeach
