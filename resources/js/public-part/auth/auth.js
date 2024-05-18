@@ -108,10 +108,10 @@ $( document ).ready(function() {
                 Notify.Me(["Unesite Vaš broj telefona", "warn"]);
                 return;
             }
-            // if(!Validator.date($("#birth_date").val())) {
-            //     Notify.Me(["Molimo da odaberete datum Vašeg rođenja. Ispravan format je dd.mm.YYYY ", "warn"]);
-            //     return;
-            // }
+            if(!Validator.date($("#birth_date").val())) {
+                Notify.Me(["Molimo da odaberete datum Vašeg rođenja. Ispravan format je dd.mm.YYYY ", "warn"]);
+                return;
+            }
             // if($("#gender").val() === ''){
             //     Notify.Me(["Molimo da odaberete Vaš spol", "warn"]);
             //     return;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PublicPart;
 use App\Http\Controllers\Controller;
 use App\Models\Other\Blog\Blog;
 use App\Models\Other\FAQ;
+use App\Models\Other\Inbox\InboxTo;
 use App\Models\Other\SinglePage;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
@@ -106,7 +107,6 @@ class ProgramsController extends Controller{
                 'auth' => Auth::check()
             ]);
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonResponse('1200', __('Desila se greška'));
         }
     }
@@ -248,6 +248,12 @@ class ProgramsController extends Controller{
         try{
             $scholarship = $this->getScholarshipApplication($program_id);
             if(!$scholarship->checked) return back()->with('error', __('Desila se greška!'))->with('message', __('Molimo da se složite sa "Kriterijem upisa" i prihvatite "Pravila privatnosti"!'));
+
+            /* Create message */
+            InboxTo::create([
+                'inbox_id' => 1,
+                'to' => Auth::user()->id
+            ]);
 
             ProgramApplication::where('program_id', $program_id)->where('attendee_id', Auth::user()->id)->update([
                 'status' => 'submitted'
