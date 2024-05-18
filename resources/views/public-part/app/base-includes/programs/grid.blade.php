@@ -3,7 +3,7 @@
         <h2>{{ __('Program') }}</h2>
     </div>
 
-    <div class="programs__grid_iw">
+    <div class="programs__grid_iw" id="programs__grid_iw">
         @foreach($offlineSessions as $session)
             <div class="pg__sample pg__sample_{{ $program->id }}">
                 <h1> {{ $session->title ?? '' }} </h1>
@@ -28,7 +28,7 @@
     </div>
     <div class="programs__grid_pagination programs__grid_pagination_{{ $program->id }}">
         @for($i=1; $i<=$offlineSessions->lastPage(); $i++)
-            <a href="{{ route('public-part.programs.sneak-and-peak', ['id' => $program->id, 'page' => $i]) }}#programs__grid">
+            <a href="{{ route('public-part.programs.sneak-and-peak', ['id' => $program->id, 'page' => $i]) }}#programs__grid_iw">
                 <div class="page-w"> <p>{{ $i }}</p> </div>
             </a>
         @endfor

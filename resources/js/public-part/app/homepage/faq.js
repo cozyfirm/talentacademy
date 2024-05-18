@@ -23,7 +23,7 @@ $(document).ready(function(){
             }
 
             state = !state;
-            console.log("we are here");
+            // console.log("we are here");
         }
     }, 3000);
 });

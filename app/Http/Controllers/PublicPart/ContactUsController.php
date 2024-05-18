@@ -24,7 +24,7 @@ class ContactUsController extends Controller{
              *  To Admins;
              *  ToDo - Replace an email
              * */
-            Mail::to("info@fondacijaekipa.ba")->send(new SendUsMessage('Kontakt forma', $name, $request->email, $name, $request->email, $request->program, $request->message));
+            Mail::to("akademija@fondacijaekipa.ba")->send(new SendUsMessage('Kontakt forma', $name, $request->email, $name, $request->email, $request->program, $request->message));
 
             return $this->jsonSuccess(__('Poruka uspješno poslana'));
         }catch (\Exception $e){
