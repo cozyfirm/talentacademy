@@ -256,7 +256,9 @@ class ProgramsController extends Controller{
     public function submitForScholarship ($program_id){
         try{
             $scholarship = $this->getScholarshipApplication($program_id);
-            if(!$scholarship->checked) return back()->with('error', __('Desila se greška!'))->with('message', __('Molimo da se složite sa "Kriterijem upisa" i prihvatite "Pravila privatnosti"!'));
+            $scholarship->update(['checked' => 1]);
+
+            // if(!$scholarship->checked) return back()->with('message', __('Molimo da se složite sa "Kriterijem upisa" i prihvatite "Pravila privatnosti"!'));
 
             /* Create message */
             InboxTo::create([

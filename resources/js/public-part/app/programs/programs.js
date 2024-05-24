@@ -235,4 +235,25 @@ $( document ).ready(function() {
     $(document).on('click','.presenters__scroll_single',function(){
         if(!arePresentersMoved) window.location.href = $(this).attr('uri');
     });
+
+
+    /**
+     *  Send application
+     */
+    $(".send-application-to-admins").click(function (e){
+
+        let criteria = $("#criteria").is(':checked');
+        let privacy  = $("#privacy").is(':checked');
+
+        if(!criteria){
+            Notify.Me(['Molimo da se složite sa "Kriterijem upisa"', "warn"]);
+            e.preventDefault();
+            return;
+        }
+        if(!privacy){
+            Notify.Me(['Molimo da prihvatite "Pravila privatnosti"', "warn"]);
+            e.preventDefault();
+            return;
+        }
+    });
 });

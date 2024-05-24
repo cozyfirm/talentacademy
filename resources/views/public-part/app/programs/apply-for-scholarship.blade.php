@@ -93,7 +93,7 @@
                             <i class="fas fa-save"></i>
                             <p>{{ __('Sačuvaj izmjene') }}</p>
                         </button>
-                        <a href="{{ route('public-part.programs.submit-for-scholarship', ['program_id' => $program->id ]) }}">
+                        <a href="{{ route('public-part.programs.submit-for-scholarship', ['program_id' => $program->id ]) }}" class="send-application-to-admins">
                             <div class="send_app">
                                 <i class="fas fa-envelope"></i>
                                 <p>{{ __('Pošalji aplikaciju') }}</p>
