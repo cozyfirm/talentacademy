@@ -12,7 +12,9 @@ trait UserBaseTrait{
         }catch (\Exception $e){ return ''; }
     }
     public function getSlug($slug): string{
-        $slug = preg_replace("/[^A-Za-z0-9 ]/", '', $slug);
+        $slug = str_replace('đ', 'd', $slug);
+        $slug = str_replace('Đ', 'D', $slug);
+        // $slug = preg_replace("/[^A-Za-z0-9 ]/", '', $slug);
         $slug = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $slug);
         $slug = iconv('UTF-8', 'ISO-8859-1//IGNORE', $slug);
         $slug = iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $slug);
