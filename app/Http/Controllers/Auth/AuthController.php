@@ -109,8 +109,6 @@ class AuthController extends Controller{
             /* Add username to request */
             $request['username'] = $this->getSlug($request->name);
 
-
-            dd($request['username']);
             /* Hash password and add token */
             $request['password'] = Hash::make($request->password);
             $request['api_token'] = hash('sha256', $request->email. '+'. time());
