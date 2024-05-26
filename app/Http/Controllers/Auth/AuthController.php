@@ -26,7 +26,7 @@ class AuthController extends Controller{
         return view($this->_path. 'auth');
     }
 
-    public function authenticate(Request $request){
+    public function authenticate(Request $request): bool|string{
         if(empty($request->email)) return json_encode(['code' => '1101', 'message' => __('Molimo da unesete Vaš email') ]);
         if(empty($request->password)) return json_encode(['code' => '1102', 'message' => __('Molimo da unesete Vašu šifru') ]);
 

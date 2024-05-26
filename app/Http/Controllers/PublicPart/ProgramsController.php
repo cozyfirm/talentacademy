@@ -191,10 +191,15 @@ class ProgramsController extends Controller{
             ->where('status', 'submitted')
             ->first();
 
+        $readyToSubmit = false;
+        $application = $this->getScholarshipApplication($id);
+        // if($application->motivation and $application->interests and $application->expectations and $application->skills and $application->cv and $application->motivation_letter) $readyToSubmit = true;
+
         return view($this->_path . 'apply-for-scholarship', [
             'program' => Program::where('id', $id)->first(),
-            'application' => $this->getScholarshipApplication($id),
-            'submittedOther' => $submittedOther
+            'application' => $application,
+            'submittedOther' => $submittedOther,
+            'readyToSubmit' => $readyToSubmit
         ]);
     }
 
@@ -258,6 +263,8 @@ class ProgramsController extends Controller{
             $scholarship = $this->getScholarshipApplication($program_id);
             $scholarship->update(['checked' => 1]);
 
+            if(!$scholarship->motivation or !$scholarship->interests or !$scholarship->experience or !$scholarship->expectations or !$scholarship->skills) return back()->with('message', __('Molimo da popunite sva polja prije slanja aplikacije!'));
+            if(!$scholarship->cv or !$scholarship->motivation_letter) return back()->with('message', __('Molimo da priložite CV i motivacijsko pismo prije slanja aplikacije!'));
             // if(!$scholarship->checked) return back()->with('message', __('Molimo da se složite sa "Kriterijem upisa" i prihvatite "Pravila privatnosti"!'));
 
             /* Create message */

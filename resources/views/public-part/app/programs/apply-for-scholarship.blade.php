@@ -99,6 +99,17 @@
                                 <p>{{ __('Pošalji aplikaciju') }}</p>
                             </div>
                         </a>
+{{--                    --}}
+{{--                        @if($readyToSubmit)--}}
+
+{{--                        @else--}}
+{{--                            <a title="{{ __('Molimo popunite sva obavezna polja prije slanja aplikacije!') }}">--}}
+{{--                                <div class="send_app send_app_greyed">--}}
+{{--                                    <i class="fas fa-envelope"></i>--}}
+{{--                                    <p>{{ __('Pošalji aplikaciju') }}</p>--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+{{--                        @endif--}}
                     @endif
                 </div>
             </form>
