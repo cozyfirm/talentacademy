@@ -31,6 +31,7 @@
                 @csrf
 
                 {{ html()->hidden('program_id')->class('form-control')->value($program->id) }}
+                {{ html()->hidden('send_application')->class('form-control')->id('send_application')->value(0) }}
 
                 <div class="apply__for_scholarship_textarea">
                     <label for="motivation">{{ __('Šta Vas je motivisalo da se prijavite na Helem Nejse Talent Akademiju? Opišite svoj interes za program na koji aplicirate.') }}</label>
@@ -82,34 +83,28 @@
 
                 <div class="other__btns">
                     @if(isset($submittedOther))
-                        <a href="#">
+                        <a>
                             <div class="cancel_btn"><p>{{ __('Već ste aplicirali za drugi program!') }}</p></div>
                         </a>
                     @else
-                        <a href="{{ route('public-part.programs.cancel-scholarship', ['program_id' => $program->id ]) }}">
-                            <div class="cancel_btn"><p>{{ __('Odustani') }}</p></div>
-                        </a>
-                        <button class="submit-btn">
-                            <i class="fas fa-save"></i>
-                            <p>{{ __('Sačuvaj izmjene') }}</p>
-                        </button>
-                        <a href="{{ route('public-part.programs.submit-for-scholarship', ['program_id' => $program->id ]) }}" class="send-application-to-admins">
-                            <div class="send_app">
+                        @if($submitted)
+                            <a>
+                                <div class="cancel_btn"><p>{{ __('Aplikacija poslana') }}</p></div>
+                            </a>
+                        @else
+                            <a href="{{ route('public-part.programs.cancel-scholarship', ['program_id' => $program->id ]) }}">
+                                <div class="cancel_btn"><p>{{ __('Odustani') }}</p></div>
+                            </a>
+                            <button class="submit-btn">
+                                <i class="fas fa-save"></i>
+                                <p>{{ __('Sačuvaj izmjene') }}</p>
+                            </button>
+
+                            <button class="submit-btn submit-application-btn">
                                 <i class="fas fa-envelope"></i>
                                 <p>{{ __('Pošalji aplikaciju') }}</p>
-                            </div>
-                        </a>
-{{--                    --}}
-{{--                        @if($readyToSubmit)--}}
-
-{{--                        @else--}}
-{{--                            <a title="{{ __('Molimo popunite sva obavezna polja prije slanja aplikacije!') }}">--}}
-{{--                                <div class="send_app send_app_greyed">--}}
-{{--                                    <i class="fas fa-envelope"></i>--}}
-{{--                                    <p>{{ __('Pošalji aplikaciju') }}</p>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        @endif--}}
+                            </button>
+                        @endif
                     @endif
                 </div>
             </form>

@@ -191,15 +191,16 @@ class ProgramsController extends Controller{
             ->where('status', 'submitted')
             ->first();
 
-        $readyToSubmit = false;
+        // $readyToSubmit = false;
         $application = $this->getScholarshipApplication($id);
         // if($application->motivation and $application->interests and $application->expectations and $application->skills and $application->cv and $application->motivation_letter) $readyToSubmit = true;
 
+        $submitted = ProgramApplication::where('program_id', $id)->where('attendee_id', Auth::user()->id)->where('status', 'submitted')->count();
         return view($this->_path . 'apply-for-scholarship', [
             'program' => Program::where('id', $id)->first(),
             'application' => $application,
             'submittedOther' => $submittedOther,
-            'readyToSubmit' => $readyToSubmit
+            'submitted' => $submitted
         ]);
     }
 
@@ -245,6 +246,23 @@ class ProgramsController extends Controller{
 
             if(isset($request->criteria) and isset($request->privacy)) $scholarship->update(['checked' => 1]);
             else $scholarship->update(['checked' => 0]);
+
+            if($request->send_application){
+                if(!$scholarship->motivation or !$scholarship->interests or !$scholarship->experience or !$scholarship->expectations or !$scholarship->skills) return back()->with('message', __('Molimo da popunite sva polja prije slanja aplikacije!'));
+                if(!$scholarship->cv) return back()->with('message', __('Molimo da priložite CV prije slanja aplikacije!'));
+
+                InboxTo::create([
+                    'inbox_id' => 2,
+                    'to' => Auth::user()->id
+                ]);
+
+                ProgramApplication::where('program_id', $request->program_id)->where('attendee_id', Auth::user()->id)->update([
+                    'status' => 'submitted'
+                ]);
+
+                return back()->with('success', __('Uspješno spremljeno!'))->with('message', __('Aplikacija uspješno poslana!'));
+            }
+            // dd($request->all());
 
             return back()->with('success', __('Uspješno spremljeno!'))->with('message', __('Vaše izmjene uspješno sačuvane!'));
         }catch (\Exception $e){
