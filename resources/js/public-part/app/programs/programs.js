@@ -274,4 +274,8 @@ $( document ).ready(function() {
 
         $("#send_application").val(1);
     });
+
+    $(".cv-select").change(function (e){ $(".cv-label").text(e.target.files[0].name); });
+    $(".ml-select").change(function (e){ $(".mv-label").text(e.target.files[0].name); });
+    $(".o-select"). change(function (e){ $(".o-label").text(e.target.files[0].name); });
 });

@@ -54,7 +54,6 @@ Route::prefix('auth')->group(function () {
 Route::prefix('')->group(function () {
     Route::get ('/',                              [HomepageController::class, 'home'])->name('public-part.home');
 
-
     /*
      *  Programs
      */
