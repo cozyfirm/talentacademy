@@ -57,17 +57,23 @@
                 <div class="upload__file_wrapper" title="{{ __('Vaš CV') }}">
                     <label class="cv-label" for="cv"> @if(isset($application->cvRel)) <span>{{ substr($application->cvRel->file, 0, 30) }}</span> @else {{ __('Upload CV') }} @endif </label>
                     <input name="cv" class="form-control form-control-sm mt-3 d-none cv-select" id="cv" type="file">
-                    <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
+                    @if(!isset($submittedOther) and !$submitted)
+                        <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
+                    @endif
                 </div>
                 <div class="upload__file_wrapper" title="{{ __('Vaše motivaciono pismo') }}">
                     <label class="mv-label" for="motivation_letter"> @if(isset($application->mlRel)) <span>{{ substr($application->mlRel->file, 0, 30) }}</span> @else {{ __('Motivacijsko pismo') }} @endif </label>
                     <input name="motivation_letter" class="form-control form-control-sm mt-3 d-none ml-select" id="motivation_letter" type="file">
-                    <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
+                    @if(!isset($submittedOther) and !$submitted)
+                        <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
+                    @endif
                 </div>
                 <div class="upload__file_wrapper" title="{{ __('Dodatni dokumenti ili primjeri rada') }}">
                     <label class="o-label" for="other" title="{{ __('Ovo polje je opcionalno') }}"> @if(isset($application->otherRel)) <span>{{ substr($application->otherRel->file, 0, 30) }}</span> @else {{ __('Dodatni dokumenti ili primjeri rada') }} @endif </label>
                     <input name="other" class="form-control form-control-sm mt-3 d-none o-select" id="other" type="file">
-                    <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
+                    @if(!isset($submittedOther) and !$submitted)
+                        <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
+                    @endif
                 </div>
 
                 <div class="terms__and_conditions_w">
