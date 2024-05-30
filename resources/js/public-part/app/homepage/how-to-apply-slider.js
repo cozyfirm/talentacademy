@@ -1,29 +1,40 @@
-$(document).ready(function(){
+document.addEventListener("DOMContentLoaded", function() {
+    // Get all slider containers
+    var containers = document.querySelectorAll(".how-to-apply__container");
+
     // Hide all slider content except the first one
-    $(".how-to-apply__container").not(":first").hide();
+    for (var i = 1; i < containers.length; i++) {
+        containers[i].style.display = "none";
+    }
 
     // Show the first pagination item as active
-    $(".how-to-apply__pagination-item").first().addClass("how-to-apply__pagination-item--active");
+    var paginationItems = document.querySelectorAll(".how-to-apply__pagination-item");
+    paginationItems[0].classList.add("how-to-apply__pagination-item--active");
 
-    $(".how-to-apply__pagination-item").click(function(){
-        var index = $(this).index();
+    // Add click event listener to pagination items
+    paginationItems.forEach(function(item, index) {
+        item.addEventListener("click", function() {
+            console.log(index);
 
-        console.log(index);
+            // Remove active class from all pagination items
+            paginationItems.forEach(function(item) {
+                item.classList.remove("how-to-apply__pagination-item--active");
+            });
 
-        // Remove active class from all pagination items
-        $(".how-to-apply__pagination-item").removeClass("how-to-apply__pagination-item--active");
+            // Add active class to the clicked pagination item
+            this.classList.add("how-to-apply__pagination-item--active");
 
-        // Add active class to the clicked pagination item
-        $(this).addClass("how-to-apply__pagination-item--active");
+            // Hide all slider content
+            containers.forEach(function(container) {
+                container.style.display = "none";
+            });
 
-        // Hide all slider content
-        $(".how-to-apply__container").hide();
+            // Show the corresponding slider content
+            containers[index].style.display = "block";
 
-
-        // Check if the clicked pagination item is the first one
-        $("#how-to-apply-" + index).show();
-
-        // Add active class to the pagination item inside the shown slider content
-        $("#how-to-apply-" + index + " .how-to-apply__pagination-item").eq(index).addClass("how-to-apply__pagination-item--active");
+            // Add active class to the pagination item inside the shown slider content
+            var paginationItemsInside = containers[index].querySelectorAll(".how-to-apply__pagination-item");
+            paginationItemsInside[index].classList.add("how-to-apply__pagination-item--active");
+        });
     });
 });
