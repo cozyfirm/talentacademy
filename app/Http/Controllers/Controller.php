@@ -11,6 +11,6 @@ class Controller extends BaseController{
     use AuthorizesRequests, ValidatesRequests;
 
     public function appTimePassed($date = null): bool{
-        return Carbon::now() > Carbon::parse('2024-06-04 01:00:00');
+        return Carbon::now() > Carbon::parse('2024-06-04 06:00:00');
     }
 }
