@@ -34,28 +34,28 @@
                 {{ html()->hidden('send_application')->class('form-control')->id('send_application')->value(0) }}
 
                 <div class="apply__for_scholarship_textarea">
-                    <label for="motivation">{{ __('Šta Vas je motivisalo da se prijavite na Helem Nejse Talent Akademiju? Opišite svoj interes za program na koji aplicirate.') }}</label>
+                    <label for="motivation">(* Obavezno polje) {{ __('Šta Vas je motivisalo da se prijavite na Helem Nejse Talent Akademiju? Opišite svoj interes za program na koji aplicirate.') }}</label>
                     {{ html()->textarea('motivation')->class('form-control form-control-sm')->id('motivation')->placeholder('Maksimalno 250 riječi..')->value(isset($application) ? $application->motivation : '')->isReadonly(false) }}
                 </div>
                 <div class="apply__for_scholarship_textarea">
-                    <label for="interests">{{ __('Molimo Vas da opišite sva relevantna iskustva iz oblasti za koju aplicirate, uključujući formalno obrazovanje, kurseve, projekte, volontiranje itd.') }}</label>
+                    <label for="interests">(* Obavezno polje) {{ __('Molimo Vas da opišite sva relevantna iskustva iz oblasti za koju aplicirate, uključujući formalno obrazovanje, kurseve, projekte, volontiranje itd.') }}</label>
                     {{ html()->textarea('interests')->class('form-control form-control-sm')->id('interests')->placeholder('Maksimalno 250 riječi..')->value(isset($application) ? $application->interests : '')->isReadonly(false) }}
                 </div>
                 <div class="apply__for_scholarship_textarea">
-                    <label for="experience">{{ __('Ukoliko nemate formalnog iskustva u oblasti za koju aplicirate, opišite talente i vještine koje smatrate relevantnima za aplikaciju.') }}</label>
+                    <label for="experience">(* Obavezno polje) {{ __('Ukoliko nemate formalnog iskustva u oblasti za koju aplicirate, opišite talente i vještine koje smatrate relevantnima za aplikaciju.') }}</label>
                     {{ html()->textarea('experience')->class('form-control form-control-sm')->id('experience')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->experience : '')->isReadonly(false) }}
                 </div>
                 <div class="apply__for_scholarship_textarea">
-                    <label for="expectations">{{ __('Koja su Vaša očekivanja od Helem Nejse Talent Akademije? Koje vještine i znanja želite steći ili unaprijediti tokom programa?') }}</label>
+                    <label for="expectations">(* Obavezno polje) {{ __('Koja su Vaša očekivanja od Helem Nejse Talent Akademije? Koje vještine i znanja želite steći ili unaprijediti tokom programa?') }}</label>
                     {{ html()->textarea('expectations')->class('form-control form-control-sm')->id('expectations')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->expectations : '')->isReadonly(false) }}
                 </div>
                 <div class="apply__for_scholarship_textarea">
-                    <label for="skills">{{ __('Na koji način bi učešće na HNTA programu doprinijelo Vašem profesionalnom razvoju?') }}</label>
+                    <label for="skills">(* Obavezno polje) {{ __('Na koji način bi učešće na HNTA programu doprinijelo Vašem profesionalnom razvoju?') }}</label>
                     {{ html()->textarea('skills')->class('form-control form-control-sm')->id('skills')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->skills : '')->isReadonly(false) }}
                 </div>
 
                 <div class="upload__file_wrapper" title="{{ __('Vaš CV') }}">
-                    <label class="cv-label" for="cv"> @if(isset($application->cvRel)) <span>{{ substr($application->cvRel->file, 0, 30) }}</span> @else {{ __('Upload CV') }} @endif </label>
+                    <label class="cv-label" for="cv"> @if(isset($application->cvRel)) <span>{{ substr($application->cvRel->file, 0, 30) }}</span> @else {{ __('(* Obavezno polje) Upload CV') }} @endif </label>
                     <input name="cv" class="form-control form-control-sm mt-3 d-none cv-select" id="cv" type="file">
                     @if(!isset($submittedOther) and !$submitted)
                         <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
@@ -75,6 +75,8 @@
                         <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
                     @endif
                 </div>
+
+                <p style="margin-top: 16px"><b>{{ __('Dozvoljeni formati za unos dokumenata su pdf, doc i docx!') }}</b></p>
 
                 <div class="terms__and_conditions_w">
                     <div class="terms__and_conditions">
