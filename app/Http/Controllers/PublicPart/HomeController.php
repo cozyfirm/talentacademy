@@ -17,6 +17,11 @@ class HomeController extends Controller{
 
     public function home(): View{
         $daysTil = Carbon::now()->diffInDays(Carbon::parse('2024-06-03 23:59:59'));
+
+        $appTimePassed = $this->appTimePassed('2024-06-04 00:00:00');
+        if($appTimePassed){
+            $daysTil = Carbon::now()->diffInDays(Carbon::parse('2024-08-02 08:00:00'));
+        }
         if($daysTil < 0) $daysTil = 0;
 
         return view($this->_path . 'home', [
@@ -24,7 +29,8 @@ class HomeController extends Controller{
             'locations' => Location::inRandomOrder()->take(6)->get(),
             'faqs' => FAQ::where('what', 0)->get(),
             'lecturers' => User::where('role', 'presenter')->inRandomOrder()->take(4)->get(),
-            'daysTill' => $daysTil
+            'daysTill' => $daysTil,
+            'appTimePassed' => $appTimePassed
         ]);
     }
     public function scholarship (){

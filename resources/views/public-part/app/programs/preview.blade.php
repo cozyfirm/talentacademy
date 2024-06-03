@@ -30,9 +30,11 @@
                             </a>
                         @endif
                     @else
-                        <a href="{{ route('public-part.programs.apply-for-scholarship', ['id' => $program->id ]) }}">
-                            <button class="my-c-btn">{{ __('Apliciraj za stipendiju') }}</button>
-                        </a>
+                        @if(!$appTimePassed)
+                            <a href="{{ route('public-part.programs.apply-for-scholarship', ['id' => $program->id ]) }}">
+                                <button class="my-c-btn">{{ __('Apliciraj za stipendiju') }}</button>
+                            </a>
+                        @endif
                     @endif
                     <a href="{{ route('public-part.programs.more-about', ['id' => $program->id ]) }}">
                         <button class="my-c-btn">{{ __('Detaljno o programu') }}</button>
@@ -60,46 +62,48 @@
         @include('public-part.app.base-includes.generic.how-to-apply')
     </div>
 
-    <!-- Counter -->
-    <div class="preview__counter preview__counter_{{ $program->id }}">
-        <div class="preview__counter_iw">
-            <h1>{{ __('Rok za prijavu aplikacija:') }}</h1>
-            <h1> 03.06.2024 </h1>
+    @if(!$appTimePassed)
+        <!-- Counter -->
+        <div class="preview__counter preview__counter_{{ $program->id }}">
+            <div class="preview__counter_iw">
+                <h1>{{ __('Rok za prijavu aplikacija:') }}</h1>
+                <h1> 03.06.2024 </h1>
 
-            <p> {{ __("Vaše aplikacije prihvatamo do 03.06.2024. godine. Ne propusti priliku da apliciraš za jedan od programa Helem Nejse Talent Akademije. ") }} </p>
+                <p> {{ __("Vaše aplikacije prihvatamo do 03.06.2024. godine. Ne propusti priliku da apliciraš za jedan od programa Helem Nejse Talent Akademije. ") }} </p>
 
-            <div class="counter__w">
-                <div class="c__num"> <p class="c__month"></p> </div>
-                <span>:</span>
-                <div class="c__num"> <p class="c__day"></p> </div>
-                <span>:</span>
-                <div class="c__num"> <p class="c__hour"></p> </div>
-                <span>:</span>
-                <div class="c__num"> <p class="c__min"></p> </div>
-            </div>
+                <div class="counter__w">
+                    <div class="c__num"> <p class="c__month"></p> </div>
+                    <span>:</span>
+                    <div class="c__num"> <p class="c__day"></p> </div>
+                    <span>:</span>
+                    <div class="c__num"> <p class="c__hour"></p> </div>
+                    <span>:</span>
+                    <div class="c__num"> <p class="c__min"></p> </div>
+                </div>
 
-            <div class="counter__btn">
-            <a href="@if(!$program->isSubmitted()) {{ route('public-part.programs.apply-for-scholarship', ['id' => $program->id ]) }} @else # @endif">
-                    <button class="app_btn">
-                        <img src="{{ asset('files/images/public-part/app-btn.png') }}" alt="">
-                        @if($program->isSubmitted())
-                            @if($program->acceptedStatus() == 'in_queue')
-                                <p>{{ __('Aplikacija poslana') }}</p>
-                            @elseif($program->acceptedStatus() == 'accepted')
-                                <p>{{ __('Aplikacija prihvaćena') }}</p>
+                <div class="counter__btn">
+                    <a href="@if(!$program->isSubmitted()) {{ route('public-part.programs.apply-for-scholarship', ['id' => $program->id ]) }} @else # @endif">
+                        <button class="app_btn">
+                            <img src="{{ asset('files/images/public-part/app-btn.png') }}" alt="">
+                            @if($program->isSubmitted())
+                                @if($program->acceptedStatus() == 'in_queue')
+                                    <p>{{ __('Aplikacija poslana') }}</p>
+                                @elseif($program->acceptedStatus() == 'accepted')
+                                    <p>{{ __('Aplikacija prihvaćena') }}</p>
+                                @else
+                                    <p>{{ __('Aplikacija odbijena') }}</p>
+                                @endif
                             @else
-                                <p>{{ __('Aplikacija odbijena') }}</p>
+                                <p>{{ __('Apliciraj za stipendiju') }}</p>
                             @endif
-                        @else
-                            <p>{{ __('Apliciraj za stipendiju') }}</p>
-                        @endif
 
 
-                    </button>
-                </a>
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    @endif
 
     <div class="snake">
         <img src="{{ asset('/files/images/public-part/snake/snake_'.($program->id).'.svg') }}" alt="{{ __('Snake') }}" class="snake__image">
