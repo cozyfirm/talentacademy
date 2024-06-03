@@ -1,6 +1,6 @@
 $(document).ready(function (){
     /* Format is: month / day / year */
-    let td = new Date("06/03/2024 23:59:59");
+    let td = new Date("06/04/2024 06:00:00");
     // let td = new Date("04/06/2024");
 
     function TimeCalculator(seconds) {
