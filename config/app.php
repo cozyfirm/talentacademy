@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'Europe/Sarajevo ',
+    'timezone' => 'Europe/Sarajevo',
 
     /*
     |--------------------------------------------------------------------------

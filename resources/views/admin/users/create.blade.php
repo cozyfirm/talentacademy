@@ -159,7 +159,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {{ html()->label(__('Detaljan opis'))->for('description')->class('bold') }}
-                                    {{ html()->textarea('description')->class('form-control form-control-sm mt-2 textarea-240')->value(isset($user) ? $user->description : '')->isReadonly(isset($preview)) }}
+                                    {{ html()->textarea('description')->class('form-control form-control-sm mt-2 textarea-240 summernote')->value(isset($user) ? $user->description : '')->isReadonly(isset($preview)) }}
                                 </div>
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {{ html()->label(__('Interview'))->for('interview')->class('bold') }}
-                                    {{ html()->textarea('interview')->class('form-control form-control-sm mt-2 textarea-240')->value(isset($user) ? $user->interview : '')->isReadonly(isset($preview)) }}
+                                    {{ html()->textarea('interview')->class('form-control form-control-sm mt-2 textarea-240 summernote')->value(isset($user) ? $user->interview : '')->isReadonly(isset($preview)) }}
                                 </div>
                             </div>
                         </div>
