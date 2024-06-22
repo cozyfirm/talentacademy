@@ -48,19 +48,19 @@
                     <h2 class="hero-section__heading"> {{ __('Helem Nejse Talent Akademija') }} </h2>
                     <div class="hero-section__subheading">{{ __('Sedmodnevna ljetna škola iz oblasti kreativnih industrija u Sarajevu!') }}</div>
                 </div>
-                @if(auth()->check())
-                    <a href="{{ route('dashboard.my-profile') }}" class="hero-section__bottom-section-button">
-                        {{ __('Apliciraj za stipendiju') }}
-                    </a>
-                @else
-                    <a href="{{ route('auth.create-account') }}" class="hero-section__bottom-section-button">
-                        {{ __('Apliciraj za stipendiju') }}
-                    </a>
-                @endif
+{{--                @if(auth()->check())--}}
+{{--                    <a href="{{ route('dashboard.my-profile') }}" class="hero-section__bottom-section-button">--}}
+{{--                        {{ __('Apliciraj za stipendiju') }}--}}
+{{--                    </a>--}}
+{{--                @else--}}
+{{--                    <a href="{{ route('auth.create-account') }}" class="hero-section__bottom-section-button">--}}
+{{--                        {{ __('Apliciraj za stipendiju') }}--}}
+{{--                    </a>--}}
+{{--                @endif--}}
             </div>
             <div class="hero-section__bottom-section">
                 <div class="hero-section__bottom-section-text">
-                    {{ __('Aplikacije do 03. juna 2024. godine!') }}
+                    {{ __('Početak 02. augusta 2024. godine!') }}
                 </div>
 
                 <a href="#features" class="hero-section__bottom-section-learn-more">

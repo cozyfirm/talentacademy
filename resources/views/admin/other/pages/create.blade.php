@@ -43,6 +43,15 @@
                         </div>
                     </div>
 
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ html()->label(__('Video url'))->for('video')->class('bold') }}
+                                {{ html()->text('video')->class('form-control form-control-sm')->value((isset($page) ? $page->video : ''))->isReadonly(isset($preview)) }}
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row mt-4">
                         <div class="col-md-12 d-flex justify-content-end">
                             <button type="submit" class="btn btn-dark btn-sm"> {{ __('Sačuvajte izmjene') }} </button>
