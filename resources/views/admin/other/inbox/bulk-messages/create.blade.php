@@ -53,7 +53,7 @@
                         @if(!isset($preview))
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ html()->label(__('Kome se šalje'))->for('country')->class('bold') }}
+                                    {{ html()->label(__('Kome se šalje'))->for('what')->class('bold') }}
                                     {{ html()->select('what', $other, isset($message) ? $message->what : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                 </form>
 
                 <!-- Display all users -->
-                @if(isset($message))
+                @if(isset($message) and $message->toRel->count())
                     <table class="table table-bordered">
                         <thead>
                             <tr>

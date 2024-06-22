@@ -39,7 +39,7 @@ class BulkMessagesController extends Controller{
     public function create (): View{
         return view($this->_path . 'create', [
             'create' => true,
-            'other' => Program::pluck('title', 'id')->prepend('Svim korisnicima', 0)
+            'other' => Program::pluck('title', 'id')->prepend('Svim korisnicima', 0)->prepend('Draft', 7)
         ]);
     }
     public function save(Request $request): JsonResponse{

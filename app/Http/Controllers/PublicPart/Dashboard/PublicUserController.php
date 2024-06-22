@@ -206,7 +206,7 @@ class PublicUserController extends Controller{
     }
     public function inbox(){
         return view($this->_path . 'user.inbox', [
-            'messages' => InboxTo::where('to', Auth::user()->id)->get(),
+            'messages' => InboxTo::where('to', Auth::user()->id)->orderBy('id', 'DESC')->get(),
             'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
         ]);
     }

@@ -14,6 +14,12 @@
             <span>{{ __('Nazad') }}</span>
         </button>
     </a>
+    <a href="{{ route('system.admin.programs.edit-application', ['id' => $application->id ]) }}">
+        <button class="pm-btn btn pm-btn-info">
+            <i class="fas fa-edit"></i>
+            <span>{{ __('Uredi') }}</span>
+        </button>
+    </a>
 @endsection
 
 @section('content')
@@ -45,23 +51,25 @@
                         </div>
                     </div>
 
-                    <hr>
+                    @if(isset($application->cvRel) or isset($application->mlRel) or isset($application->otherRel))
+                        <hr>
 
-                    <div class="row mt-3 d-inline-flex">
-                        <div class="col-md-12 gap-5">
-                            @if(isset($application->cvRel))
-                                <a href="{{ route('system.admin.programs.download-file', ['id' => $application->cvRel->id ]) }}" class="text-info">{{ substr($application->cvRel->file, 0, 30) }}</a>
-                            @endif
-                            <span>|</span>
-                            @if(isset($application->mlRel))
-                                <a href="{{ route('system.admin.programs.download-file', ['id' => $application->mlRel->id ]) }}" class="text-info">{{ substr($application->mlRel->file, 0, 30) }}</a>
-                            @endif
-                            <span>|</span>
-                            @if(isset($application->otherRel))
-                                <a href="{{ route('system.admin.programs.download-file', ['id' => $application->otherRel->id ]) }}" class="text-info">{{ substr($application->otherRel->file, 0, 30) }}</a>
-                            @endif
+                        <div class="row mt-3 d-inline-flex">
+                            <div class="col-md-12 gap-5">
+                                @if(isset($application->cvRel))
+                                    <a href="{{ route('system.admin.programs.download-file', ['id' => $application->cvRel->id ]) }}" class="text-info">{{ substr($application->cvRel->file, 0, 30) }}</a>
+                                @endif
+                                <span>|</span>
+                                @if(isset($application->mlRel))
+                                    <a href="{{ route('system.admin.programs.download-file', ['id' => $application->mlRel->id ]) }}" class="text-info">{{ substr($application->mlRel->file, 0, 30) }}</a>
+                                @endif
+                                <span>|</span>
+                                @if(isset($application->otherRel))
+                                    <a href="{{ route('system.admin.programs.download-file', ['id' => $application->otherRel->id ]) }}" class="text-info">{{ substr($application->otherRel->file, 0, 30) }}</a>
+                                @endif
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     <hr>
 

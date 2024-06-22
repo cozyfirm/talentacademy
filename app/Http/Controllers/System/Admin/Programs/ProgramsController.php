@@ -4,7 +4,11 @@ namespace App\Http\Controllers\System\Admin\Programs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\Core\Filters;
+use App\Mail\Users\ApplicationStatus;
+use App\Mail\Users\ConfirmEmail;
 use App\Models\Core\File;
+use App\Models\Other\Inbox\Inbox;
+use App\Models\Other\Inbox\InboxTo;
 use App\Models\Other\Location;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
@@ -20,6 +24,7 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use MongoDB\Driver\Session;
 
@@ -128,6 +133,46 @@ class ProgramsController extends Controller{
         return view($this->_path . 'preview-application', [
             'application' => ProgramApplication::where('id', $id)->first(),
         ]);
+    }
+    public function editApplication ($id){
+        return view($this->_path . 'edit-application', [
+            'application' => ProgramApplication::where('id', $id)->first(),
+        ]);
+    }
+    public function updateApplication(Request $request): JsonResponse{
+        try{
+            $application = ProgramApplication::where('id', $request->id)->first();
+
+            if($application->app_status == 'in_queue' and $request->app_status != 'in_queue'){
+                /* Send this message only first time when changing */
+
+                if($request->app_status == 'accepted'){
+                    $message = Inbox::where('id', 3)->first();
+                    $status = 'prihvaćena';
+                }else if($request->app_status == 'denied'){
+                    $message = Inbox::where('id', 4)->first();
+                    $status = 'odbijena';
+                }
+
+                InboxTo::create([
+                    'inbox_id' => $message->id,
+                    'to' => $application->attendee_id
+                ]);
+
+                /**
+                 *  Send an email
+                 */
+                Mail::to($application->userRel->email)->send(new ApplicationStatus($application->userRel->name, $status, $message->content));
+                $application->update(['app_status' => $request->app_status]);
+
+                return $this->jsonSuccess(__('Obavijest uspješno poslana!'), route('system.admin.programs.preview-application', ['id' => $request->id]));
+            }
+            $application->update(['app_status' => $request->app_status]);
+
+            return $this->jsonSuccess(__('Informacije ažurirane bez slanja obavijesti!'), route('system.admin.programs.preview-application', ['id' => $request->id]));
+        }catch (\Exception $e){
+            return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
+        }
     }
     public function downloadFile ($id){
         try{

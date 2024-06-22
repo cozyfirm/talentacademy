@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="msg_body d-none">
-                                <p>{!! $message->messageRel->content ?? '' !!}</p>
+                                <p>{!! nl2br($message->messageRel->content ?? '') !!}</p>
                             </div>
                         </div>
                     @endforeach
