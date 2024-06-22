@@ -33,7 +33,13 @@
             <a href="{{ route('dashboard.inbox') }}">
                 <div class="inner__menu_links_link @if(Route::is('dashboard.inbox')) active @endif">
                     <img src="{{ asset('files/images/public-part/inbox.png') }}" class="inbox" alt="">
-                    <p>{{ __('Inbox') }}</p>
+                    <p>{{ __('Obavijesti') }}</p>
+
+                    @if(Auth()->user()->unreadNotifications())
+                        <div class="number" id="number-of-notifications-w">
+                            <p id="number-of-notifications">{{ Auth()->user()->unreadNotifications() }}</p>
+                        </div>
+                    @endif
                 </div>
             </a>
 {{--                Auth()->user()->role == 'presenter' or--}}

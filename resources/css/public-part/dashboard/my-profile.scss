@@ -34,10 +34,12 @@
             a{
                 position: relative; display: flex;
                 .inner__menu_links_link{
-                    display: inline-flex; position: relative; gap: 10px; padding: 0px 20px; border-left: 1px solid rgba(0,0,0,0.1); border-right: 1px solid rgba(0,0,0,0.1);
+                    display: flex; position: relative; gap: 10px; padding: 0px 20px; border-left: 1px solid rgba(0,0,0,0.1); border-right: 1px solid rgba(0,0,0,0.1);
+                    align-items: center;
                     img{
                         //width: auto; height: 20px; position: relative;
-                        margin-top: 20px;
+                        //margin-top: 20px;
+                        margin-top: 0px !important;
                     }
                     .scholarship{
                         width: 15px; height: 20px;
@@ -50,7 +52,15 @@
                     }
 
                     p{
-                        margin-top: 18px;
+                        //margin-top: 18px;
+                        margin: 0px;
+                    }
+
+                    .number{
+                        background: $white; height: 20px; display: flex; align-items: center; padding: 0px 6px; border-radius: 3px;
+                        p{
+                            font-size: 12px; margin: 0px; padding: 0px; font-weight: bold;
+                        }
                     }
                 }
                 .active{
@@ -308,7 +318,7 @@
                 position: relative; left: 0px; top:0px; width: 100%; min-height: 48px; margin-bottom: 16px;
                 .msg_header{
                     position: relative; left: 0px; top:0px; width: 100%; height: 56px; border: 1px solid $dark; border-radius: 8px;
-                    background: $p1_bcg;
+                    background: #EA8BF3;
                     display: inline-flex; justify-content: space-between;
                     .msg_from{
                         display: inline-flex; width: 220px;
@@ -363,6 +373,34 @@
                     }
 
                 }
+            }
+        }
+
+        .inbox__pagination{
+            position: relative; width: 100%; height: 40px; text-align: center; display: flex; justify-content: center; margin-top: 16px;
+            .pagination{
+                display: flex; width: 100%; list-style: none; gap: 8px;
+                li{
+                    width: 32px; height: 32px; background: #ffffff; display: flex; justify-content: center; align-items: center; border: 1px solid rgba(0,0,0,0.1);
+                    &.active{
+                        background: $primary !important;
+                        span{
+                            color: #ffffff !important;
+                        }
+                    }
+                    a{
+                        color: #000000;
+                    }
+
+                    .page-link{
+                        border-radius: 4px; background: $primary; border-color:$primary;
+                    }
+                    &.active > .page-link{
+                        background: #000000; border-color:#000000;
+                        color: $primary !important;
+                    }
+                }
+                li:first-child, li:last-child{display: none;}
             }
         }
     }

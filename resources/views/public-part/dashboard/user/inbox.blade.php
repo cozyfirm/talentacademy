@@ -15,10 +15,14 @@
             <div class="profile__wrapper_right profile__wrapper_right_inbox">
                 <div class="inbox_wrapper">
                     @foreach($messages as $message)
-                        <div class="msg_wrapper">
+                        <div class="msg_wrapper" attr-id="{{ $message->id }}">
                             <div class="msg_header msg_header_{{ $message->messageRel->what ?? '' }}">
                                 <div class="msg_from">
-                                    <img src="{{ asset('files/images/public-part/msgtag.png') }}" alt="">
+                                    @if($message->read)
+                                        <img class="msg__img" src="{{ asset('files/images/public-part/msgtag.png') }}" alt="">
+                                    @else
+                                        <img class="msg__img" src="{{ asset('files/images/public-part/msgtag-full.png') }}" alt="">
+                                    @endif
                                     <h5>{{ $message->messageRel->fromRel->name ?? '' }}</h5>
                                 </div>
                                 <div class="msg_title">
@@ -33,6 +37,10 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+
+                <div class="inbox__pagination">
+                    {{$messages->links("pagination::bootstrap-4")}}
                 </div>
             </div>
         </div>

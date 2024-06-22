@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Models\Core\Country;
+use App\Models\Other\Inbox\InboxTo;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
 use Carbon\Carbon;
@@ -97,5 +98,9 @@ class User extends Authenticatable{
             $app = ProgramApplication::where('attendee_id', $this->id)->where('app_status', 'accepted')->count();
             return (bool)$app;
         }catch (\Exception $e){ return false; }
+    }
+
+    public function unreadNotifications(){
+        return InboxTo::where('to', $this->id)->whereNull('read_at')->count();
     }
 }

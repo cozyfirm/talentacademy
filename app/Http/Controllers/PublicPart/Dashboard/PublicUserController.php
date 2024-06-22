@@ -26,6 +26,7 @@ use MongoDB\Driver\Session;
 class PublicUserController extends Controller{
     use UserBaseTrait, ResponseTrait, FileTrait, CommonTrait;
     protected string $_path = 'public-part.dashboard.';
+    protected int $_notification_count = 6;
 
     /**
      *  Preview and update my profile
@@ -206,9 +207,23 @@ class PublicUserController extends Controller{
     }
     public function inbox(){
         return view($this->_path . 'user.inbox', [
-            'messages' => InboxTo::where('to', Auth::user()->id)->orderBy('id', 'DESC')->get(),
+            'messages' => InboxTo::where('to', Auth::user()->id)->orderBy('id', 'DESC')->paginate($this->_notification_count),
             'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
         ]);
+    }
+    public function markMessageAsRead(Request $request){
+        try{
+            $notification = InboxTo::where('id', $request->id)->first();
+
+            if($notification->to == Auth::user()->id){
+                $notification->update(['read_at' => Carbon::now(), 'read' => 1]);
+            }
+            return $this->jsonResponse('0000', __('Uspješno ažurirano!'), [
+                'unread' => Auth::user()->unreadNotifications()
+            ]);
+        }catch (\Exception $e){
+            return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
+        }
     }
     public function mySchedule($date = null): View | RedirectResponse{
         if(Auth::user()->role == 'user'){

@@ -172,6 +172,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
      */
     Route::get ('/apply-for-scholarship',                   [PublicUserController::class, 'applyForScholarship'])->name('dashboard.apply-for-scholarship');
     Route::get ('/inbox',                                   [PublicUserController::class, 'inbox'])->name('dashboard.inbox');
+    Route::post('/mark-message-as-read',                    [PublicUserController::class, 'markMessageAsRead'])->name('dashboard.mark-message-as-read');
     Route::get ('/my-schedule',                             [PublicUserController::class, 'mySchedule'])->name('dashboard.my-schedule');
     Route::get ('/my-schedule/{date}',                      [PublicUserController::class, 'mySchedule'])->name('dashboard.my-schedule-by-date');
 

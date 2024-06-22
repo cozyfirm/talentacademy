@@ -9,6 +9,7 @@ use App\Models\Other\Inbox\Inbox;
 use App\Models\Other\Inbox\InboxTo;
 use App\Models\Other\Location;
 use App\Models\Programs\Program;
+use App\Models\Programs\ProgramApplication;
 use App\Models\User;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
@@ -58,6 +59,14 @@ class BulkMessagesController extends Controller{
                 }
             }else if($request->what >= 1 and $request->what <= 6){
                 /* Sent to users from specific program */
+                $applications = ProgramApplication::where('program_id', $request->what)->where('app_status', 'accepted')->get();
+
+                foreach ($applications as $application){
+                    InboxTo::create([
+                        'inbox_id' => $inbox->id,
+                        'to' => $application->attendee_id
+                    ]);
+                }
             }
 
             return $this->jsonSuccess(__('Uspješno ste unijeli lokaciju!'), route('system.admin.inbox.bulk-messages.preview', ['id' => $inbox->id]));
