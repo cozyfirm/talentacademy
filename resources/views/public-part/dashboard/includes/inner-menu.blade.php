@@ -42,6 +42,20 @@
                     @endif
                 </div>
             </a>
+
+            <a href="{{ route('dashboard.my-notes') }}">
+                <div class="inner__menu_links_link @if(Route::is('dashboard.my-notes')) active @endif">
+                    <img src="{{ asset('files/images/public-part/notes.png') }}" class="inbox" alt="">
+                    <p>{{ __('Moje zabilješke') }}</p>
+
+                    @if(Auth()->user()->unreadNotifications())
+                        <div class="number" id="number-of-notifications-w">
+                            <p id="number-of-notes">{{ Auth()->user()->totalNotes() }}</p>
+                        </div>
+                    @endif
+                </div>
+            </a>
+
 {{--                Auth()->user()->role == 'presenter' or--}}
             @if( (Auth()->user()->role == 'user' and Auth()->user()->myProgram()))
                 <a href="{{ route('dashboard.my-schedule') }}">

@@ -10,6 +10,7 @@ use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionFile;
 use App\Models\Programs\ProgramSessionLink;
+use App\Models\Programs\ProgramSessionNote;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
@@ -211,7 +212,7 @@ class PublicUserController extends Controller{
             'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
         ]);
     }
-    public function markMessageAsRead(Request $request){
+    public function markMessageAsRead(Request $request): JsonResponse|bool|string {
         try{
             $notification = InboxTo::where('id', $request->id)->first();
 
@@ -252,6 +253,32 @@ class PublicUserController extends Controller{
             'currentDay' => $currentDay,
             'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
         ]);
+    }
+
+    /*
+     *  My notes
+     */
+    public function myNotes(): View | RedirectResponse{
+        if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
+
+        return view($this->_path . 'user.my-notes', [
+            'sessions' => Auth::user()->getMySessions()
+        ]);
+    }
+    public function removeMyNote(Request $request){
+        try{
+            $note = ProgramSessionNote::where('id', $request->id)->first();
+            $left = ProgramSessionNote::where('session_id', $note->session_id)->where('id', '!=', $note->id)->count();
+
+            $note->delete();
+
+            return $this->jsonResponse('0000', __('Bilješka uspješno obrisana!'), [
+                'left' => $left,
+                'totalLeft' => Auth::user()->totalNotes()
+            ]);
+        }catch (\Exception $e){
+            return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
+        }
     }
 
     /* -------------------------------------------------------------------------------------------------------------- */

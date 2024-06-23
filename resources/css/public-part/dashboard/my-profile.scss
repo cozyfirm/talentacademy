@@ -375,7 +375,6 @@
                 }
             }
         }
-
         .inbox__pagination{
             position: relative; width: 100%; height: 40px; text-align: center; display: flex; justify-content: center; margin-top: 16px;
             .pagination{
@@ -403,6 +402,127 @@
                 li:first-child, li:last-child{display: none;}
             }
         }
+
+        /* My notes */
+        .my__notes__wrapper{
+            position: relative; left: 0px; top: 0px; width: 100%; gap: 16px; display: flex; flex-wrap: wrap;
+            .my__note_wrapper{
+                position: relative; width: 100%; display: flex; flex-wrap: wrap; gap: 16px;
+
+                &.active{
+                    .my__note_body{
+                        display: flex;
+                    }
+                }
+
+                .my__note__header{
+                    position: relative; width: 100%; height: 80px; background: #EA8BF3; border-radius: 8px; display: flex; justify-content: space-between;
+                    padding: 0px 32px;
+
+                    @media only screen and (max-width: 1000px) {
+                        height: auto; padding: 16px 16px;
+                    }
+
+                    .mnh__left, .mnh__right{
+                        display: flex; gap: 8px; align-items: center; align-content: center; height: 100%;
+
+                        img{
+                            height: 20px; margin-top:0px;
+                        }
+                        p{
+                            margin-top: 2px; margin-bottom: 0px;
+
+                            span{
+                                @media only screen and (max-width: 1000px) {
+                                    width: 100%;
+                                }
+                            }
+                        }
+                        .notes_img{
+                            margin-left: 24px;
+                        }
+
+                        .total_no{
+                            position: relative; height: 20px; border-radius: 4px; display: flex; align-content: center; padding: 0px 4px; background: $white;
+                            font-size: 12px; align-items: center; font-weight: bold;
+                        }
+
+                        .speaker_img, .presenter_name{
+                            @media only screen and (max-width: 1000px) {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    .mnh__left{
+                        @media only screen and (max-width: 1000px) {
+                            flex-wrap: wrap; width: 100%;
+                            .session__title{
+                                width: 100%;
+                            }
+                        }
+                    }
+                    .mnh__right{
+                        @media only screen and (max-width: 1000px) {
+                            position: absolute; right: 16px; top: 16px;
+                            align-content: flex-start; align-items: flex-start;
+                        }
+                    }
+
+                }
+                .my__note_body{
+                    position: relative; width: 100%; background: #EEF0F2; border-radius: 8px; display: none; padding: 24px 16px; flex-wrap: wrap; gap: 16px;
+
+                    .single__note{
+                        position:relative; width: 100%; display: flex; justify-content: space-between; gap: 32px; transition: 0.3s all; padding: 0px 16px; border-radius: 8px;
+
+                        @media only screen and (max-width: 1000px) {
+                            padding: 0px; flex-wrap: wrap; gap: 16px;
+                        }
+
+                        .time__w{
+                            width: 90px;
+                            p{
+                                font-weight: bold;
+                            }
+
+                            @media only screen and (max-width: 1000px) {
+                                width: 100%;
+                            }
+                        }
+
+                        .note_w{
+                            width: calc(100% - 184px);
+                            @media only screen and (max-width: 1000px) {
+                                width: 100%;
+                            }
+                        }
+
+                        .remove_w{
+                            width: 30px; text-align: right;
+                            img:hover{cursor: pointer;}
+
+                            @media only screen and (max-width: 1000px) {
+                                position: absolute; right: 16px; top: 0px;
+                            }
+                        }
+                        p{
+                            margin: 0px;
+                        }
+                    }
+                    //.single_note:last-child{margin-bottom: 0px;}
+                    .single__note:hover{
+                        background: #FFFFFF; padding: 16px;
+                    }
+                }
+            }
+            .my__note_wrapper_1{ .my__note__header{ background: $p1_bcg; } }
+            .my__note_wrapper_2{ .my__note__header{ background: $p2_bcg; } }
+            .my__note_wrapper_3{ .my__note__header{ background: $p3_bcg; } }
+            .my__note_wrapper_4{ .my__note__header{ background: $p4_bcg; } }
+            .my__note_wrapper_5{ .my__note__header{ background: $p5_bcg; } }
+            .my__note_wrapper_6{ .my__note__header{ background: $p6_bcg; } }
+        }
     }
 }
 
@@ -425,7 +545,7 @@
         .profile__wrapper_right_schedule{
             padding: 0px; border: none;
         }
-        .profile__wrapper_right_inbox{padding: 0px; border: none;}
+        .profile__wrapper_right_inbox, .profile__wrapper_right_my_notes{padding: 0px; border: none;}
     }
 }
 

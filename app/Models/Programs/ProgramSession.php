@@ -60,7 +60,7 @@ class ProgramSession extends Model{
         return $this->hasOne(Location::class, 'id', 'location_id');
     }
     public function noteRel(): HasMany{
-        return $this->hasMany(ProgramSessionNote::class, 'session_id', 'id')->where('attendee_id', Auth::user()->id);
+        return $this->hasMany(ProgramSessionNote::class, 'session_id', 'id')->where('attendee_id', Auth::user()->id)->orderBy('id', 'desc');
     }
     public function getDayInOrder(){
         $uniqueSessions = ProgramSession::where('program_id', $this->program_id)->orderBy('date')->get()->unique('date');

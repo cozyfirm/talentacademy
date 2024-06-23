@@ -7,6 +7,7 @@ use App\Models\Models\Core\Country;
 use App\Models\Other\Inbox\InboxTo;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
+use App\Models\Programs\ProgramSessionNote;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -99,8 +100,25 @@ class User extends Authenticatable{
             return (bool)$app;
         }catch (\Exception $e){ return false; }
     }
+    public function getMySessions($passed = null){
+        $programApp = ProgramApplication::where('attendee_id', $this->id)->where('app_status', 'accepted')->orderBy('id', 'DESC')->first();
+        /* If we want all sessions, call without any arguments */
+        if($passed == null){
+            return ProgramSession::where('program_id', $programApp->program_id)->orderBy('datetime_from', 'DESC')->get();
+        }else{
+            if($passed = false){
+                /* Future sessions */
+            }else{
+                /* Passed sessions */
+                return ProgramSession::where('program_id', $programApp->program_id)->where('datetime_from', '<')->orderBy('datetime_from', 'DESC')->get();
+            }
+        }
+    }
 
     public function unreadNotifications(){
         return InboxTo::where('to', $this->id)->whereNull('read_at')->count();
+    }
+    public function totalNotes(){
+        return ProgramSessionNote::where('attendee_id', $this->id)->count();
     }
 }
