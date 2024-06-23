@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Models\Core\Country;
 use App\Models\Other\Inbox\InboxTo;
+use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionNote;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
@@ -88,6 +90,9 @@ class User extends Authenticatable{
     public function sessionsRel(): HasMany{
         return $this->hasMany(ProgramSession::class, 'presenter_id', 'id');
     }
+    public function applicationRel(): HasMany{
+        return $this->hasMany(ProgramApplication::class, 'attendee_id', 'id');
+    }
     public function submitted(): bool{
         try{
             $app = ProgramApplication::where('attendee_id', $this->id)->where('status', 'submitted')->count();
@@ -99,6 +104,18 @@ class User extends Authenticatable{
             $app = ProgramApplication::where('attendee_id', $this->id)->where('app_status', 'accepted')->count();
             return (bool)$app;
         }catch (\Exception $e){ return false; }
+    }
+    /* Not so great; Remove it */
+    public function whatIsMyProgram($param = null): ProgramApplication | null | string | int{
+        try{
+            $program = Program::whereHas('appRel', function ($q){
+                $q->where('attendee_id', Auth::user()->id)->where('app_status', 'accepted');
+            })->first();
+
+            if($param){
+                return $program->$param;
+            }else return $program;
+        }catch (\Exception $e){ return null; }
     }
     public function getMySessions($passed = null){
         $programApp = ProgramApplication::where('attendee_id', $this->id)->where('app_status', 'accepted')->orderBy('id', 'DESC')->first();
@@ -113,6 +130,17 @@ class User extends Authenticatable{
                 return ProgramSession::where('program_id', $programApp->program_id)->where('datetime_from', '<')->orderBy('datetime_from', 'DESC')->get();
             }
         }
+    }
+    public function getMyLecturers(){
+        return User::whereHas('sessionsRel.programRel', function ($q){
+            $q->where('id', $this->whatIsMyProgram('id'));
+        })->get();
+    }
+
+    public function getMyTeamMates(){
+        return User::whereHas('applicationRel', function ($q){
+            $q->where('program_id', $this->whatIsMyProgram('id'))->where('app_status', 'accepted');
+        })->get();
     }
 
     public function unreadNotifications(){

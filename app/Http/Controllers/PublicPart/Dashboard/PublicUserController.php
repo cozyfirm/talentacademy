@@ -285,7 +285,8 @@ class PublicUserController extends Controller{
         if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
 
         return view($this->_path . 'user.department', [
-
+            'lecturers' => Auth::user()->getMyLecturers(),
+            'teamMates' => Auth::user()->getMyTeamMates()
         ]);
     }
     /* -------------------------------------------------------------------------------------------------------------- */

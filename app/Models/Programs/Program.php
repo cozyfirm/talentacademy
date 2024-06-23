@@ -48,6 +48,9 @@ class Program extends Model{
     public function imageRel(): HasOne{
         return $this->hasOne(File::class, 'id', 'image_id');
     }
+    public function appRel(): HasMany{
+        return $this->hasMany(ProgramApplication::class, 'program_id', 'id');
+    }
     public function isSubmitted(): bool{
         try{
             $submitted = ProgramApplication::where('program_id', $this->id)->where('attendee_id', Auth::user()->id)->first();
