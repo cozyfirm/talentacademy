@@ -17,3 +17,8 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/public/files/blog
+/public/files/programs
+/public/files/images/single-pages
+/public/files/images/public-part/locations
+/public/files/images/public-part/users

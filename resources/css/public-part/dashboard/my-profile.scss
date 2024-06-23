@@ -526,6 +526,33 @@
     }
 }
 
+/*
+ *  Department
+ */
+.department__wrapper{
+    position: relative; left: calc(50% - $container-width-half); width: $container-width; display: flex; justify-content: space-between; padding: 32px 0px; flex-wrap: wrap;
+
+    .header__wrapper{
+        position: relative; width: 100%; padding: 16px 0px;
+        h1{}
+    }
+
+    .users__wrapper{
+        position: relative; width: 100%; display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap;
+
+        .single__user{
+            position: relative; width: calc(25% - 12px); min-height: 120px; background: red; border-radius: 8px; overflow: hidden;
+
+            .image__wrapper{
+                position: relative; width: 100%; height: 220px;
+                img{
+                    min-width: 100%; min-height: 100%; object-fit: cover;
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1500px) {
     .profile__wrapper{
         left: 40px; width: calc(100% - 80px);

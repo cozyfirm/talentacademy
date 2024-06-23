@@ -281,6 +281,13 @@ class PublicUserController extends Controller{
         }
     }
 
+    public function department(): View | RedirectResponse{
+        if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
+
+        return view($this->_path . 'user.department', [
+
+        ]);
+    }
     /* -------------------------------------------------------------------------------------------------------------- */
     /*
      *  Sign out and redirect to homepage

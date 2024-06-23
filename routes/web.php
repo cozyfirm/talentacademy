@@ -182,6 +182,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::post('/remove-my-note',                          [PublicUserController::class, 'removeMyNote'])->name('dashboard.remove-my-note');
     });
 
+    Route::get ('/department',                              [PublicUserController::class, 'department'])->name('dashboard.department');
+
     /* Sign out */
     Route::get ('/sign-out',                                [PublicUserController::class, 'signOut'])->name('dashboard.sing-out');
 });
