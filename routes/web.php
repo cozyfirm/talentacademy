@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicPart\BlogController;
 use App\Http\Controllers\PublicPart\ContactUsController;
+use App\Http\Controllers\PublicPart\Dashboard\ChatController;
 use App\Http\Controllers\PublicPart\LecturersController;
 use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
@@ -183,6 +184,14 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     });
 
     Route::get ('/department',                              [PublicUserController::class, 'department'])->name('dashboard.department');
+
+    /**
+     *  Chat routes
+     */
+    Route::prefix('chat')->group(function () {
+        /* Default route for preview chat conversations */
+        Route::get ('/',                                         [ChatController::class, 'chat'])->name('dashboard.chat');
+    });
 
     /* Sign out */
     Route::get ('/sign-out',                                [PublicUserController::class, 'signOut'])->name('dashboard.sing-out');

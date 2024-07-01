@@ -104,8 +104,8 @@
                 </div>
             </a>
 
-            <a href="{{ route('dashboard.inbox') }}">
-                <div class="inner__menu_links_link @if(Route::is('dashboard.inbox')) active @endif">
+            <a href="{{ route('dashboard.chat') }}">
+                <div class="inner__menu_links_link @if(Route::is('dashboard.chat')) active @endif">
                     <img src="{{ asset('files/images/public-part/chat.png') }}" class="inbox" alt="">
                     <p>{{ __('Chat') }}</p>
 
