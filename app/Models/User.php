@@ -81,6 +81,9 @@ class User extends Authenticatable{
         'password' => 'hashed',
     ];
 
+    public function photoUri(){
+        return ($this->photo_uri) ? $this->photo_uri : 'silhouette.png';
+    }
     public function birthDate(): string {
         return Carbon::parse($this->birth_date)->format('d.m.Y');
     }

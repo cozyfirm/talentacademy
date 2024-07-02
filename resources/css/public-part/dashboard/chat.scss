@@ -57,7 +57,7 @@
         }
 
         .my__contacts__wrapper{
-            position: relative; width: 100%; height: calc(100% - 274px); margin-top: 32px; background: #FFFFFF; padding: 0px 16px;
+            position: relative; width: 100%; height: calc(100% - 274px); margin-top: 32px; background: #FFFFFF; padding: 0px 16px;  border-radius: 16px;
             .lcw__header{
                 background: #82C0EB; padding: 8px 16px; border-radius: 24px; height: 40px; margin-top: 16px;
                 p{
@@ -74,6 +74,14 @@
                     }
                     .conversation__img{
                         position: relative; width: 30px; height: 30px; border-radius: 50%; overflow: hidden;
+                        img{
+                            position: absolute; left: 0px; top: 0px;
+
+                            object-fit: cover;
+                            min-width: 100%;
+                            min-height: 100%;
+                            max-width: 120%;
+                        }
                     }
                     p{
                         margin: 0px;
@@ -105,6 +113,90 @@
     }
 
     .conversation__wrapper{
-        position: relative; width: calc(100% - 392px); background: grey; display: flex; background: #ffffff;
+        position: relative; width: calc(100% - 392px); background: #ffffff; border-radius: 16px;
+        // display: flex; flex-wrap: wrap;
+
+        .conversation__wrapper__header{
+            position: relative; width: 100%; height: 80px; border-bottom: 1px solid #E7E7E7; display: flex; gap: 16px; align-items: center; padding: 0px 32px;
+
+            .profile_img_wrapper{
+                position: relative; width: 40px; height: 40px; border-radius: 50%; overflow: hidden;
+                img{
+                    position: absolute; left: 0px; top: 0px;
+
+                    object-fit: cover;
+                    min-width: 100%;
+                    min-height: 100%;
+                    max-width: 120%;
+                }
+            }
+            h4{
+                margin: 0px;
+            }
+        }
+        .conversation__wrapper__body{
+            position: relative; width: 100%; height: calc(100% - 209px); overflow: auto;
+            //display: table;
+            display: flex; flex-wrap: wrap; gap: 8px; flex-flow: column nowrap;
+            // align-content: flex-end;
+            // display: flex; flex-wrap: wrap; gap: 8px; // flex-direction: column;
+
+            .user__message__w{
+                position: relative; width: 100%; // flex: 1 1;
+                // display:table-cell; vertical-align:bottom;
+                // vertical-align: bottom;
+                //align-self: flex-start;
+                padding: 8px 32px; display: flex;
+
+                .message__w{
+                    position: relative; width: 60%; display: flex; gap: 16px;
+                    .message_img_w{
+                        width: 32px; height: 32px; border-radius: 50%; overflow: hidden; position: relative; border: 1px solid rgba(0,0,0,0.1);
+                        img{
+                            position: absolute; left: 0px; top: 0px;
+
+                            object-fit: cover;
+                            min-width: 100%;
+                            min-height: 100%;
+                            max-width: 120%;
+                        }
+                    }
+                    .message{
+                        max-width: calc(100% - 50px); display: flex; background: #EEF0F2; border-radius: 8px; padding: 8px 16px;
+                        p{
+                            //margin: 0px;
+                        }
+                    }
+                }
+            }
+            .my__message__w{
+                justify-content: flex-end;
+                .message__w{
+                    .message{
+                        background: #82C0EB;
+                    }
+                }
+            }
+        }
+        .conversation__wrapper__body > :first-child {
+            margin-top: auto !important;
+            /* use !important to prevent breakage from child margin settings */
+        }
+        .conversation__wrapper__body::-webkit-scrollbar {
+            width: 0px;
+            height:0px;
+            background: #CDEEF2;
+        }
+
+        .conversation__wrapper__new_msg{
+            position: relative; width: 100%; height: 128px; display: flex; padding: 0px 32px; gap: 32px; align-items: center;
+
+            textarea{
+                width: calc(100% - 56px); border: 1px solid rgba(0,0,0,0.3); border-radius: 16px; background: none; resize: none; padding: 8px 16px; height: 80px;
+            }
+            img{
+                height: 24px;
+            }
+        }
     }
 }

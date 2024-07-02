@@ -191,6 +191,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::prefix('chat')->group(function () {
         /* Default route for preview chat conversations */
         Route::get ('/',                                         [ChatController::class, 'chat'])->name('dashboard.chat');
+
+        Route::post('/start-conversation',                       [ChatController::class, 'startConversation'])->name('dashboard.start-conversation');
+        Route::post('/send-message',                             [ChatController::class, 'sendMessage'])->name('dashboard.send-message');
     });
 
     /* Sign out */
