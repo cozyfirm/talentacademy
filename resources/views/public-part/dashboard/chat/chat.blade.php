@@ -3,10 +3,16 @@
 <!-- Title of page -->
 @section('Welcome') @endsection
 
+<!-- Chat scripts -->
+@section('js-scripts') @vite(['resources/js/public-part/chat/chat.js']) @endsection
+
 <!-- Page content -->
 @section('public-content')
     <!-- Dashboard inner menu -->
     @include('public-part.dashboard.includes.inner-menu')
+
+    <!-- loggedUserID -->
+    {{ html()->hidden('loggedUserID')->class('form-control')->id('loggedUserID')->value(Auth()->user()->id) }}
 
     <div class="chat__wrapper">
         <div class="conversations__wrapper">
@@ -70,7 +76,7 @@
             </div>
 
             <div class="conversation__wrapper__body">
-                @for($i=0; $i<0; $i++)
+                @for($i=0; $i<1; $i++)
                     <div class="user__message__w">
                         <div class="message__w">
                             <div class="message_img_w">
@@ -84,7 +90,7 @@
                     <div class="user__message__w my__message__w">
                         <div class="message__w">
                             <div class="message">
-                                <p>Hello mate, that's me :) What do you think about this one? Do you love it ?</p>
+                                <p>Hello mate, that's me :)</p>
                             </div>
                             <div class="message_img_w">
                                 <img src="{{ asset('files/images/public-part/users/' . (Auth()->user()->photo_uri)) }}" alt="">
@@ -95,7 +101,9 @@
             </div>
             <div class="conversation__wrapper__new_msg">
                 <textarea id="chat-message" name="message" id="message" placeholder="{{ __('Vaša poruka...') }}"></textarea>
-                <img id="send-chat-message" src="{{ asset('files/images/public-part/new-message.png' ) }}" alt="{{ __('Profile image') }}">
+                <div class="send__chat_msg_img_w" id="send-chat-message">
+                    <img src="{{ asset('files/images/public-part/new-message.png' ) }}" alt="{{ __('Profile image') }}">
+                </div>
             </div>
         </div>
     </div>

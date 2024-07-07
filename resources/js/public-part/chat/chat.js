@@ -1,15 +1,115 @@
 import { Notify } from './../../style/layout/notify.ts';
-import { Validator } from "../../style/layout/validator.ts";
+import { MqttInit } from './../../mqtt/mqtt-init.ts';
+// import mqtt from "mqtt";
+import mqtt from "mqtt"; // import namespace "mqtt"
+
+// let mqtt = "./../../mqtt/mqtt.js";
 
 $(document).ready(function(){
+    let mqttConnected = false, mqttSubscribed = false, subscribedTopic = '';
+    /* Decide should we scroll to end of div or not */
+    let scrollToEnd = false;
+    /* Do not attempt multiple fetches before listing messages */
+    let allowMessageFetch = true;
+
+    /* Get ID of logged user; Read from chat form */
+    let loggedUserID = parseInt($("#loggedUserID").val());
+    console.log("loggedUserID: " + loggedUserID);
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
+    const client   = mqtt.connect("wss://mqtt.cozyfirm.com:8083", MqttInit.options);
+    client.on('error', (err) => { client.end() });
+    client.on('reconnect', () => { console.log('Reconnecting...'); });
+    client.on('connect', () => {
+        mqttConnected = true;
+        // client.subscribe("test", { qos: 0 });
+        console.log("Connected to MQTT!");
+    });
+
+    client.on('message', (topic, message, packet) => {
+        let response = JSON.parse(message.toString());
+        appendMessage(response['message']);
+    });
+
     let startConversationURI = '/dashboard/chat/start-conversation';
     let sendMessageUri = '/dashboard/chat/send-message';
+    let fetchOldMessagesUri = '/dashboard/chat/fetch-old-messages';
+
+    let getLastMsgID = function (){
+        return $(".conversation__wrapper__body").children().last().attr('msg-id');
+    };
+    let getFirstMsgID = function (){
+        return $(".conversation__wrapper__body").children().first().attr('msg-id');
+    };
+    /**
+     * Append single message to chat
+     * @param message
+     */
+    let appendMessage = function (message){
+        let className = (parseInt(message['sender_id']) === loggedUserID) ? "user__message__w my__message__w" : "user__message__w";
+        let image = (message['sender_rel']['photo_uri'] !== null) ? message['sender_rel']['photo_uri'] : 'silhouette.png';
+
+        $(".conversation__wrapper__body").append(function (){
+            return $("<div>").attr('class', className).attr('id', 'message-id-' + message['id']).attr('msg-id', message['id'])
+                .append(function (){
+                    return $("<div>").attr('class', 'message__w')
+                        .append(function (){
+                            return $("<div>").attr('class', 'message')
+                                .append(function (){
+                                    return $("<p>").text(message['body']);
+                                });
+                        })
+                        .append(function (){
+                            return $("<div>").attr('class', 'message_img_w')
+                                .append(function (){
+                                    return $("<img>").attr('src', '/files/images/public-part/users/' + image).attr('alt', 'Profile photo');
+                                });
+                        });
+                });
+        });
+
+        if(scrollToEnd) $('.conversation__wrapper__body').animate({ scrollTop: $('.conversation__wrapper__body').prop('scrollHeight') }, 200);
+    }
+    /* This function is used to inject messages to chat */
+    let injectMessages = function (messages, newConversation = false){
+        if(newConversation){
+            /* Remove all previous messages */
+            $(".conversation__wrapper__body").empty();
+        }
+
+        for(let i=0; i<messages.length; i++){
+            let className = (parseInt(messages[i]['sender_id']) === loggedUserID) ? "user__message__w my__message__w" : "user__message__w";
+            let image = (messages[i]['sender_rel']['photo_uri'] !== null) ? messages[i]['sender_rel']['photo_uri'] : 'silhouette.png';
+
+            $(".conversation__wrapper__body").prepend(function (){
+                return $("<div>").attr('class', className).attr('id', 'message-id-' + messages[i]['id']).attr('msg-id', messages[i]['id'])
+                    .append(function (){
+                        return $("<div>").attr('class', 'message__w')
+                            .append(function (){
+                                return $("<div>").attr('class', 'message')
+                                    .append(function (){
+                                        return $("<p>").text(messages[i]['body']);
+                                    });
+                            })
+                            .append(function (){
+                                return $("<div>").attr('class', 'message_img_w')
+                                    .append(function (){
+                                        return $("<img>").attr('src', '/files/images/public-part/users/' + image).attr('alt', 'Profile photo');
+                                    });
+                            });
+                    });
+            });
+        }
+
+        /* Scroll to bottom of div */
+        // $('.conversation__wrapper__body').scrollTop($('.conversation__wrapper__body').height())
+        if(scrollToEnd)  $('.conversation__wrapper__body').animate({ scrollTop: $('.conversation__wrapper__body').prop('scrollHeight') }, 0);
+    };
 
     /**
      *  Start conversation with user
@@ -17,7 +117,13 @@ $(document).ready(function(){
     $(".start__conversation").click(function (){
         let userId = $(this).attr('user-id');
 
-        console.log(userId);
+        /* Unsubscribe from topic */
+        if(mqttSubscribed){
+            mqttSubscribed = false;
+
+            client.unsubscribe(subscribedTopic);
+            console.log("Unsubscribed from: " + subscribedTopic);
+        }
 
         $.ajax({
             url: startConversationURI,
@@ -30,7 +136,6 @@ $(document).ready(function(){
                 let code = response['code'];
                 if(code === '0000'){
                     let data = response['data'];
-                    console.log(data);
 
                     if(data['type'] === 'single'){
                         $("#chat-photo").attr('src', '/files/images/public-part/users/' + data['user']['photo']);
@@ -38,6 +143,20 @@ $(document).ready(function(){
 
                     $("#chat-title").text(data['title']);
                     $("#conversation-wrapper").attr('hash', data['hash']);
+
+                    if(mqttConnected){
+                        subscribedTopic = data['hash'];
+
+                        client.subscribe(data['hash'], { qos: 0 });
+                        console.log("Subscribed to: " + data['hash']);
+                        mqttSubscribed = true;
+                    }
+
+                    /* Allow scroll to the end */
+                    scrollToEnd = true;
+
+                    /* Messages */
+                    injectMessages(data['messages'], true);
                 }else{
                     Notify.Me([response['message'], "warn"]);
                 }
@@ -48,9 +167,12 @@ $(document).ready(function(){
     /**
      *  Send new message
      */
-    $('body').on('click', '#send-chat-message', function() {
+    let sendMessage = function (){
         let hash = $("#conversation-wrapper").attr('hash');
         let message = $("#chat-message");
+        let messageVal = message.val();
+        /* Remove message before success to prevent new line glitch */
+        message.val("");
 
         $.ajax({
             url: sendMessageUri,
@@ -58,17 +180,67 @@ $(document).ready(function(){
             dataType: "json",
             data: {
                 hash: hash,
-                message: message.val()
+                message: messageVal
             },
             success: function success(response) {
                 let code = response['code'];
                 if(code === '0000'){
+                    message.val("");
 
+                    /* If I send message, allow scroll to bottom */
+                    scrollToEnd = true;
                 }else{
                     Notify.Me([response['message'], "warn"]);
                 }
             }
         });
+    };
+
+    $('body').on('click', '#send-chat-message', function() {
+        sendMessage();
+    });
+    $(document).on('keypress',function(e) {
+        if(e.which === 13 && !e.shiftKey) {
+            if($("#chat-message").val() !== ""){
+                sendMessage();
+            }
+        }
     });
 
+    /**
+     *  Detect scrolling
+     */
+    $('.conversation__wrapper__body').on('touchmove mousewheel', function(e){
+        scrollToEnd = ($(this).scrollTop()) > ($('.conversation__wrapper__body').prop('scrollHeight') - $('.conversation__wrapper__body').height()  - 10);
+
+        getLastMsgID();
+
+        if($(this).scrollTop() < 10 && allowMessageFetch){
+            allowMessageFetch = false;
+
+            $.ajax({
+                url: fetchOldMessagesUri,
+                method: 'POST',
+                dataType: "json",
+                data: {
+                    hash: $("#conversation-wrapper").attr('hash'),
+                    firstMessageID: getFirstMsgID()
+                },
+                success: function success(response) {
+                    allowMessageFetch = true;
+
+                    let code = response['code'];
+                    if(code === '0000'){
+                        injectMessages(response['data']['messages'], false);
+                        if(response['data']['messages'].length !== 0) $('.conversation__wrapper__body').animate({ scrollTop: 50 }, 0);
+                    }else{
+                        Notify.Me([response['message'], "warn"]);
+                    }
+                }
+            });
+        }else if($(this).scrollTop() > 10) allowMessageFetch = true;
+    })
+    $(".conversation__wrapper__body").scroll(function() { //.box is the class of the div
+
+    });
 });

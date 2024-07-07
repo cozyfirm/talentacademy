@@ -53,5 +53,9 @@ import "./public-part/app/lecturers/lecturers.js";
 /* Mobile menu */
 import "./public-part/core/menu.js";
 
+/* MQTT SCRIPTS */
+// window.mqtt = "./mqtt/mqtt.js";
+
+
 /* Chat scripts */
-import "./public-part/chat/chat.js";
+// import "./public-part/chat/chat.js";

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\PublicPart\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chat\Conversation;
+use App\Models\Chat\Message;
 use App\Models\Chat\Participant;
 use App\Models\User;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Common\FileTrait;
+use App\Traits\Mqtt\MqttTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Illuminate\Http\JsonResponse;
@@ -17,8 +19,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class ChatController extends Controller{
-    use UserBaseTrait, ResponseTrait, FileTrait, CommonTrait;
+    use UserBaseTrait, ResponseTrait, FileTrait, CommonTrait, MqttTrait;
     protected string $_path = 'public-part.dashboard.chat.';
+    protected int $_total_messages = 20;
 
     public function chat(): View{
         return view($this->_path . 'chat', [
@@ -78,7 +81,8 @@ class ChatController extends Controller{
                         'type' => 'single',
                         'user' => $user,
                         'title' => $user->name,
-                        'hash' => $conversation->hash
+                        'hash' => $conversation->hash,
+                        'messages' => Message::where('conversation_id', $conversation->id)->with('senderRel')->orderBy('id', 'DESC')->take($this->_total_messages)->get()
                     ]);
                 }
             }
@@ -88,7 +92,41 @@ class ChatController extends Controller{
     }
     public function sendMessage(Request $request): bool | string{
         try{
-            dd($request->all());
+            $user = User::where('id', Auth::user()->id)->first();
+            $user->photo = $user->photoUri();
+
+            /** @var CHAT_HASH $request */
+            $conversation = Conversation::where('hash', $request->hash)->first();
+
+            $message = Message::create([
+                'conversation_id' => $conversation->id,
+                'sender_id' => Auth::user()->id,
+                'body' => $request->message
+            ]);
+
+            /* Publish over MQTT */
+            $this->publishChatMessage($request->hash, $user, Message::where('id', $message->id)->with('senderRel')->first());
+
+            return $this->jsonResponse('0000', __('Poruka poslana!'), [
+                'user' => $user,
+                'message' => Message::where('id', $message->id)->with('senderRel')->get()
+            ]);
+        }catch (\Exception $e){
+            dd($e);
+        }
+    }
+    public function fetchOldMessages(Request $request){
+        try{
+            $conversation = Conversation::where('hash', $request->hash)->first();
+
+            return $this->jsonResponse('0000', __('Bilješka uspješno obrisana!'), [
+                'messages' => Message::where('conversation_id', $conversation->id)
+                    ->where('id', '<', $request->firstMessageID)
+                    ->with('senderRel')
+                    ->orderBy('id', 'DESC')
+                    ->take($this->_total_messages)
+                    ->get()
+            ]);
         }catch (\Exception $e){
             dd($e);
         }

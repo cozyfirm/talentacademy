@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    return;
     // Show the first pagination item as active
     const paginationItems = document.querySelectorAll(".how-to-apply__pagination-item");
     paginationItems[0].classList.add("how-to-apply__pagination-item--active");

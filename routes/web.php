@@ -194,6 +194,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
         Route::post('/start-conversation',                       [ChatController::class, 'startConversation'])->name('dashboard.start-conversation');
         Route::post('/send-message',                             [ChatController::class, 'sendMessage'])->name('dashboard.send-message');
+
+        Route::post('/fetch-old-messages',                       [ChatController::class, 'fetchOldMessages'])->name('dashboard.fetch-old-messages');
     });
 
     /* Sign out */

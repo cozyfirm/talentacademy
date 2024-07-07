@@ -24,6 +24,7 @@
         @include('public-part.layout.snippets.meta-tags')
 
         @vite(['resources/css/public-part/layout.scss', 'resources/js/app.js'])
+        @yield('js-scripts')
     </head>
 
     <body>
