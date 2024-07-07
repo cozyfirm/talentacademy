@@ -144,7 +144,7 @@ class User extends Authenticatable{
     public function getMyTeamMates(){
         return User::whereHas('applicationRel', function ($q){
             $q->where('program_id', $this->whatIsMyProgram('id'))->where('app_status', 'accepted');
-        })->get();
+        })->orderBy('name')->get();
     }
 
     public function unreadNotifications(){

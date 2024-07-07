@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @method static where(string $string, $id)
+ * @method static create(array $array)
  */
 class Participant extends Model{
     use HasFactory;
@@ -18,5 +19,8 @@ class Participant extends Model{
 
     public function userRel(): HasOne{
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+    public function conversationRel(): HasOne{
+        return $this->hasOne(Conversation::class, 'id', 'conversation_id');
     }
 }

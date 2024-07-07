@@ -22,12 +22,15 @@
                 </div>
 
                 <div class="lcw__body gcw__body">
-                    <div class="conversation__item">
-                        <div class="conversation__img">
-                            <img src="{{ asset('files/images/public-part/info.png') }}" alt="">
+                    @foreach($groups as $group)
+                        <div class="conversation__item start-group-conversations" hash="{{ $group->hash }}">
+                            <div class="conversation__img">
+                                <img src="{{ asset('files/images/public-part/info.png') }}" alt="">
+                            </div>
+                            <p>{{ $group->name }}</p>
                         </div>
-                        <p>{{ __('Akademija info') }}</p>
-                    </div>
+                    @endforeach
+
                     <div class="conversation__item">
                         <div class="conversation__img">
                             <img src="{{ asset('files/images/public-part/department.png') }}" alt="">
@@ -67,37 +70,50 @@
             </div>
         </div>
 
-        <div class="conversation__wrapper" id="conversation-wrapper" hash="">
+        <div class="conversation__wrapper" id="conversation-wrapper" hash="{{ $firstConversation->hash }}">
             <div class="conversation__wrapper__header">
                 <div class="profile_img_wrapper">
-                    <img id="chat-photo" src="{{ asset('files/images/public-part/users/8750ef071285fb7c5efc1d25c40572a5.jpeg' ) }}" alt="{{ __('Profile image') }}">
+                    @if($firstConversation->is_group)
+                        <img id="chat-photo" src="{{ asset('files/images/public-part/users/silhouette.png' ) }}" alt="{{ __('Profile image') }}">
+                    @else
+                        <!-- ToDo -->
+                    @endif
                 </div>
-                <h4 id="chat-title">Naima Čano</h4>
+                <h4 id="chat-title">
+                    @if($firstConversation->is_group)
+                        {{ $firstConversation->name }}
+                    @else
+                        <!-- ToDo -->
+                    @endif
+                </h4>
             </div>
 
             <div class="conversation__wrapper__body">
-                @for($i=0; $i<1; $i++)
-                    <div class="user__message__w">
-                        <div class="message__w">
-                            <div class="message_img_w">
-                                <img src="{{ asset('files/images/public-part/users/8750ef071285fb7c5efc1d25c40572a5.jpeg' ) }}" alt="{{ __('Profile image') }}">
-                            </div>
-                            <div class="message">
-                                <p>Hello mate, that's me :) What do you think about this one? Do you love it ?</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user__message__w my__message__w">
-                        <div class="message__w">
-                            <div class="message">
-                                <p>Hello mate, that's me :)</p>
-                            </div>
-                            <div class="message_img_w">
-                                <img src="{{ asset('files/images/public-part/users/' . (Auth()->user()->photo_uri)) }}" alt="">
+                @foreach($messages as $message)
+                    @if($message->sender_id == Auth()->user()->id)
+                        <div class="user__message__w my__message__w">
+                            <div class="message__w">
+                                <div class="message">
+                                    <p>{{ $message->body }}</p>
+                                </div>
+                                <div class="message_img_w">
+                                    <img src="{{ asset('files/images/public-part/users/' . ($message->senderRel->photoUri()) ) }}" alt="{{ __('Profile image') }}">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endfor
+                    @else
+                        <div class="user__message__w">
+                            <div class="message__w">
+                                <div class="message_img_w">
+                                    <img src="{{ asset('files/images/public-part/users/' . ($message->senderRel->photoUri()) ) }}" alt="{{ __('Profile image') }}">
+                                </div>
+                                <div class="message">
+                                    <p>{{ $message->body }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
             <div class="conversation__wrapper__new_msg">
                 <textarea id="chat-message" name="message" id="message" placeholder="{{ __('Vaša poruka...') }}"></textarea>

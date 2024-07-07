@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\Core\Filters;
 use App\Mail\Users\ApplicationStatus;
 use App\Mail\Users\ConfirmEmail;
+use App\Models\Chat\Participant;
 use App\Models\Core\File;
 use App\Models\Other\Inbox\Inbox;
 use App\Models\Other\Inbox\InboxTo;
@@ -120,7 +121,7 @@ class ProgramsController extends Controller{
 
         $filters = [
             'programRel.title' => __('Program'),
-            'useRel.name' => __('Ime i prezime'),
+            'userRel.name' => __('Ime i prezime'),
             'app_status' => __('Status aplikacije')
         ];
 
@@ -168,6 +169,15 @@ class ProgramsController extends Controller{
                 return $this->jsonSuccess(__('Obavijest uspješno poslana!'), route('system.admin.programs.preview-application', ['id' => $request->id]));
             }
             $application->update(['app_status' => $request->app_status]);
+
+            /* If user does not belong to Academy Info, Add it */
+            $participant = Participant::where('conversation_id', '=', 1)->where('user_id', $application->attendee_id)->first();
+            if(!$participant){
+                Participant::create([
+                    'conversation_id' => 1,
+                    'user_id' => $application->attendee_id
+                ]);
+            }
 
             return $this->jsonSuccess(__('Informacije ažurirane bez slanja obavijesti!'), route('system.admin.programs.preview-application', ['id' => $request->id]));
         }catch (\Exception $e){

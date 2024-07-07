@@ -13,6 +13,7 @@ use App\Traits\Mqtt\MqttTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -23,24 +24,48 @@ class ChatController extends Controller{
     protected string $_path = 'public-part.dashboard.chat.';
     protected int $_total_messages = 20;
 
-    public function chat(): View{
-        $totalConversations = Participant::where('user_id', Auth::user()->id)->count();
-        if(!$totalConversations){
-            /* Get first teammate */
-//            dd(Auth::user()->getMyTeamMates());
-            // $conversation = $this->getConversation($request->userId);
-        }else{
+    public function chat(): View | RedirectResponse{
+        /* All users should be member of Academy wall group */
+        $groups = Conversation::whereHas('participantsRel', function ($q){
+            $q->where('user_id', Auth::user()->id);
+        })->where('is_group', 1)->orderBy('id')->get();
 
-        }
-//        dd($totalConversations);
+        /* If user is not a member of single group, redirect to main profile */
+        if($groups->count() < 1) return redirect('dashboard.my-profile');
+
+        /* ToDo - Maybe change this to last chat or something like that */
+        $firstConversation = $groups[0];
+
+        $conversation = Conversation::where('id', '=', $firstConversation->id)->first();
+        $messages = Message::where('conversation_id', '=', $conversation->id)
+            ->orderBy('id','desc')
+            ->with('senderRel')
+            ->take(20)
+            ->get()
+            ->reverse();
+
+        //$totalConversations = Participant::where('user_id', Auth::user()->id)->count();
+        //if(!$totalConversations){
+        //    /* Get first teammate */
+        //    // $conversation = $this->getConversation($request->userId);
+        //}else{
+        //
+        //}
+
         return view($this->_path . 'chat', [
-            'teamMates' => Auth::user()->getMyTeamMates()
+            'teamMates' => Auth::user()->getMyTeamMates(),
+            'groups' => $groups,
+            'firstConversation' => $firstConversation,
+            'messages' => $messages
         ]);
     }
     public function createNewConversation($user_id): Conversation | bool{
         try{
+            $user = User::where('id', $user_id)->first();
+
             $conversation = Conversation::create([
-                'hash' =>  Hash::make(Auth::user()->id . '-' . $user_id . '-' . time())
+                'hash' =>  Hash::make(Auth::user()->id . '-' . $user_id . '-' . time()),
+                'name' => Auth::user()->name . ' - ' . $user->name
             ]);
             Participant::create([
                 'conversation_id' => $conversation->id,
@@ -62,10 +87,12 @@ class ChatController extends Controller{
                 $conversation = $this->createNewConversation($user_id);
             }else{
                 $myConversations = $myConversations->toArray();
-                $withUser = Participant::whereIn('conversation_id', $myConversations)->where('user_id', $user_id)->first();
+                $withUser = Participant::whereHas('conversationRel', function ($q) {
+                    $q->where('is_group', false);
+                })->whereIn('conversation_id', $myConversations)->where('user_id', $user_id)->first();
 
                 if(!$withUser) $conversation = $this->createNewConversation($user_id);
-                else $conversation = Conversation::where('id', $withUser->conversation_id)->first();
+                else $conversation = Conversation::where('id', '=', $withUser->conversation_id)->first();
             }
 
             return $conversation;
@@ -73,13 +100,26 @@ class ChatController extends Controller{
     }
     public function startConversation(Request $request): bool | string{
         try{
-            $conversation = $this->getConversation($request->userId);
+            if(isset($request->group)){
+                /**
+                 *  Group chat
+                 */
+                $conversation = Conversation::where('hash', '=', $request->hash)->first();
 
-            if($conversation){
-                /* Find user for conversation or conversation name */
-                if($conversation->participants > 2){
+                return $this->jsonResponse('0000', __('Bilješka uspješno obrisana!'), [
+                    'type' => 'group',
+                    'title' => $conversation->name,
+                    'hash' => $conversation->hash,
+                    'messages' => Message::where('conversation_id', '=', $conversation->id)->with('senderRel')->orderBy('id', 'DESC')->take($this->_total_messages)->get()
+                ]);
+            }else{
+                /**
+                 *  Individual chat with other users
+                 */
 
-                }else{
+                $conversation = $this->getConversation($request->userId);
+
+                if($conversation){
                     $participant = Participant::where('conversation_id', $conversation->id)->where('user_id', '!=', Auth::user()->id)->first();
                     $user = User::where('id', $participant->user_id)->first();
 
@@ -91,10 +131,11 @@ class ChatController extends Controller{
                         'user' => $user,
                         'title' => $user->name,
                         'hash' => $conversation->hash,
-                        'messages' => Message::where('conversation_id', $conversation->id)->with('senderRel')->orderBy('id', 'DESC')->take($this->_total_messages)->get()
+                        'messages' => Message::where('conversation_id', '=', $conversation->id)->with('senderRel')->orderBy('id', 'DESC')->take($this->_total_messages)->get()
                     ]);
                 }
             }
+            dd($request->all());
         }catch (\Exception $e){
             dd($e);
         }

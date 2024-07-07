@@ -8,9 +8,10 @@ import mqtt from "mqtt"; // import namespace "mqtt"
 $(document).ready(function(){
     let mqttConnected = false, mqttSubscribed = false, subscribedTopic = '';
     /* Decide should we scroll to end of div or not */
-    let scrollToEnd = false;
+    let scrollToEnd = true;
     /* Do not attempt multiple fetches before listing messages */
     let allowMessageFetch = true;
+    let defaultImage = 'silhouette.png';
 
     /* Get ID of logged user; Read from chat form */
     let loggedUserID = parseInt($("#loggedUserID").val());
@@ -27,8 +28,19 @@ $(document).ready(function(){
     client.on('reconnect', () => { console.log('Reconnecting...'); });
     client.on('connect', () => {
         mqttConnected = true;
-        // client.subscribe("test", { qos: 0 });
-        console.log("Connected to MQTT!");
+
+        let conversationWrapper = $("#conversation-wrapper");
+
+        /* Subscribe to first channel */
+        subscribedTopic = conversationWrapper.attr('hash');
+
+        client.subscribe(subscribedTopic, { qos: 0 });
+        mqttSubscribed = true;
+
+        console.log("Connected to MQTT and subscribed to " + subscribedTopic);
+
+        /* On connect, first time scroll to end */
+        $('.conversation__wrapper__body').animate({ scrollTop: $('.conversation__wrapper__body').prop('scrollHeight') }, 0);
     });
 
     client.on('message', (topic, message, packet) => {
@@ -46,22 +58,33 @@ $(document).ready(function(){
     let getFirstMsgID = function (){
         return $(".conversation__wrapper__body").children().first().attr('msg-id');
     };
-    /**
-     * Append single message to chat
-     * @param message
-     */
-    let appendMessage = function (message){
-        let className = (parseInt(message['sender_id']) === loggedUserID) ? "user__message__w my__message__w" : "user__message__w";
-        let image = (message['sender_rel']['photo_uri'] !== null) ? message['sender_rel']['photo_uri'] : 'silhouette.png';
 
-        $(".conversation__wrapper__body").append(function (){
-            return $("<div>").attr('class', className).attr('id', 'message-id-' + message['id']).attr('msg-id', message['id'])
+    let formMessageDom = function (className, id, body, image){
+        if(className === 'user__message__w'){
+            return $("<div>").attr('class', className).attr('id', 'message-id-' + id).attr('msg-id', id)
+                .append(function (){
+                    return $("<div>").attr('class', 'message__w')
+                        .append(function (){
+                            return $("<div>").attr('class', 'message_img_w')
+                                .append(function (){
+                                    return $("<img>").attr('src', '/files/images/public-part/users/' + image).attr('alt', 'Profile photo');
+                                });
+                        })
+                        .append(function (){
+                            return $("<div>").attr('class', 'message')
+                                .append(function (){
+                                    return $("<p>").text(body);
+                                });
+                        });
+                });
+        }else{
+            return $("<div>").attr('class', className).attr('id', 'message-id-' + id).attr('msg-id', id)
                 .append(function (){
                     return $("<div>").attr('class', 'message__w')
                         .append(function (){
                             return $("<div>").attr('class', 'message')
                                 .append(function (){
-                                    return $("<p>").text(message['body']);
+                                    return $("<p>").text(body);
                                 });
                         })
                         .append(function (){
@@ -71,6 +94,18 @@ $(document).ready(function(){
                                 });
                         });
                 });
+        }
+    };
+    /**
+     * Append single message to chat
+     * @param message
+     */
+    let appendMessage = function (message){
+        let className = (parseInt(message['sender_id']) === loggedUserID) ? "user__message__w my__message__w" : "user__message__w";
+        let image = (message['sender_rel']['photo_uri'] !== null) ? message['sender_rel']['photo_uri'] : defaultImage;
+
+        $(".conversation__wrapper__body").append(function (){
+            return formMessageDom(className, message['id'], message['body'], image);
         });
 
         if(scrollToEnd) $('.conversation__wrapper__body').animate({ scrollTop: $('.conversation__wrapper__body').prop('scrollHeight') }, 200);
@@ -84,25 +119,10 @@ $(document).ready(function(){
 
         for(let i=0; i<messages.length; i++){
             let className = (parseInt(messages[i]['sender_id']) === loggedUserID) ? "user__message__w my__message__w" : "user__message__w";
-            let image = (messages[i]['sender_rel']['photo_uri'] !== null) ? messages[i]['sender_rel']['photo_uri'] : 'silhouette.png';
+            let image = (messages[i]['sender_rel']['photo_uri'] !== null) ? messages[i]['sender_rel']['photo_uri'] : defaultImage;
 
             $(".conversation__wrapper__body").prepend(function (){
-                return $("<div>").attr('class', className).attr('id', 'message-id-' + messages[i]['id']).attr('msg-id', messages[i]['id'])
-                    .append(function (){
-                        return $("<div>").attr('class', 'message__w')
-                            .append(function (){
-                                return $("<div>").attr('class', 'message')
-                                    .append(function (){
-                                        return $("<p>").text(messages[i]['body']);
-                                    });
-                            })
-                            .append(function (){
-                                return $("<div>").attr('class', 'message_img_w')
-                                    .append(function (){
-                                        return $("<img>").attr('src', '/files/images/public-part/users/' + image).attr('alt', 'Profile photo');
-                                    });
-                            });
-                    });
+                return formMessageDom(className, messages[i]['id'], messages[i]['body'], image);
             });
         }
 
@@ -120,9 +140,7 @@ $(document).ready(function(){
         /* Unsubscribe from topic */
         if(mqttSubscribed){
             mqttSubscribed = false;
-
             client.unsubscribe(subscribedTopic);
-            console.log("Unsubscribed from: " + subscribedTopic);
         }
 
         $.ajax({
@@ -148,7 +166,57 @@ $(document).ready(function(){
                         subscribedTopic = data['hash'];
 
                         client.subscribe(data['hash'], { qos: 0 });
-                        console.log("Subscribed to: " + data['hash']);
+                        mqttSubscribed = true;
+                    }
+
+                    /* Allow scroll to the end */
+                    scrollToEnd = true;
+
+                    /* Messages */
+                    injectMessages(data['messages'], true);
+                }else{
+                    Notify.Me([response['message'], "warn"]);
+                }
+            }
+        });
+    });
+    /**
+     *  Start a group conversation
+     */
+    $(".start-group-conversations").click(function (){
+        let hash = $(this).attr('hash');
+
+        if(mqttSubscribed){
+            mqttSubscribed = false;
+            client.unsubscribe(subscribedTopic);
+        }
+
+        $.ajax({
+            url: startConversationURI,
+            method: 'POST',
+            dataType: "json",
+            data: {
+                group: true,
+                hash: hash
+            },
+            success: function success(response) {
+                let code = response['code'];
+                if(code === '0000'){
+                    let data = response['data'];
+
+                    if(data['type'] === 'single'){
+                        $("#chat-photo").attr('src', '/files/images/public-part/users/' + data['user']['photo']);
+                    }else{
+                        $("#chat-photo").attr('src', '/files/images/public-part/users/' + defaultImage);
+                    }
+
+                    $("#chat-title").text(data['title']);
+                    $("#conversation-wrapper").attr('hash', data['hash']);
+
+                    if(mqttConnected){
+                        subscribedTopic = data['hash'];
+
+                        client.subscribe(data['hash'], { qos: 0 });
                         mqttSubscribed = true;
                     }
 
