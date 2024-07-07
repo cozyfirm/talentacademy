@@ -24,6 +24,15 @@ class ChatController extends Controller{
     protected int $_total_messages = 20;
 
     public function chat(): View{
+        $totalConversations = Participant::where('user_id', Auth::user()->id)->count();
+        if(!$totalConversations){
+            /* Get first teammate */
+//            dd(Auth::user()->getMyTeamMates());
+            // $conversation = $this->getConversation($request->userId);
+        }else{
+
+        }
+//        dd($totalConversations);
         return view($this->_path . 'chat', [
             'teamMates' => Auth::user()->getMyTeamMates()
         ]);

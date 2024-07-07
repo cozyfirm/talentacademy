@@ -16,7 +16,9 @@ return new class extends Migration
 
             $table->string('hash');
             $table->string('name')->nullable();
+            $table->string('description')->nullable();
             $table->unsignedInteger('participants')->default(2);
+            $table->tinyInteger('is_group')->default(0);
 
             $table->timestamps();
         });

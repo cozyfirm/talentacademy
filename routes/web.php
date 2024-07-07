@@ -8,6 +8,7 @@ use App\Http\Controllers\PublicPart\LecturersController;
 use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
 use App\Http\Controllers\PublicPart\Dashboard\PublicUserController;
+use App\Http\Controllers\System\Admin\Other\Chat\GroupChatsController;
 use App\Http\Controllers\System\Admin\Other\Inbox\BulkMessagesController;
 use App\Http\Controllers\System\Admin\Other\OtherController;
 use App\Http\Controllers\System\Admin\Other\BlogController as AdminBlogController;
@@ -318,6 +319,24 @@ Route::prefix('system')->middleware('auth')->group(function () {
                 Route::get ('/preview/{id}',                   [BulkMessagesController::class, 'preview'])->name('system.admin.inbox.bulk-messages.preview');
                 // Route::post('/update',                         [BulkMessagesController::class, 'faqUpdate'])->name('system.admin.inbox.bulk-messages.update');
                 Route::get ('/delete/{id}',                    [BulkMessagesController::class, 'delete'])->name('system.admin.inbox.bulk-messages.delete');
+            });
+        });
+
+        Route::prefix('chat')->middleware('auth')->group(function () {
+            /*
+             *  Group chats
+             */
+            Route::prefix('group-chats')->middleware('auth')->group(function () {
+                Route::get ('/',                               [GroupChatsController::class, 'index'])->name('system.admin.chat.group-chats');
+                Route::get ('/create',                         [GroupChatsController::class, 'create'])->name('system.admin.chat.group-chats.create');
+                Route::post('/save',                           [GroupChatsController::class, 'save'])->name('system.admin.chat.group-chats.save');
+                Route::get ('/preview/{id}',                   [GroupChatsController::class, 'preview'])->name('system.admin.chat.group-chats.preview');
+                Route::get ('/delete/{id}',                    [GroupChatsController::class, 'delete'])->name('system.admin.chat.group-chats.delete');
+
+                /* Add participants */
+                Route::get ('/add-participant/{id}',           [GroupChatsController::class, 'addParticipant'])->name('system.admin.chat.group-chats.add-participant');
+                Route::post('/save-participant',               [GroupChatsController::class, 'saveParticipant'])->name('system.admin.chat.group-chats.save-participant');
+                Route::get ('/delete-participant/{id}',        [GroupChatsController::class, 'deleteParticipant'])->name('system.admin.chat.group-chats.delete-participant');
             });
         });
 

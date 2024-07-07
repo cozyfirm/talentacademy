@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @method static create(array $array)
+ * @method static where(string $string, string $string1, $id)
  */
 class Message extends Model{
     use HasFactory;

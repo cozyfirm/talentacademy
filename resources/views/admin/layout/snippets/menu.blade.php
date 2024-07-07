@@ -288,6 +288,13 @@
                             <p>{{__('Bulk messages')}}</p>
                         </div>
                     </a>
+                    <a href="{{ route('system.admin.chat.group-chats') }}">
+                        <div class="inside-lm-link">
+                            <div class="ilm-l"></div><div class="ilm-c"></div>
+                            <p>{{__('Group chats')}}</p>
+                        </div>
+                    </a>
+
                     <a href="">
                         <div class="inside-lm-link">
                             <div class="ilm-l"></div><div class="ilm-c"></div>

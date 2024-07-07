@@ -23,6 +23,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property mixed $name
  * @method static where(string $string, string $string1)
  * @method static whereHas(string $string, \Closure $param)
+ * @method static orderBy(string $string, string $string1)
  */
 class User extends Authenticatable{
     use HasApiTokens, HasFactory, Notifiable;
