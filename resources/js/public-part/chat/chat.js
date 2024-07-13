@@ -174,6 +174,10 @@ $(document).ready(function(){
 
                     /* Messages */
                     injectMessages(data['messages'], true);
+
+                    if(window.innerWidth <= 1000){
+                        $(".conversation__wrapper").css('display', 'initial');
+                    }
                 }else{
                     Notify.Me([response['message'], "warn"]);
                 }
@@ -225,6 +229,10 @@ $(document).ready(function(){
 
                     /* Messages */
                     injectMessages(data['messages'], true);
+
+                    if(window.innerWidth <= 1000){
+                        $(".conversation__wrapper").css('display', 'unset');
+                    }
                 }else{
                     Notify.Me([response['message'], "warn"]);
                 }
@@ -308,7 +316,13 @@ $(document).ready(function(){
             });
         }else if($(this).scrollTop() > 10) allowMessageFetch = true;
     })
-    $(".conversation__wrapper__body").scroll(function() { //.box is the class of the div
 
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     * Mobile version of chat; Apply a bit of different rules
+     */
+    $(".arrow__back").click(function (){
+        $(".conversation__wrapper").css('display', 'none');
     });
 });

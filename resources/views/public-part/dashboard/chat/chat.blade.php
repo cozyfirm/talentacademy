@@ -72,6 +72,9 @@
 
         <div class="conversation__wrapper" id="conversation-wrapper" hash="{{ $firstConversation->hash }}">
             <div class="conversation__wrapper__header">
+                <div class="arrow__back">
+                    <img src="{{ asset('files/images/public-part/arrow-back.png' ) }}" alt="{{ __('Zatvorite') }}">
+                </div>
                 <div class="profile_img_wrapper">
                     @if($firstConversation->is_group)
                         <img id="chat-photo" src="{{ asset('files/images/public-part/users/silhouette.png' ) }}" alt="{{ __('Profile image') }}">

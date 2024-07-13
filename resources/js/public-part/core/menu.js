@@ -20,4 +20,24 @@ $(document).ready(function (){
         $('.mobile-menu__submenu').slideToggle();
         $('#open-mobile-submenu i').toggleClass('rotate');
     });
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     * Profile submenu
+     */
+    let innerMenuOpen = false;
+    if(window.innerWidth <= 1200){
+        $(".profile__submenu").addClass('active');
+        // $(".profile__inner_menu").toggleClass('d-none');
+    }
+    $(".profile__submenu").click(function (){
+        if(!innerMenuOpen){
+            innerMenuOpen = true;
+
+            $(".profile__inner_menu").css('display', 'inline-flex');
+        }else{
+            innerMenuOpen = false;
+            $(".profile__inner_menu").css('display', 'none');
+        }
+    });
 });

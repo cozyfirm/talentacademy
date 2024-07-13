@@ -18,6 +18,15 @@
                     }
                 }
             }
+            .profile__submenu{
+                //@media only screen and (max-width: 1200px){
+                //    svg{
+                //        .change-color{
+                //            fill: #EA8BF3 !important;
+                //        }
+                //    }
+                //}
+            }
             .active{
                 svg{
                     .change-color{
@@ -109,7 +118,7 @@
         height: auto; background: $white; border-bottom: 2px solid $black;
         .mobile_small_menu{display: flex;}
         .inner__menu{
-            left: 20px; width: calc(100% - 40px); height:auto; flex-wrap: wrap;
+            left: 20px; width: calc(100% - 40px); height:auto; flex-wrap: wrap; display: none;
             .inner__menu_profile{
                 flex-wrap: wrap; width: 100%;
                 a{
