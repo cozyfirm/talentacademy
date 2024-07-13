@@ -655,6 +655,73 @@
     .users__wrapper_5 { .single__user{.text__wrapper{.buttons__wrapper{button{background: $p5_bps;}}}} .single__user:hover{ background: $p5_pas; } }
     .users__wrapper_6 { .single__user{.text__wrapper{.buttons__wrapper{button{background: $p6_bps;}}}} .single__user:hover{ background: $p6_pas; } }
 }
+/*
+ *  Preview users
+ */
+.preview__user_w{
+    position: relative; left: calc(50% - $container-width-half); width: $container-width; display: flex; justify-content: space-between;
+    padding: 32px 0px; gap: 32px;
+
+    @media only screen and (max-width: 1500px) { left: 50px; width: calc(100% - 100px); }
+    @media only screen and (max-width: 800px) { left: 20px; width: calc(100% - 40px); flex-wrap: wrap; gap: 20px; }
+
+    .image__n_social__wrapper{
+        position: relative; width: 380px; min-height: 420px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 32px;
+        @media only screen and (max-width: 800px){
+            width: 100%; min-height: auto;
+        }
+        .only__image__wrapper{
+            position: relative; width: 380px; height: 340px; border-radius: 32px; overflow: hidden;
+
+            @media only screen and (max-width: 800px){
+                width: 100%; height: 360px;
+            }
+            img{
+                width: 100%; object-fit: cover; object-position: center;
+            }
+        }
+        .socials__wrapper{
+            position: relative; width: 100%; height: 40px; display: flex; justify-content: center; gap: 16px; align-items: center;
+            a{
+                display: flex; align-items: center;
+                img{
+                    height: 20px;
+                }
+            }
+        }
+    }
+    .text__wrapper{
+        position: relative; width: calc(100% - 380px); display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; align-content: flex-start;
+        @media only screen and (max-width: 800px){
+            width: 100%; gap: 16px;
+        }
+        .full__name{
+            position: relative; width: 100%;
+            h1{
+                margin: 0px; font-size: 52px;
+            }
+            @media only screen and (max-width: 800px){
+                h1{ font-size: 40px; }
+                h2{ font-size: 26px; }
+            }
+        }
+        .text__part{
+            position: relative; width: 100%; display: flex; flex-wrap: wrap; gap: 16px;
+            a{
+                @media only screen and (max-width: 800px){
+                    width: 100%;
+                }
+                .send__a__message{
+                    position: relative; display: flex; gap: 8px; padding: 8px 32px; background: #EA8BF3; align-items: center; border-radius: 8px; justify-content: center;
+                    @media only screen and (max-width: 800px){
+                        width: 100%;
+                    }
+                    svg, p{ margin: 0px; }
+                }
+            }
+        }
+    }
+}
 
 @media only screen and (max-width: 1500px) {
     .profile__wrapper{

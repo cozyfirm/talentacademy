@@ -11,6 +11,7 @@ use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionFile;
 use App\Models\Programs\ProgramSessionLink;
 use App\Models\Programs\ProgramSessionNote;
+use App\Models\User;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
@@ -286,6 +287,14 @@ class PublicUserController extends Controller{
 
         return view($this->_path . 'user.department', [
             'lecturers' => Auth::user()->getMyLecturers(),
+            'teamMates' => Auth::user()->getMyTeamMates()
+        ]);
+    }
+    public function previewUser($username): View | RedirectResponse{
+        if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
+
+        return view($this->_path . 'user.preview-user', [
+            'user' => User::where('username', $username)->first(),
             'teamMates' => Auth::user()->getMyTeamMates()
         ]);
     }

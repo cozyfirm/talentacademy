@@ -185,6 +185,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     });
 
     Route::get ('/department',                              [PublicUserController::class, 'department'])->name('dashboard.department');
+    Route::get ('/preview-user/{username}',                 [PublicUserController::class, 'previewUser'])->name('dashboard.preview-user');
 
     /**
      *  Chat routes

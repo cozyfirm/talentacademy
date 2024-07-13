@@ -61,7 +61,7 @@
                             <p>{{ $teamMate->institution }}</p>
 
                             <div class="buttons__wrapper">
-                                <a href="{{ route('public-part.lecturers.single-lecturer', ['id' => $teamMate->id]) }}">
+                                <a href="{{ route('dashboard.preview-user', ['username' => $teamMate->username ]) }}">
                                     <button>
                                         <img src="{{ asset('files/images/public-part/user.png') }}" alt="">
                                         <p>{{ __('Više informacija') }}</p>
