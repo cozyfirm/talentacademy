@@ -566,6 +566,43 @@
             .my__note_wrapper_5{ .my__note__header{ background: $p5_bcg; } }
             .my__note_wrapper_6{ .my__note__header{ background: $p6_bcg; } }
         }
+
+        /* My Evaluations wrapper */
+        .my__evaluations__wrapper{
+            position: relative; left: 0px; top: 0px; width: 100%; gap: 16px; display: flex; flex-wrap: wrap; min-height: 60px;
+
+            .single__evaluation{
+                position: relative; width: 100%; display: flex; justify-content: space-between; border: 1px solid #000000; border-radius: 8px; padding: 16px 32px;
+
+                .session__w{
+                    display: flex; gap: 32px; align-content: center; width: calc(100% - 250px); justify-content: flex-start; flex-direction: row;
+                    p{ margin: 0px; font-weight: bold; }
+                    .presenter__w, .session_name__w{
+                        display: flex; gap: 16px; align-content: center; align-items: center;
+                        p{ margin: 0px; font-weight: bold; }
+                    }
+                }
+                .evaluation__btn__w{
+                    display: flex; align-items: center;
+                    a{
+                        position: relative; display: flex;
+                        .just_a_btn{
+                            display:flex; align-items:center; padding: 8px 32px; background: #EA8BF3; gap: 16px; border-radius: 8px; border: 1px solid #000000;
+                            p, svg{margin:0px;}
+                        }
+                    }
+                }
+            }
+
+            // $p2_bps
+            .single__evaluation_1{ background: $p1_bcg; .evaluation__btn__w{ a{ .just_a_btn{ background: $p1_bps; } } } }
+            .single__evaluation_2{ background: $p2_bcg; .evaluation__btn__w{ a{ .just_a_btn{ background: $p2_bps; } } } }
+            .single__evaluation_3{ background: $p3_bcg; .evaluation__btn__w{ a{ .just_a_btn{ background: $p3_bps; } } } }
+            .single__evaluation_4{ background: $p4_bcg; .evaluation__btn__w{ a{ .just_a_btn{ background: $p4_bps; } } } }
+            .single__evaluation_5{ background: $p5_bcg; .evaluation__btn__w{ a{ .just_a_btn{ background: $p5_bps; } } } }
+            .single__evaluation_5{ background: $p6_bcg; .evaluation__btn__w{ a{ .just_a_btn{ background: $p6_bps; } } } }
+            .single__evaluation_greyed{ background: #FFFFFF; .evaluation__btn__w{ a{ .just_a_btn{ background: #cccccc; } } } }
+        }
     }
 }
 

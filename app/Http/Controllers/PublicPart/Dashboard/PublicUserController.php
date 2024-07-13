@@ -298,6 +298,16 @@ class PublicUserController extends Controller{
             'teamMates' => Auth::user()->getMyTeamMates()
         ]);
     }
+    /*
+     *  My evaluations
+     */
+    public function myEvaluations (): View | RedirectResponse{
+        if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
+
+        return view($this->_path . 'user.my-evaluations', [
+
+        ]);
+    }
     /* -------------------------------------------------------------------------------------------------------------- */
     /*
      *  Sign out and redirect to homepage

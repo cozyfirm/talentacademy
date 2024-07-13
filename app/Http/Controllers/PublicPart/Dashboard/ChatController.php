@@ -24,7 +24,9 @@ class ChatController extends Controller{
     protected string $_path = 'public-part.dashboard.chat.';
     protected int $_total_messages = 20;
 
-    public function chat(): View | RedirectResponse{
+    public function chat($username = null): View | RedirectResponse{
+        $user = null;
+
         /* All users should be member of Academy wall group */
         $groups = Conversation::whereHas('participantsRel', function ($q){
             $q->where('user_id', Auth::user()->id);
@@ -33,8 +35,13 @@ class ChatController extends Controller{
         /* If user is not a member of single group, redirect to main profile */
         if($groups->count() < 1) return redirect('dashboard.my-profile');
 
-        /* ToDo - Maybe change this to last chat or something like that */
-        $firstConversation = $groups[0];
+        if(isset($username)){
+            $user = User::where('username', $username)->first();
+            $firstConversation = $this->getConversation($user->id);
+        }else{
+            /* ToDo - Maybe change this to last chat or something like that */
+            $firstConversation = $groups[0];
+        }
 
         $conversation = Conversation::where('id', '=', $firstConversation->id)->first();
         $messages = Message::where('conversation_id', '=', $conversation->id)
@@ -44,19 +51,12 @@ class ChatController extends Controller{
             ->get()
             ->reverse();
 
-        //$totalConversations = Participant::where('user_id', Auth::user()->id)->count();
-        //if(!$totalConversations){
-        //    /* Get first teammate */
-        //    // $conversation = $this->getConversation($request->userId);
-        //}else{
-        //
-        //}
-
         return view($this->_path . 'chat', [
             'teamMates' => Auth::user()->getMyTeamMates(),
             'groups' => $groups,
-            'firstConversation' => $firstConversation,
-            'messages' => $messages
+            'firstConversation' => $conversation,
+            'messages' => $messages,
+            'user' => $user
         ]);
     }
     public function createNewConversation($user_id): Conversation | bool{

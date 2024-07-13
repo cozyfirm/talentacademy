@@ -187,12 +187,19 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get ('/department',                              [PublicUserController::class, 'department'])->name('dashboard.department');
     Route::get ('/preview-user/{username}',                 [PublicUserController::class, 'previewUser'])->name('dashboard.preview-user');
 
+    /* Evaluations */
+    Route::prefix('my-evaluations')->group(function () {
+        Route::get ('/',                                        [PublicUserController::class, 'myEvaluations'])->name('dashboard.my-evaluations');
+        Route::post('/remove-my-note',                          [PublicUserController::class, 'removeMyNote'])->name('dashboard.remove-my-note');
+    });
+
     /**
      *  Chat routes
      */
     Route::prefix('chat')->group(function () {
         /* Default route for preview chat conversations */
         Route::get ('/',                                         [ChatController::class, 'chat'])->name('dashboard.chat');
+        Route::get ('/conversation/{username}',                  [ChatController::class, 'chat'])->name('dashboard.chat.conversation-with-user');
 
         Route::post('/start-conversation',                       [ChatController::class, 'startConversation'])->name('dashboard.start-conversation');
         Route::post('/send-message',                             [ChatController::class, 'sendMessage'])->name('dashboard.send-message');

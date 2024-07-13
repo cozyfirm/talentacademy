@@ -78,15 +78,15 @@
                 <div class="profile_img_wrapper">
                     @if($firstConversation->is_group)
                         <img id="chat-photo" src="{{ asset('files/images/public-part/users/silhouette.png' ) }}" alt="{{ __('Profile image') }}">
-                    @else
-                        <!-- ToDo -->
+                    @elseif(isset($user))
+                        <img id="chat-photo" src="{{ asset('files/images/public-part/users/' . $user->photo_uri ) }}" alt="{{ __('Profile image') }}">
                     @endif
                 </div>
                 <h4 id="chat-title">
                     @if($firstConversation->is_group)
                         {{ $firstConversation->name }}
-                    @else
-                        <!-- ToDo -->
+                    @elseif(isset($user))
+                        {{ $user->name  }}
                     @endif
                 </h4>
             </div>

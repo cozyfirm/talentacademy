@@ -109,9 +109,9 @@
                     <img src="{{ asset('files/images/public-part/chat.png') }}" class="inbox" alt="">
                     <p>{{ __('Chat') }}</p>
 
-                    <div class="number" id="number-of-notifications-w">
-                        <p id="number-of-notifications"> 13 </p>
-                    </div>
+                    {{--<div class="number" id="number-of-notifications-w">--}}
+                    {{--    <p id="number-of-notifications">  </p>--}}
+                    {{--</div>--}}
                 </div>
             </a>
 
@@ -138,8 +138,8 @@
                 </a>
             @endif
 
-            <a href="#">
-                <div class="inner__menu_links_link @if(Route::is('dashboard.my-notes')) active @endif">
+            <a href="{{ route('dashboard.my-evaluations') }}">
+                <div class="inner__menu_links_link @if(Route::is('dashboard.my-evaluations')) active @endif">
                     <img src="{{ asset('files/images/public-part/notes.png') }}" class="inbox" alt="">
                     <p>{{ __('Moje evaluacije') }}</p>
 
