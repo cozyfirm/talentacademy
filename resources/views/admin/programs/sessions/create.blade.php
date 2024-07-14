@@ -147,5 +147,37 @@
             <!-- Other information -->
             @include('admin.programs.snippets.sessions-right-menu')
         </div>
+
+        @if(isset($preview))
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <hr>
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th width="60px" class="text-center">#</th>
+                            <th width="160px" class="">{{ __('Ime i prezime') }}</th>
+                            @foreach($questions as $question)
+                                <th class="">{{ $question->question }}</th>
+                            @endforeach
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @php $counter = 1 @endphp
+                        @foreach($users as $user)
+                            <tr>
+                                <th scope="row" class="text-center">{{ $counter++ }}.</th>
+                                <th>{{ $user->attendeeRel->name ?? '' }}</th>
+                                @foreach($user->getEvaluationsForUser($user->attendee_id, $session->id) as $evaluation)
+                                    <td>{{ $evaluation->answer }}</td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @endif
     </div>
 @endsection

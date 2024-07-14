@@ -4,10 +4,12 @@ namespace App\Http\Controllers\PublicPart\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Models\Core\Country;
+use App\Models\Other\FormQuestion;
 use App\Models\Other\Inbox\InboxTo;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
+use App\Models\Programs\ProgramSessionEvaluation;
 use App\Models\Programs\ProgramSessionFile;
 use App\Models\Programs\ProgramSessionLink;
 use App\Models\Programs\ProgramSessionNote;
@@ -305,9 +307,39 @@ class PublicUserController extends Controller{
         if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
 
         return view($this->_path . 'user.my-evaluations', [
-
+            'sessions' => Auth::user()->getMySessions(true)
         ]);
     }
+    public function checkMyEvaluation ($session_id): View | RedirectResponse{
+        if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
+
+        return view($this->_path . 'user.my-evaluation-check', [
+            'questions' => FormQuestion::get(),
+            'session_id' => $session_id
+        ]);
+    }
+    public function updateEvaluation(Request $request): RedirectResponse{
+        try{
+            /* First remove all previous samples */
+            ProgramSessionEvaluation::where('session_id', $request->session_id)->where('attendee_id', Auth::user()->id)->delete();
+
+            foreach ($request->all() as $key => $val){
+                if($key == '_token' or $key == 'session_id') continue;
+                /* Remove question__ from key */
+                $question_id = substr($key, 10);
+
+                ProgramSessionEvaluation::create([
+                    'session_id' => $request->session_id,
+                    'attendee_id' => Auth::user()->id,
+                    'question_id' => $question_id,
+                    'answer' => $val
+                ]);
+            }
+
+            return redirect()->route('dashboard.my-evaluations.check', ['session_id' => $request->session_id]);
+        }catch (\Exception $e){ return back(); }
+    }
+
     /* -------------------------------------------------------------------------------------------------------------- */
     /*
      *  Sign out and redirect to homepage

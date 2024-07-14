@@ -8,12 +8,14 @@ use App\Mail\Users\ApplicationStatus;
 use App\Mail\Users\ConfirmEmail;
 use App\Models\Chat\Participant;
 use App\Models\Core\File;
+use App\Models\Other\FormQuestion;
 use App\Models\Other\Inbox\Inbox;
 use App\Models\Other\Inbox\InboxTo;
 use App\Models\Other\Location;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
+use App\Models\Programs\ProgramSessionEvaluation;
 use App\Models\Programs\ProgramSessionFile;
 use App\Models\Programs\ProgramSessionLink;
 use App\Models\User;
@@ -235,6 +237,8 @@ class ProgramsController extends Controller{
         $session = ProgramSession::where('id', $id)->first();
         $program = Program::where('id', $session->program_id)->first();
 
+        $users = ProgramSessionEvaluation::where('session_id', $id)->select('attendee_id')->distinct()->get();
+
         return view($this->_path . 'sessions.create', [
             'preview' => true,
             'program' => $program,
@@ -242,7 +246,9 @@ class ProgramsController extends Controller{
             'locations' => Location::pluck('title', 'id'),
             'presenters' => User::where('role', 'presenter')->pluck('name', 'id')->prepend('Bez predavača', 0),
             'session' => $session,
-            'timeArr' => self::formTimeArr()
+            'timeArr' => self::formTimeArr(),
+            'questions' => FormQuestion::orderBy('id', 'ASC')->get(),
+            'users' => $users
         ]);
     }
     public function editSession($id): View{

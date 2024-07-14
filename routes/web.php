@@ -190,6 +190,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     /* Evaluations */
     Route::prefix('my-evaluations')->group(function () {
         Route::get ('/',                                        [PublicUserController::class, 'myEvaluations'])->name('dashboard.my-evaluations');
+        Route::get ('/check/{session_id}',                      [PublicUserController::class, 'checkMyEvaluation'])->name('dashboard.my-evaluations.check');
+        Route::post('/update-evaluation',                       [PublicUserController::class, 'updateEvaluation'])->name('dashboard.update-evaluation');
+
         Route::post('/remove-my-note',                          [PublicUserController::class, 'removeMyNote'])->name('dashboard.remove-my-note');
     });
 

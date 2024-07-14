@@ -603,6 +603,44 @@
             .single__evaluation_5{ background: $p6_bcg; .evaluation__btn__w{ a{ .just_a_btn{ background: $p6_bps; } } } }
             .single__evaluation_greyed{ background: #FFFFFF; .evaluation__btn__w{ a{ .just_a_btn{ background: #cccccc; } } } }
         }
+
+        .my__evaluations__form_w{
+            position: relative; width: 100%; min-height: 120px; margin-top: 32px; display:  flex; flex-wrap: wrap; gap: 24px;
+
+            .single__question{
+                position: relative; width: 100%; display: flex; flex-wrap: wrap; gap: 8px;
+
+                .question__w{
+                    position: relative; width: 100%;
+                    p{margin: 0px;}
+                }
+                .answers__wrapper{
+                    position: relative; width: 100%;
+                    textarea{
+                        // background: rgba(0,0,0,0.1);
+                        resize: none; height: 80px; border: 1px solid #333333; min-height: auto !important;
+                    }
+                }
+            }
+            .send_btn{
+                position: relative; width: 100%;
+            }
+            .note__w{
+                position: relative; width: 60%; display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; background: #D8D9DA; border-radius: 16px; padding: 16px 32px;
+                p{
+                    margin: 0px;
+                }
+            }
+
+            .form-check-input{
+                // background: rgba(0,0,0,0.1);
+                border: 1px solid #333333;
+            }
+            .form-check-input:checked{
+                background-color: $primary;
+                border-color: $primary;
+            }
+        }
     }
 }
 

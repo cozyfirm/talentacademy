@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('programs__sessions_notes', function (Blueprint $table) {
+        Schema::create('programs__sessions_evaluations', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('attendee_id');
@@ -24,7 +24,13 @@ return new class extends Migration
                 ->references('id')
                 ->on('programs__sessions')
                 ->onDelete('cascade');
-            $table->text('note');
+
+            $table->unsignedBigInteger('question_id');
+            $table->foreign('question_id')
+                ->references('id')
+                ->on('form__questions')
+                ->onDelete('cascade');
+            $table->text('answer');
 
             $table->timestamps();
         });
@@ -35,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('programs__sessions_notes');
+        Schema::dropIfExists('programs__sessions_evaluations');
     }
 };

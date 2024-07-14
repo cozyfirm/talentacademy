@@ -8,6 +8,7 @@ use App\Models\Other\Inbox\InboxTo;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
+use App\Models\Programs\ProgramSessionEvaluation;
 use App\Models\Programs\ProgramSessionNote;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -131,7 +132,7 @@ class User extends Authenticatable{
                 /* Future sessions */
             }else{
                 /* Passed sessions */
-                return ProgramSession::where('program_id', $programApp->program_id)->where('datetime_from', '<')->orderBy('datetime_from', 'DESC')->get();
+                return ProgramSession::where('program_id', $programApp->program_id)->where('datetime_from', '<', Carbon::now())->orderBy('datetime_from', 'DESC')->get();
             }
         }
     }
@@ -152,5 +153,28 @@ class User extends Authenticatable{
     }
     public function totalNotes(){
         return ProgramSessionNote::where('attendee_id', $this->id)->count();
+    }
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /* Session & evaluations */
+    /**
+     *  Check if user answered specific question about session
+     */
+    public function isThisAnswer($session_id, $question_id, $answer): string | int{
+        return ProgramSessionEvaluation::where('attendee_id', $this->id)->where('session_id', $session_id)->where('question_id', $question_id)->where('answer', $answer)->count();
+    }
+    public function getAnswer($session_id, $question_id): string | int{
+        $evaluation = ProgramSessionEvaluation::where('attendee_id', $this->id)->where('session_id', $session_id)->where('question_id', $question_id)->first();
+        return $evaluation->answer ?? '';
+    }
+    public function isSessionEvaluated($session_id, $evaluated_24h = false): bool{
+        $evaluation = ProgramSessionEvaluation::where('attendee_id', $this->id)->where('session_id', $session_id)->first();
+
+        if($evaluation){
+            if($evaluated_24h){
+                if(Carbon::now()->subDay() < $evaluation->created_at) return false;
+                return true;
+            }else return true;
+        }else return false;
     }
 }

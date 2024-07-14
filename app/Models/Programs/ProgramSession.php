@@ -72,4 +72,11 @@ class ProgramSession extends Model{
         }
         return $currentDay;
     }
+
+    public function evaluationsRel(): HasMany{
+        return $this->hasMany(ProgramSessionEvaluation::class, 'session_id', 'id');
+    }
+    public function evaluationsByUserRel($attendee_id): HasMany{
+        return $this->hasMany(ProgramSessionEvaluation::class, 'session_id', 'id')->where('attendee_id', $attendee_id);
+    }
 }
