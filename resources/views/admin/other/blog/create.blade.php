@@ -83,6 +83,14 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-group">
+                                {{ html()->label(__('YouTube link'))->for('video')->class('bold') }}
+                                {{ html()->text('video', $post->video ?? '' )->class('form-control form-control-sm')->required()->value((isset($post) ? $post->video : ''))->isReadonly(isset($preview))->maxlength(100) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 {{ html()->label(__('Sadržaj posta'))->for('description')->class('bold') }}
                                 {{ html()->textarea('description')->class('form-control form-control-sm mt-2 textarea-240 summernote')->value(isset($post) ? $post->description : '')->isReadonly(isset($preview)) }}
                             </div>

@@ -91,7 +91,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="single-blog__content-right"> {!! nl2br($post->description) !!} </div>
+                <div class="single-blog__content-right">
+                    <div class="content__text">
+                        {!! nl2br($post->description) !!}
+                    </div>
+                    @if(isset($post->video))
+                        <div class="blog__video">
+                            <iframe class="blog__video_iframe" src="{{ $post->video }}" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+                        </div>
+                    @endif
+                </div>
             </div>
             <div class="single-blog__images">
                 @foreach($post->imageRel as $image)

@@ -123,4 +123,14 @@ $(document).ready(function (){
     $(".close_gallery").click(function (){
         $(".image__wrapper").addClass('d-none');
     });
+
+    /**
+     *  Blog video
+     */
+    if($(".blog__video_iframe").length){
+        let elem = $(".blog__video_iframe");
+
+        elem.height(parseInt(elem.width() / 1.77));
+        console.log("Exists!", elem.width());
+    }
 });
