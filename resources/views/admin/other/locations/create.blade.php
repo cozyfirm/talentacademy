@@ -106,6 +106,14 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-group">
+                                {{ html()->label(__('Da li je lokacija javno dostupna?'))->for('public')->class('bold') }}
+                                {{ html()->select('public', ['0' => 'Ne', '1' => 'Da'], isset($location) ? $location->public : '1')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 {{ html()->label(__('Detaljan opis'))->for('description')->class('bold') }}
                                 {{ html()->textarea('description')->class('form-control form-control-sm mt-2 textarea-240 summernote')->value(isset($location) ? $location->description : '')->isReadonly(isset($preview)) }}
                             </div>

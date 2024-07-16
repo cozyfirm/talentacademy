@@ -26,7 +26,7 @@ class HomeController extends Controller{
 
         return view($this->_path . 'home', [
             'blogPosts' => Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take(6)->get(),
-            'locations' => Location::inRandomOrder()->take(6)->get(),
+            'locations' => Location::where('public', '=', 1)->inRandomOrder()->take(6)->get(),
             'faqs' => FAQ::where('what', 0)->get(),
             'lecturers' => User::where('role', 'presenter')->inRandomOrder()->take(4)->get(),
             'daysTill' => $daysTil,

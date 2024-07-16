@@ -5,9 +5,6 @@
 
 <!-- Page content -->
 @section('public-content')
-    <!-- Dashboard inner menu -->
-    @include('public-part.dashboard.includes.inner-menu')
-
     <div class="white__wrapper">
         <div class="profile__wrapper">
             @include('public-part.dashboard.includes.left-side')

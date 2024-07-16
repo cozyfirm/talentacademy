@@ -52,7 +52,7 @@ class ChatController extends Controller{
             ->reverse();
 
         return view($this->_path . 'chat', [
-            'teamMates' => Auth::user()->getMyTeamMates(),
+            'teamMates' => Auth::user()->getUsersFromMyProgram(),
             'groups' => $groups,
             'firstConversation' => $conversation,
             'messages' => $messages,

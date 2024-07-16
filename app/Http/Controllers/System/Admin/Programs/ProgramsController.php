@@ -41,7 +41,11 @@ class ProgramsController extends Controller{
         'Projekcija filma' => 'Projekcija filma',
         'JAM sesija' => 'JAM sesija',
         'Posjeta' => 'Posjeta',
-        'Hakaton' => 'Hakaton'
+        'Hakaton' => 'Hakaton',
+        'Doručak' => 'Doručak',
+        'Ručak' => 'Ručak',
+        'Večera' => 'Večera',
+        'Kritičko razmišljanje' => 'Kritičko razmišljanje'
     ];
 
     public function index(): View{

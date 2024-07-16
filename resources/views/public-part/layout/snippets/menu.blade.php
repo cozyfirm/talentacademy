@@ -130,3 +130,10 @@
         </div>
     </div>
 </div>
+
+@if(Auth()->check())
+    @if(Auth()->user()->role == 'user' or Auth()->user()->role == 'presenter')
+        <!-- Dashboard inner menu -->
+        @include('public-part.dashboard.includes.inner-menu')
+    @endif
+@endif

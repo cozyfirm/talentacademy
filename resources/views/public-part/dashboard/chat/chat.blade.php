@@ -8,9 +8,6 @@
 
 <!-- Page content -->
 @section('public-content')
-    <!-- Dashboard inner menu -->
-    @include('public-part.dashboard.includes.inner-menu')
-
     <!-- loggedUserID -->
     {{ html()->hidden('loggedUserID')->class('form-control')->id('loggedUserID')->value(Auth()->user()->id) }}
 

@@ -5,8 +5,6 @@
 
 <!-- Page content -->
 @section('public-content')
-    @include('public-part.dashboard.includes.inner-menu')
-
     <div class="apply__for_scholarship_w">
         <div class="apply__for_scholarship_inner">
             @if(session()->has('message'))

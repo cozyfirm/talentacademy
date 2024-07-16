@@ -115,20 +115,21 @@
                 </div>
             </a>
 
-            <a href="{{ route('dashboard.my-notes') }}">
-                <div class="inner__menu_links_link @if(Route::is('dashboard.my-notes')) active @endif">
-                    <img src="{{ asset('files/images/public-part/notes.png') }}" class="inbox" alt="">
-                    <p>{{ __('Moje zabilješke') }}</p>
+            @if( (Auth()->user()->role == 'user' and Auth()->user()->myProgram()))
+                <a href="{{ route('dashboard.my-notes') }}">
+                    <div class="inner__menu_links_link @if(Route::is('dashboard.my-notes')) active @endif">
+                        <img src="{{ asset('files/images/public-part/notes.png') }}" class="inbox" alt="">
+                        <p>{{ __('Moje zabilješke') }}</p>
 
-                    @if(Auth()->user()->unreadNotifications())
-                        <div class="number" id="number-of-notifications-w">
-                            <p id="number-of-notes">{{ Auth()->user()->totalNotes() }}</p>
-                        </div>
-                    @endif
-                </div>
-            </a>
+                        @if(Auth()->user()->unreadNotifications())
+                            <div class="number" id="number-of-notifications-w">
+                                <p id="number-of-notes">{{ Auth()->user()->totalNotes() }}</p>
+                            </div>
+                        @endif
+                    </div>
+                </a>
+            @endif
 
-{{--                Auth()->user()->role == 'presenter' or--}}
             @if( (Auth()->user()->role == 'user' and Auth()->user()->myProgram()))
                 <a href="{{ route('dashboard.my-schedule') }}">
                     <div class="inner__menu_links_link @if(Route::is('dashboard.my-schedule')) active @endif">
@@ -138,16 +139,18 @@
                 </a>
             @endif
 
-            <a href="{{ route('dashboard.my-evaluations') }}">
-                <div class="inner__menu_links_link @if(Route::is('dashboard.my-evaluations')) active @endif">
-                    <img src="{{ asset('files/images/public-part/notes.png') }}" class="inbox" alt="">
-                    <p>{{ __('Moje evaluacije') }}</p>
+            @if( (Auth()->user()->role == 'user' and Auth()->user()->myProgram()))
+                <a href="{{ route('dashboard.my-evaluations') }}">
+                    <div class="inner__menu_links_link @if(Route::is('dashboard.my-evaluations')) active @endif">
+                        <img src="{{ asset('files/images/public-part/notes.png') }}" class="inbox" alt="">
+                        <p>{{ __('Moje evaluacije') }}</p>
 
-                    <div class="number" id="number-of-notifications-w">
-                        <p id="number-of-notes">4</p>
+                        <div class="number" id="number-of-notifications-w">
+                            <p id="number-of-notes">4</p>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            @endif
         </div>
     </div>
 </div>

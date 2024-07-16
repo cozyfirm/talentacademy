@@ -5,9 +5,6 @@
 
 <!-- Page content -->
 @section('public-content')
-    <!-- Dashboard inner menu -->
-    @include('public-part.dashboard.includes.inner-menu')
-
     <!-- Choose programs -->
     <div class="programs__wrapper">
         <div class="programs__wrapper_colored programs__wrapper_colored_1">

@@ -12,14 +12,14 @@ class LocationsController extends Controller{
 
     public function locations(): View{
         return view($this->_path . 'locations', [
-            'locations' => Location::get()
+            'locations' => Location::where('public', '=', 1)->get()
         ]);
     }
 
     public function single_location($id): View{
         return view($this->_path . 'single-location', [
-            'location' => Location::where('id', '=', $id)->first(),
-            'similarLocations' => Location::inRandomOrder()->take(6)->get()
+            'location' => Location::where('id', '=', $id)->where('public', '=', 1)->first(),
+            'similarLocations' => Location::where('public', '=', 1)->inRandomOrder()->take(6)->get()
         ]);
     }
 }

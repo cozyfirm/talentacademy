@@ -122,6 +122,17 @@ class User extends Authenticatable{
             }else return $program;
         }catch (\Exception $e){ return null; }
     }
+    public function whatIsMyPresenterProgram($param = null): ProgramApplication | null | string | int{
+        try{
+            $program = Program::whereHas('sessionsRel', function ($q){
+                $q->where('presenter_id', Auth::user()->id);
+            })->first();
+
+            if($param){
+                return $program->$param;
+            }else return $program;
+        }catch (\Exception $e){ return null; }
+    }
     public function getMySessions($passed = null){
         $programApp = ProgramApplication::where('attendee_id', $this->id)->where('app_status', 'accepted')->orderBy('id', 'DESC')->first();
         /* If we want all sessions, call without any arguments */
@@ -146,6 +157,25 @@ class User extends Authenticatable{
         return User::whereHas('applicationRel', function ($q){
             $q->where('program_id', $this->whatIsMyProgram('id'))->where('app_status', 'accepted');
         })->orderBy('name')->get();
+    }
+    public function getUsersFromMyProgram(){
+        if($this->role == 'user'){
+            $programID = $this->whatIsMyProgram('id');
+            /* User role */
+            return User::whereHas('applicationRel', function ($q) use ($programID){
+                $q->where('program_id', $programID)->where('app_status', 'accepted');
+            })->orWhereHas('sessionsRel', function ($q) use ($programID){
+                $q->where('program_id', $programID);
+            })->orderBy('name')->get();
+        }else if($this->role == 'presenter'){
+            /* Presenter role */
+            $programID = $this->whatIsMyPresenterProgram('id');
+            return User::whereHas('applicationRel', function ($q) use ($programID){
+                $q->where('program_id', $programID)->where('app_status', 'accepted');
+            })->orWhereHas('sessionsRel', function ($q) use ($programID){
+                $q->where('program_id', $programID);
+            })->orderBy('name')->get();
+        }
     }
 
     public function unreadNotifications(){

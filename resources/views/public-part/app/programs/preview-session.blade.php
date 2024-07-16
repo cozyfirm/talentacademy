@@ -71,7 +71,7 @@
     </div>
 
     <!-- For logged users -->
-    @if(Auth()->check())
+    @if(Auth()->check() and Auth()->user()->whatIsMyProgram('id') == $program->id)
         <div class="my_notes__wrapper my_notes__wrapper_{{ $program->id }}">
             <div class="my_notes__wrapper_inner">
                 <div class="my_notes__wrapper_inner_header">

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('cover_img')->nullable();
 
             $table->text('description');
+            $table->tinyInteger('public')->default(1);
 
             $table->timestamps();
         });
