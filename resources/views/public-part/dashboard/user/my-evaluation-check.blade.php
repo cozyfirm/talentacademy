@@ -71,7 +71,7 @@
 
                         <div class="note__w">
                             <img src="{{ asset('files/images/svg-icons/atention.svg') }}" alt="IG icon">
-                            <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
+                            <p> Tvoja ocjena radionice nam je jako važna, zato te molimo da redovno ispunjavaš evaluacije radionica. Nakon svake završene radionice evaluacioni formular će postati dostupan u tvom dashboardu. Odgovore i ocjene u evaluacionoj formi možeš editovati 24 sata nakon što si započeo/la njeno ispunjavanje. Nakon 24 sata započeta forma se zaključava i više se ne može editovati. </p>
                         </div>
                     </div>
                 </form>

@@ -10,6 +10,7 @@ use App\Models\Other\SinglePage;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class HomeController extends Controller{
@@ -24,9 +25,15 @@ class HomeController extends Controller{
         }
         if($daysTil < 0) $daysTil = 0;
 
+        if(Auth::check()){
+            $locations = Location::inRandomOrder()->take(6)->get();
+        }else{
+            $locations = Location::where('public', '=', 1)->inRandomOrder()->take(6)->get();
+        }
+
         return view($this->_path . 'home', [
             'blogPosts' => Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take(6)->get(),
-            'locations' => Location::where('public', '=', 1)->inRandomOrder()->take(6)->get(),
+            'locations' => $locations,
             'faqs' => FAQ::where('what', 0)->get(),
             'lecturers' => User::where('role', 'presenter')->inRandomOrder()->take(4)->get(),
             'daysTill' => $daysTil,

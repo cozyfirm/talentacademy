@@ -145,9 +145,9 @@
                         <img src="{{ asset('files/images/public-part/notes.png') }}" class="inbox" alt="">
                         <p>{{ __('Moje evaluacije') }}</p>
 
-                        <div class="number" id="number-of-notifications-w">
-                            <p id="number-of-notes">4</p>
-                        </div>
+{{--                        <div class="number" id="number-of-notifications-w">--}}
+{{--                            <p id="number-of-notes">4</p>--}}
+{{--                        </div>--}}
                     </div>
                 </a>
             @endif

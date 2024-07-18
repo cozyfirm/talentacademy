@@ -70,6 +70,10 @@
             </div>
         </div>
     </div>
+
+    <!-- Blog section; Scroll-bar lattest news -->
+    @include('public-part.app.base-includes.blog.blog_scroll')
+
     <div class="features" id="features">
         <div class="features__container">
             <div class="features__content">
@@ -120,14 +124,13 @@
     @include('public-part.app.base-includes.programs.all')
 
     <!-- Generic element; How to apply -->
-    <div class="how-to-apply">
-        @include('public-part.app.base-includes.generic.how-to-apply')
-    </div>
+{{--    <div class="how-to-apply">--}}
+{{--        @include('public-part.app.base-includes.generic.how-to-apply')--}}
+{{--    </div>--}}
 
     @include('public-part.app.base-includes.snake.snake')
 
-    <!-- Blog section; Scroll-bar lattest news -->
-    @include('public-part.app.base-includes.blog.blog_scroll')
+
 
     <!-- FAQ section -->
     @include('public-part.app.base-includes.generic.faq')

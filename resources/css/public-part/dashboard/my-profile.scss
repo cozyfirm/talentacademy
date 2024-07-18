@@ -573,17 +573,39 @@
 
             .single__evaluation{
                 position: relative; width: 100%; display: flex; justify-content: space-between; border: 1px solid #000000; border-radius: 8px; padding: 16px 32px;
-
+                @media only screen and (max-width: 1200px){
+                    flex-wrap: wrap; gap: 16px;
+                }
                 .session__w{
                     display: flex; gap: 32px; align-content: center; width: calc(100% - 250px); justify-content: flex-start; flex-direction: row;
+                    @media only screen and (max-width: 1200px){
+                        width: 100%;
+                    }
+                    @media only screen and (max-width: 800px){
+                        flex-wrap: wrap; gap: 16px;
+                    }
                     p{ margin: 0px; font-weight: bold; }
                     .presenter__w, .session_name__w{
                         display: flex; gap: 16px; align-content: center; align-items: center;
                         p{ margin: 0px; font-weight: bold; }
+
+                        @media only screen and (max-width: 800px){
+                            width: 100%;
+                        }
+                    }
+                    .session_name__w{
+                        @media only screen and (max-width: 800px){
+                            p{
+                                font-size: 20px;
+                            }
+                        }
                     }
                 }
                 .evaluation__btn__w{
                     display: flex; align-items: center;
+                    @media only screen and (max-width: 800px){
+                        display: none;
+                    }
                     a{
                         position: relative; display: flex;
                         .just_a_btn{
@@ -602,6 +624,17 @@
             .single__evaluation_5{ background: $p5_bcg; .evaluation__btn__w{ a{ .just_a_btn{ background: $p5_bps; } } } }
             .single__evaluation_5{ background: $p6_bcg; .evaluation__btn__w{ a{ .just_a_btn{ background: $p6_bps; } } } }
             .single__evaluation_greyed{ background: #FFFFFF; .evaluation__btn__w{ a{ .just_a_btn{ background: #cccccc; } } } }
+
+            .single__evaluation{
+                @media only screen and (max-width: 800px){
+                    background: none; padding: 0px; border: none;
+                    .session__w{
+                        .session_name__w{
+                            p{font-size: 32px !important;}
+                        }
+                    }
+                }
+            }
         }
 
         .my__evaluations__form_w{
@@ -626,7 +659,7 @@
                 position: relative; width: 100%;
             }
             .note__w{
-                position: relative; width: 60%; display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; background: #D8D9DA; border-radius: 16px; padding: 16px 32px;
+                position: relative; width: 100%; display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; background: #D8D9DA; border-radius: 16px; padding: 16px 32px;
                 p{
                     margin: 0px;
                 }
