@@ -140,6 +140,7 @@ Route::prefix('')->group(function () {
     Route::get ('/cookies',                                  [HomepageController::class, 'cookies'])->name('public-part.cookies');
 
     Route::get ('/critical-thinking',                        [HomepageController::class, 'criticalThinking'])->name('public-part.critical-thinking');
+    Route::get ('/critical-thinking-preview/{id}',           [HomepageController::class, 'criticalThinkingPreview'])->name('public-part.critical-thinking.preview');
 });
 
 /**
@@ -147,6 +148,9 @@ Route::prefix('')->group(function () {
  */
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get ('/my-profile',                              [PublicUserController::class, 'myProfile'])->name('dashboard.my-profile');
+    Route::get ('/welcome',                                 [PublicUserController::class, 'welcome'])->name('dashboard.welcome');
+    Route::get ('/latest-news',                             [PublicUserController::class, 'latestNews'])->name('dashboard.latest-news');
+    Route::get ('/latest-new/{id}',                         [PublicUserController::class, 'latestNew'])->name('dashboard.latest-new');
     Route::get ('/edit-links/{link}',                       [PublicUserController::class, 'editLinks'])->name('dashboard.edit-links');
     Route::get ('/change-password',                         [PublicUserController::class, 'changePassword'])->name('dashboard.change-password');
     Route::post('/update-profile',                          [PublicUserController::class, 'updateProfile'])->name('dashboard.update-profile');
@@ -193,7 +197,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::get ('/check/{session_id}',                      [PublicUserController::class, 'checkMyEvaluation'])->name('dashboard.my-evaluations.check');
         Route::post('/update-evaluation',                       [PublicUserController::class, 'updateEvaluation'])->name('dashboard.update-evaluation');
 
-        Route::post('/remove-my-note',                          [PublicUserController::class, 'removeMyNote'])->name('dashboard.remove-my-note');
+//        Route::post('/remove-my-note',                          [PublicUserController::class, 'removeMyNote'])->name('dashboard.remove-my-note');
     });
 
     /**

@@ -23,7 +23,7 @@ class BlogController extends Controller{
     public function index(): View{
         $posts = Blog::where('id', '>', 0);
         $posts = Filters::filter($posts);
-        $filters = [ 'title' => __('Naslov'), 'what' => __('Kreirao') ];
+        $filters = [ 'title' => __('Naslov') ];
 
         return view($this->_path . 'blog.index', [
             'filters' => $filters,
@@ -33,7 +33,7 @@ class BlogController extends Controller{
     public function create(): View{
         return view($this->_path . 'blog.create', [
             'create' => true,
-            'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0)
+            'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', 10)->prepend('Kritičko mišljenje', 6)
         ]);
     }
     public function save(Request $request): JsonResponse{
@@ -49,14 +49,14 @@ class BlogController extends Controller{
     public function preview($id): View{
         return view($this->_path . 'blog.create', [
             'preview' => true,
-            'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0),
+            'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', 10)->prepend('Kritičko mišljenje', 6),
             'post' => Blog::where('id', $id)->first()
         ]);
     }
     public function edit($id): View{
         return view($this->_path . 'blog.create', [
             'edit' => true,
-            'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0),
+            'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', 10)->prepend('Kritičko mišljenje', 6),
             'post' => Blog::where('id', $id)->first()
         ]);
     }

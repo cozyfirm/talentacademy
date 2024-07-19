@@ -89,6 +89,13 @@
         }
     }
 
+    .blog__critical__thinking__img{
+        position: relative; width: 100%; display: flex; justify-content: center;
+        img{
+            max-width: 100%;
+        }
+    }
+
     .blog__items {
         width: 100%;
         display: flex;
@@ -183,6 +190,9 @@
                 }
             }
         }
+    }
+    .blog__items__critical{
+        margin-top: 32px; border:none;
     }
 
     .blog__load_more_w{

@@ -58,9 +58,9 @@
     @include('public-part.app.base-includes.blog.blog_scroll')
 
     <!-- Generic element; How to apply -->
-    <div class="how-to-apply how-to-apply_{{ $program->id }} how-to-apply-bg-white">
-        @include('public-part.app.base-includes.generic.how-to-apply')
-    </div>
+{{--    <div class="how-to-apply how-to-apply_{{ $program->id }} how-to-apply-bg-white">--}}
+{{--        @include('public-part.app.base-includes.generic.how-to-apply')--}}
+{{--    </div>--}}
 
     @if(!$appTimePassed)
         <!-- Counter -->

@@ -15,9 +15,9 @@ class BlogController extends Controller{
     protected string $_path = 'public-part.app.blog.';
 
     public function blog(): View{
-        $last = Blog::where('published', '=', 1)->orderBy('id', 'desc')->first();
+        $last = Blog::where('published', '=', 1)->where('category', '<', 6)->orderBy('id', 'desc')->first();
         return view($this->_path . 'blog', [
-            'posts' => Blog::where('published', '=', 1)->where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(3)->get(),
+            'posts' => Blog::where('published', '=', 1)->where('category', '<', 6)->where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(3)->get(),
             'last' => $last
         ]);
     }
@@ -29,12 +29,12 @@ class BlogController extends Controller{
         $post = Blog::where('id', $id)->first();
         return view($this->_path . 'single-blog', [
             'post' => $post,
-            'blogPosts' => Blog::where('published', '=', 1)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get()
+            'blogPosts' => Blog::where('published', '=', 1)->where('category', '<', 6)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get()
         ]);
     }
     public function loadMore(Request $request): bool|string{
         try{
-            $posts = Blog::where('published', '=', 1)->where('id', '<', $request->lastID)->orderBy('id', 'DESC')->take(3)->get();
+            $posts = Blog::where('published', '=', 1)->where('category', '<', 6)->where('id', '<', $request->lastID)->orderBy('id', 'DESC')->take(3)->get();
             foreach ($posts as $post){
                 $post->img = $post->mainImg->getFile();
                 $post->categoryVal = $post->getCategory();

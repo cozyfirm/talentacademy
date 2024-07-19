@@ -147,6 +147,17 @@ class User extends Authenticatable{
             }
         }
     }
+    public function totalRealSessions(): int{
+        $sessions = $this->getMySessions(true);
+        $count = 0;
+        foreach ($sessions as $session){
+            if($session->type == 'Radionica' or $session->type == 'Predavanje' or $session->type == 'Keynote Predavanje' or $session->type == 'Projekcija filma' or $session->type == 'Posjeta' or $session->type == 'Hakaton') {
+                if($this->isSessionEvaluated($session->id, true)) $count++;
+            }
+        }
+
+        return $count;
+    }
     public function getMyLecturers(){
         return User::whereHas('sessionsRel.programRel', function ($q){
             $q->where('id', $this->whatIsMyProgram('id'));

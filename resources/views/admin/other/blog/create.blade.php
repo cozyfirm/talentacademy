@@ -62,7 +62,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Kategorija'))->for('category')->class('bold') }}
-                                {{ html()->select('category', $other, isset($post) ? $post->what : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
+                                {{ html()->select('category', $other, isset($post) ? $post->category : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -84,7 +84,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 {{ html()->label(__('YouTube link'))->for('video')->class('bold') }}
-                                {{ html()->text('video', $post->video ?? '' )->class('form-control form-control-sm')->required()->value((isset($post) ? $post->video : ''))->isReadonly(isset($preview))->maxlength(100) }}
+                                {{ html()->text('video', $post->video ?? '' )->class('form-control form-control-sm')->value((isset($post) ? $post->video : ''))->isReadonly(isset($preview))->maxlength(100) }}
                             </div>
                         </div>
                     </div>

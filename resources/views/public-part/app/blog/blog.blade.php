@@ -5,20 +5,26 @@
 @section('public-content')
     <div class="blog">
         <div class="blog__container">
-            <!-- Preview last post -->
-            <div class="blog__featured-article">
-                <img src="{{ asset( isset($last->mainImg) ? $last->mainImg->getFile() : '' ) }}" alt="Featured article image" class="blog__featured-article-image">
-                <div class="blog__featured-article-content">
-                    <div class="blog__featured-article-title"> {{ $last->title }} </div>
-                    <div class="blog__featured-article-description"> {{ $last->short_desc }} </div>
-                    <a href="{{ route('public-part.blog.preview', ['id' => $last->id ]) }}" class="blog__featured-article-button">{{ __('Više informacija...') }}</a>
+            @if(isset($criticalThinking))
+                <div class="blog__critical__thinking__img">
+                    <img src="{{ asset( $page->fileRel->getFile()) }}">
                 </div>
-            </div>
+            @else
+                <!-- Preview last post -->
+                <div class="blog__featured-article">
+                    <img src="{{ asset( isset($last->mainImg) ? $last->mainImg->getFile() : '' ) }}" alt="Featured article image" class="blog__featured-article-image">
+                    <div class="blog__featured-article-content">
+                        <div class="blog__featured-article-title"> {{ $last->title }} </div>
+                        <div class="blog__featured-article-description"> {{ $last->short_desc }} </div>
+                        <a href="@if(!isset($showAll)) {{ route('public-part.blog.preview', ['id' => $last->id ]) }} @else {{ route('dashboard.latest-new', ['id' => $last->id ]) }} @endif" class="blog__featured-article-button">{{ __('Više informacija...') }}</a>
+                    </div>
+                </div>
+            @endif
 
             <!-- Preview last posts except the last one -->
-            <div class="blog__items">
+            <div class="blog__items @if(isset($criticalThinking)) blog__items__critical @endif">
                 @foreach($posts as $post)
-                    <a href="{{ route('public-part.blog.preview', ['id' => $post->id ]) }}" class="blog__item" id="blog__item_id_{{ $post->id }}" itemid="{{ $post->id }}" uri="{{ route('public-part.blog.preview', ['id' => $post->id]) }}">
+                    <a href="@if(isset($criticalThinking)) {{ route('public-part.critical-thinking.preview', ['id' => $post->id ]) }} @else @if(!isset($showAll)) {{ route('public-part.blog.preview', ['id' => $post->id ]) }} @else {{ route('dashboard.latest-new', ['id' => $post->id ]) }} @endif @endif" class="blog__item" id="blog__item_id_{{ $post->id }}" itemid="{{ $post->id }}" uri="{{ route('public-part.blog.preview', ['id' => $post->id]) }}">
                         <img src="{{ isset($post->mainImg) ? asset($post->mainImg->getFile()) : '' }}" alt="Blog image" class="blog__item-image">
                         <div class="blog__item-content">
                             <div class="blog__item-content-box">
@@ -32,9 +38,11 @@
                 @endforeach
             </div>
 
-            <div class="blog__load_more_w">
-                <div class="load__more_btn">{{ __('Još vijesti') }}</div>
-            </div>
+            @if(!isset($showAll))
+                <div class="blog__load_more_w">
+                    <div class="load__more_btn">{{ __('Još vijesti') }}</div>
+                </div>
+            @endif
         </div>
     </div>
     @include('public-part.app.base-includes.snake.snake')

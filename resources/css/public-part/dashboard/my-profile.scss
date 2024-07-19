@@ -1044,5 +1044,42 @@
     }
 }
 
+/**
+ *  Welcome pack
+ */
+
+.welcome__pack__w{
+    position: relative; left: calc(50% - $container-width-half); width: $container-width; display: inline-flex; justify-content: center;
+    margin-top: 32px; margin-bottom: 32px; min-height: 120px; gap: 32px; flex-wrap: wrap;
+
+    @media only screen and (max-width: 1500px) {
+        left: 40px; width: calc(100% - 80px);
+    }
+    @media only screen and (max-width: 1200px) {
+        left: 20px; width: calc(100% - 40px);
+        gap: 20px;
+    }
+
+    .blog__video_iframe{
+        width: 100%;
+    }
+    .text__wrapper{
+        position: relative; width: 1000px; display: flex; flex-wrap: wrap;
+        @media only screen and (max-width: 1000px) {
+            left: 0px; width: calc(100% - 0px);
+        }
+
+        h1{
+            width: 100%;
+        }
+        .text__content{
+            margin-top: 32px;
+        }
+        p{
+            //margin: 0px; padding: 0px;
+            //h1,h2,h3,h4,h5,h6{margin: 0px; padding: 0px;}
+        }
+    }
+}
 
 @import "chat";

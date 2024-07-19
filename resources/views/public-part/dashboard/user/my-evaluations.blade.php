@@ -12,7 +12,7 @@
             <div class="profile__wrapper_right profile__wrapper_right_my_notes">
                 <div class="my__evaluations__wrapper">
                     @foreach($sessions as $session)
-                        @if($session->presenter_id)
+                        @if($session->presenter_id and ($session->type == 'Radionica' or $session->type == 'Predavanje' or $session->type == 'Keynote Predavanje' or $session->type == 'Projekcija filma' or $session->type == 'Posjeta' or $session->type == 'Hakaton'))
                             <div class="single__evaluation @if(Auth()->user()->isSessionEvaluated($session->id, true)) single__evaluation_greyed @else @endif single__evaluation_{{ $session->programRel->id }}">
                                 <div class="session__w">
                                     <div class="session_name__w">

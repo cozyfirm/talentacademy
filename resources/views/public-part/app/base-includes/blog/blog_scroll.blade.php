@@ -6,7 +6,7 @@
         </div>
         <div class="news__list slider_w_2">
             @foreach($blogPosts as $post)
-                <div class="news__list-item" uri="{{ route('public-part.blog.preview', ['id' => $post->id]) }}">
+                <div class="news__list-item" uri="@if(isset($criticalThinking)) {{ route('public-part.critical-thinking.preview', ['id' => $post->id ]) }} @else @if(!isset($showAll)) {{ route('public-part.blog.preview', ['id' => $post->id ]) }} @else {{ route('dashboard.latest-new', ['id' => $post->id ]) }} @endif @endif">
                     <div class="img_ww">
                         <img src="{{ isset($post->mainImg) ? asset($post->mainImg->getFile()) : '' }}" alt="{{ __('News image') }}" class="news__list-item-image">
                     </div>

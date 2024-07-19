@@ -4,8 +4,10 @@ namespace App\Http\Controllers\PublicPart\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Models\Core\Country;
+use App\Models\Other\Blog\Blog;
 use App\Models\Other\FormQuestion;
 use App\Models\Other\Inbox\InboxTo;
+use App\Models\Other\SinglePage;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
@@ -40,6 +42,29 @@ class PublicUserController extends Controller{
             'countries' => Country::orderBy('name_ba')->get()->pluck('name_ba', 'id'),
             'myProfile' => true,
             'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+        ]);
+    }
+    public function welcome(): View{
+        return view($this->_path . 'user.welcome', [
+            'content' => SinglePage::where('id', 14)->first()
+        ]);
+    }
+    public function latestNews(): View{
+        $last = Blog::where('published', '=', 1)->where('category', '=', 10)->orderBy('id', 'desc')->first();
+
+        return view('public-part.app.blog.blog', [
+            'posts' => Blog::where('published', '=', 1)->where('category', '=', 10)->where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(30)->get(),
+            'last' => $last,
+            'showAll' => true
+        ]);
+    }
+    public function latestNew($id): View{
+        $post = Blog::where('id', $id)->first();
+
+        return view('public-part.app.blog.single-blog', [
+            'post' => $post,
+            'blogPosts' => Blog::where('published', '=', 1)->where('category', '=', 10)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get(),
+            'showAll' => true
         ]);
     }
     public function updateProfile (Request $request): JsonResponse{

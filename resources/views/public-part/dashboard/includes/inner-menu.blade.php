@@ -65,6 +65,23 @@
             </a>
         </div>
         <div class="inner__menu_links">
+            <a href="{{ route('dashboard.welcome') }}">
+                <div class="inner__menu_links_link @if(Route::is('dashboard.welcome')) active @endif">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 5H16.791C16.9377 4.51378 17.0082 4.00779 17 3.5C17 1.57 15.43 0 13.5 0C11.878 0 10.795 1.482 10.096 3.085C9.407 1.57 8.269 0 6.5 0C4.57 0 3 1.57 3 3.5C3 4.096 3.079 4.589 3.209 5H2C0.897 5 0 5.897 0 7V9C0 10.103 0.897 11 2 11V18C2 19.103 2.897 20 4 20H16C17.103 20 18 19.103 18 18V11C19.103 11 20 10.103 20 9V7C20 5.897 19.103 5 18 5ZM13.5 2C14.327 2 15 2.673 15 3.5C15 5 14.374 5 14 5H11.522C12.033 3.424 12.775 2 13.5 2ZM5 3.5C5 2.673 5.673 2 6.5 2C7.388 2 8.214 3.525 8.698 5H6C5.626 5 5 5 5 3.5ZM2 7H9V9H2V7ZM4 18V11H9V18H4ZM16 18H11V11H16V18ZM11 9V7.085L11.017 7H18L18.001 9H11Z" fill="black"/>
+                    </svg>
+                    <p>{{ __('Welcome pack') }}</p>
+                </div>
+            </a>
+            <a href="{{ route('dashboard.latest-news') }}">
+                <div class="inner__menu_links_link @if(Route::is('dashboard.latest-news') or Route::is('dashboard.latest-new')) active @endif">
+                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.875 0H2.125C0.953 0 0 0.897 0 2V16C0 17.103 0.953 18 2.125 18H17.875C19.047 18 20 17.103 20 16V2C20 0.897 19.047 0 17.875 0ZM17.875 16H2.125C2.068 16 2.029 15.984 2.012 15.984C2.005 15.984 2.001 15.986 2 15.992L1.988 2.046C1.995 2.036 2.04 2 2.125 2H17.875C17.954 2.001 17.997 2.028 18 2.008L18.012 15.954C18.005 15.964 17.96 16 17.875 16Z" fill="black"/>
+                        <path d="M4 4H10V10H4V4ZM4 12V14H16V12H4ZM12 8H16V10H12V8ZM12 4H16V6H12V4Z" fill="black"/>
+                    </svg>
+                    <p>{{ __('Vijesti') }}</p>
+                </div>
+            </a>
             @if(Auth()->user()->role == 'presenter')
                 <a href="{{ route('dashboard.preview-sessions') }}">
                     <div class="inner__menu_links_link @if(Route::is('dashboard.preview-sessions')) active @endif">
@@ -119,7 +136,7 @@
                 <a href="{{ route('dashboard.my-notes') }}">
                     <div class="inner__menu_links_link @if(Route::is('dashboard.my-notes')) active @endif">
                         <img src="{{ asset('files/images/public-part/notes.png') }}" class="inbox" alt="">
-                        <p>{{ __('Moje zabilješke') }}</p>
+                        <p>{{ __('Zabilješke') }}</p>
 
                         @if(Auth()->user()->unreadNotifications())
                             <div class="number" id="number-of-notifications-w">
@@ -141,13 +158,13 @@
 
             @if( (Auth()->user()->role == 'user' and Auth()->user()->myProgram()))
                 <a href="{{ route('dashboard.my-evaluations') }}">
-                    <div class="inner__menu_links_link @if(Route::is('dashboard.my-evaluations')) active @endif">
+                    <div class="inner__menu_links_link @if(Route::is('dashboard.my-evaluations') or Route::is('dashboard.my-evaluations.check')) active @endif">
                         <img src="{{ asset('files/images/public-part/notes.png') }}" class="inbox" alt="">
-                        <p>{{ __('Moje evaluacije') }}</p>
+                        <p>{{ __('Evaluacije') }}</p>
 
-{{--                        <div class="number" id="number-of-notifications-w">--}}
-{{--                            <p id="number-of-notes">4</p>--}}
-{{--                        </div>--}}
+                        <div class="number" id="number-of-notifications-w">
+                            <p id="number-of-notes">{{ Auth()->user()->totalRealSessions() }}</p>
+                        </div>
                     </div>
                 </a>
             @endif

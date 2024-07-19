@@ -32,7 +32,7 @@ class HomeController extends Controller{
         }
 
         return view($this->_path . 'home', [
-            'blogPosts' => Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take(6)->get(),
+            'blogPosts' => Blog::where('published', '=', 1)->where('category', '<', 6)->orderBy('id', 'DESC')->take(6)->get(),
             'locations' => $locations,
             'faqs' => FAQ::where('what', 0)->get(),
             'lecturers' => User::where('role', 'presenter')->inRandomOrder()->take(4)->get(),
@@ -76,8 +76,27 @@ class HomeController extends Controller{
         ]);
     }
     public function criticalThinking (){
-        return view($this->_path . 'single-page', [
+        // $last = Blog::where('published', '=', 1)->where('category', '=', 6)->orderBy('id', 'desc')->first();
+
+        return view('public-part.app.blog.blog', [
+            'posts' => Blog::where('published', '=', 1)->where('category', '=', 6)->orderBy('id', 'DESC')->take(30)->get(),
+            'showAll' => true,
+            'criticalThinking' => true,
             'page' => SinglePage::where('id', 8)->first()
+        ]);
+
+        //return view($this->_path . 'single-page', [
+        //    'page' => SinglePage::where('id', 8)->first()
+        //]);
+    }
+    public function criticalThinkingPreview($id): View{
+        $post = Blog::where('id', $id)->first();
+
+        return view('public-part.app.blog.single-blog', [
+            'post' => $post,
+            'blogPosts' => Blog::where('published', '=', 1)->where('category', '=', 6)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get(),
+            'showAll' => true,
+            'criticalThinking' => true,
         ]);
     }
 }
