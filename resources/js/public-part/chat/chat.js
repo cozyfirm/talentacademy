@@ -325,4 +325,16 @@ $(document).ready(function(){
     $(".arrow__back").click(function (){
         $(".conversation__wrapper").css('display', 'none');
     });
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     * Set size of chat
+     */
+
+    if(window.innerWidth <= 1000){
+        let groupChatHeight = $(".group__chats__wrapper").height();
+        console.log("wee", groupChatHeight, window.innerHeight);
+
+        $(".my__contacts__wrapper").height((window.innerHeight - groupChatHeight - 210));
+    }
 });

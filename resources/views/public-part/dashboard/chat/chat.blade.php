@@ -12,7 +12,7 @@
     {{ html()->hidden('loggedUserID')->class('form-control')->id('loggedUserID')->value(Auth()->user()->id) }}
 
     <div class="chat__wrapper">
-        <div class="conversations__wrapper">
+        <div class="conversations__wrapper__first">
             <div class="left__conversations__wrapper group__chats__wrapper">
                 <div class="lcw__header">
                     <p>{{ __('Info i group chats') }}</p>
