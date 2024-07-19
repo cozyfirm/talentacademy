@@ -29,7 +29,7 @@ class ApplicationStatus extends Mailable{
     public function envelope(): Envelope{
         return new Envelope(
             from: new Address('no-reply@fondacijaekipa.ba', 'NoReply EKIPA'),
-            subject: 'Status prijave',
+            subject: 'Dobrodošli na Helem Nejse Talent Akademiju! (Važne informacije)',
         );
     }
 
