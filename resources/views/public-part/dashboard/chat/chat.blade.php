@@ -19,27 +19,37 @@
                 </div>
 
                 <div class="lcw__body gcw__body">
+                    @php $i = 1; @endphp
                     @foreach($groups as $group)
                         <div class="conversation__item start-group-conversations" hash="{{ $group->hash }}">
                             <div class="conversation__img">
-                                <img src="{{ asset('files/images/public-part/info.png') }}" alt="">
+                                @if($i == 1)
+                                    <img src="{{ asset('files/images/public-part/info.png') }}" alt="">
+                                    @php $i++ @endphp
+                                @elseif($i == 2)
+                                    <img src="{{ asset('files/images/public-part/department.png') }}" alt="">
+                                    @php $i++ @endphp
+                                @elseif($i == 3)
+                                    <img src="{{ asset('files/images/public-part/wall.png') }}" alt="">
+                                    @php $i++ @endphp
+                                @endif
                             </div>
                             <p>{{ $group->name }}</p>
                         </div>
                     @endforeach
 
-                    <div class="conversation__item">
-                        <div class="conversation__img">
-                            <img src="{{ asset('files/images/public-part/department.png') }}" alt="">
-                        </div>
-                        <p>{{ __('Moj odsjek') }}</p>
-                    </div>
-                    <div class="conversation__item">
-                        <div class="conversation__img">
-                            <img src="{{ asset('files/images/public-part/wall.png') }}" alt="">
-                        </div>
-                        <p>{{ __('Akademija wall') }}</p>
-                    </div>
+{{--                    <div class="conversation__item">--}}
+{{--                        <div class="conversation__img">--}}
+{{--                            <img src="{{ asset('files/images/public-part/department.png') }}" alt="">--}}
+{{--                        </div>--}}
+{{--                        <p>{{ __('Moj odsjek') }}</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="conversation__item">--}}
+{{--                        <div class="conversation__img">--}}
+{{--                            <img src="{{ asset('files/images/public-part/wall.png') }}" alt="">--}}
+{{--                        </div>--}}
+{{--                        <p>{{ __('Akademija wall') }}</p>--}}
+{{--                    </div>--}}
                 </div>
             </div>
 
