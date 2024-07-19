@@ -25,12 +25,16 @@ class LocationsController extends Controller{
     public function single_location($id): View{
         if(Auth::check()){
             $locations = Location::inRandomOrder()->take(6)->get();
+            $location  = Location::where('id', '=', $id)->where('public', '=', 1)->first();
         }else{
             $locations = Location::where('public', '=', 1)->inRandomOrder()->take(6)->get();
+
+            $location  = Location::where('id', '=', $id)->where('public', '=', 1)->first();
+            if(!$location) return back();
         }
 
         return view($this->_path . 'single-location', [
-            'location' => Location::where('id', '=', $id)->where('public', '=', 1)->first(),
+            'location' => $location,
             'similarLocations' => $locations
         ]);
     }
