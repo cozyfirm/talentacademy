@@ -139,16 +139,16 @@
                 </div>
             </a>
 
-            <a href="{{ route('dashboard.chat') }}">
-                <div class="inner__menu_links_link @if(Route::is('dashboard.chat')) active @endif">
-                    <img src="{{ asset('files/images/public-part/chat.png') }}" class="inbox" alt="">
-                    <p>{{ __('Chat') }}</p>
+{{--            <a href="{{ route('dashboard.chat') }}">--}}
+{{--                <div class="inner__menu_links_link @if(Route::is('dashboard.chat')) active @endif">--}}
+{{--                    <img src="{{ asset('files/images/public-part/chat.png') }}" class="inbox" alt="">--}}
+{{--                    <p>{{ __('Chat') }}</p>--}}
 
-                    {{--<div class="number" id="number-of-notifications-w">--}}
-                    {{--    <p id="number-of-notifications">  </p>--}}
-                    {{--</div>--}}
-                </div>
-            </a>
+{{--                    --}}{{--<div class="number" id="number-of-notifications-w">--}}
+{{--                    --}}{{--    <p id="number-of-notifications">  </p>--}}
+{{--                    --}}{{--</div>--}}
+{{--                </div>--}}
+{{--            </a>--}}
 
             @if( (Auth()->user()->role == 'user' and Auth()->user()->myProgram()))
                 <a href="{{ route('dashboard.my-notes') }}">
