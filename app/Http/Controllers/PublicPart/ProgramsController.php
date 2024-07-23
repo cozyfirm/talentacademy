@@ -45,7 +45,8 @@ class ProgramsController extends Controller{
             'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
         ]);
     }
-    public function sneakAndPeak($id, $page = 1): View{
+    public function sneakAndPeak($id, $page = 1): View | RedirectResponse{
+        if(Auth::check()) return redirect()->route('public-part.programs.preview', ['id' => $id]);
         // Make sure that you call the static method currentPageResolver()
         // before querying users
         Paginator::currentPageResolver(function () use ($page) {
