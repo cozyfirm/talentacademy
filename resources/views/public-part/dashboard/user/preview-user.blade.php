@@ -47,12 +47,12 @@
                 <div class="text__part">
                     <h3>{{ __('O meni') }}</h3>
                     <p>{!! nl2br($user->about) !!}</p>
-                    <a href="{{ route('dashboard.chat.conversation-with-user', ['username' => $user->username ]) }}">
-                        <div class="send__a__message">
-                            <img src="{{ asset('files/images/svg-icons/send-msg.svg') }}" alt="IG icon">
-                            <p>{{ __('Pošalji poruku') }}</p>
-                        </div>
-                    </a>
+{{--                    <a href="{{ route('dashboard.chat.conversation-with-user', ['username' => $user->username ]) }}">--}}
+{{--                        <div class="send__a__message">--}}
+{{--                            <img src="{{ asset('files/images/svg-icons/send-msg.svg') }}" alt="IG icon">--}}
+{{--                            <p>{{ __('Pošalji poruku') }}</p>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
                 </div>
             </div>
         </div>
