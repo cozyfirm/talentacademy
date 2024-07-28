@@ -19,6 +19,10 @@
             border-radius: 30px;
             border: 1px solid $text-white;
             object-fit: cover;
+
+            @media (max-width: 800px) {
+                width: 100%; height: auto; object-fit: cover;
+            }
         }
 
         .sl__header{

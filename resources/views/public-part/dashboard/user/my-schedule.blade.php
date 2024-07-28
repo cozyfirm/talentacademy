@@ -6,7 +6,7 @@
 <!-- Page content -->
 @section('public-content')
     <div class="white__wrapper">
-        <div class="profile__wrapper">
+        <div class="profile__wrapper profile__wrapper__mp0">
             @include('public-part.dashboard.includes.left-side')
 
             <div class="profile__wrapper_right profile__wrapper_right_schedule">

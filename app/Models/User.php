@@ -110,6 +110,13 @@ class User extends Authenticatable{
             return (bool)$app;
         }catch (\Exception $e){ return false; }
     }
+    public function presenterProgram(): bool{
+        try{
+            $app = ProgramSession::where('presenter_id', $this->id)->count();
+            return (bool)$app;
+        }catch (\Exception $e){ return false; }
+    }
+
     /* Not so great; Remove it */
     public function whatIsMyProgram($param = null): ProgramApplication | null | string | int{
         try{
@@ -159,15 +166,27 @@ class User extends Authenticatable{
         return $count;
     }
     public function getMyLecturers(){
-        return User::whereHas('sessionsRel.programRel', function ($q){
-            $q->where('id', $this->whatIsMyProgram('id'));
-        })->get();
+        if($this->role == 'presenter'){
+            return User::whereHas('sessionsRel.programRel', function ($q){
+                $q->where('id', $this->whatIsMyPresenterProgram('id'));
+            })->get();
+        }else{
+            return User::whereHas('sessionsRel.programRel', function ($q){
+                $q->where('id', $this->whatIsMyProgram('id'));
+            })->get();
+        }
     }
 
     public function getMyTeamMates(){
-        return User::whereHas('applicationRel', function ($q){
-            $q->where('program_id', $this->whatIsMyProgram('id'))->where('app_status', 'accepted');
-        })->orderBy('name')->get();
+        if($this->role == 'presenter'){
+            return User::whereHas('applicationRel', function ($q){
+                $q->where('program_id', $this->whatIsMyPresenterProgram('id'))->where('app_status', 'accepted');
+            })->orderBy('name')->get();
+        }else{
+            return User::whereHas('applicationRel', function ($q){
+                $q->where('program_id', $this->whatIsMyProgram('id'))->where('app_status', 'accepted');
+            })->orderBy('name')->get();
+        }
     }
     public function getUsersFromMyProgram(){
         if($this->role == 'user'){

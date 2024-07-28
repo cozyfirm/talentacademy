@@ -119,16 +119,18 @@ $( document ).ready(function() {
                                            }
                                        })
                                        .append(function (){
-                                           return $("<div>").attr('class', 'program__timeline-item-right-item')
-                                               .append(function (){
-                                                   return $("<div>").attr('class', 'program__timeline-item-right-item-icon')
-                                                       .append(function (){
-                                                           return $("<img>").attr('src', '/files/images/svg-icons/program-item-icon-name.svg')
-                                                       })
-                                               })
-                                               .append(function (){
-                                                   return $("<div>").attr('class', 'program__timeline-item-right-item-text').text(sessions[i]['lecturer'])
-                                               })
+                                           if(sessions[i]['lecturer'] !== 'Nije dostupno'){
+                                               return $("<div>").attr('class', 'program__timeline-item-right-item')
+                                                   .append(function (){
+                                                       return $("<div>").attr('class', 'program__timeline-item-right-item-icon')
+                                                           .append(function (){
+                                                               return $("<img>").attr('src', '/files/images/svg-icons/program-item-icon-name.svg')
+                                                           })
+                                                   })
+                                                   .append(function (){
+                                                       return $("<div>").attr('class', 'program__timeline-item-right-item-text').text(sessions[i]['lecturer'])
+                                                   })
+                                           }
                                        })
                                        .append(function (){
                                            return $("<div>").attr('class', 'program__timeline-item-right-item')

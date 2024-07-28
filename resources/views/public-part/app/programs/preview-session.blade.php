@@ -38,7 +38,10 @@
             @if(Auth()->check() and $session->presenter_data)
                 <h2 class="session__title session__title-2">{{ __('Riječ predavača') }}</h2>
                 <p> {!! nl2br($session->presenter_data) !!} </p>
-                <div class="preview-session__extra">
+            @endif
+
+            <div class="preview-session__extra">
+                @if($session->sessionFileRel->count())
                     <div class="session__extra__inner">
                         <h3 class="preview-session__extra-header">{{ __('Preuzmi literaturu:') }}</h3>
                         @foreach($session->sessionFileRel as $sessionFile)
@@ -52,6 +55,8 @@
                             </a>
                         @endforeach
                     </div>
+                @endif
+                @if($session->sessionLinkRel->count())
                     <div class="session__extra__inner">
                         <h3 class="preview-session__extra-header">{{ __('Korisni linkovi:') }}</h3>
                         @foreach($session->sessionLinkRel as $sessionLink)
@@ -65,8 +70,8 @@
                             </a>
                         @endforeach
                     </div>
-                </div>
-            @endif
+                @endif
+            </div>
         </div>
     </div>
 

@@ -108,12 +108,6 @@
                     </div>
                 </a>
             @else
-                <a href="{{ route('dashboard.department') }}">
-                    <div class="inner__menu_links_link @if(Route::is('dashboard.department')) active @endif">
-                        <img src="{{ asset('files/images/public-part/lecturers.png') }}" class="inbox" alt="">
-                        <p>{{ __('Odsjek') }}</p>
-                    </div>
-                </a>
 
 {{--                @if(!Auth()->user()->submitted())--}}
 {{--                    @if(!$appTimePassed)--}}
@@ -126,6 +120,12 @@
 {{--                    @endif--}}
 {{--                @endif--}}
             @endif
+            <a href="{{ route('dashboard.department') }}">
+                <div class="inner__menu_links_link @if(Route::is('dashboard.department')) active @endif">
+                    <img src="{{ asset('files/images/public-part/lecturers.png') }}" class="inbox" alt="">
+                    <p>{{ __('Odsjek') }}</p>
+                </div>
+            </a>
             <a href="{{ route('dashboard.inbox') }}">
                 <div class="inner__menu_links_link @if(Route::is('dashboard.inbox')) active @endif">
                     <img src="{{ asset('files/images/public-part/inbox.png') }}" class="inbox" alt="">

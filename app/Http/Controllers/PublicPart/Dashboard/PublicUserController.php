@@ -310,7 +310,9 @@ class PublicUserController extends Controller{
     }
 
     public function department(): View | RedirectResponse{
-        if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
+        if(Auth::user()->role == 'presenter'){
+            if(!Auth::user()->presenterProgram()) return redirect()->route('dashboard.my-profile');
+        }else if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
 
         return view($this->_path . 'user.department', [
             'lecturers' => Auth::user()->getMyLecturers(),
@@ -318,7 +320,9 @@ class PublicUserController extends Controller{
         ]);
     }
     public function previewUser($username): View | RedirectResponse{
-        if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
+        if(Auth::user()->role == 'presenter'){
+            if(!Auth::user()->presenterProgram()) return redirect()->route('dashboard.my-profile');
+        }else if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
 
         return view($this->_path . 'user.preview-user', [
             'user' => User::where('username', $username)->first(),
