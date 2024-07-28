@@ -270,6 +270,10 @@
                             }
                         }
                     }
+                    @media only screen and (max-width: 800px){
+                        td{min-width: 120px;}
+                        td:first-child{min-width: 60px;}
+                    }
 
                     //.td-end{ text-align: right; background: grey; }
 
