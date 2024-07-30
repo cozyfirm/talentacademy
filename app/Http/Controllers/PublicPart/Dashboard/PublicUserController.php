@@ -71,6 +71,10 @@ class PublicUserController extends Controller{
         try{
             $request['birth_date'] = Carbon::parse($request->birth_date)->format('Y-m-d');
 
+            if(isset($request->phone)){
+                if(strlen($request->phone) > 12) return $this->jsonError('1503', __('Broj telefona nije važeći!'));
+            }
+
             /* When updating password */
             if(isset($request->email)){
                 if(empty($request->password)) return $this->jsonError('1501', __('Lozinka ne može biti prazna!'));

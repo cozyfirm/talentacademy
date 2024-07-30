@@ -18,7 +18,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <b>{{ html()->label(__('Ime i prezime'))->for('name')->class('bold') }}</b>
-                                        {{ html()->text('name')->class('form-control form-control-sm mt-1')->maxlength(100)->value(Auth::user()->name) }}
+                                        {{ html()->text('name')->class('form-control form-control-sm mt-1 required')->maxlength(100)->value(Auth::user()->name) }}
                                     </div>
                                 </div>
                             </div>
@@ -26,7 +26,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <b>{{ html()->label(__('Broj telefona'))->for('phone')->class('bold') }}</b>
-                                        {{ html()->number('phone')->class('form-control form-control-sm mt-1')->maxlength(13)->placeholder('+38761222555')->value(Auth::user()->phone) }}
+                                        {{ html()->number('phone')->class('form-control form-control-sm mt-1 required')->maxlength(13)->value(Auth::user()->phone) }}
                                         <small id="prefixHelp" class="form-text text-muted"> {{ __('Unesite Vaš broj telefona') }} </small>
                                     </div>
                                 </div>
@@ -41,12 +41,12 @@
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <b>{{ html()->label(__('Adresa stanovanja'))->for('address')->class('bold') }}</b>
-                                    {{ html()->text('address')->class('form-control form-control-sm mt-2')->maxlength('100')->value(Auth::user()->address) }}
+                                    {{ html()->text('address')->class('form-control form-control-sm mt-2 required')->maxlength('100')->value(Auth::user()->address) }}
                                     <small id="addressHelp" class="form-text text-muted">{{ __('Vaša adresa stanovanja') }}</small>
                                 </div>
                                 <div class="col-md-6">
                                     <b>{{ html()->label(__('Grad'))->for('city')->class('bold') }}</b>
-                                    {{ html()->text('city')->class('form-control form-control-sm mt-2')->maxlength('50')->value(Auth::user()->city) }}
+                                    {{ html()->text('city')->class('form-control form-control-sm mt-2 required')->maxlength('50')->value(Auth::user()->city) }}
                                     <small id="living_placeHelp" class="form-text text-muted">{{ __('Grad u kojem trenutno živite') }}</small>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <b>{{ html()->label(__('O meni'))->for('country')->class('bold') }}</b>
-                                        {{ html()->textarea('about')->class('form-control form-control-sm mt-2')->value(Auth::user()->about) }}
+                                        {{ html()->textarea('about')->class('form-control form-control-sm mt-2')->value(Auth::user()->about)->maxlength(2000) }}
                                         <small id="countryHelp" class="form-text text-muted"> {{ __('Osnovne informacije o Vama') }} </small>
                                     </div>
                                 </div>

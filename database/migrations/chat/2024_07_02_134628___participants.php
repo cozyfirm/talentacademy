@@ -24,7 +24,7 @@ return new class extends Migration
 //                ->references('id')
 //                ->on('users')
 //                ->onDelete('cascade');
-
+            $table->integer('unread')->default(0);
             $table->timestamps();
         });
     }

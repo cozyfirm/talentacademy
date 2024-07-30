@@ -12,6 +12,7 @@ use App\Traits\Common\FileTrait;
 use App\Traits\Mqtt\MqttTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -51,12 +52,18 @@ class ChatController extends Controller{
             ->get()
             ->reverse();
 
+        $conversations = Conversation::whereHas('participantsRel', function ($q){
+            $q->where('user_id', Auth::user()->id);
+        })->where('is_group', 0)->orderBy('updated_at', 'DESC')->get();
+
+
         return view($this->_path . 'chat', [
             'teamMates' => Auth::user()->getUsersFromMyProgram(),
             'groups' => $groups,
             'firstConversation' => $conversation,
             'messages' => $messages,
-            'user' => $user
+            'user' => $user,
+            'conversations' => $conversations
         ]);
     }
     public function createNewConversation($user_id): Conversation | bool{
@@ -126,6 +133,8 @@ class ChatController extends Controller{
                     /* Set user photo */
                     $user->photo = $user->photoUri();
 
+                    Participant::where('conversation_id', $conversation->id)->where('user_id', Auth::user()->id)->update(['unread' => 0]);
+
                     return $this->jsonResponse('0000', __('Bilješka uspješno obrisana!'), [
                         'type' => 'single',
                         'user' => $user,
@@ -135,9 +144,8 @@ class ChatController extends Controller{
                     ]);
                 }
             }
-            dd($request->all());
         }catch (\Exception $e){
-            dd($e);
+
         }
     }
     public function sendMessage(Request $request): bool | string{
@@ -147,6 +155,9 @@ class ChatController extends Controller{
 
             /** @var CHAT_HASH $request */
             $conversation = Conversation::where('hash', $request->hash)->first();
+            $participant = Participant::where('conversation_id', $conversation->id)->where('user_id', '!=', Auth::user()->id)->first();
+
+            $participant->update(['unread' => ($participant->unread + 1)]);
 
             $message = Message::create([
                 'conversation_id' => $conversation->id,
@@ -156,6 +167,8 @@ class ChatController extends Controller{
 
             /* Publish over MQTT */
             $this->publishChatMessage($request->hash, $user, Message::where('id', $message->id)->with('senderRel')->first());
+
+            $conversation->update(['updated_at' => Carbon::now()]);
 
             return $this->jsonResponse('0000', __('Poruka poslana!'), [
                 'user' => $user,

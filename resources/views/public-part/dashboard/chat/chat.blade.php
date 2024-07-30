@@ -59,20 +59,40 @@
                 </div>
 
                 <div class="all__chats">
-                    @foreach($teamMates as $teamMate)
-                        @if($teamMate->id != Auth()->user()->id )
-                            <div class="conversation__item start__conversation" user-id="{{ $teamMate->id }}">
-                                <div class="conversation__img">
-                                    @if(isset($teamMate->photo_uri))
-                                        <img src="{{ asset('files/images/public-part/users/' . ($teamMate->photo_uri)) }}" alt="{{ __('Profile image') }}">
-                                    @else
-                                        <img class="cover-image" src="{{ asset('files/images/public-part/silhouette.png') }}" alt="{{ __('Profile image') }}">
-                                    @endif
-                                </div>
-                                <p>{{ $teamMate->name }}</p>
+                    @foreach($conversations as $conversation)
+                        <div class="conversation__item start__conversation" user-id="{{ $conversation->getOtherSide()->user_id }}" hash="{{ $conversation->hash }}">
+                            <div class="conversation__img">
+                                @if(isset($conversation->getOtherSide()->userRel->photo_uri))
+                                    <img src="{{ asset('files/images/public-part/users/' . ($conversation->getOtherSide()->userRel->photo_uri)) }}" alt="{{ __('Profile image') }}">
+                                @else
+                                    <img class="cover-image" src="{{ asset('files/images/public-part/silhouette.png') }}" alt="{{ __('Profile image') }}">
+                                @endif
                             </div>
-                        @endif
+                            <p>{{ $conversation->getOtherSide()->userRel->name ?? '' }}</p>
+
+                            <div class="unread_msg @if($conversation->mySide->unread == 0) d-none @endif">
+                                <p>
+                                    {{ $conversation->mySide->unread ?? '' }}
+                                </p>
+                            </div>
+                        </div>
                     @endforeach
+
+{{--                        <br><br><br>--}}
+{{--                    @foreach($teamMates as $teamMate)--}}
+{{--                        @if($teamMate->id != Auth()->user()->id )--}}
+{{--                            <div class="conversation__item start__conversation" user-id="{{ $teamMate->id }}">--}}
+{{--                                <div class="conversation__img">--}}
+{{--                                    @if(isset($teamMate->photo_uri))--}}
+{{--                                        <img src="{{ asset('files/images/public-part/users/' . ($teamMate->photo_uri)) }}" alt="{{ __('Profile image') }}">--}}
+{{--                                    @else--}}
+{{--                                        <img class="cover-image" src="{{ asset('files/images/public-part/silhouette.png') }}" alt="{{ __('Profile image') }}">--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                                <p>{{ $teamMate->name }}</p>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
+{{--                    @endforeach--}}
                 </div>
             </div>
         </div>

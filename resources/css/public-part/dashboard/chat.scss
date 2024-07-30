@@ -39,6 +39,9 @@
                     p{
                         margin: 0px;
                     }
+                    .unread_msg{
+                        position: relative; width: 16px; height: 16px; border-radius: 50%; background: #CDEEF2;
+                    }
                 }
             }
             .gcw__body{
@@ -97,6 +100,13 @@
                     }
                     p{
                         margin: 0px;
+                    }
+
+                    .unread_msg{
+                        position: relative; height: 16px; border-radius: 50%; background: #CDEEF2; padding: 0px 4px;
+                        p{
+                            font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin: 0px; padding: 0px;
+                        }
                     }
                 }
                 .conversation__item:hover{

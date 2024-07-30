@@ -46,6 +46,8 @@ $(document).ready(function(){
     client.on('message', (topic, message, packet) => {
         let response = JSON.parse(message.toString());
         appendMessage(response['message']);
+
+        /* When message appears, and if this is the chat we want to work with */
     });
 
     let startConversationURI = '/dashboard/chat/start-conversation';
