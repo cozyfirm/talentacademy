@@ -120,28 +120,30 @@
 
             <div class="conversation__wrapper__body">
                 @foreach($messages as $message)
-                    @if($message->sender_id == Auth()->user()->id)
-                        <div class="user__message__w my__message__w">
-                            <div class="message__w">
-                                <div class="message">
-                                    <p>{{ $message->body }}</p>
-                                </div>
-                                <div class="message_img_w">
-                                    <img src="{{ asset('files/images/public-part/users/' . ($message->senderRel->photoUri()) ) }}" alt="{{ __('Profile image') }}">
-                                </div>
-                            </div>
-                        </div>
-                    @else
-                        <div class="user__message__w">
-                            <div class="message__w">
-                                <div class="message_img_w">
-                                    <img src="{{ asset('files/images/public-part/users/' . ($message->senderRel->photoUri()) ) }}" alt="{{ __('Profile image') }}">
-                                </div>
-                                <div class="message">
-                                    <p>{{ $message->body }}</p>
+                    @if(isset($message->senderRel))
+                        @if($message->sender_id == Auth()->user()->id)
+                            <div class="user__message__w my__message__w">
+                                <div class="message__w">
+                                    <div class="message">
+                                        <p>{{ $message->body }}</p>
+                                    </div>
+                                    <div class="message_img_w">
+                                        <img src="{{ asset('files/images/public-part/users/' . ($message->senderRel->photoUri()) ) }}" alt="{{ __('Profile image') }}">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="user__message__w">
+                                <div class="message__w">
+                                    <div class="message_img_w">
+                                        <img src="{{ asset('files/images/public-part/users/' . ($message->senderRel->photoUri()) ) }}" alt="{{ __('Profile image') }}">
+                                    </div>
+                                    <div class="message">
+                                        <p>{{ $message->body }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     @endif
                 @endforeach
             </div>

@@ -9,31 +9,35 @@
         <div class="preview__user_w">
             <div class="image__n_social__wrapper">
                 <div class="only__image__wrapper">
-                    <img src="{{ asset('files/images/public-part/users/' . ($user->photo_uri)) }}" alt="Lecturer image" class="lecturers__list-item-image">
+                    @if(isset($user->photo_uri))
+                        <img src="{{ asset('files/images/public-part/users/' . ($teamMate->photo_uri)) }}" alt="User image" class="lecturers__list-item-image">
+                    @else
+                        <img class="cover-image" src="{{ asset('files/images/public-part/silhouette.png') }}" alt="">
+                    @endif
                 </div>
                 <div class="socials__wrapper">
                     @if(isset($user->instagram) and !empty($user->instagram))
-                        <a href="#">
+                        <a href="{{ $user->instagram }}">
                             <img src="{{ asset('files/images/svg-icons/ig.svg') }}" alt="IG icon">
                         </a>
                     @endif
                     @if(isset($user->facebook) and !empty($user->facebook))
-                        <a href="#">
+                        <a href="{{ $user->facebook }}">
                             <img src="{{ asset('files/images/svg-icons/fb.svg') }}" alt="FB icon">
                         </a>
                     @endif
                     @if(isset($user->twitter) and !empty($user->twitter))
-                        <a href="#">
+                        <a href="{{ $user->twitter }}">
                             <img src="{{ asset('files/images/svg-icons/x.svg') }}" alt="X icon">
                         </a>
                     @endif
                     @if(isset($user->linkedin) and !empty($user->linkedin))
-                        <a href="#">
+                        <a href="{{ $user->linkedin }}">
                             <img src="{{ asset('files/images/svg-icons/linkedin.svg') }}" alt="Linkedin icon">
                         </a>
                     @endif
                     @if(isset($user->web) and !empty($user->web))
-                        <a href="#">
+                        <a href="{{ $user->web }}">
                             <img src="{{ asset('files/images/svg-icons/dribble.svg') }}" alt="Dribble icon">
                         </a>
                     @endif
