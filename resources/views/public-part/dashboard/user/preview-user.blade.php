@@ -10,7 +10,7 @@
             <div class="image__n_social__wrapper">
                 <div class="only__image__wrapper">
                     @if(isset($user->photo_uri))
-                        <img src="{{ asset('files/images/public-part/users/' . ($teamMate->photo_uri)) }}" alt="User image" class="lecturers__list-item-image">
+                        <img src="{{ asset('files/images/public-part/users/' . ($user->photo_uri)) }}" alt="User image" class="lecturers__list-item-image">
                     @else
                         <img class="cover-image" src="{{ asset('files/images/public-part/silhouette.png') }}" alt="">
                     @endif
