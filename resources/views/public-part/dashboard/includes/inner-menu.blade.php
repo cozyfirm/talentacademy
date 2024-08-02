@@ -59,7 +59,7 @@
                         <path class="change-color" d="M13.6591 9.2898C14.5491 9.2898 15.2791 8.5598 15.2791 7.6698C15.2791 6.7798 14.5491 6.0498 13.6591 6.0498C12.7691 6.0498 12.0391 6.7698 12.0391 7.6698C12.0391 8.5698 12.7691 9.2898 13.6591 9.2898Z" fill="#EEF0F2"/>
                     </g>
                 </svg>
-                <div class="total_no"><p>6</p></div>
+{{--                <div class="total_no"><p>6</p></div>--}}
             </div>
         </a>
         <a href="#">
@@ -143,9 +143,9 @@
                     <img src="{{ asset('files/images/public-part/chat.png') }}" class="inbox" alt="">
                     <p>{{ __('Chat') }}</p>
 
-                    <div class="number" id="number-of-notifications-w">
-                        <p id="number-of-notifications">  </p>
-                    </div>
+{{--                    <div class="number" id="number-of-notifications-w">--}}
+{{--                        <p id="number-of-notifications">  </p>--}}
+{{--                    </div>--}}
                 </div>
             </a>
 
