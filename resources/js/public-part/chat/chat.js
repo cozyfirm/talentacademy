@@ -49,7 +49,6 @@ $(document).ready(function(){
         /* Main channel */
         client.subscribe(apiToken, { qos: 0 });
         console.log("Connected to MQTT and subscribed to " + apiToken);
-
     });
 
     client.on('message', (topic, message, packet) => {
