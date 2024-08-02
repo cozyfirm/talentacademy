@@ -16,7 +16,7 @@ export class Notify {
     static getMainWrapper() : void {
         this.mainWrapper = $(".notifyMeWrapper");
     }
-    static Me(options : any, expiration : number = 60000) : void{
+    static Me(options : any, expiration : number = 6000) : void{
         /* Check for main wrapper */
         this.getMainWrapper();
         /* Set static body */

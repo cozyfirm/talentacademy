@@ -86,7 +86,7 @@ $(document).ready(function(){
 
                 if(response['code'] === '2010'){
                     /* New chat message */
-                    
+
                     /* Set total number of unread messages */
                     totalUnreadMessages(data['message']['totalUnread']);
 
