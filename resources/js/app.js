@@ -59,3 +59,8 @@ import "./public-part/core/menu.js";
 
 /* Chat scripts */
 // import "./public-part/chat/chat.js";
+
+/* Import push notifications */
+
+import "./public-part/notifications/push-not.js";
+import "./public-part/chat/chat.js";

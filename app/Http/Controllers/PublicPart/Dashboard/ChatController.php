@@ -148,6 +148,36 @@ class ChatController extends Controller{
 
         }
     }
+
+    protected function sendNotifications(Conversation $conversation, User $user, $unread, $message): void{
+        try{
+            $notification = [
+                'hash' => $conversation->hash,
+                'conversation' => $conversation->name,
+                'is_group' => $conversation->is_group,
+                'totalUnread' => $unread,
+                'message' => $message
+            ];
+
+            $participants = Participant::where('conversation_id', $conversation->id)->where('user_id', '!=', Auth::user()->id)->get();
+
+            foreach ($participants as $participant){
+                /** @var $otherUser: User that should receive push notification */
+                $otherUser = User::where('id', $participant->user_id)->first();
+
+                $this->pushNotification($otherUser->api_token, $user, '2010', $notification);
+            }
+        }catch (\Exception $e){
+            throw new $e;
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return bool|string
+     *
+     * Create new message object and push notification to users
+     */
     public function sendMessage(Request $request): bool | string{
         try{
             $user = User::where('id', Auth::user()->id)->first();
@@ -155,9 +185,12 @@ class ChatController extends Controller{
 
             /** @var CHAT_HASH $request */
             $conversation = Conversation::where('hash', $request->hash)->first();
-            $participant = Participant::where('conversation_id', $conversation->id)->where('user_id', '!=', Auth::user()->id)->first();
 
-            $participant->update(['unread' => ($participant->unread + 1)]);
+            if($conversation->is_group == 0){
+                /** @var $participant: Participant of message */
+                $participant = Participant::where('conversation_id', $conversation->id)->where('user_id', '!=', Auth::user()->id)->first();
+                $participant->update(['unread' => ($participant->unread + 1)]);
+            }
 
             $message = Message::create([
                 'conversation_id' => $conversation->id,
@@ -165,11 +198,22 @@ class ChatController extends Controller{
                 'body' => $request->message
             ]);
 
-            /* Publish over MQTT */
+            /** Publish over MQTT */
             $this->publishChatMessage($request->hash, $user, Message::where('id', $message->id)->with('senderRel')->first());
 
+            try{
+                /**
+                 *  Create new push notification to other side/s
+                 */
+                $this->sendNotifications($conversation, $user,isset($participant) ? $participant->unread : 0, $request->message );
+            }catch (\Exception $e){
+
+            }
+
+            /** Update conversation so new conversations should show at the beginning */
             $conversation->update(['updated_at' => Carbon::now()]);
 
+            /** Return response on sender message */
             return $this->jsonResponse('0000', __('Poruka poslana!'), [
                 'user' => $user,
                 'message' => Message::where('id', $message->id)->with('senderRel')->get()

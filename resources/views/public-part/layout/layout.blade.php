@@ -12,6 +12,7 @@
 
         <title> @yield('title', 'Talent Akademija') </title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="api-token" content="@if(Auth()->check()){{ Auth()->user()->api_token }}@else{{ time() }}@endif">
         <script src="https://kit.fontawesome.com/cdf2a0a58b.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

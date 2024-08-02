@@ -44,6 +44,10 @@ export class Notify {
                 this.params['class'] = "nt-danger";
                 this.params['icon']  = "fas fa-radiation";
             }
+            if(options[1] === 'chat'){
+                this.params['class'] = "nt-chat";
+                this.params['icon']  = "fas fa-comment";
+            }
         }
         this.params['expiration'] = expiration;
 

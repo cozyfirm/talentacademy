@@ -4,7 +4,7 @@
 @section('Welcome') @endsection
 
 <!-- Chat scripts -->
-@section('js-scripts') @vite(['resources/js/public-part/chat/chat.js']) @endsection
+{{--@section('js-scripts') @vite(['resources/js/public-part/chat/chat.js']) @endsection--}}
 
 <!-- Page content -->
 @section('public-content')

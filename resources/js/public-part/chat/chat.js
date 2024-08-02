@@ -16,6 +16,7 @@ $(document).ready(function(){
     /* Get ID of logged user; Read from chat form */
     let loggedUserID = parseInt($("#loggedUserID").val());
     console.log("loggedUserID: " + loggedUserID);
+    let apiToken = $('meta[name="api-token"]').attr('content');
 
     $.ajaxSetup({
         headers: {
@@ -23,29 +24,80 @@ $(document).ready(function(){
         }
     });
 
+    let conversationWrapper = $("#conversation-wrapper");
+
     const client   = mqtt.connect("wss://mqtt.cozyfirm.com:8083", MqttInit.options);
     client.on('error', (err) => { client.end() });
     client.on('reconnect', () => { console.log('Reconnecting...'); });
     client.on('connect', () => {
         mqttConnected = true;
 
-        let conversationWrapper = $("#conversation-wrapper");
+        if(conversationWrapper.length){
+            /* Subscribe to first channel */
+            subscribedTopic = conversationWrapper.attr('hash');
 
-        /* Subscribe to first channel */
-        subscribedTopic = conversationWrapper.attr('hash');
+            client.subscribe(subscribedTopic, { qos: 0 });
+            mqttSubscribed = true;
 
-        client.subscribe(subscribedTopic, { qos: 0 });
-        mqttSubscribed = true;
+            console.log("Connected to MQTT and subscribed to " + subscribedTopic);
 
-        console.log("Connected to MQTT and subscribed to " + subscribedTopic);
+            /* On connect, first time scroll to end */
+            $('.conversation__wrapper__body').animate({ scrollTop: $('.conversation__wrapper__body').prop('scrollHeight') }, 0);
+        }
 
-        /* On connect, first time scroll to end */
-        $('.conversation__wrapper__body').animate({ scrollTop: $('.conversation__wrapper__body').prop('scrollHeight') }, 0);
+        /* Main channel */
+        client.subscribe(apiToken, { qos: 0 });
+        console.log("Connected to MQTT and subscribed to " + apiToken);
+
     });
 
     client.on('message', (topic, message, packet) => {
         let response = JSON.parse(message.toString());
-        appendMessage(response['message']);
+        let data = response['data'];
+
+        console.log(data);
+
+        if(response['code'] === '2000'){
+            /* Message from active chat */
+            appendMessage(response['data']['message']);
+        }else{
+            /* Other push notification messages */
+            if(!conversationWrapper.length){
+                /* Chat is not open */
+                if(response['code'] === '2010'){
+                    /* New chat message */
+                    Notify.Me(["<b> " + data['sender']['name'] + " </b> <br>" + data['message']['message'], "chat"]);
+                }
+            }else{
+                /**
+                 *  If user is currently using chat, then:
+                 *
+                 *  1. This chat is open
+                 *  2. This chat is not open
+                 */
+
+                if(response['code'] === '2010'){
+                    /* New chat message */
+
+                    if(data['message']['hash'] !== subscribedTopic){
+                        /* Not opened chat; Increase number of unread messages */
+
+                        if(data['message']['is_group'] === 0){
+                            /* Individual message */
+
+                            $('.conversation__item[hash="'+data['message']['hash']+'"]')
+                                .find(".unread_msg")
+                                .removeClass('d-none')
+                                .find("p").text(data['message']['totalUnread']);
+
+                            Notify.Me(["<b> " + data['sender']['name'] + " </b> <br>" + data['message']['message'], "chat"]);
+                        }else{
+                            Notify.Me(["<b> " + data['sender']['name'] + " (" + data['message']['conversation'] + ") </b> <br>" + data['message']['message'], "chat"]);
+                        }
+                    }
+                }
+            }
+        }
 
         /* When message appears, and if this is the chat we want to work with */
     });
@@ -180,6 +232,10 @@ $(document).ready(function(){
                     if(window.innerWidth <= 1000){
                         $(".conversation__wrapper").css('display', 'initial');
                     }
+
+                    $('.conversation__item[hash="'+subscribedTopic+'"]')
+                        .find(".unread_msg")
+                        .addClass('d-none')
                 }else{
                     Notify.Me([response['message'], "warn"]);
                 }
