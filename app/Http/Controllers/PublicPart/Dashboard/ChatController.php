@@ -162,22 +162,23 @@ class ChatController extends Controller{
                 'hash' => $conversation->hash,
                 'conversation' => $conversation->name,
                 'is_group' => $conversation->is_group,
-                'totalUnread' => $unread,
+                'unreadMessages' => $unread,
                 'message' => $message
             ];
 
             $participants = Participant::where('conversation_id', $conversation->id)->where('user_id', '!=', Auth::user()->id)->get();
 
             foreach ($participants as $participant){
-                /** @var $otherUser: User that should receive push notification */
-                $otherUser = User::where('id', $participant->user_id)->first(['id', 'email', 'name', 'api_token', 'username','photo_uri']);
+                try{
+                    /** @var $otherUser: User that should receive push notification */
+                    $otherUser = User::where('id', $participant->user_id)->first(['id', 'email', 'name', 'api_token', 'username','photo_uri']);
+                    $notification['totalUnread'] = $otherUser->unreadMessages();
 
-                if($otherUser->api_token) $this->pushNotification($otherUser->api_token, $user, '2010', $notification);
+                    if($otherUser->api_token) $this->pushNotification($otherUser->api_token, $user, '2010', $notification);
+                }catch (\Exception $e){}
             }
         }catch (\Exception $e){
-            dd($e);
-//            dd($e);
-//            throw new $e;
+            throw new $e;
         }
     }
 

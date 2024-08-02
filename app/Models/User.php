@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Chat\Participant;
 use App\Models\Models\Core\Country;
 use App\Models\Other\Inbox\InboxTo;
 use App\Models\Programs\Program;
@@ -236,5 +237,9 @@ class User extends Authenticatable{
                 return true;
             }else return true;
         }else return false;
+    }
+
+    public function unreadMessages(){
+        return Participant::where('user_id', $this->id)->sum('unread');
     }
 }

@@ -51,6 +51,11 @@ $(document).ready(function(){
         console.log("Connected to MQTT and subscribed to " + apiToken);
     });
 
+    let totalUnreadMessages = function (total){
+        $("#number-of-unread-messages-m").text(total);
+        $("#number-of-unread-messages-d").text(total);
+    };
+
     client.on('message', (topic, message, packet) => {
         let response = JSON.parse(message.toString());
         let data = response['data'];
@@ -67,6 +72,9 @@ $(document).ready(function(){
                 if(response['code'] === '2010'){
                     /* New chat message */
                     Notify.Me(["<b> " + data['sender']['name'] + " </b> <br>" + data['message']['message'], "chat", data['message']['hash']]);
+
+                    /* Set total number of unread messages */
+                    totalUnreadMessages(data['message']['totalUnread']);
                 }
             }else{
                 /**
@@ -78,6 +86,9 @@ $(document).ready(function(){
 
                 if(response['code'] === '2010'){
                     /* New chat message */
+                    
+                    /* Set total number of unread messages */
+                    totalUnreadMessages(data['message']['totalUnread']);
 
                     if(data['message']['hash'] !== subscribedTopic){
                         /* Not opened chat; Increase number of unread messages */
@@ -88,7 +99,7 @@ $(document).ready(function(){
                             $('.conversation__item[hash="'+data['message']['hash']+'"]')
                                 .find(".unread_msg")
                                 .removeClass('d-none')
-                                .find("p").text(data['message']['totalUnread']);
+                                .find("p").text(data['message']['unreadMessages']);
 
                             Notify.Me(["<b> " + data['sender']['name'] + " </b> <br>" + data['message']['message'], "chat", data['message']['hash']]);
                         }else{
