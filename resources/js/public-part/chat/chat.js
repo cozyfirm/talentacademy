@@ -66,7 +66,7 @@ $(document).ready(function(){
                 /* Chat is not open */
                 if(response['code'] === '2010'){
                     /* New chat message */
-                    Notify.Me(["<b> " + data['sender']['name'] + " </b> <br>" + data['message']['message'], "chat"]);
+                    Notify.Me(["<b> " + data['sender']['name'] + " </b> <br>" + data['message']['message'], "chat", data['message']['hash']]);
                 }
             }else{
                 /**
@@ -90,9 +90,9 @@ $(document).ready(function(){
                                 .removeClass('d-none')
                                 .find("p").text(data['message']['totalUnread']);
 
-                            Notify.Me(["<b> " + data['sender']['name'] + " </b> <br>" + data['message']['message'], "chat"]);
+                            Notify.Me(["<b> " + data['sender']['name'] + " </b> <br>" + data['message']['message'], "chat", data['message']['hash']]);
                         }else{
-                            Notify.Me(["<b> " + data['sender']['name'] + " (" + data['message']['conversation'] + ") </b> <br>" + data['message']['message'], "chat"]);
+                            Notify.Me(["<b> " + data['sender']['name'] + " (" + data['message']['conversation'] + ") </b> <br>" + data['message']['message'], "chat", data['message']['hash']]);
                         }
                     }
                 }
@@ -211,6 +211,8 @@ $(document).ready(function(){
 
                     if(data['type'] === 'single'){
                         $("#chat-photo").attr('src', '/files/images/public-part/users/' + data['user']['photo']);
+                    }else{
+                        $("#chat-photo").attr('src', '/files/images/public-part/' + data['image']);
                     }
 
                     $("#chat-title").text(data['title']);
@@ -269,7 +271,7 @@ $(document).ready(function(){
                     if(data['type'] === 'single'){
                         $("#chat-photo").attr('src', '/files/images/public-part/users/' + data['user']['photo']);
                     }else{
-                        $("#chat-photo").attr('src', '/files/images/public-part/users/' + defaultImage);
+                        $("#chat-photo").attr('src', '/files/images/public-part/' + data['image']);
                     }
 
                     $("#chat-title").text(data['title']);

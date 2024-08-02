@@ -104,7 +104,7 @@
                 </div>
                 <div class="profile_img_wrapper">
                     @if($firstConversation->is_group)
-                        <img id="chat-photo" src="{{ asset('files/images/public-part/users/silhouette.png' ) }}" alt="{{ __('Profile image') }}">
+                        <img id="chat-photo" src="{{ asset('files/images/public-part/' . $firstConversation->image ) }}" alt="{{ __('Profile image') }}">
                     @elseif(isset($user))
                         <img id="chat-photo" src="{{ asset('files/images/public-part/users/' . $user->photo_uri ) }}" alt="{{ __('Profile image') }}">
                     @endif

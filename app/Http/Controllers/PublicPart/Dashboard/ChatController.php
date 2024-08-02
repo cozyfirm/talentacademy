@@ -25,7 +25,7 @@ class ChatController extends Controller{
     protected string $_path = 'public-part.dashboard.chat.';
     protected int $_total_messages = 20;
 
-    public function chat($username = null): View | RedirectResponse{
+    public function chat($hash = null): View | RedirectResponse{
         $user = null;
 
         /* All users should be member of Academy wall group */
@@ -36,9 +36,15 @@ class ChatController extends Controller{
         /* If user is not a member of single group, redirect to main profile */
         if($groups->count() < 1) return redirect()->route('dashboard.my-profile');
 
-        if(isset($username)){
-            $user = User::where('username', $username)->first();
-            $firstConversation = $this->getConversation($user->id);
+        if(isset($hash)){
+            $firstConversation = Conversation::where('hash', '=', $hash)->first();
+
+            /* Now, let's find a user */
+            $participant = Participant::where('conversation_id', $firstConversation->id)->where('user_id', '!=', Auth::user()->id)->first();
+            $user = User::where('id', $participant->user_id)->first();
+
+            /* Remove unread messages */
+            Participant::where('conversation_id', $firstConversation->id)->where('user_id', '=', Auth::user()->id)->update(['unread' => 0]);
         }else{
             /* ToDo - Maybe change this to last chat or something like that */
             $firstConversation = $groups[0];
@@ -116,6 +122,7 @@ class ChatController extends Controller{
                 return $this->jsonResponse('0000', __('Bilješka uspješno obrisana!'), [
                     'type' => 'group',
                     'title' => $conversation->name,
+                    'image' => $conversation->image,
                     'hash' => $conversation->hash,
                     'messages' => Message::where('conversation_id', '=', $conversation->id)->with('senderRel')->orderBy('id', 'DESC')->take($this->_total_messages)->get()
                 ]);
@@ -163,12 +170,14 @@ class ChatController extends Controller{
 
             foreach ($participants as $participant){
                 /** @var $otherUser: User that should receive push notification */
-                $otherUser = User::where('id', $participant->user_id)->first();
+                $otherUser = User::where('id', $participant->user_id)->first(['id', 'email', 'name', 'api_token', 'username','photo_uri']);
 
-                $this->pushNotification($otherUser->api_token, $user, '2010', $notification);
+                if($otherUser->api_token) $this->pushNotification($otherUser->api_token, $user, '2010', $notification);
             }
         }catch (\Exception $e){
-            throw new $e;
+            dd($e);
+//            dd($e);
+//            throw new $e;
         }
     }
 
@@ -180,7 +189,7 @@ class ChatController extends Controller{
      */
     public function sendMessage(Request $request): bool | string{
         try{
-            $user = User::where('id', Auth::user()->id)->first();
+            $user = User::where('id', Auth::user()->id)->first(['id', 'email', 'name', 'api_token', 'username','photo_uri']);
             $user->photo = $user->photoUri();
 
             /** @var CHAT_HASH $request */
@@ -205,9 +214,9 @@ class ChatController extends Controller{
                 /**
                  *  Create new push notification to other side/s
                  */
-                $this->sendNotifications($conversation, $user,isset($participant) ? $participant->unread : 0, $request->message );
+                 $this->sendNotifications($conversation, $user,isset($participant) ? $participant->unread : 0, $request->message );
             }catch (\Exception $e){
-
+                // dump($e);
             }
 
             /** Update conversation so new conversations should show at the beginning */

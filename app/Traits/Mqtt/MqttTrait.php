@@ -58,6 +58,9 @@ trait MqttTrait{
      */
     public function pushNotification($topic, User | Auth $sender, $code, $message): void{
         try{
+            /* Remove api_token */
+            $sender->api_token = time();
+
             $message = [
                 'code' => $code,
                 'data' => [

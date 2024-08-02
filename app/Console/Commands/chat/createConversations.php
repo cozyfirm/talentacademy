@@ -51,6 +51,16 @@ class createConversations extends Command
     }
 
     public function handle(){
+        $conversations = Conversation::get();
+        foreach ($conversations as $conversation){
+            $hash = str_replace('/', '-', $conversation->hash);
+            $hash = str_replace('&', '-', $hash);
+
+            if (str_contains($conversation->hash, '/')){
+                $conversation->update(['hash' => $hash]);
+            }
+        }
+
         for($i=1; $i<=5; $i++){
             $usersFromProgram = User::whereHas('applicationRel', function ($q) use ($i){
                 $q->where('program_id', $i)->where('app_status', 'accepted');

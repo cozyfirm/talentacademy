@@ -5,7 +5,8 @@ export class Notify {
         "message" : "This is default notifyMe message",
         "class" : "nt-success",
         "expiration" : 6000,
-        'icon' : "fas fa-check"
+        'icon' : "fas fa-check",
+        'hash' : 'none'
     };
 
     static customID : number = (new Date).getTime();
@@ -15,7 +16,7 @@ export class Notify {
     static getMainWrapper() : void {
         this.mainWrapper = $(".notifyMeWrapper");
     }
-    static Me(options : any, expiration : number = 6000) : void{
+    static Me(options : any, expiration : number = 60000) : void{
         /* Check for main wrapper */
         this.getMainWrapper();
         /* Set static body */
@@ -29,7 +30,7 @@ export class Notify {
 
         if(options.length >= 1) this.params['message'] = options[0];
 
-        console.log(this.params['message']);
+        console.log(options);
 
         if(options.length >= 2) {
             if(options[1] === 'success'){
@@ -49,7 +50,13 @@ export class Notify {
                 this.params['icon']  = "fas fa-comment";
             }
         }
+        /* Used for hash */
+        if(options.length >= 3){
+            this.params['hash'] = options[2];
+        }
         this.params['expiration'] = expiration;
+
+        let hash = this.params['hash'];
 
         /* Create new instance of self object */
         let $obj = this;
@@ -59,6 +66,7 @@ export class Notify {
         this.mainWrapper.append(function () {
             return $("<div/>").attr("id", $obj.customID)
                 .attr('class', 'notifyMe')
+                .attr('hash', hash)
                 .append(function () {
                     return $("<div/>").attr('class', 'nt-inline')
                         .append(function () {
@@ -83,8 +91,12 @@ export class Notify {
 
         /* Ad listener for instant removal */
         this.body.on('click', "#" + $obj.customID, function () {
-            $(this).remove();
-            if (!$( ".notifyMe" ).length) $obj.mainWrapper.remove();
+            if($(this).attr('hash') !== 'none'){
+                window.location.href = '/dashboard/chat/conversation/' + $(this).attr('hash');
+            }else{
+                $(this).remove();
+                if (!$( ".notifyMe" ).length) $obj.mainWrapper.remove();
+            }
         });
     }
 }
