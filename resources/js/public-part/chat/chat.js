@@ -5,6 +5,8 @@ import mqtt from "mqtt"; // import namespace "mqtt"
 
 // let mqtt = "./../../mqtt/mqtt.js";
 
+console.log("Starting chat script ..");
+
 $(document).ready(function(){
     let mqttConnected = false, mqttSubscribed = false, subscribedTopic = '';
     /* Decide should we scroll to end of div or not */
@@ -15,7 +17,6 @@ $(document).ready(function(){
 
     /* Get ID of logged user; Read from chat form */
     let loggedUserID = parseInt($("#loggedUserID").val());
-    console.log("loggedUserID: " + loggedUserID);
     let apiToken = $('meta[name="api-token"]').attr('content');
 
     $.ajaxSetup({
