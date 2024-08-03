@@ -26,12 +26,7 @@
                     </div>
                     <div class="hero-section__upper__days faded">
                         <h4>
-                            <span>{{ $daysTill }}</span>
-                            @if($appTimePassed)
-                                Dana do početka Akademije!!!
-                            @else
-                                Dana do kraja roka za upis na Akademiju!!!
-                            @endif
+                            Let's have some fun!!!
                         </h4>
                     </div>
                 </div>
