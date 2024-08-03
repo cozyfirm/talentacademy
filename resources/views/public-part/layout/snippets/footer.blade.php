@@ -46,9 +46,10 @@
                 <p> Crafted by <a href="https://fondacijaekipa.ba/">Fondacija Ekipa</a> & <a href="https://cozyfirm.com">Cozy Firm</a> </p>
 
 {{--                <p>© {{ date('Y') }} Fondacija Ekipa. All rights reserved.</p>--}}
-                <a href="{{ route('public-part.privacy') }}">Politika privatnosti</a>
-                <a href="{{ route('public-part.terms') }}">Uslovi korištenja</a>
-                <a href="{{ route('public-part.cookies') }}">Kolačići</a>
+                <a href="{{ route('public-part.privacy') }}">{{ __('Politika privatnosti') }}</a>
+                <a href="{{ route('public-part.terms') }}">{{ __('Uslovi korištenja') }}</a>
+                <a href="{{ route('public-part.cookies') }}">{{ __('Kolačići') }}</a>
+                <a href="https://github.com/cozyfirm/talentacademy" target="_blank">{{ __('Github Repo') }}</a>
             </div>
             <div class="footer__icons">
                 <a href="https://www.facebook.com/people/Helem-Nejse-Talent-Akademija/61559380710858/">
