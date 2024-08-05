@@ -608,7 +608,7 @@
                 .evaluation__btn__w{
                     display: flex; align-items: center;
                     @media only screen and (max-width: 800px){
-                        display: none;
+                        //display: none;
                     }
                     a{
                         position: relative; display: flex;
