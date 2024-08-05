@@ -17,12 +17,12 @@
                         <div class="single__evaluation single__evaluation_1">
                             <div class="session__w">
                                 <div class="session_name__w">
-                                    <p>Audio miksanje</p>
+                                    <p>{{ $session->title ?? '' }}</p>
                                 </div>
 
                                 <div class="presenter__w">
                                     <img src="{{ asset('files/images/svg-icons/speaker.svg') }}" alt="IG icon">
-                                    <p>Šemsa Suljaković</p>
+                                    <p>{{ $session->presenterRel->name ?? '' }}</p>
                                 </div>
                             </div>
                             <div class="evaluation__btn__w">
