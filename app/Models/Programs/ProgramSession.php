@@ -74,7 +74,7 @@ class ProgramSession extends Model{
     }
 
     public function evaluationsRel(): HasMany{
-        return $this->hasMany(ProgramSessionEvaluation::class, 'session_id', 'id');
+        return $this->hasMany(ProgramSessionEvaluation::class, 'session_id', 'id')->orderBy('session_id');
     }
     public function evaluationsByUserRel($attendee_id): HasMany{
         return $this->hasMany(ProgramSessionEvaluation::class, 'session_id', 'id')->where('attendee_id', $attendee_id);

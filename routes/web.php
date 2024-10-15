@@ -277,6 +277,8 @@ Route::prefix('system')->middleware('auth')->group(function () {
             Route::get ('/edit-application/{id}',                  [AdminProgramsController::class, 'editApplication'])->name('system.admin.programs.edit-application');
             Route::post('/update-applications',                    [AdminProgramsController::class, 'updateApplication'])->name('system.admin.programs.update-application');
             Route::get ('/download-file/{id}',                     [AdminProgramsController::class, 'downloadFile'])->name('system.admin.programs.download-file');
+
+            Route::get ('/evaluations',                            [AdminProgramsController::class, 'evaluations'])->name('system.admin.programs.evaluations');
             /**
              *  Sessions
              */

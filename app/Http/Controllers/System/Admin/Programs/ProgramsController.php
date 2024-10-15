@@ -361,4 +361,12 @@ class ProgramsController extends Controller{
             return back();
         }
     }
+
+    public function evaluations (): View{
+        $programs = Program::get();
+        return view($this->_path . 'evaluations', [
+            'programs' => $programs,
+            'questions' => FormQuestion::get()
+        ]);
+    }
 }
