@@ -92,12 +92,31 @@ class ProgramsController extends Controller{
     }
     public function getAjaxLecturerSessions(Request $request){
         try{
-            $currentDay = ProgramSession::where('presenter_id', $request->lecturer)->whereDate('date', $request->date)->orderBy('datetime_from')->first();
-            $sessions = ProgramSession::where('presenter_id', $request->lecturer)->whereDate('date', $request->date)->orderBy('datetime_from')->get();
+            // $currentDay = ProgramSession::where('presenter_id', $request->lecturer)->whereDate('date', $request->date)->orderBy('datetime_from')->first();
+            // $sessions = ProgramSession::where('presenter_id', $request->lecturer)->whereDate('date', $request->date)->orderBy('datetime_from')->get();
+
+            $currentDay = ProgramSession::whereHas('presentersRel', function ($q) use($request){
+                $q->where('presenter_id', '=', $request->lecturer);
+            })->whereHas('programRel.seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->whereDate('date', $request->date)->orderBy('datetime_from')->first();
+
+            /** Get sessions for specific user */
+            $sessions = ProgramSession::whereHas('presentersRel', function ($q) use($request){
+                $q->where('presenter_id', '=', $request->lecturer);
+            })->whereDate('date', $request->date)->orderBy('datetime_from')->with('presentersRel.presenterRel')->get();
 
             foreach ($sessions as $session){
-                $session->lecturer = $session->presenterRel->name ?? __('Nije dostupno');
-                $session->location = $session->locationRel->title ?? '';
+                $lecturer = ""; $counter = 0;
+
+                foreach ($session->presentersRel as $presenter){
+                    $lecturer .= $presenter->presenterRel->name ?? 'Nije dostupno';
+                    if($counter++ < ($session->presentersRel->count() - 1)) $lecturer .= ", ";
+                }
+
+                // $session->lecturer    = $session->presenterRel->name ?? __('Nije dostupno');
+                $session->lecturer    = $lecturer;
+                $session->location    = $session->locationRel->title ?? '';
                 $session->time_from_f = $session->timeFrom();
             }
 

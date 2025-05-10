@@ -129,19 +129,24 @@ class PublicUserController extends Controller{
     /*
      *  Presenter routes
      */
-    public function previewSessions (): View{
+    public function previewSessions (): View | RedirectResponse{
         /* Redirect if not presenter */
         if(Auth::user()->role != 'presenter') return redirect()->route('dashboard.my-profile');
 
         return view($this->_path . 'presenter.preview-sessions', [
-            'sessions' => ProgramSession::where('presenter_id', Auth::user()->id)->get(),
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+            'sessions' => ProgramSession::whereHas('presentersRel', function ($q){
+                $q->where('presenter_id', '=', Auth::user()->id);
+            })->whereHas('programRel.seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->get(),
+            'appTimePassed' => $this->appTimePassed('2025-06-04 00:00:00')
         ]);
     }
-    public function previewSession ($id): View{
+    public function previewSession ($id): View | RedirectResponse{
         $session = ProgramSession::where('id', $id)->first();
         /* Redirect if not presenter */
-        if(Auth::user()->role != 'presenter' or $session->presenter_id != Auth::user()->id) return redirect()->route('dashboard.my-profile');
+
+        if(!Auth::user()->presenterHasAccess($id)) return redirect()->route('dashboard.my-profile');
 
         return view($this->_path . 'presenter.preview-session', [
             'session' => $session,
@@ -151,7 +156,7 @@ class PublicUserController extends Controller{
     public function updateSessions(Request $request): JsonResponse{
         try{
             $session = ProgramSession::where('id', $request->id)->first();
-            if(Auth::user()->role != 'presenter' or $session->presenter_id != Auth::user()->id)  return $this->jsonError('1500', __('Nemate ovlaštenje za pristup!'));
+            if(!Auth::user()->presenterHasAccess($session->id)) return $this->jsonError('1500', __('Nemate privilegiju za ažuriranje ove sesije!'));
 
             $session->update(['presenter_data' => $request->presenter_data]);
 
@@ -314,9 +319,9 @@ class PublicUserController extends Controller{
     }
 
     public function department(): View | RedirectResponse{
-        if(Auth::user()->role == 'presenter'){
-            if(!Auth::user()->presenterProgram()) return redirect()->route('dashboard.my-profile');
-        }else if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
+        //if(Auth::user()->role == 'presenter'){
+        //    if(!Auth::user()->presenterProgram()) return redirect()->route('dashboard.my-profile');
+        //}else if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
 
         return view($this->_path . 'user.department', [
             'lecturers' => Auth::user()->getMyLecturers(),

@@ -20,4 +20,7 @@ class SessionPresenter extends Model{
     public function presenterRel(): HasOne{
         return $this->hasOne(User::class, 'id', 'presenter_id');
     }
+    public function sessionRel(): HasOne{
+        return $this->hasOne(ProgramSession::class, 'id', 'session_id');
+    }
 }

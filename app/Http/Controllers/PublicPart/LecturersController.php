@@ -20,16 +20,22 @@ class LecturersController extends Controller{
     public function getData($lecturers, int $program_id = 0): View{
         return view($this->_path . 'lecturers', [
             'lecturers' => $lecturers,
-            'lecPrograms' => Program::where('id', '>', 0)->where('id', '<=', 5)->get(),
+            'lecPrograms' => Program::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->get(),
             'program_id' => $program_id
         ]);
     }
     public function lecturers(): View{
-        $lecturers = User::where('role', 'presenter')->orderBy('id', 'DESC')->take($this->_take)->get();
+        $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->where('role', 'presenter')->orderBy('id', 'DESC')->take($this->_take)->get();
         return $this->getData($lecturers);
     }
     public function filter ($program_id): View{
-        $lecturers = User::whereHas('sessionsRel.programRel', function ($query) use($program_id){
+        $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->whereHas('sessionsPresenterRel.sessionRel.programRel', function ($query) use($program_id){
             $query->where('id', $program_id);
         })->where('role', 'presenter')->orderBy('id', 'DESC')->take($this->_take)->get();
         return $this->getData($lecturers, $program_id);
@@ -40,14 +46,28 @@ class LecturersController extends Controller{
         if($lecturer->role != 'presenter') return redirect()->route('public-part.home');
 
         if($date){
-            $currentDay = ProgramSession::where('presenter_id', $id)->whereDate('date', $date)->orderBy('date')->first();
-        }else $currentDay = ProgramSession::where('presenter_id', $id)->orderBy('date')->first();
+            $currentDay = ProgramSession::whereHas('presentersRel', function ($q) use($id){
+                $q->where('presenter_id', '=', $id);
+            })->whereHas('programRel.seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->whereDate('date', $date)->orderBy('date')->first();
+        }else{
+            $currentDay = ProgramSession::whereHas('presentersRel', function ($q) use($id){
+                $q->where('presenter_id', '=', $id);
+            })->whereHas('programRel.seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->orderBy('date')->first();
+        }
 
         return view($this->_path . 'single-lecturer', [
             'program' => Program::where('id', $currentDay->program_id)->first(),
             'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
             'currentDay' => $currentDay,
-            'sessions' => ProgramSession::where('presenter_id', $id)->where('date', $currentDay->date)->get(),
+            'sessions' => ProgramSession::whereHas('presentersRel', function ($q) use($id){
+                $q->where('presenter_id', '=', $id);
+            })->whereHas('programRel.seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('date', $currentDay->date)->get(),
             'lecturer' => $lecturer
         ]);
     }
@@ -58,13 +78,17 @@ class LecturersController extends Controller{
     public function loadMore(Request $request): bool|string{
         try{
             if($request->program_id == 0){
-                $lecturers = User::where('role', 'presenter')
+                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
+                    $q->where('active', '=', 1);
+                })->where('role', 'presenter')
                     ->where('id', '<', $request->lastID)
                     ->orderBy('id', 'DESC')
                     ->take($this->_take)
                     ->get();
             }else{
-                $lecturers = User::whereHas('sessionsRel.programRel', function ($query) use($request){
+                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
+                    $q->where('active', '=', 1);
+                })->whereHas('sessionsPresenterRel.sessionRel.programRel', function ($query) use($request){
                     $query->where('id', $request->program_id);
                 })->where('role', 'presenter')->where('id', '<', $request->lastID)->orderBy('id', 'DESC')->take($this->_take)->get();
             }
@@ -77,13 +101,17 @@ class LecturersController extends Controller{
     public function filterByName(Request $request){
         try{
             if($request->program_id == 0){
-                $lecturers = User::where('role', 'presenter')
+                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
+                    $q->where('active', '=', 1);
+                })->where('role', 'presenter')
                     ->where('name', 'LIKE', '%'. $request->value . '%')
                     ->orderBy('id', 'ASC')
                     ->take($this->_take)
                     ->get();
             }else{
-                $lecturers = User::whereHas('sessionsRel.programRel', function ($query) use($request){
+                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
+                    $q->where('active', '=', 1);
+                })->whereHas('sessionsPresenterRel.sessionRel.programRel', function ($query) use($request){
                     $query->where('id', $request->program_id);
                 })->where('name', 'LIKE', '%'. $request->value . '%')->where('role', 'presenter')->orderBy('id', 'DESC')->take($this->_take)->get();
             }

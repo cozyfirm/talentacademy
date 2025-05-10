@@ -32,16 +32,6 @@
                             <img src="{{ asset('files/images/svg-icons/dribble.svg') }}" alt="Dribble icon">
                         </a>
                     @endif
-
-{{--                    <a href="#" target="_blank" class="single-lecturer__featured-icon">--}}
-{{--                        <img src="{{ asset('files/images/svg-icons/linkedin.svg') }}" alt="Linkedin icon">--}}
-{{--                    </a>--}}
-{{--                    <a href="#" target="_blank" class="single-lecturer__featured-icon">--}}
-{{--                        <img src="{{ asset('files/images/svg-icons/x.svg') }}" alt="X icon">--}}
-{{--                    </a>--}}
-{{--                    <a href="#" target="_blank" class="single-lecturer__featured-icon">--}}
-{{--                        <img src="{{ asset('files/images/svg-icons/dribble.svg') }}" alt="Dribble icon">--}}
-{{--                    </a>--}}
                 </div>
                 <p> {!! nl2br($lecturer->short_description) !!} </p>
             </div>
@@ -129,7 +119,11 @@
                                         <img src="{{ asset('files/images/svg-icons/program-item-icon-name.svg') }}" alt="">
                                     </div>
                                     <div class="program__timeline-item-right-item-text">
-                                        {{ $session->presenterRel->name ?? '' }}
+                                        @php $total = 0; @endphp
+                                        @foreach($session->presentersRel as $presenter)
+                                            {{ $presenter->presenterRel->name ?? '' }}
+                                            @if($total++ < ($session->presentersRel->count() - 1)), @endif
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="program__timeline-item-right-item">

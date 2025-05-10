@@ -40,6 +40,9 @@
         font-weight: 700;
         line-height: 140%;
         margin-top: 8px;
+        .ps-presenters-wrapper{
+            display: flex; align-items: center; gap: 5px;
+        }
     }
 }
 .preview-session__header_1{ background-color:$p1_bcg; }

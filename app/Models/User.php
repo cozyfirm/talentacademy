@@ -11,6 +11,7 @@ use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionEvaluation;
 use App\Models\Programs\ProgramSessionNote;
+use App\Models\Programs\SessionPresenter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -94,7 +95,8 @@ class User extends Authenticatable{
         return $this->hasOne(Country::class, 'id', 'country');
     }
     public function sessionsRel(): HasMany{
-        return $this->hasMany(ProgramSession::class, 'presenter_id', 'id');
+        return $this->hasMany(SessionPresenter::class, 'presenter_id', 'id');
+        // return $this->hasMany(ProgramSession::class, 'presenter_id', 'id');
     }
     public function applicationRel(): HasMany{
         return $this->hasMany(ProgramApplication::class, 'attendee_id', 'id');
@@ -113,7 +115,7 @@ class User extends Authenticatable{
     }
     public function presenterProgram(): bool{
         try{
-            $app = ProgramSession::where('presenter_id', $this->id)->count();
+            $app = SessionPresenter::where('presenter_id', '=', $this->id)->count();
             return (bool)$app;
         }catch (\Exception $e){ return false; }
     }
@@ -132,8 +134,10 @@ class User extends Authenticatable{
     }
     public function whatIsMyPresenterProgram($param = null): ProgramApplication | null | string | int{
         try{
-            $program = Program::whereHas('sessionsRel', function ($q){
+            $program = Program::whereHas('sessionsRel.presentersRel', function ($q){
                 $q->where('presenter_id', Auth::user()->id);
+            })->whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
             })->first();
 
             if($param){
@@ -168,11 +172,11 @@ class User extends Authenticatable{
     }
     public function getMyLecturers(){
         if($this->role == 'presenter'){
-            return User::whereHas('sessionsRel.programRel', function ($q){
+            return User::whereHas('sessionsRel.sessionRel.programRel', function ($q){
                 $q->where('id', $this->whatIsMyPresenterProgram('id'));
             })->get();
         }else{
-            return User::whereHas('sessionsRel.programRel', function ($q){
+            return User::whereHas('sessionsRel.sessionRel.programRel', function ($q){
                 $q->where('id', $this->whatIsMyProgram('id'));
             })->get();
         }
@@ -241,5 +245,15 @@ class User extends Authenticatable{
 
     public function unreadMessages(){
         return Participant::where('user_id', $this->id)->sum('unread');
+    }
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /* V2 updates */
+    public function presenterHasAccess($session_id): bool{
+        if(Auth::user()->role != 'presenter') return false;
+        return (bool)SessionPresenter::where('session_id', '=', $session_id)->where('presenter_id', '=', Auth::user()->id)->count();
+    }
+    public function sessionsPresenterRel(): HasMany{
+        return $this->hasMany(SessionPresenter::class, 'presenter_id', 'id');
     }
 }

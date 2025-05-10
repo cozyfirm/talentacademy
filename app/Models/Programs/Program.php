@@ -45,7 +45,14 @@ class Program extends Model{
         /*
          *  First, let's extract sessions
          */
-        return ProgramSession::where('program_id', $this->id)->where('presenter_id', $presenter_id)->orderBy('datetime_from')->get()->unique('date');
+
+       return ProgramSession::whereHas('presentersRel', function ($q) use($presenter_id){
+           $q->where('presenter_id', '=', $presenter_id);
+       })->whereHas('programRel.seasonRel', function ($q){
+           $q->where('active', '=', 1);
+       })->where('program_id', $this->id)->orderBy('datetime_from')->get()->unique('date');
+
+        // return ProgramSession::where('program_id', $this->id)->where('presenter_id', $presenter_id)->orderBy('datetime_from')->get()->unique('date');
     }
 
     public function imageRel(): HasOne{
