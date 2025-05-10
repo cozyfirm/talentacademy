@@ -199,7 +199,7 @@ class User extends Authenticatable{
             /* User role */
             return User::whereHas('applicationRel', function ($q) use ($programID){
                 $q->where('program_id', $programID)->where('app_status', 'accepted');
-            })->orWhereHas('sessionsRel', function ($q) use ($programID){
+            })->orWhereHas('sessionsRel.sessionRel.programRel', function ($q) use ($programID){
                 $q->where('program_id', $programID);
             })->orderBy('name')->get();
         }else if($this->role == 'presenter'){
@@ -207,7 +207,7 @@ class User extends Authenticatable{
             $programID = $this->whatIsMyPresenterProgram('id');
             return User::whereHas('applicationRel', function ($q) use ($programID){
                 $q->where('program_id', $programID)->where('app_status', 'accepted');
-            })->orWhereHas('sessionsRel', function ($q) use ($programID){
+            })->orWhereHas('sessionsRel.sessionRel.programRel', function ($q) use ($programID){
                 $q->where('program_id', $programID);
             })->orderBy('name')->get();
         }

@@ -62,9 +62,8 @@ class ChatController extends Controller{
             $q->where('user_id', Auth::user()->id);
         })->where('is_group', 0)->orderBy('updated_at', 'DESC')->get();
 
-
         return view($this->_path . 'chat', [
-            'teamMates' => Auth::user()->getUsersFromMyProgram(),
+            // 'teamMates' => Auth::user()->getUsersFromMyProgram(),
             'groups' => $groups,
             'firstConversation' => $conversation,
             'messages' => $messages,

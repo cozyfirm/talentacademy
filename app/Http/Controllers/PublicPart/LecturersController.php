@@ -32,7 +32,18 @@ class LecturersController extends Controller{
         })->where('role', 'presenter')->orderBy('id', 'DESC')->take($this->_take)->get();
         return $this->getData($lecturers);
     }
-    public function filter ($program_id): View{
+    public function filter ($program_id): View | RedirectResponse{
+        /**
+         *  If program is not active, redirect to Lecturers home
+         */
+        $program = Program::whereHas('seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->where('id', '=', $program_id)->first();
+        if(!isset($program)) return redirect()->route('public-part.lecturers.lecturers');
+
+        /**
+         *  Get only lecturers from active season; User can be in two different seasons
+         */
         $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
             $q->where('active', '=', 1);
         })->whereHas('sessionsPresenterRel.sessionRel.programRel', function ($query) use($program_id){
@@ -43,7 +54,9 @@ class LecturersController extends Controller{
 
     public function single_lecturer($id, $date = null): View | RedirectResponse{
         $lecturer = User::where('id', $id)->first();
-        if($lecturer->role != 'presenter') return redirect()->route('public-part.home');
+        if($lecturer->role != 'presenter') return redirect()->route('public-part.lecturers.lecturers');
+
+        /* ToDo:: Check if user is not at current active season, do not show it's data */
 
         if($date){
             $currentDay = ProgramSession::whereHas('presentersRel', function ($q) use($id){

@@ -37,19 +37,6 @@
                             <p>{{ $group->name }}</p>
                         </div>
                     @endforeach
-
-{{--                    <div class="conversation__item">--}}
-{{--                        <div class="conversation__img">--}}
-{{--                            <img src="{{ asset('files/images/public-part/department.png') }}" alt="">--}}
-{{--                        </div>--}}
-{{--                        <p>{{ __('Moj odsjek') }}</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="conversation__item">--}}
-{{--                        <div class="conversation__img">--}}
-{{--                            <img src="{{ asset('files/images/public-part/wall.png') }}" alt="">--}}
-{{--                        </div>--}}
-{{--                        <p>{{ __('Akademija wall') }}</p>--}}
-{{--                    </div>--}}
                 </div>
             </div>
 
@@ -77,22 +64,6 @@
                             </div>
                         </div>
                     @endforeach
-
-{{--                        <br><br><br>--}}
-{{--                    @foreach($teamMates as $teamMate)--}}
-{{--                        @if($teamMate->id != Auth()->user()->id )--}}
-{{--                            <div class="conversation__item start__conversation" user-id="{{ $teamMate->id }}">--}}
-{{--                                <div class="conversation__img">--}}
-{{--                                    @if(isset($teamMate->photo_uri))--}}
-{{--                                        <img src="{{ asset('files/images/public-part/users/' . ($teamMate->photo_uri)) }}" alt="{{ __('Profile image') }}">--}}
-{{--                                    @else--}}
-{{--                                        <img class="cover-image" src="{{ asset('files/images/public-part/silhouette.png') }}" alt="{{ __('Profile image') }}">--}}
-{{--                                    @endif--}}
-{{--                                </div>--}}
-{{--                                <p>{{ $teamMate->name }}</p>--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
-{{--                    @endforeach--}}
                 </div>
             </div>
         </div>
