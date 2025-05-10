@@ -11,6 +11,7 @@ use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionNote;
+use App\Traits\Common\CommonTrait;
 use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ProgramsController extends Controller{
-    use ResponseTrait, FileTrait;
+    use ResponseTrait, FileTrait, CommonTrait;
     protected string $_path = 'public-part.app.programs.';
     protected int $_pages = 6;
 
@@ -42,7 +43,7 @@ class ProgramsController extends Controller{
             'sessions' => $this->getSessionsByDate($id, $date ?? $currentDay->date),
             // 'offlineSessions' => $offlineSessions,
             'faqs' => FAQ::where('what', $id)->get(),
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+            'appTimePassed' => $this->appTimePassed($this->getSeasonData('app_date') . ' 00:00:00')
         ]);
     }
     public function sneakAndPeak($id, $page = 1): View | RedirectResponse{

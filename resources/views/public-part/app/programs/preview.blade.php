@@ -67,9 +67,9 @@
         <div class="preview__counter preview__counter_{{ $program->id }}">
             <div class="preview__counter_iw">
                 <h1>{{ __('Rok za prijavu aplikacija:') }}</h1>
-                <h1> 03.06.2024 </h1>
+                <h1> {{ CommonHelper::getAppDate() }} </h1>
 
-                <p> {{ __("Vaše aplikacije prihvatamo do 03.06.2024. godine. Ne propusti priliku da apliciraš za jedan od programa Helem Nejse Talent Akademije. ") }} </p>
+                <p> {{ __("Vaše aplikacije prihvatamo do ") . CommonHelper::getAppDate() . __(" godine. Ne propusti priliku da apliciraš za jedan od programa Helem Nejse Talent Akademije. ") }} </p>
 
                 <div class="counter__w">
                     <div class="c__num"> <p class="c__month"></p> </div>
@@ -96,8 +96,6 @@
                             @else
                                 <p>{{ __('Apliciraj za stipendiju') }}</p>
                             @endif
-
-
                         </button>
                     </a>
                 </div>

@@ -98,7 +98,7 @@
                     transition: 0.2s all;
 
                     h4{
-                        color:#EA8BF3; font-size: 24px;
+                        color:$primary; font-size: 24px;
                         font-style: normal;
                         font-weight: 400;
                         margin-top: 8px;
@@ -125,7 +125,7 @@
             align-items: center;
 
             .hero-section__arrow {
-                width: 100%;
+                width: 100%; margin: 64px 0px;
 
                 @media (max-width: 1200px) {
                     margin-top: 16px;
@@ -284,7 +284,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #F45B69;
+    background: #FFCC33;
 
     .features__container {
         width: 100%;

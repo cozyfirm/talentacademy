@@ -10,8 +10,11 @@ class CommonHelper{
     public static function getCurrentSeason(){
         return Season::where('active', '=', 1)->first();
     }
-    public static function getStartDate(){
-        dd(self::getCurrentSeason());
+    public static function getAppDate(): string{
+        return Carbon::parse(self::getCurrentSeason()->app_date)->format('d.m.Y');
+    }
+    public static function getStartDate(): string{
+        return Carbon::parse(self::getCurrentSeason()->start_date)->format('d.m.Y');
     }
     public static function getStartDateDay(): string{
         return Carbon::parse(self::getCurrentSeason()->start_date)->format('d');

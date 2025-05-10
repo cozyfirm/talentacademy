@@ -89,7 +89,7 @@
                             }
                         }
                         p{
-                            font-size: 24px; color:#EA8BF3; font-weight: 500; margin: 0px;
+                            font-size: 24px; color:$primary; font-weight: 500; margin: 0px;
                             @media (max-width: $mobile-width){
                                 font-size: 18px;
                             }
@@ -103,12 +103,12 @@
 
                     a{
                         .btn{
-                            position: relative; height: 36px; display: inline-flex; justify-content: center; border: 1px solid #EA8BF3;
-                            color:#EA8BF3; padding: 0px 32px; gap: 8px; padding-top: 5px;
+                            position: relative; height: 36px; display: inline-flex; justify-content: center; border: 1px solid $primary;
+                            color:$primary; padding: 0px 32px; gap: 8px; padding-top: 5px;
                         }
 
                         .btn_bcg{
-                            background: #EA8BF3; color:$dark;
+                            background: $primary; color:$dark;
                         }
                     }
 

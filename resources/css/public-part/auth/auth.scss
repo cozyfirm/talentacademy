@@ -14,7 +14,7 @@ html, body{ position: relative; left:0px; top:0px; width: 100%; height: 100%; ma
      */
 
     .af-image{
-        position: absolute; left:0px; top:0px; width: 30%; height: 100%; background: #000000; margin: 0px;
+        position: absolute; left:0px; top:0px; width: 30%; height: 100%; background: #333366; margin: 0px;
         img{
             position: absolute; left:0px; top:0px; right:0px; bottom: 0px; margin:auto; max-height: 100%;
             rotate: -90deg;
@@ -95,7 +95,7 @@ html, body{ position: relative; left:0px; top:0px; width: 100%; height: 100%; ma
                 }
 
                 .btn{
-                    background: #EA8BF3; height: 28px; padding:3px 15px; color:#fff; font-size:14px;
+                    background: #66cccc; height: 28px; padding:3px 15px; color:#fff; font-size:14px;
                     font-family: "Gimlet Sans Variable", sans-serif;
                     font-display: swap;
                 }
