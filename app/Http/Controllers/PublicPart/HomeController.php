@@ -17,11 +17,11 @@ class HomeController extends Controller{
     protected string $_path = 'public-part.app.home.';
 
     public function home(): View{
-        $daysTil = Carbon::now()->diffInDays(Carbon::parse('2024-06-03 23:59:59'));
+        $daysTil = Carbon::now()->diffInDays(Carbon::parse('2025-05-31 23:59:59'));
 
-        $appTimePassed = $this->appTimePassed('2024-06-04 00:00:00');
+        $appTimePassed = $this->appTimePassed('2025-05-31 00:00:00');
         if($appTimePassed){
-            $daysTil = Carbon::now()->diffInDays(Carbon::parse('2024-08-02 08:00:00'));
+            $daysTil = Carbon::now()->diffInDays(Carbon::parse('2025-08-02 08:00:00'));
         }
         if($daysTil < 0) $daysTil = 0;
 

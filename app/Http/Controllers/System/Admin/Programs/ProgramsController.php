@@ -18,6 +18,7 @@ use App\Models\Programs\ProgramSession;
 use App\Models\Programs\ProgramSessionEvaluation;
 use App\Models\Programs\ProgramSessionFile;
 use App\Models\Programs\ProgramSessionLink;
+use App\Models\Programs\SessionPresenter;
 use App\Models\User;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Common\FileTrait;
@@ -49,7 +50,9 @@ class ProgramsController extends Controller{
     ];
 
     public function index(): View{
-        $programs = Program::where('id', '>', 0);
+        $programs = Program::whereHas('seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        });
         $programs = Filters::filter($programs);
 
         $filters = [
@@ -218,19 +221,36 @@ class ProgramsController extends Controller{
             'create' => true,
             'program' => Program::where('id', $program_id)->first(),
             'types' => $this->_session_types,
-            'locations' => Location::pluck('title', 'id'),
+            'locations' => Location::where('active', '=', '1')->pluck('title', 'id'),
             'presenters' => User::where('role', 'presenter')->pluck('name', 'id')->prepend('Bez predavača', 0),
             'timeArr' => self::formTimeArr()
         ]);
     }
     public function saveSession(Request $request): JsonResponse{
         try{
+            $totalPresenters = 0;
             $this->calculateDuration($request);
 
             $request['date'] = Carbon::parse($request->date)->format('Y-m-d');
             $request['datetime_from'] = Carbon::parse($request->date . ' ' . $request->time_from);
 
-            ProgramSession::create($request->all());
+            foreach ($request->presenter_id as $key => $val){
+                if($val == (int)$val){
+                    $totalPresenters ++;
+                }
+            }
+
+            if(!$totalPresenters) return $this->jsonError('1500', __('Molimo da odaberete predavača ili opciju "Bez predavača"'));
+
+            $session = ProgramSession::create($request->except(['presenter_id']));
+
+            foreach ($request->presenter_id as $key => $val){
+                if($val == (int)$val){
+                    try{
+                        SessionPresenter::create(['session_id' => $session->id, 'presenter_id' => $val]);
+                    }catch (\Exception $e){}
+                }
+            }
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.programs.preview', ['id' => $request->program_id]));
         }catch (\Exception $e){
@@ -247,7 +267,7 @@ class ProgramsController extends Controller{
             'preview' => true,
             'program' => $program,
             'types' => $this->_session_types,
-            'locations' => Location::pluck('title', 'id'),
+            'locations' => Location::where('active', '=', '1')->pluck('title', 'id'),
             'presenters' => User::where('role', 'presenter')->pluck('name', 'id')->prepend('Bez predavača', 0),
             'session' => $session,
             'timeArr' => self::formTimeArr(),
@@ -263,7 +283,7 @@ class ProgramsController extends Controller{
             'edit' => true,
             'program' => $program,
             'types' => $this->_session_types,
-            'locations' => Location::pluck('title', 'id'),
+            'locations' => Location::where('active', '=', '1')->pluck('title', 'id'),
             'presenters' => User::where('role', 'presenter')->pluck('name', 'id')->prepend('Bez predavača', 0),
             'session' => $session,
             'timeArr' => self::formTimeArr()
@@ -271,11 +291,32 @@ class ProgramsController extends Controller{
     }
     public function updateSession(Request $request): JsonResponse{
         try{
+            $totalPresenters = 0;
             $this->calculateDuration($request);
 
             $request['date'] = Carbon::parse($request->date)->format('Y-m-d');
             $request['datetime_from'] = Carbon::parse($request->date . ' ' . $request->time_from);
-            ProgramSession::where('id', $request->id)->update($request->except(['id', 'undefined', 'files']));
+
+            foreach ($request->presenter_id as $key => $val){
+                if($val == (int)$val){
+                    $totalPresenters ++;
+                }
+            }
+
+            if(!$totalPresenters) return $this->jsonError('1500', __('Molimo da odaberete predavača ili opciju "Bez predavača"'));
+
+            ProgramSession::where('id', $request->id)->update($request->except(['id', 'undefined', 'files', 'presenter_id']));
+
+            /* First, let's delete all previous relationships */
+            SessionPresenter::where('session_id', '=', $request->id)->delete();
+
+            foreach ($request->presenter_id as $key => $val){
+                if($val == (int)$val){
+                    try{
+                        SessionPresenter::create(['session_id' => $request->id, 'presenter_id' => $val]);
+                    }catch (\Exception $e){}
+                }
+            }
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.programs.sessions.preview', ['id' => $request->id]));
         }catch (\Exception $e){
@@ -289,6 +330,9 @@ class ProgramsController extends Controller{
             $program = Program::where('id', $session->program_id)->first();
             $name = $session->title;
             $session->delete();
+
+            /* Delete relationships */
+            SessionPresenter::where('session_id', '=', $id)->delete();
 
             return redirect()->route('system.admin.programs.preview', ['id' => $program->id ])->with('success', __('Uspješno obrisana sesija ' . $name . "!"));
         }catch (\Exception $e){

@@ -59,16 +59,32 @@
                             <a href="{{ route('public-part.programs.preview-session', ['id' => $session->id]) }}">
                                 <h2 class="program__timeline-item-right-title"> {{ $session->title }} </h2>
                             </a>
-                            @if($session->presenter_id)
+                            @if($session->presentersRel->count())
                                 <div class="program__timeline-item-right-item">
                                     <div class="program__timeline-item-right-item-icon">
                                         <img src="{{ asset('files/images/svg-icons/program-item-icon-name.svg') }}" alt="">
                                     </div>
                                     <div class="program__timeline-item-right-item-text">
-                                        {{ $session->presenterRel->name ?? '' }}
+                                        @php $total = 0; @endphp
+                                        @foreach($session->presentersRel as $presenter)
+                                            {{ $presenter->presenterRel->name ?? '' }}
+                                            @if($total++ < ($session->presentersRel->count() - 1)), @endif
+                                        @endforeach
                                     </div>
                                 </div>
                             @endif
+
+                            <!-- Old version, deprecated -->
+{{--                            @if($session->presenter_id)--}}
+{{--                                <div class="program__timeline-item-right-item">--}}
+{{--                                    <div class="program__timeline-item-right-item-icon">--}}
+{{--                                        <img src="{{ asset('files/images/svg-icons/program-item-icon-name.svg') }}" alt="">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="program__timeline-item-right-item-text">--}}
+{{--                                        {{ $session->presenterRel->name ?? '' }}--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            @endif--}}
                             <div class="program__timeline-item-right-item">
                                 <div class="program__timeline-item-right-item-icon">
                                     <img src="{{ asset('files/images/svg-icons/program-item-icon-location.svg') }}" alt="">

@@ -111,7 +111,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Predavač'))->for('presenter_id')->class('bold') }}
-                                {{ html()->select('presenter_id', $presenters, isset($session) ? $session->presenter_id : '')->class('form-control form-control-sm mt-1')->disabled(isset($preview)) }}
+
+                                <select name="presenter_id" class="form-control form-control-sm select2" required multiple>
+                                    @foreach($presenters as $key => $val)
+                                        <option value="{{ $key }}" @isset($session) @if(SessionHelper::isPresenterSelected($session->id, $key)) selected @endif @endisset>{{ $val }}</option>
+                                    @endforeach
+                                </select>
+
+{{--                                {{ html()->select('presenter_id', $presenters, isset($session) ? $session->presenter_id : '')->class('form-control form-control-sm mt-1')->disabled(isset($preview)) }}--}}
                             </div>
                         </div>
                     </div>

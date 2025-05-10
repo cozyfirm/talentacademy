@@ -104,10 +104,16 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Da li je lokacija javno dostupna?'))->for('public')->class('bold') }}
                                 {{ html()->select('public', ['0' => 'Ne', '1' => 'Da'], isset($location) ? $location->public : '1')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ html()->label(__('Da li je dostupna u pretrazi?'))->for('active')->class('bold') }}
+                                {{ html()->select('active', ['0' => 'Ne', '1' => 'Da'], isset($location) ? $location->active : '1')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
                             </div>
                         </div>
                     </div>

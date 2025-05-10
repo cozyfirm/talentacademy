@@ -9,7 +9,7 @@
         <div class="hero-section__container">
             <div class="hero-section__upper-section">
                 <div class="hero-section__upper-section-text">
-                    {{ __('02 - 10. Avgust 2024. - Sarajevo') }}
+                    {{ __('02 - 10. Avgust 2025. - Sarajevo') }}
                 </div>
                 <div class="hero-section__upper-section-avatars-container">
                     <div class="hero-section__upper__lecturers ">
@@ -48,19 +48,19 @@
                     <h2 class="hero-section__heading"> {{ __('Helem Nejse Talent Akademija') }} </h2>
                     <div class="hero-section__subheading">{{ __('Sedmodnevna ljetna škola iz oblasti kreativnih industrija u Sarajevu!') }}</div>
                 </div>
-{{--                @if(auth()->check())--}}
-{{--                    <a href="{{ route('dashboard.my-profile') }}" class="hero-section__bottom-section-button">--}}
-{{--                        {{ __('Apliciraj za stipendiju') }}--}}
-{{--                    </a>--}}
-{{--                @else--}}
-{{--                    <a href="{{ route('auth.create-account') }}" class="hero-section__bottom-section-button">--}}
-{{--                        {{ __('Apliciraj za stipendiju') }}--}}
-{{--                    </a>--}}
-{{--                @endif--}}
+                @if(auth()->check())
+                    <a href="{{ route('dashboard.my-profile') }}" class="hero-section__bottom-section-button">
+                        {{ __('Apliciraj za stipendiju') }}
+                    </a>
+                @else
+                    <a href="{{ route('auth.create-account') }}" class="hero-section__bottom-section-button">
+                        {{ __('Apliciraj za stipendiju') }}
+                    </a>
+                @endif
             </div>
             <div class="hero-section__bottom-section">
                 <div class="hero-section__bottom-section-text">
-                    {{ __('Početak 02. augusta 2024. godine!') }}
+                    {{ __('Početak 02. augusta 2025. godine!') }}
                 </div>
 
                 <a href="#features" class="hero-section__bottom-section-learn-more">

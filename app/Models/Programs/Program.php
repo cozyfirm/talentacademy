@@ -23,6 +23,9 @@ class Program extends Model{
     protected $table = 'programs';
     protected $guarded = ['id'];
 
+    public function seasonRel(): HasOne{
+        return $this->hasOne(Season::class, 'id', 'season_id');
+    }
     public function sessionsRel(): HasMany{
         return $this->hasMany(ProgramSession::class, 'program_id', 'id')->orderBy('datetime_from');
     }

@@ -28,6 +28,7 @@ return new class extends Migration
 
             $table->text('description');
             $table->tinyInteger('public')->default(1);
+            $table->tinyInteger('active')->default(1);
 
             $table->timestamps();
         });

@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('programs', function (Blueprint $table) {
+        Schema::create('__seasons', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title', 200);
-            $table->text('description')->nullable();
-            $table->integer('image_id')->nullable();
+            $table->string('title');
+            $table->tinyInteger('active')->default(1);
+            /** Subtract ID for CSS */
+            $table->integer('subtract')->default(5);
 
-            $table->integer('season_id');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('programs');
+        Schema::dropIfExists('__seasons');
     }
 };

@@ -47,6 +47,9 @@ class ProgramSession extends Model{
     public function presenterRel(): HasOne{
         return $this->hasOne(User::class, 'id', 'presenter_id');
     }
+    public function presentersRel(): HasMany{
+        return $this->hasMany(SessionPresenter::class, 'session_id', 'id');
+    }
     public function sessionFileRel(): HasMany{
         return $this->hasMany(ProgramSessionFile::class, 'session_id', 'id');
     }
