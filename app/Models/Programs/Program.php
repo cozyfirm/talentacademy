@@ -3,6 +3,7 @@
 namespace App\Models\Programs;
 
 use App\Models\Core\File;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -33,7 +34,19 @@ class Program extends Model{
         /*
          *  First, let's extract sessions
          */
-        return ProgramSession::where('program_id', $this->id)->where('presenter_id', '!=', 0)->where('presenter_id', '!=', null)->orderBy('datetime_from')->get()->unique('presenter_id');
+
+        return User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->whereHas('sessionsPresenterRel.sessionRel.programRel', function ($q){
+            $q->where('id', '=', $this->id);
+        })->where('role', 'presenter')->get();
+
+        //return ProgramSession::where('program_id', $this->id)
+        //    ->whereHas('presentersRel', function ($q) { $q->where('presenter_id'); })
+        //    ->where('presenter_id', '!=', null)
+        //    ->orderBy('datetime_from')
+        //    ->get()
+        //    ->unique('presenter_id');
     }
     public function uniqueDateSessions(): Collection{
         /*

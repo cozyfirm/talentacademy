@@ -42,7 +42,7 @@
 <div class="s-top-menu">
     <div class="app-name">
         <a title="{{__('Naslovna strana')}}">
-            <h1> Alkaris d.o.o </h1>
+            <h1> Cozy Firm d.o.o </h1>
         </a>
         <i class="fas fa-bars t-3 system-m-i-t" title="{{__('Otvorite / zatvorite MENU')}}"></i>
     </div>

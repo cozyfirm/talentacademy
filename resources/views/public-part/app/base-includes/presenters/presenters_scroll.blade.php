@@ -9,34 +9,34 @@
     <div class="presenters__scroll_iw">
         <div class="presenters__scroll_body">
             @foreach($program->uniquePresenterSessions() as $presenter)
-                <div class="presenters__scroll_single" uri="{{ route('public-part.lecturers.single-lecturer', ['id' => $presenter->presenterRel->id]) }}">
+                <div class="presenters__scroll_single" uri="{{ route('public-part.lecturers.single-lecturer', ['id' => $presenter->id]) }}">
                     <div class="img_wrapper">
-                        <img src="{{ asset('files/images/public-part/users/' . ($presenter->presenterRel->photo_uri ?? '') ) }}" alt="">
+                        <img src="{{ asset('files/images/public-part/users/' . ($presenter->photo_uri ?? '') ) }}" alt="">
                     </div>
 
                     <div class="p__s_s_btn">
-                        <button class="sp__btn"> {{ $presenter->presenterRel->presenter_role ?? '' }} </button>
+                        <button class="sp__btn"> {{ $presenter->presenter_role ?? '' }} </button>
                     </div>
 
                     <div class="sp__text_w">
-                        <h1> {{ $presenter->presenterRel->name ?? '' }} </h1>
-                        <h2> {{ $presenter->presenterRel->institution ?? '' }} </h2>
-                        <p> {{ $presenter->presenterRel->short_description ?? '' }} </p>
+                        <h1> {{ $presenter->name ?? '' }} </h1>
+                        <h2> {{ $presenter->institution ?? '' }} </h2>
+                        <p> {{ $presenter->short_description ?? '' }} </p>
                     </div>
 
                     <div class="sp__icons_w">
-                        @if(isset($presenter->presenterRel) and $presenter->presenterRel->linkedin != '')
-                            <a href="{{  $presenter->presenterRel->linkedin }}" target="_blank">
+                        @if(isset($presenter) and $presenter->linkedin != '')
+                            <a href="{{  $presenter->linkedin }}" target="_blank">
                                 <img src="{{ asset('files/images/public-part/in.png') }}" alt="">
                             </a>
                         @endif
-                        @if(isset($presenter->presenterRel) and $presenter->presenterRel->twitter != '')
-                            <a href="{{  $presenter->presenterRel->twitter }}" target="_blank">
+                        @if(isset($presenter) and $presenter->twitter != '')
+                            <a href="{{  $presenter->twitter }}" target="_blank">
                                 <img src="{{ asset('files/images/public-part/twitter.png') }}" alt="">
                             </a>
                         @endif
-                        @if(isset($presenter->presenterRel) and $presenter->presenterRel->web != '')
-                            <a href="{{  $presenter->presenterRel->web }}" target="_blank">
+                        @if(isset($presenter) and $presenter->web != '')
+                            <a href="{{  $presenter->web }}" target="_blank">
                                 <img src="{{ asset('files/images/public-part/basket.png') }}" alt="">
                             </a>
                         @endif

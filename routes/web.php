@@ -1,23 +1,26 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PublicPart\Archive\ArchiveController;
+use App\Http\Controllers\PublicPart\Archive\ArchiveLecturersController;
 use App\Http\Controllers\PublicPart\BlogController;
 use App\Http\Controllers\PublicPart\ContactUsController;
 use App\Http\Controllers\PublicPart\Dashboard\ChatController;
+use App\Http\Controllers\PublicPart\Dashboard\PublicUserController;
+use App\Http\Controllers\PublicPart\HomeController as HomepageController;
 use App\Http\Controllers\PublicPart\LecturersController;
 use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
-use App\Http\Controllers\PublicPart\Dashboard\PublicUserController;
+use App\Http\Controllers\System\Admin\HomeController;
+use App\Http\Controllers\System\Admin\Other\BlogController as AdminBlogController;
 use App\Http\Controllers\System\Admin\Other\Chat\GroupChatsController;
 use App\Http\Controllers\System\Admin\Other\Inbox\BulkMessagesController;
-use App\Http\Controllers\System\Admin\Other\OtherController;
-use App\Http\Controllers\System\Admin\Other\BlogController as AdminBlogController;
-use App\Http\Controllers\System\Admin\Users\UsersController;
 use App\Http\Controllers\System\Admin\Other\LocationsController as AdminLocationsController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\System\Admin\HomeController;
-use App\Http\Controllers\PublicPart\HomeController as HomepageController;
+use App\Http\Controllers\System\Admin\Other\OtherController;
 use App\Http\Controllers\System\Admin\Programs\ProgramsController as AdminProgramsController;
+use App\Http\Controllers\System\Admin\Users\UsersController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -109,7 +112,6 @@ Route::prefix('')->group(function () {
         Route::get ('/filter/{program_id}',    [LecturersController::class, 'filter'])->name('public-part.lecturers.filter');
         Route::get ('/preview/{id}',           [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer');
         Route::get ('/preview/{id}/{date}',    [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer-date');
-
         Route::post('/load-more',              [LecturersController::class, 'loadMore'])->name('public-part.lecturers.load-more');
         Route::post('/filter-by-name',         [LecturersController::class, 'filterByName'])->name('public-part.lecturers.filter-by-name');
     });
@@ -141,6 +143,28 @@ Route::prefix('')->group(function () {
 
     Route::get ('/critical-thinking',                        [HomepageController::class, 'criticalThinking'])->name('public-part.critical-thinking');
     Route::get ('/critical-thinking-preview/{id}',           [HomepageController::class, 'criticalThinkingPreview'])->name('public-part.critical-thinking.preview');
+
+    /**
+     *  Archive
+     */
+    Route::prefix('archive')->group(function () {
+        Route::get ('/',                       [ArchiveController::class, 'home'])->name('public-part.archive');
+
+        Route::prefix('lecturers')->group(function () {
+            Route::get ('/',                       [ArchiveLecturersController::class, 'lecturers'])->name('public-part.archive.lecturers.lecturers');
+            Route::get ('/filter/{program_id}',    [ArchiveLecturersController::class, 'filter'])->name('public-part.archive.lecturers.filter');
+            Route::get ('/preview/{id}',           [ArchiveLecturersController::class, 'single_lecturer'])->name('public-part.archive.lecturers.single-lecturer');
+            Route::get ('/preview/{id}/{date}',    [ArchiveLecturersController::class, 'single_lecturer'])->name('public-part.archive.lecturers.single-lecturer-date');
+            Route::post('/load-more',              [ArchiveLecturersController::class, 'loadMore'])->name('public-part.archive.lecturers.load-more');
+            Route::post('/filter-by-name',         [ArchiveLecturersController::class, 'filterByName'])->name('public-part.archive.lecturers.filter-by-name');
+        });
+
+        Route::prefix('critical-thinking')->group(function () {
+            Route::get ('/',                       [ArchiveController::class, 'criticalThinking'])->name('public-part.archive.critical-thinking');
+            Route::get ('/preview/{id}',           [ArchiveController::class, 'criticalThinkingPreview'])->name('public-part.archive.critical-thinking.preview');
+
+        });
+    });
 });
 
 /**

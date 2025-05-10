@@ -27,7 +27,7 @@
         <a href="{{ route('public-part.scholarship') }}">{{ __('Stipendije') }}</a>
         <a href="{{ route('public-part.blog.blog') }}">{{ __('Blog') }}</a>
         <a href="{{ route('public-part.locations.locations') }}">{{ __('Lokacije') }}</a>
-        <a href="{{ route('public-part.lecturers.lecturers') }}">{{ __('Arhiva') }}</a>
+        <a href="{{ route('public-part.archive') }}">{{ __('Arhiva') }}</a>
         <a href="{{ route('public-part.lecturers.lecturers') }}">{{ __('Alumni') }}</a>
         <a class="show-header-submenu">
             {{ __('Programi') }}
@@ -81,7 +81,7 @@
         <a href="{{ route('public-part.scholarship') }}" class="mobile-menu__content-link">{{ __('Stipendije') }}</a>
         <a href="{{ route('public-part.blog.blog') }}" class="mobile-menu__content-link">{{ __('Blog') }}</a>
         <a href="{{ route('public-part.locations.locations') }}" class="mobile-menu__content-link">{{ __('Lokacije') }}</a>
-        <a href="#}" class="mobile-menu__content-link">{{ __('Arhiva') }}</a>
+        <a href="{{ route('public-part.archive') }}" class="mobile-menu__content-link">{{ __('Arhiva') }}</a>
         <a href="#" class="mobile-menu__content-link">{{ __('Alumni') }}</a>
         <a class="mobile-menu__content-link" id="open-mobile-submenu">
             {{ __('Programi akademije') }}

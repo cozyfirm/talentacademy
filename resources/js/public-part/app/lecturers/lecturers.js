@@ -10,8 +10,12 @@ $(document).ready(function (){
     });
 
     let loadMoreUri  = '/lecturers/load-more';
+    let loadMoreArchiveUri  = '/archive/lecturers/load-more';
+
     let filterByName = '/lecturers/filter-by-name';
-    let preview      = '/lecturers/preview/';
+    let filterByNameArchive = '/archive/lecturers/filter-by-name';
+    let preview       = '/lecturers/preview/';
+    let previewArchive= '/archive/lecturers/preview/';
 
     let privateSessions   = '/programs/get-ajax-lecturer-sessions';
 
@@ -20,7 +24,7 @@ $(document).ready(function (){
     let writeLecturers = function (lecturers){
         for(let i=0; i<lecturers.length; i++){
             $(".lecturers__list").append(function (){
-                return $("<div>").attr('class', 'lecturers__list-item').attr('itemid', lecturers[i]['id']).attr('uri', '/lecturers/preview/' + lecturers[i]['id'])
+                return $("<div>").attr('class', 'lecturers__list-item').attr('itemid', lecturers[i]['id']).attr('uri', (($("#archive").val() === "true") ? previewArchive : preview) + lecturers[i]['id'])
                     .append(function (){
                         return $("<img>").attr('src', '/files/images/public-part/users/' + lecturers[i]['photo_uri'])
                             .attr('class', 'lecturers__list-item-image');
@@ -29,7 +33,7 @@ $(document).ready(function (){
                         return $("<div>").attr('class', 'lecturers__list-item-category').text(lecturers[i]['presenter_role'])
                     })
                     .append(function (){
-                        return $("<a>").attr('href', preview + lecturers[i]['id'])
+                        return $("<a>").attr('href', (($("#archive").val() === "true") ? previewArchive : preview) + lecturers[i]['id'])
                             .append(function (){
                                 return $("<h3>").attr('class', 'lecturers__list-item-name')
                                     .text(lecturers[i]['name']);
@@ -83,7 +87,7 @@ $(document).ready(function (){
         if(loadMoreLocked) return;
 
         $.ajax({
-            url: loadMoreUri,
+            url: ($("#archive").val() === "true") ? loadMoreArchiveUri : loadMoreUri,
             method: 'POST',
             dataType: "json",
             data: {
@@ -121,7 +125,7 @@ $(document).ready(function (){
         loadMoreLocked = value !== '';
 
         $.ajax({
-            url: filterByName,
+            url: ($("#archive").val() === "true") ? filterByNameArchive : filterByName,
             method: 'POST',
             dataType: "json",
             data: {

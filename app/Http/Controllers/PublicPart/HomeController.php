@@ -34,7 +34,9 @@ class HomeController extends Controller{
         }
 
         return view($this->_path . 'home', [
-            'blogPosts' => Blog::where('published', '=', 1)->where('category', '<', 6)->orderBy('id', 'DESC')->take(6)->get(),
+            'blogPosts' => Blog::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('published', '=', 1)->where('category', '<', 6)->orderBy('id', 'DESC')->take(6)->get(),
             'locations' => $locations,
             'faqs' => FAQ::where('what', 0)->get(),
             'lecturers' => User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
