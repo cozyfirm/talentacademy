@@ -380,5 +380,3 @@ Route::prefix('system')->middleware('auth')->group(function () {
         });
     });
 });
-
-//Route::get('/user', [HomeCont::class, 'index']);
