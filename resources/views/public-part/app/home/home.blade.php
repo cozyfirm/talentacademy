@@ -9,7 +9,7 @@
         <div class="hero-section__container">
             <div class="hero-section__upper-section">
                 <div class="hero-section__upper-section-text">
-                    {{ __('02 - 10. Avgust 2025. - Sarajevo') }}
+                    {{ CommonHelper::getStartDateDay() . ' - ' . CommonHelper::getEndDate() .  __(' - Sarajevo') }}
                 </div>
                 <div class="hero-section__upper-section-avatars-container">
                     <div class="hero-section__upper__lecturers ">

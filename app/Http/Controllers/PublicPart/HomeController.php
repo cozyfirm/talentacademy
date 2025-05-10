@@ -8,20 +8,22 @@ use App\Models\Other\FAQ;
 use App\Models\Other\Location;
 use App\Models\Other\SinglePage;
 use App\Models\User;
+use App\Traits\Common\CommonTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class HomeController extends Controller{
+    use CommonTrait;
     protected string $_path = 'public-part.app.home.';
 
     public function home(): View{
-        $daysTil = Carbon::now()->diffInDays(Carbon::parse('2025-05-31 23:59:59'));
+        $daysTil = Carbon::now()->diffInDays(Carbon::parse($this->getSeasonData('app_date') . ' 23:59:59'));
 
-        $appTimePassed = $this->appTimePassed('2025-05-31 00:00:00');
+        $appTimePassed = $this->appTimePassed($this->getSeasonData('app_date') . ' 00:00:00');
         if($appTimePassed){
-            $daysTil = Carbon::now()->diffInDays(Carbon::parse('2025-08-02 08:00:00'));
+            $daysTil = Carbon::now()->diffInDays(Carbon::parse($this->getSeasonData('start_date') . ' 08:00:00'));
         }
         if($daysTil < 0) $daysTil = 0;
 
@@ -35,7 +37,9 @@ class HomeController extends Controller{
             'blogPosts' => Blog::where('published', '=', 1)->where('category', '<', 6)->orderBy('id', 'DESC')->take(6)->get(),
             'locations' => $locations,
             'faqs' => FAQ::where('what', 0)->get(),
-            'lecturers' => User::where('role', 'presenter')->inRandomOrder()->take(4)->get(),
+            'lecturers' => User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('role', 'presenter')->inRandomOrder()->take(4)->get(),
             'daysTill' => $daysTil,
             'appTimePassed' => $appTimePassed
         ]);
@@ -79,22 +83,22 @@ class HomeController extends Controller{
         // $last = Blog::where('published', '=', 1)->where('category', '=', 6)->orderBy('id', 'desc')->first();
 
         return view('public-part.app.blog.blog', [
-            'posts' => Blog::where('published', '=', 1)->where('category', '=', 6)->orderBy('id', 'DESC')->take(30)->get(),
+            'posts' => Blog::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('published', '=', 1)->where('category', '=', -2)->orderBy('id', 'DESC')->take(30)->get(),
             'showAll' => true,
             'criticalThinking' => true,
             'page' => SinglePage::where('id', 8)->first()
         ]);
-
-        //return view($this->_path . 'single-page', [
-        //    'page' => SinglePage::where('id', 8)->first()
-        //]);
     }
     public function criticalThinkingPreview($id): View{
-        $post = Blog::where('id', $id)->first();
+        $post = Blog::where('id', '=', $id)->first();
 
         return view('public-part.app.blog.single-blog', [
             'post' => $post,
-            'blogPosts' => Blog::where('published', '=', 1)->where('category', '=', 6)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get(),
+            'blogPosts' => Blog::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('published', '=', 1)->where('category', '=', -2)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get(),
             'showAll' => true,
             'criticalThinking' => true,
         ]);

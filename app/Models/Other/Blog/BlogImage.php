@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @method static create()
+ * @method static where(string $string, string $string1, $id)
  */
 class BlogImage extends Model{
     use HasFactory;

@@ -4,6 +4,7 @@ namespace App\Models\Other\Blog;
 
 use App\Models\Core\File;
 use App\Models\Programs\Program;
+use App\Models\Programs\Season;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -54,5 +55,9 @@ class Blog extends Model{
     /* Get category */
     public function getCategory(){
         return (!$this->category) ? __('Globalni post') : $this->categoryRel->title;
+    }
+
+    public function seasonRel(): HasOne{
+        return $this->hasOne(Season::class, 'id', 'season_id');
     }
 }

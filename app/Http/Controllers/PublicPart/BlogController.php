@@ -15,9 +15,14 @@ class BlogController extends Controller{
     protected string $_path = 'public-part.app.blog.';
 
     public function blog(): View{
-        $last = Blog::where('published', '=', 1)->where('category', '<', 6)->orderBy('id', 'desc')->first();
+        $last = Blog::whereHas('seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->where('published', '=', 1)->where('category', '!=', -1)->where('category', '!=', '-2')->orderBy('id', 'desc')->first();
+
         return view($this->_path . 'blog', [
-            'posts' => Blog::where('published', '=', 1)->where('category', '<', 6)->where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(3)->get(),
+            'posts' => Blog::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('published', '=', 1)->where('category', '!=', -1)->where('category', '!=', '-2')->where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(3)->get(),
             'last' => $last
         ]);
     }
@@ -34,7 +39,9 @@ class BlogController extends Controller{
     }
     public function loadMore(Request $request): bool|string{
         try{
-            $posts = Blog::where('published', '=', 1)->where('category', '<', 6)->where('id', '<', $request->lastID)->orderBy('id', 'DESC')->take(3)->get();
+            $posts = Blog::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('published', '=', 1)->where('category', '!=', -1)->where('category', '!=', '-2')->where('id', '<', $request->lastID)->orderBy('id', 'DESC')->take(3)->get();
             foreach ($posts as $post){
                 $post->img = $post->mainImg->getFile();
                 $post->categoryVal = $post->getCategory();
@@ -47,12 +54,12 @@ class BlogController extends Controller{
         }
     }
 
-    public function fetchImages(Request $request){
+    public function fetchImages(Request $request): string|bool {
         try{
-            $current = BlogImage::where('id', $request->attrID)->first();
+            $current = BlogImage::where('id', '=', $request->attrID)->first();
 
-            $previous = BlogImage::where('blog_id', $request->blog_id)->where('id', '<', $request->attrID)->orderBy('id', 'desc')->first();
-            $next     = BlogImage::where('blog_id', $request->blog_id)->where('id', '>', $request->attrID)->orderBy('id', 'ASC')->first();
+            $previous = BlogImage::where('blog_id', '=', $request->blog_id)->where('id', '<', $request->attrID)->orderBy('id', 'desc')->first();
+            $next     = BlogImage::where('blog_id', '=', $request->blog_id)->where('id', '>', $request->attrID)->orderBy('id', 'ASC')->first();
 
             return $this->jsonResponse('0000', __(''), [
                 'next' => $next->id ?? '',

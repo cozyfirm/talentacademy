@@ -7,6 +7,7 @@ use App\Http\Controllers\System\Core\Filters;
 use App\Models\Other\Blog\Blog;
 use App\Models\Other\Blog\BlogImage;
 use App\Models\Programs\Program;
+use App\Models\Programs\Season;
 use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
@@ -21,9 +22,9 @@ class BlogController extends Controller{
     protected string $_path = 'admin.other.';
 
     public function index(): View{
-        $posts = Blog::where('id', '>', 0);
+        $posts = Blog::where('id', '>', 0)->orderBy('id', 'desc');
         $posts = Filters::filter($posts);
-        $filters = [ 'title' => __('Naslov') ];
+        $filters = [ 'title' => __('Naslov'), 'seasonRel.title' => __('Sezona') ];
 
         return view($this->_path . 'blog.index', [
             'filters' => $filters,
@@ -33,12 +34,18 @@ class BlogController extends Controller{
     public function create(): View{
         return view($this->_path . 'blog.create', [
             'create' => true,
-            'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', 10)->prepend('Kritičko mišljenje', 6)
+            // 'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', 10)->prepend('Kritičko mišljenje', 6)
+            'other' => Program::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', -1)->prepend('Kritičko mišljenje', -2)
         ]);
     }
     public function save(Request $request): JsonResponse{
         try{
             $request['created_by'] = Auth::user()->id;
+            $season = Season::where('active', '=', 1)->first();
+            $request['season_id'] = $season->id;
+
             $post = Blog::create($request->all());
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.blog.preview', ['id' => $post->id]));
@@ -49,30 +56,32 @@ class BlogController extends Controller{
     public function preview($id): View{
         return view($this->_path . 'blog.create', [
             'preview' => true,
-            'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', 10)->prepend('Kritičko mišljenje', 6),
-            'post' => Blog::where('id', $id)->first()
+            'other' => Program::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', -1)->prepend('Kritičko mišljenje', -2),
+            'post' => Blog::where('id', '=', $id)->first()
         ]);
     }
     public function edit($id): View{
         return view($this->_path . 'blog.create', [
             'edit' => true,
-            'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', 10)->prepend('Kritičko mišljenje', 6),
-            'post' => Blog::where('id', $id)->first()
+            'other' => Program::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', -1)->prepend('Kritičko mišljenje', -2),
+            'post' => Blog::where('id', '=', $id)->first()
         ]);
     }
     public function update(Request $request): JsonResponse{
         try{
-            Blog::where('id', $request->id)->update($request->except(['id', 'undefined', 'files']));
+            Blog::where('id', '=', $request->id)->update($request->except(['id', 'undefined', 'files']));
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.blog.preview', ['id' => $request->id]));
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
-    public function delete($id){
-        Blog::where('id', $id)->delete();
-
+    public function delete($id): RedirectResponse{
+        Blog::where('id', '=', $id)->delete();
         return redirect()->route('system.admin.blog')->with('success', __('Uspješno obrisano!'));
     }
 
@@ -92,7 +101,7 @@ class BlogController extends Controller{
     }
     public function deleteFromGallery($id): RedirectResponse{
         try{
-            $blogImage = BlogImage::where('id', $id)->first();
+            $blogImage = BlogImage::where('id', '=', $id)->first();
             $postID = $blogImage->blog_id;
             $blogImage->delete();
 
@@ -103,11 +112,11 @@ class BlogController extends Controller{
     }
     public function editImage ($id, $what): View{
         return view($this->_path . 'blog.edit-image', [
-            'post' => Blog::where('id', $id)->first(),
+            'post' => Blog::where('id', '=', $id)->first(),
             'what' => $what
         ]);
     }
-    public function updateImage(Request $request){
+    public function updateImage(Request $request): RedirectResponse{
         try{
             $request['path'] = ('files/blog');
             $file = $this->saveFile($request, 'file', 'blog_img');

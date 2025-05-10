@@ -22,7 +22,7 @@
     </div>
 
     <div class="header__links">
-{{--        <a href="{{ route('public-part.critical-thinking') }}">{{ __('Kritičko razmišljanje') }}</a>--}}
+        <a href="{{ route('public-part.critical-thinking') }}">{{ __('Kritičko razmišljanje') }}</a>
         <a href="{{ route('public-part.lecturers.lecturers') }}">{{ __('Predavači') }}</a>
         <a href="{{ route('public-part.scholarship') }}">{{ __('Stipendije') }}</a>
         <a href="{{ route('public-part.blog.blog') }}">{{ __('Blog') }}</a>
@@ -76,7 +76,7 @@
         <img src="{{ asset('files/images/svg-icons/close-menu.svg') }}" alt="Close mobile menu" id="close-mobile-menu">
     </div>
     <div class="mobile-menu__content">
-{{--        <a href="{{ route('public-part.critical-thinking') }}" class="mobile-menu__content-link">{{ __('Kritičko razmišljanje') }}</a>--}}
+        <a href="{{ route('public-part.critical-thinking') }}" class="mobile-menu__content-link">{{ __('Kritičko razmišljanje') }}</a>
         <a href="{{ route('public-part.lecturers.lecturers') }}" class="mobile-menu__content-link">{{ __('Predavači') }}</a>
         <a href="{{ route('public-part.scholarship') }}" class="mobile-menu__content-link">{{ __('Stipendije') }}</a>
         <a href="{{ route('public-part.blog.blog') }}" class="mobile-menu__content-link">{{ __('Blog') }}</a>

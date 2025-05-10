@@ -19,6 +19,10 @@ return new class extends Migration
             /** Subtract ID for CSS */
             $table->integer('subtract')->default(5);
 
+            $table->date('app_date');
+            $table->date('start_date');
+            $table->date('end_date');
+
             $table->timestamps();
             $table->softDeletes();
         });

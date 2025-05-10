@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits\Common;
+use App\Models\Programs\Season;
 use Illuminate\Http\Request;
 
 trait CommonTrait{
@@ -14,5 +15,14 @@ trait CommonTrait{
         }
 
         return self::$_time_arr;
+    }
+
+    public function getSeasonData($param){
+        try{
+            $season = Season::where('active', '=', 1)->first();
+            return ($season) ? $season->$param : "";
+        }catch (\Exception $e){
+            return "";
+        }
     }
 }

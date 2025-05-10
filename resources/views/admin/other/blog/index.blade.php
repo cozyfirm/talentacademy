@@ -39,6 +39,7 @@
                 <tr>
                     <td class="text-center">{{ $i++}}.</td>
                     <td> {{ $post->title ?? ''}} </td>
+                    <td> {{ $post->seasonRel->title ?? ''}} </td>
 
                     <td class="text-center">
                         <a href="{{route('system.admin.blog.preview', ['id' => $post->id] )}}" title="{{ __('Više informacija') }}">

@@ -50,10 +50,14 @@ class PublicUserController extends Controller{
         ]);
     }
     public function latestNews(): View{
-        $last = Blog::where('published', '=', 1)->where('category', '=', 10)->orderBy('id', 'desc')->first();
+        $last = Blog::whereHas('seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->where('published', '=', 1)->where('category', '=', -1)->orderBy('id', 'desc')->first();
 
         return view('public-part.app.blog.blog', [
-            'posts' => Blog::where('published', '=', 1)->where('category', '=', 10)->where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(30)->get(),
+            'posts' => Blog::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('published', '=', 1)->where('category', '=', -1)->where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(30)->get(),
             'last' => $last,
             'showAll' => true
         ]);

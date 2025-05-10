@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('img_three')->nullable();
             $table->string('video')->nullable();
 
+            $table->integer('season_id')->default(1);
+
             $table->timestamps();
         });
     }
