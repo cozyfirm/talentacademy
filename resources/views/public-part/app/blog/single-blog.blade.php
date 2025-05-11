@@ -15,7 +15,7 @@
 {{--        <img class="img-three" src="{{ asset( $post->imgThree->getFile() ) }}">--}}
 {{--    </div>--}}
 
-    <div class="image__wrapper d-none">
+    <div class="image__wrapper preview__image_wrapper d-none">
         <div class="close_gallery" title="{{ __('Zatvorite galeriju') }}">
             <i class="fas fa-times"></i>
         </div>

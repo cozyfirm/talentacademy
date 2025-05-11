@@ -1,6 +1,6 @@
 $(document).ready(function (){
     /* Format is: month / day / year */
-    let td = new Date("05/31/2025 06:00:00");
+    let td = new Date("06/01/2025 06:00:00").getTime();
     // let td = new Date("04/06/2024");
 
     function TimeCalculator(seconds) {
@@ -15,13 +15,20 @@ $(document).ready(function (){
             s = Math.floor(seconds % 60);
         }
 
+        console.log(mo);
         /* Check if it's right page */
-        // noinspection JSJQueryEfficiency
         if($(".c__month").length){
-            $(".c__month").text(d);
-            $(".c__day").text(h);
-            $(".c__hour").text(m);
-            $(".c__min").text(s);
+            if(mo){
+                $(".c__month").text(mo).attr('title', 'Mjeseci');
+                $(".c__day").text(d).attr('title', 'Dana');
+                $(".c__hour").text(h).attr('title', 'Sati');
+                $(".c__min").text(m).attr('title', 'Minuta');
+            }else{
+                $(".c__month").text(d).attr('title', 'Dana');
+                $(".c__day").text(h).attr('title', 'Sati');
+                $(".c__hour").text(m).attr('title', 'Minuta');
+                $(".c__min").text(s).attr('title', 'Sekundi');
+            }
         }
 
         // console.log(`${mo} Months ${d} Days ${h}:${m}:${s}`);

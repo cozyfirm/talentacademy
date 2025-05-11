@@ -65,7 +65,7 @@ class ProgramsController extends Controller{
     }
     public function moreAbout ($id){
         return view('public-part.app.home.single-page', [
-            'page' => SinglePage::where('id', $id + 8)->first()
+            'page' => SinglePage::where('id', $id + 9)->first()
         ]);
     }
     public function getAjaxPrivateSessions(Request $request){

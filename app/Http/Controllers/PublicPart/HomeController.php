@@ -105,4 +105,9 @@ class HomeController extends Controller{
             'criticalThinking' => true,
         ]);
     }
+    public function alumni (){
+        return view($this->_path . 'single-page', [
+            'page' => SinglePage::where('id', 7)->first()
+        ]);
+    }
 }

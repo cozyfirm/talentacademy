@@ -28,7 +28,7 @@
         <a href="{{ route('public-part.blog.blog') }}">{{ __('Blog') }}</a>
         <a href="{{ route('public-part.locations.locations') }}">{{ __('Lokacije') }}</a>
         <a href="{{ route('public-part.archive') }}">{{ __('Arhiva') }}</a>
-        <a href="{{ route('public-part.lecturers.lecturers') }}">{{ __('Alumni') }}</a>
+        <a href="{{ route('public-part.alumni') }}">{{ __('Alumni') }}</a>
         <a class="show-header-submenu">
             {{ __('Programi') }}
             <i class="fas fa-chevron-down"></i>
@@ -82,7 +82,7 @@
         <a href="{{ route('public-part.blog.blog') }}" class="mobile-menu__content-link">{{ __('Blog') }}</a>
         <a href="{{ route('public-part.locations.locations') }}" class="mobile-menu__content-link">{{ __('Lokacije') }}</a>
         <a href="{{ route('public-part.archive') }}" class="mobile-menu__content-link">{{ __('Arhiva') }}</a>
-        <a href="#" class="mobile-menu__content-link">{{ __('Alumni') }}</a>
+        <a href="{{ route('public-part.alumni') }}" class="mobile-menu__content-link">{{ __('Alumni') }}</a>
         <a class="mobile-menu__content-link" id="open-mobile-submenu">
             {{ __('Programi akademije') }}
             <i class="fas fa-chevron-down"></i>

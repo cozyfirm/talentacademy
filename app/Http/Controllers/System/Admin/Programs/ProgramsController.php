@@ -125,7 +125,9 @@ class ProgramsController extends Controller{
     }
 
     public function allApplications(): View{
-        $applications = ProgramApplication::where('status', '=', 'submitted');
+        $applications = ProgramApplication::whereHas('programRel.seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->where('status', '=', 'submitted');
         $applications = Filters::filter($applications);
 
         $filters = [

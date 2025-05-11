@@ -84,7 +84,7 @@ $('.single-select2').select2({
 });
 
 
-$(document).on('click', '.image__wrapper', function(e){
+$(document).on('click', '.preview__image_wrapper', function(e){
     // if the click target isn't inside the image container or a nav button…
     if ( $(e.target).closest('.main-image, .archive_gallery__navigation-button').length === 0 ) {
         $(this).addClass('d-none');

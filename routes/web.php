@@ -145,6 +145,7 @@ Route::prefix('')->group(function () {
     Route::get ('/critical-thinking',                        [HomepageController::class, 'criticalThinking'])->name('public-part.critical-thinking');
     Route::get ('/critical-thinking-preview/{id}',           [HomepageController::class, 'criticalThinkingPreview'])->name('public-part.critical-thinking.preview');
 
+    Route::get ('/alumni',                                   [HomepageController::class, 'alumni'])->name('public-part.alumni');
     /**
      *  Archive
      */

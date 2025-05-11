@@ -13,6 +13,7 @@
     justify-content: center;
     align-items: center;
     background-color: #CAA8F5;
+    border-top: 1px solid $dark;
 
     .preview-session__header-container {
         padding: 64px 0;
@@ -41,7 +42,7 @@
         line-height: 140%;
         margin-top: 8px;
         .ps-presenters-wrapper{
-            display: flex; align-items: center; gap: 5px;
+           // display: flex; align-items: center; gap: 5px;
         }
     }
 }

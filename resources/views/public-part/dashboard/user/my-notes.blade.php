@@ -24,7 +24,15 @@
 
                                     <div class="mnh__right">
                                         <img class="speaker_img" src="{{ asset('files/images/public-part/speaker.png') }}" alt="">
-                                        <p class="no__select presenter_name"> {{ $session->presenterRel->name }} </p>
+                                        <p class="no__select presenter_name">
+                                        @if($session->presentersRel->count())
+                                                @php $total = 0; @endphp
+                                                @foreach($session->presentersRel as $presenter)
+                                                    {{ $presenter->presenterRel->name ?? '' }}
+                                                    @if($total++ < ($session->presentersRel->count() - 1)), @endif
+                                                @endforeach
+                                            @endif
+                                        </p>
                                         <img class="notes_img" src="{{ asset('files/images/public-part/notes.png') }}" alt="">
                                         <div class="total_no" id="notes__count_{{ $session->id }}"> {{ $session->noteRel->count() }} </div>
                                     </div>

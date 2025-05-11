@@ -47,10 +47,10 @@
                         <small>{{ __('Spisak svih predavača na kursu') }}</small>
                     </h6>
 
-                    @foreach($program->uniquePresenterSessions() as $sessionRel)
+                    @foreach($program->uniquePresenterSessions() as $presenter)
                         <p class="card-text mt-2 mb-1" title="{{ __('Više informacija o predavaču') }}">
-                            <a href="{{ route('system.admin.users.preview', ['username' => $sessionRel->presenterRel->username ]) }}" class="m-0 p-0 get-gke-exam" target="_blank">
-                                <small>{{ $sessionRel->presenterRel->name ?? '' }}</small>
+                            <a href="{{ route('system.admin.users.preview', ['username' => $presenter->username ]) }}" class="m-0 p-0 get-gke-exam" target="_blank">
+                                <small>{{ $presenter->name ?? '' }}</small>
                             </a>
                         </p>
                     @endforeach
