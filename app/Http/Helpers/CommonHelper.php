@@ -24,4 +24,8 @@ class CommonHelper{
 
         return Carbon::parse($currentSeason->end_date)->format('d') . '. ' . self::$_months[(int)(Carbon::parse($currentSeason->end_date)->format('m')) - 1] . ' ' . Carbon::parse($currentSeason->end_date)->format('Y');
     }
+
+    public static function getBcgColor($program_id): int{
+        return (int)($program_id - self::getCurrentSeason()->subtract);
+    }
 }

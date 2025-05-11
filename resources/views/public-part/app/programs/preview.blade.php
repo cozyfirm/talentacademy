@@ -5,7 +5,7 @@
 
 <!-- Page content -->
 @section('public-content')
-    <div class="preview__cover preview__cover_{{ $program->id }}">
+    <div class="preview__cover preview__cover_{{ CommonHelper::getBcgColor($program->id) }}">
         <div class="preview__cover_iw">
             <div class="p__c_iw_img">
                 <img src="{{ asset($program->imageRel->getFile()) }}" alt="">
@@ -58,13 +58,13 @@
     @include('public-part.app.base-includes.blog.blog_scroll')
 
     <!-- Generic element; How to apply -->
-{{--    <div class="how-to-apply how-to-apply_{{ $program->id }} how-to-apply-bg-white">--}}
-{{--        @include('public-part.app.base-includes.generic.how-to-apply')--}}
-{{--    </div>--}}
+    <div class="how-to-apply how-to-apply_{{ CommonHelper::getBcgColor($program->id) }} how-to-apply-bg-white">
+        @include('public-part.app.base-includes.generic.how-to-apply')
+    </div>
 
     @if(!$appTimePassed)
         <!-- Counter -->
-        <div class="preview__counter preview__counter_{{ $program->id }}">
+        <div class="preview__counter preview__counter_{{ CommonHelper::getBcgColor($program->id) }}">
             <div class="preview__counter_iw">
                 <h1>{{ __('Rok za prijavu aplikacija:') }}</h1>
                 <h1> {{ CommonHelper::getAppDate() }} </h1>
@@ -115,7 +115,7 @@
     @include('public-part.app.base-includes.programs.all')
 
     <!-- Contact us form -->
-    <div class="contact-us contact-us-program cu_{{ $program->id }}">
+    <div class="contact-us contact-us-program cu_{{ CommonHelper::getBcgColor($program->id) }}">
         @include('public-part.app.base-includes.generic.contact-us')
     </div>
 @endsection

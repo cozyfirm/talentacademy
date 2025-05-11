@@ -5,7 +5,7 @@
 
     <div class="programs__grid_iw" id="programs__grid_iw">
         @foreach($offlineSessions as $session)
-            <div class="pg__sample pg__sample_{{ $program->id }}">
+            <div class="pg__sample pg__sample_{{ CommonHelper::getBcgColor($program->id) }}">
                 <h1> {{ $session->title ?? '' }} </h1>
                 <div class="info_w">
                     <div class="pg_sample__row">
@@ -26,7 +26,7 @@
             </div>
         @endforeach
     </div>
-    <div class="programs__grid_pagination programs__grid_pagination_{{ $program->id }}">
+    <div class="programs__grid_pagination programs__grid_pagination_{{ CommonHelper::getBcgColor($program->id) }}">
         @for($i=1; $i<=$offlineSessions->lastPage(); $i++)
             <a href="{{ route('public-part.programs.sneak-and-peak', ['id' => $program->id, 'page' => $i]) }}#programs__grid_iw">
                 <div class="page-w"> <p>{{ $i }}</p> </div>

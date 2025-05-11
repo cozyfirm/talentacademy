@@ -1,4 +1,4 @@
-<div class="program__timeline program__timeline_{{ $program->id }}" id="program-sessions">
+<div class="program__timeline program__timeline_{{ CommonHelper::getBcgColor($program->id) }}" id="program-sessions">
     <div class="program__timeline__sessions_sticky sticky">
         <div class="program__timeline-section dark">
             <div class="program__timeline-container">

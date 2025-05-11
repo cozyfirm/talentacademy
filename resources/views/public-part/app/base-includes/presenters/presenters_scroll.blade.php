@@ -1,6 +1,6 @@
 <!-- Presenters -->
-<div class="presenters__scroll_wrapper presenters__scroll_wrapper_{{ $program->id }}">
-    <div class="generic__header generic__header_{{ $program->id }}">
+<div class="presenters__scroll_wrapper presenters__scroll_wrapper_{{ CommonHelper::getBcgColor($program->id)}}">
+    <div class="generic__header generic__header_{{ CommonHelper::getBcgColor($program->id) }}">
         <h2>{{ __('Predavači') }}</h2>
         <a href="{{ route('public-part.lecturers.lecturers') }}">
             <button class="gh_button">{{ __('Svi predavači') }}</button>
