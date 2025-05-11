@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\PublicPart\Archive;
 
 use App\Http\Controllers\Controller;
+use App\Models\Archive\Gallery;
 use App\Models\Other\Blog\Blog;
 use App\Models\Other\SinglePage;
 use App\Traits\Http\ResponseTrait;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ArchiveController extends Controller{
@@ -54,5 +58,64 @@ class ArchiveController extends Controller{
             'showAll' => true,
             'criticalThinking' => true,
         ]);
+    }
+
+    /**
+     * Preview archive gallery
+     *
+     * @return View
+     */
+    public function gallery(): View{
+        return view($this->_path . 'gallery', [
+            'images' => Gallery::orderBy('id', 'desc')->take(3)->get()
+        ]);
+    }
+
+    /**
+     * Load more images from gallery
+     * @param Request $request
+     * @return bool|string
+     */
+    public function loadMoreImages(Request $request): bool|string{
+        try{
+            $last = Gallery::orderBy('id', 'ASC')->first();
+            $images = Gallery::where('id', '<', $request->lastID)->orderBy('id', 'desc')->take(3)->get();
+            $isLast = false;
+
+            foreach ($images as $image) {
+                if($image->id == $last->id) $isLast = true;
+            }
+
+            return $this->jsonResponse('0000', 'Success', [
+                'images' => $images,
+                'isLast' => $isLast
+            ]);
+        }catch (\Exception $e){}
+    }
+
+    /**
+     * Fetch single image
+     * @param Request $request
+     * @return bool|string
+     */
+    public function fetchImage(Request $request): bool|string{
+        try{
+            $previous = Gallery::where('id', '>', $request->attrID)->orderBy('id', 'asc')->first();
+            $image    = Gallery::where('id', '=', $request->attrID)->first();
+            $next     = Gallery::where('id', '<', $request->attrID)->orderBy('id', 'desc')->first();
+
+            if(!$previous){
+                $previous = Gallery::orderBy('id', 'asc')->first();
+            }
+            if(!$next){
+                $next = Gallery::orderBy('id', 'desc')->first();
+            }
+
+            return $this->jsonResponse('0000', 'Success', [
+                'previous' => $previous,
+                'image' => $image,
+                'next' => $next
+            ]);
+        }catch (\Exception $e){ }
     }
 }

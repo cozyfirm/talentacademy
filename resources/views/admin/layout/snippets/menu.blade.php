@@ -61,31 +61,31 @@
 {{--                <div class="number-of"><p>3</p></div>--}}
 {{--            </div>--}}
 
-            <a href="#" target="_blank">
+            <a href="{{ route('public-part.home') }}" target="_blank">
                 <div class="single-li">
-                    <p> {{__('Blog')}} </p>
+                    <p> {{__('HomePage')}} </p>
                 </div>
             </a>
 
-            <a href="#">
+            <a href="{{ route('system.admin.programs.all-applications') }}">
                 <div class="single-li">
-                    <p> {{__('WebShop')}} </p>
+                    <p> {{__('Prijave na programe')}} </p>
                 </div>
             </a>
         </div>
 
         <!-- Right top icons -->
         <div class="right-icons">
-            <div class="single-li main-search-w" title="">
-                <i class="fas fa-search main-search-t" title="{{__('Pretražite')}}"></i>
+{{--            <div class="single-li main-search-w" title="">--}}
+{{--                <i class="fas fa-search main-search-t" title="{{__('Pretražite')}}"></i>--}}
 {{--                @include('system.template.menu.menu-includes.search')--}}
-            </div>
-            <div class="single-li m-show-notifications" title="Pregled obavijesti">
-                <i class="fas fa-bell"></i>
-                <div class="number-of"><p id="no-unread-notifications">12</p></div>
+{{--            </div>--}}
+{{--            <div class="single-li m-show-notifications" title="Pregled obavijesti">--}}
+{{--                <i class="fas fa-bell"></i>--}}
+{{--                <div class="number-of"><p id="no-unread-notifications">12</p></div>--}}
 
 {{--                @include('system.template.menu.menu-includes.notifications')--}}
-            </div>
+{{--            </div>--}}
             <div class="single-li main-search-w" title="">
                 <a href="{{ route('auth.logout') }}">
                     <i class="fas fa-power-off" title="{{__('Odjavite se')}}"></i>
@@ -260,6 +260,28 @@
                     <div class="extra-elements">
                         <div class="ee-t ee-t-b"><p>{{__('Other')}}</p></div>
                     </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="menu-a-link">
+            <div class="s-lm-wrapper">
+                <div class="s-lm-s-elements">
+                    <div class="s-lms-e-img">
+                        <i class="fas fa-archive"></i>
+                    </div>
+                    <p>{{__('Arhiva')}}</p>
+                    <div class="extra-elements">
+                        <div class="rotate-element"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+                <div class="inside-links active-links">
+                    <a href="{{ route('system.admin.archive.gallery') }}">
+                        <div class="inside-lm-link">
+                            <div class="ilm-l"></div><div class="ilm-c"></div>
+                            <p>{{__('Galerija fotografija')}}</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </a>

@@ -13,7 +13,7 @@
             </div>
 
             <div class="archive__body">
-                <a href="#" class="ab__link">
+                <a href="{{ route('public-part.archive.photo-gallery') }}" class="ab__link">
                     <div class="ab__wrapper">
                         <div class="ab__w__img">
                             <img src="{{ asset('files/images/public-part/archive/gallery.jpg') }}" alt="">

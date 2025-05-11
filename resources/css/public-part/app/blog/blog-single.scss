@@ -225,7 +225,7 @@
     .close_gallery{
         position: absolute; right: 32px; top: 32px;
         i{
-            color:#EA8BF3; font-size: 32px; transition: 0.2s all;
+            color:$primary; font-size: 32px; transition: 0.2s all;
         }
     }
     .close_gallery:hover{
@@ -248,7 +248,7 @@
 
         gap: 16px;
 
-        .gallery__navigation-button {
+        .gallery__navigation-button, .archive_gallery__navigation-button{
             display: flex;
             height: 35.754px;
             padding: 8px 16px;

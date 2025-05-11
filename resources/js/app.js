@@ -32,6 +32,7 @@ import "./public-part/app/programs/programs.js";
 /* Contact -us */
 import "./public-part/app/contact-us/send-us-a-message.js";
 
+import "./public-part/app/archive/gallery.js";
 
 /* Import Submit script */
 import "./style/submit.js";
@@ -79,5 +80,13 @@ $('.single-select2').select2({
     },
     escapeMarkup: function (markup) {
         return markup; // Allow custom HTML (if needed)
+    }
+});
+
+
+$(document).on('click', '.image__wrapper', function(e){
+    // if the click target isn't inside the image container or a nav button…
+    if ( $(e.target).closest('.main-image, .archive_gallery__navigation-button').length === 0 ) {
+        $(this).addClass('d-none');
     }
 });

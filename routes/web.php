@@ -11,6 +11,7 @@ use App\Http\Controllers\PublicPart\HomeController as HomepageController;
 use App\Http\Controllers\PublicPart\LecturersController;
 use App\Http\Controllers\PublicPart\LocationsController;
 use App\Http\Controllers\PublicPart\ProgramsController;
+use App\Http\Controllers\System\Admin\Archive\GalleryController as ArchiveGalleryController;
 use App\Http\Controllers\System\Admin\HomeController;
 use App\Http\Controllers\System\Admin\Other\BlogController as AdminBlogController;
 use App\Http\Controllers\System\Admin\Other\Chat\GroupChatsController;
@@ -162,7 +163,12 @@ Route::prefix('')->group(function () {
         Route::prefix('critical-thinking')->group(function () {
             Route::get ('/',                       [ArchiveController::class, 'criticalThinking'])->name('public-part.archive.critical-thinking');
             Route::get ('/preview/{id}',           [ArchiveController::class, 'criticalThinkingPreview'])->name('public-part.archive.critical-thinking.preview');
+        });
 
+        Route::prefix('photo-gallery')->group(function () {
+            Route::get ('/',                       [ArchiveController::class, 'gallery'])->name('public-part.archive.photo-gallery');
+            Route::post('/load-more',              [ArchiveController::class, 'loadMoreImages'])->name('public-part.archive.photo-gallery.load-more');
+            Route::post('/fetch-image',            [ArchiveController::class, 'fetchImage'])->name('public-part.archive.photo-gallery.fetch-image');
         });
     });
 });
@@ -401,6 +407,21 @@ Route::prefix('system')->middleware('auth')->group(function () {
 
             Route::get ('/edit-image/{id}/{what}',         [AdminBlogController::class, 'editImage'])->name('system.admin.blog.edit-image');
             Route::post('/update-image',                   [AdminBlogController::class, 'updateImage'])->name('system.admin.blog.update-image');
+        });
+
+        /**
+         *  Archive
+         */
+        Route::prefix('archive')->middleware('auth')->group(function () {
+            /**
+             *  Gallery
+             */
+            Route::prefix('gallery')->group(function () {
+                Route::get ('/',                               [ArchiveGalleryController::class, 'index'])->name('system.admin.archive.gallery');
+                Route::get ('/create',                         [ArchiveGalleryController::class, 'create'])->name('system.admin.archive.gallery.create');
+                Route::post('/save',                           [ArchiveGalleryController::class, 'save'])->name('system.admin.archive.gallery.save');
+                Route::get ('/delete/{id}',                    [ArchiveGalleryController::class, 'delete'])->name('system.admin.archive.gallery.delete');
+            });
         });
     });
 });
