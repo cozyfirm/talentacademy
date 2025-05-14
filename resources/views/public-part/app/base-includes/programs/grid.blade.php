@@ -1,6 +1,6 @@
 <div class="programs__grid" id="programs__grid">
     <div class="generic__header">
-        <h2>{{ __('Program') }}</h2>
+        <h2>@if(isset($lecturer)) {{ __('Sesije predavača') }} @else {{ __('Program') }} @endif</h2>
     </div>
 
     <div class="programs__grid_iw" id="programs__grid_iw">
