@@ -16,14 +16,16 @@
             <h1>{{ __('Dobro došli!') }}</h1>
 
             <p>
-                {{ __('Molimo da u svojoj aplikaciji pokušaš dati što više informacija o sebi i o razlozima zbog kojih želiš postati stipendista Helem Nejse Talent Akademje na programu') }}
-                <b>{{ $program->title }}</b>.
+                Molimo vas da u svojoj aplikaciji podijelite iskrene i autentične odgovore na pitanja ispod. Ova prijava je prvi korak ka tome da postanete dio <b>Helem Nejse Talent Akademije</b>.
+            </p>
+            <p>
+                <b>VAŽNO: Nemojte koristiti alate poput ChatGPT-a za generisanje odgovora.</b> Vaše riječi, iskustvo i stavovi su ono što nas zanima – tražimo stvarne vas, ne savršene rečenice. Želimo da vas upoznamo i razumijemo zašto baš vi treba da budete dio ovog programa.
+            </p>
+            <p>
+                Na osnovu vaših odgovora, biramo kandidate koji će biti pozvani na narednu fazu selekcije. Ukoliko imate pitanja, javite nam se putem e-maila ili društvenih mreža.
             </p>
 
-            <p> {{ __('Važno je da što detaljnije opišeš svoje odgovore u prijavi jer od toga u velikoj mjeri zavisi naša procjena tvog profila i potencijala. Detaljnje informacije koje pružiš pomoći će nam da bolje razumijemo tvoju motivaciju, iskustvo, očekivanja i ciljeve. Na temelju ovih odgovora odlučujemo o mogućnosti dodjele stipendije, stoga je ključno da svoje misli i ambicije izraziš na najbolji mogući način. ') }} </p>
-            <p> {{ __('Svoju aplikaciju ili njene dijelove možeš čuvati u ovoj formi. Tvoja finalna aplikacija će biti proslijeđena nama tek kada izabereš opciju "Pošalji aplikaciju".') }} </p>
-
-            <p> {{ __('Možete aplicirati samo za jedan od ponuđenih studijskih programa. Provjerite da li je baš ovo program koji želite upisati i podnesite vašu aplikaciju. Ukoliko nije, molimo vas da izaberete neki drugi program akademije.') }} </p>
+            <p><b>Obavezna pitanja:</b></p>
 
             <form action="{{ route('public-part.programs.update-scholarship') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -32,25 +34,28 @@
                 {{ html()->hidden('send_application')->class('form-control')->id('send_application')->value(0) }}
 
                 <div class="apply__for_scholarship_textarea">
-                    <label for="motivation">(* Obavezno polje) {{ __('Šta Vas je motivisalo da se prijavite na Helem Nejse Talent Akademiju? Opišite svoj interes za program na koji aplicirate.') }}</label>
-                    {{ html()->textarea('motivation')->class('form-control form-control-sm')->id('motivation')->placeholder('Maksimalno 250 riječi..')->value(isset($application) ? $application->motivation : '')->isReadonly(false) }}
+                    <label for="motivation">(* Obavezno polje) {{ __('Šta vas je motivisalo da se prijavite na Helem Nejse Talent Akademiju?') }}</label>
+                    {{ html()->textarea('motivation')->class('form-control form-control-sm mb-2')->id('motivation')->placeholder('Maksimalno 300 riječi..')->value(isset($application) ? $application->motivation : '')->isReadonly(false) }}
+                    <small id="motivation" class="form-text text-muted"><i>{{ __('Tražimo vašu iskrenu priču: Šta vas pokreće, gdje ste se pronašli u pozivu, i zašto mislite da je ovo prava prilika za vas?') }}</i></small>
                 </div>
                 <div class="apply__for_scholarship_textarea">
-                    <label for="interests">(* Obavezno polje) {{ __('Molimo Vas da opišite sva relevantna iskustva iz oblasti za koju aplicirate, uključujući formalno obrazovanje, kurseve, projekte, volontiranje itd.') }}</label>
-                    {{ html()->textarea('interests')->class('form-control form-control-sm')->id('interests')->placeholder('Maksimalno 250 riječi..')->value(isset($application) ? $application->interests : '')->isReadonly(false) }}
+                    <label for="interests">(* Obavezno polje) {{ __('Zašto mislite da ste baš vi dobar/a kandidat/kinja za ovaj program?') }}</label>
+                    {{ html()->textarea('interests')->class('form-control form-control-sm mb-2')->id('interests')->placeholder('Maksimalno 300 riječi..')->value(isset($application) ? $application->interests : '')->isReadonly(false) }}
+                    <small id="interests" class="form-text text-muted"><i>{{ __('Imate li neko relevantno iskustvo, znanje, vještine, ili čak samo snažnu motivaciju da učite i doprinesete zajednici?') }}</i></small>
                 </div>
                 <div class="apply__for_scholarship_textarea">
-                    <label for="experience">(* Obavezno polje) {{ __('Ukoliko nemate formalnog iskustva u oblasti za koju aplicirate, opišite talente i vještine koje smatrate relevantnima za aplikaciju.') }}</label>
-                    {{ html()->textarea('experience')->class('form-control form-control-sm')->id('experience')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->experience : '')->isReadonly(false) }}
+                    <label for="experience">(* Obavezno polje) {{ __('Kako očekujete da će vam program pomoći u ličnom i profesionalnom razvoju?') }}</label>
+                    {{ html()->textarea('experience')->class('form-control form-control-sm mb-2')->id('experience')->placeholder('Maksimalno 300 riječi..')->value(isset($application) ? $application->experience : '')->isReadonly(false) }}
+                    <small id="experience" class="form-text text-muted"><i>{{ __('Recite nam gdje se vidite poslije akademije, šta želite postići, i kako vam mi možemo pomoći na tom putu.') }}</i></small>
                 </div>
-                <div class="apply__for_scholarship_textarea">
-                    <label for="expectations">(* Obavezno polje) {{ __('Koja su Vaša očekivanja od Helem Nejse Talent Akademije? Koje vještine i znanja želite steći ili unaprijediti tokom programa?') }}</label>
-                    {{ html()->textarea('expectations')->class('form-control form-control-sm')->id('expectations')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->expectations : '')->isReadonly(false) }}
-                </div>
-                <div class="apply__for_scholarship_textarea">
-                    <label for="skills">(* Obavezno polje) {{ __('Na koji način bi učešće na HNTA programu doprinijelo Vašem profesionalnom razvoju?') }}</label>
-                    {{ html()->textarea('skills')->class('form-control form-control-sm')->id('skills')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->skills : '')->isReadonly(false) }}
-                </div>
+{{--                <div class="apply__for_scholarship_textarea">--}}
+{{--                    <label for="expectations">(* Obavezno polje) {{ __('Koja su Vaša očekivanja od Helem Nejse Talent Akademije? Koje vještine i znanja želite steći ili unaprijediti tokom programa?') }}</label>--}}
+{{--                    {{ html()->textarea('expectations')->class('form-control form-control-sm')->id('expectations')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->expectations : '')->isReadonly(false) }}--}}
+{{--                </div>--}}
+{{--                <div class="apply__for_scholarship_textarea">--}}
+{{--                    <label for="skills">(* Obavezno polje) {{ __('Na koji način bi učešće na HNTA programu doprinijelo Vašem profesionalnom razvoju?') }}</label>--}}
+{{--                    {{ html()->textarea('skills')->class('form-control form-control-sm')->id('skills')->placeholder('Maksimalno 500 riječi..')->value(isset($application) ? $application->skills : '')->isReadonly(false) }}--}}
+{{--                </div>--}}
 
                 <div class="upload__file_wrapper" title="{{ __('Vaš CV') }}">
                     <label class="cv-label" for="cv"> @if(isset($application->cvRel)) <span>{{ substr($application->cvRel->file, 0, 30) }}</span> @else {{ __('(* Obavezno polje) Upload CV') }} @endif </label>
@@ -59,13 +64,13 @@
                         <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
                     @endif
                 </div>
-                <div class="upload__file_wrapper" title="{{ __('Vaše motivaciono pismo') }}">
-                    <label class="mv-label" for="motivation_letter"> @if(isset($application->mlRel)) <span>{{ substr($application->mlRel->file, 0, 30) }}</span> @else {{ __('Motivacijsko pismo') }} @endif </label>
-                    <input name="motivation_letter" class="form-control form-control-sm mt-3 d-none ml-select" id="motivation_letter" type="file">
-                    @if(!isset($submittedOther) and !$submitted)
-                        <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>
-                    @endif
-                </div>
+{{--                <div class="upload__file_wrapper" title="{{ __('Vaše motivaciono pismo') }}">--}}
+{{--                    <label class="mv-label" for="motivation_letter"> @if(isset($application->mlRel)) <span>{{ substr($application->mlRel->file, 0, 30) }}</span> @else {{ __('Motivacijsko pismo') }} @endif </label>--}}
+{{--                    <input name="motivation_letter" class="form-control form-control-sm mt-3 d-none ml-select" id="motivation_letter" type="file">--}}
+{{--                    @if(!isset($submittedOther) and !$submitted)--}}
+{{--                        <button class="save-btn"> <i class="fas fa-upload"></i> <p> {{ __('Upload') }} </p></button>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
                 <div class="upload__file_wrapper" title="{{ __('Dodatni dokumenti ili primjeri rada') }}">
                     <label class="o-label" for="other" title="{{ __('Ovo polje je opcionalno') }}"> @if(isset($application->otherRel)) <span>{{ substr($application->otherRel->file, 0, 30) }}</span> @else {{ __('Dodatni dokumenti ili primjeri rada') }} @endif </label>
                     <input name="other" class="form-control form-control-sm mt-3 d-none o-select" id="other" type="file">

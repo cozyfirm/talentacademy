@@ -59,7 +59,20 @@ class LecturersController extends Controller{
         $lecturer = User::where('id', $id)->first();
         if($lecturer->role != 'presenter') return redirect()->route('public-part.lecturers.lecturers');
 
+        /**
+         *  Show lecturer info only for active users or lecturers
+         */
+
+        /* Always redirect */
+        return redirect()->route('public-part.lecturers.single-lecturer.sneak-and-peek', ['id' => $id, 'page' => 1]);
+
         if(!Auth::check()) return redirect()->route('public-part.lecturers.single-lecturer.sneak-and-peek', ['id' => $id, 'page' => 1]);
+        else{
+            /* ToDo : Uncomment this one */
+            if(Auth::user()->role != 'presenter' or Auth::user()->role != 'admin'){
+                if(!Auth::user()->hasAcceptedApp()) return redirect()->route('public-part.lecturers.single-lecturer.sneak-and-peek', ['id' => $id, 'page' => 1]);
+            }
+        }
 
         /* ToDo:: Check if user is not at current active season, do not show it's data */
 

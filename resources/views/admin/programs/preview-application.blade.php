@@ -60,10 +60,10 @@
                                     <a href="{{ route('system.admin.programs.download-file', ['id' => $application->cvRel->id ]) }}" class="text-info">{{ substr($application->cvRel->file, 0, 30) }}</a>
                                 @endif
                                 <span>|</span>
-                                @if(isset($application->mlRel))
-                                    <a href="{{ route('system.admin.programs.download-file', ['id' => $application->mlRel->id ]) }}" class="text-info">{{ substr($application->mlRel->file, 0, 30) }}</a>
-                                @endif
-                                <span>|</span>
+{{--                                @if(isset($application->mlRel))--}}
+{{--                                    <a href="{{ route('system.admin.programs.download-file', ['id' => $application->mlRel->id ]) }}" class="text-info">{{ substr($application->mlRel->file, 0, 30) }}</a>--}}
+{{--                                @endif--}}
+{{--                                <span>|</span>--}}
                                 @if(isset($application->otherRel))
                                     <a href="{{ route('system.admin.programs.download-file', ['id' => $application->otherRel->id ]) }}" class="text-info">{{ substr($application->otherRel->file, 0, 30) }}</a>
                                 @endif
@@ -84,7 +84,7 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {{ html()->label(__('Molimo Vas da opišite sva relevantna iskustva iz oblasti za koju aplicirate, uključujući formalno obrazovanje, kurseve, projekte, volontiranje itd.'))->for('short_description')->class('bold') }}
+                                {{ html()->label(__('Zašto mislite da ste baš vi dobar/a kandidat/kinja za ovaj program?'))->for('short_description')->class('bold') }}
                                 {{ html()->textarea('short_description')->class('form-control form-control-sm mt-2 textarea-120')->value(isset($application) ? $application->interests : '')->isReadonly(true) }}
                             </div>
                         </div>
@@ -92,29 +92,27 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {{ html()->label(__('Ukoliko nemate formalnog iskustva u oblasti za koju aplicirate, opišite talente i vještine koje smatrate relevantnima za aplikaciju.'))->for('short_description')->class('bold') }}
+                                {{ html()->label(__('Kako očekujete da će vam program pomoći u ličnom i profesionalnom razvoju?'))->for('short_description')->class('bold') }}
                                 {{ html()->textarea('short_description')->class('form-control form-control-sm mt-2 textarea-120')->value(isset($application) ? $application->experience : '')->isReadonly(true) }}
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {{ html()->label(__('Koja su Vaša očekivanja od Helem Nejse Talent Akademije? Koje vještine i znanja želite steći ili unaprijediti tokom programa?'))->for('short_description')->class('bold') }}
-                                {{ html()->textarea('short_description')->class('form-control form-control-sm mt-2 textarea-120')->value(isset($application) ? $application->expectations : '')->isReadonly(true) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {{ html()->label(__('Na koji način bi učešće na HNTA programu doprinijelo Vašem profesionalnom razvoju?'))->for('short_description')->class('bold') }}
-                                {{ html()->textarea('short_description')->class('form-control form-control-sm mt-2 textarea-120')->value(isset($application) ? $application->skills : '')->isReadonly(true) }}
-                            </div>
-                        </div>
-                    </div>
-
-
+{{--                    <div class="row mt-3">--}}
+{{--                        <div class="col-md-12">--}}
+{{--                            <div class="form-group">--}}
+{{--                                {{ html()->label(__('Koja su Vaša očekivanja od Helem Nejse Talent Akademije? Koje vještine i znanja želite steći ili unaprijediti tokom programa?'))->for('short_description')->class('bold') }}--}}
+{{--                                {{ html()->textarea('short_description')->class('form-control form-control-sm mt-2 textarea-120')->value(isset($application) ? $application->expectations : '')->isReadonly(true) }}--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="row mt-3">--}}
+{{--                        <div class="col-md-12">--}}
+{{--                            <div class="form-group">--}}
+{{--                                {{ html()->label(__('Na koji način bi učešće na HNTA programu doprinijelo Vašem profesionalnom razvoju?'))->for('short_description')->class('bold') }}--}}
+{{--                                {{ html()->textarea('short_description')->class('form-control form-control-sm mt-2 textarea-120')->value(isset($application) ? $application->skills : '')->isReadonly(true) }}--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </form>
             </div>
         </div>

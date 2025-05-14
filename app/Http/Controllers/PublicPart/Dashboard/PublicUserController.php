@@ -239,7 +239,7 @@ class PublicUserController extends Controller{
     public function applyForScholarship (): View | RedirectResponse{
         /* Redirect if not user */
         if(Auth::user()->role != 'user') return redirect()->route('dashboard.my-profile');
-        $appTimePassed = $this->appTimePassed('2024-06-04 00:00:00');
+        $appTimePassed = $this->appTimePassed($this->getSeasonData('app_date') . ' 00:00:00');
         if($appTimePassed) return back();
 
         return view($this->_path . 'user.apply-for-scholarship', [

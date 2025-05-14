@@ -210,7 +210,7 @@ class ProgramsController extends Controller{
     }
     public function applyForScholarship ($id): View | RedirectResponse{
         if(!Auth::check()) return redirect()->route('auth');
-        $appTimePassed = $this->appTimePassed('2024-06-04 00:00:00');
+        $appTimePassed = $this->appTimePassed($this->getSeasonData('app_date') . ' 00:00:00');
         if($appTimePassed) return back();
 
         /* Check does user have other applications */
@@ -242,8 +242,8 @@ class ProgramsController extends Controller{
                 'motivation' => $request->motivation,
                 'interests' => $request->interests,
                 'experience' => $request->experience,
-                'expectations' => $request->expectations,
-                'skills' => $request->skills
+                // 'expectations' => $request->expectations,
+                // 'skills' => $request->skills
             ]);
 
             if(isset($request->cv)){
@@ -255,15 +255,16 @@ class ProgramsController extends Controller{
 
                 $scholarship->update(['cv' => $file->id ]);
             }
-            if(isset($request->motivation_letter)){
-                $request['path'] = (storage_path('files/programs/applications'));
-                $file = $request->file('motivation_letter');
-                $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
-                if($ext != 'pdf' and $ext != 'doc' and $ext != 'docx') return back()->with('message', __('Dozvoljeni formati su pdf, doc i docx!'));
-                $file = $this->saveFile($request, 'motivation_letter', 'app_mot_letter');
-
-                $scholarship->update(['motivation_letter' => $file->id ]);
-            }
+            /** Motivation letter removed in 2025 */
+            //if(isset($request->motivation_letter)){
+            //    $request['path'] = (storage_path('files/programs/applications'));
+            //    $file = $request->file('motivation_letter');
+            //    $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+            //    if($ext != 'pdf' and $ext != 'doc' and $ext != 'docx') return back()->with('message', __('Dozvoljeni formati su pdf, doc i docx!'));
+            //    $file = $this->saveFile($request, 'motivation_letter', 'app_mot_letter');
+            //
+            //    $scholarship->update(['motivation_letter' => $file->id ]);
+            //}
             if(isset($request->other)){
                 $request['path'] = (storage_path('files/programs/applications'));
                 $file = $request->file('other');
@@ -278,7 +279,10 @@ class ProgramsController extends Controller{
             else $scholarship->update(['checked' => 0]);
 
             if($request->send_application){
-                if(!$scholarship->motivation or !$scholarship->interests or !$scholarship->experience or !$scholarship->expectations or !$scholarship->skills) return back()->with('message', __('Molimo da popunite sva polja prije slanja aplikacije!'));
+                /**
+                 *  Removed in V2.0 : !$scholarship->expectations or !$scholarship->skills
+                 */
+                if(!$scholarship->motivation or !$scholarship->interests or !$scholarship->experience /* or !$scholarship->expectations or !$scholarship->skills */) return back()->with('message', __('Molimo da popunite sva polja prije slanja aplikacije!'));
                 if(!$scholarship->cv) return back()->with('message', __('Molimo da priložite CV prije slanja aplikacije!'));
 
                 InboxTo::create([

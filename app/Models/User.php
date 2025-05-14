@@ -256,4 +256,14 @@ class User extends Authenticatable{
     public function sessionsPresenterRel(): HasMany{
         return $this->hasMany(SessionPresenter::class, 'presenter_id', 'id');
     }
+
+    /**
+     * Check if user has any accepted application for active season (last applications does not count)
+     * @return bool|int
+     */
+    public function hasAcceptedApp(): bool | int{
+        return ProgramApplication::whereHas('programRel.seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->where('attendee_id', $this->id)->where('app_status', 'accepted')->count();
+    }
 }
