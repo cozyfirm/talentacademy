@@ -30,6 +30,7 @@ class ProgramsController extends Controller{
         return ProgramSession::where('program_id', $program_id)->whereDate('date', $date)->orderBy('datetime_from')->get();
     }
     public function preview($id, $date = null): View | RedirectResponse{
+        return redirect()->route('public-part.programs.sneak-and-peak', ['id' => $id, 'page' => 1]);
         if(!Auth::check()) return redirect()->route('public-part.programs.sneak-and-peak', ['id' => $id, 'page' => 1]);
 
         if($date){
@@ -47,7 +48,7 @@ class ProgramsController extends Controller{
         ]);
     }
     public function sneakAndPeak($id, $page = 1): View | RedirectResponse{
-        if(Auth::check()) return redirect()->route('public-part.programs.preview-program', ['id' => $id]);
+        // if(Auth::check()) return redirect()->route('public-part.programs.preview-program', ['id' => $id]);
         // Make sure that you call the static method currentPageResolver()
         // before querying users
         Paginator::currentPageResolver(function () use ($page) {

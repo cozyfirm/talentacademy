@@ -47,6 +47,7 @@
     @include('public-part.app.base-includes.presenters.presenters_scroll')
 
     @include('public-part.app.base-includes.programs.grid')
+
 {{--    @if(Auth()->check())--}}
 {{--        <!-- Sessions for logged user -->--}}
 {{--        @include('public-part.app.programs.includes.sessions')--}}
