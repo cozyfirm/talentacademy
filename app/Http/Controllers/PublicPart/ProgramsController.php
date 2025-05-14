@@ -60,7 +60,8 @@ class ProgramsController extends Controller{
             'blogPosts' => Blog::where('published', '=', 1)->where('category', '<', 6)->orderBy('id', 'DESC')->take(6)->get(),
             'offlineSessions' => $offlineSessions,
             'faqs' => FAQ::where('what', $id)->get(),
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00'),
+            'page' => $page
         ]);
     }
     public function moreAbout ($id){

@@ -13,7 +13,6 @@
                     </div>
                     <div class="program__timeline-top-right">
                         @foreach($program->uniqueDateSessions() as $dates)
-{{--                            href="{{ route('public-part.programs.preview-program-date', ['id' => $program->id, 'date' => $dates->date]) }}"--}}
                             <a class="fetch-private-sessions" date="{{ $dates->date }}" program-id="{{ $program->id }}">
                                 <div class="program__timeline-top-right-day">
                                     <div class="program__timeline-top-right-day-number @if($currentDay->date == $dates->date) active @endif">

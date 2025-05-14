@@ -53,7 +53,7 @@
     @endif
 
     <!-- A bit of difference from program in data structure -->
-    <div class="program__timeline program__timeline_{{ $program->id }}">
+    <div class="program__timeline program__timeline_{{ CommonHelper::getBcgColor($program->id) }}">
         <div class="program__timeline__sessions_sticky sticky">
             <div class="program__timeline-section dark">
                 <div class="program__timeline-container">

@@ -333,6 +333,8 @@
     .programs__grid_pagination_5{ .page-w{ background: $p5_bcg; }  }
     .programs__grid_pagination_6{ .page-w{ background: $p6_bcg; }  }
 
+    .programs__grid_pagination{ .active{ background: $dark; p{ color: $white; } } }
+
     @media only screen and (max-width: $container-width){
         .programs__grid_iw{
             left: 40px; width: calc(100% - 80px);
