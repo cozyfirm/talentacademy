@@ -109,12 +109,13 @@ Route::prefix('')->group(function () {
      *  Lecturers
      */
     Route::prefix('lecturers')->group(function () {
-        Route::get ('/',                       [LecturersController::class, 'lecturers'])->name('public-part.lecturers.lecturers');
-        Route::get ('/filter/{program_id}',    [LecturersController::class, 'filter'])->name('public-part.lecturers.filter');
-        Route::get ('/preview/{id}',           [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer');
-        Route::get ('/preview/{id}/{date}',    [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer-date');
-        Route::post('/load-more',              [LecturersController::class, 'loadMore'])->name('public-part.lecturers.load-more');
-        Route::post('/filter-by-name',         [LecturersController::class, 'filterByName'])->name('public-part.lecturers.filter-by-name');
+        Route::get ('/',                                 [LecturersController::class, 'lecturers'])->name('public-part.lecturers.lecturers');
+        Route::get ('/filter/{program_id}',              [LecturersController::class, 'filter'])->name('public-part.lecturers.filter');
+        Route::get ('/preview/{id}',                     [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer');
+        Route::get ('/preview/{id}/{date}',              [LecturersController::class, 'single_lecturer'])->name('public-part.lecturers.single-lecturer-date');
+        Route::get ('/sneak-and-peek/{id}/{page}',       [LecturersController::class, 'sneakAndPeak'])->name('public-part.lecturers.single-lecturer.sneak-and-peek');
+        Route::post('/load-more',                        [LecturersController::class, 'loadMore'])->name('public-part.lecturers.load-more');
+        Route::post('/filter-by-name',                   [LecturersController::class, 'filterByName'])->name('public-part.lecturers.filter-by-name');
     });
 
     /*

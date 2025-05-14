@@ -36,7 +36,8 @@
     </div>
     <div class="programs__grid_pagination programs__grid_pagination_{{ CommonHelper::getBcgColor($program->id) }}">
         @for($i=1; $i<=$offlineSessions->lastPage(); $i++)
-            <a href="{{ route('public-part.programs.sneak-and-peak', ['id' => $program->id, 'page' => $i]) }}#programs__grid_iw">
+            <!-- This one is used in program or lecturer preview -->
+            <a href="@if(isset($lecturer)) {{ route('public-part.lecturers.single-lecturer.sneak-and-peek', ['id' => $lecturer->id, 'page' => $i]) }}#programs__grid_iw @else {{ route('public-part.programs.sneak-and-peak', ['id' => $program->id, 'page' => $i]) }}#programs__grid_iw @endif">
                 <div class="page-w @if($i == $page) active @endif"> <p>{{ $i }}</p> </div>
             </a>
         @endfor

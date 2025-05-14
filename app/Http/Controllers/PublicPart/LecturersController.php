@@ -9,6 +9,8 @@ use App\Models\Programs\ProgramSession;
 use App\Models\User;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -16,6 +18,7 @@ class LecturersController extends Controller{
     use ResponseTrait;
     protected string $_path = 'public-part.app.lecturers.';
     protected int $_take = 6;
+    protected int $_pages = 6;
 
     public function getData($lecturers, int $program_id = 0): View{
         return view($this->_path . 'lecturers', [
@@ -56,6 +59,8 @@ class LecturersController extends Controller{
         $lecturer = User::where('id', $id)->first();
         if($lecturer->role != 'presenter') return redirect()->route('public-part.lecturers.lecturers');
 
+        if(!Auth::check()) return redirect()->route('public-part.lecturers.single-lecturer.sneak-and-peek', ['id' => $id, 'page' => 1]);
+
         /* ToDo:: Check if user is not at current active season, do not show it's data */
 
         if($date){
@@ -82,6 +87,38 @@ class LecturersController extends Controller{
                 $q->where('active', '=', 1);
             })->where('date', $currentDay->date)->get(),
             'lecturer' => $lecturer
+        ]);
+    }
+
+    public function sneakAndPeak($id, $page = 1): View | RedirectResponse{
+        $lecturer = User::where('id', $id)->first();
+        if($lecturer->role != 'presenter') return redirect()->route('public-part.lecturers.lecturers');
+
+        // Make sure that you call the static method currentPageResolver()
+        // before querying users
+        Paginator::currentPageResolver(function () use ($page) {
+            return $page;
+        });
+
+        $offlineSessions = ProgramSession::whereHas('presentersRel', function ($q) use($id){
+            $q->where('presenter_id', '=', $id);
+        })->whereHas('programRel.seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->paginate($this->_pages);
+
+        foreach ($offlineSessions as $session){
+            $program = Program::where('id', $session->programRel->id)->first();
+            break;
+        }
+
+        if(!isset($program)) return redirect()->route('public-part.lecturers.lecturers');
+
+        return view($this->_path . 'single-lecturer', [
+            'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
+            'offlineSessions' => $offlineSessions,
+            'lecturer' => $lecturer,
+            'program' => $program,
+            'page' => $page
         ]);
     }
 
