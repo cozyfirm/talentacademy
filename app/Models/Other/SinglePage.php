@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @method static where(string $string, mixed $page_id)
+ * @method static orderBy(string $string, string $string1)
  */
 class SinglePage extends Model{
     use HasFactory;

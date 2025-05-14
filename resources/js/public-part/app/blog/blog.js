@@ -18,6 +18,10 @@ $(document).ready(function (){
             lastID = $(this).attr('itemid');
         });
 
+        if($(this).hasClass('load__more_alumni')){
+            console.log("Load more Alumni !!");
+        }
+
         $.ajax({
             url: loadMoreUri,
             method: 'POST',

@@ -37,7 +37,7 @@ class BlogController extends Controller{
             // 'other' => Program::pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', 10)->prepend('Kritičko mišljenje', 6)
             'other' => Program::whereHas('seasonRel', function ($q){
                 $q->where('active', '=', 1);
-            })->pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', -1)->prepend('Kritičko mišljenje', -2)
+            })->pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', -1)->prepend('Kritičko mišljenje', -2)->prepend('HNTA Alumni program', -3)
         ]);
     }
     public function save(Request $request): JsonResponse{
@@ -58,7 +58,7 @@ class BlogController extends Controller{
             'preview' => true,
             'other' => Program::whereHas('seasonRel', function ($q){
                 $q->where('active', '=', 1);
-            })->pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', -1)->prepend('Kritičko mišljenje', -2),
+            })->pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', -1)->prepend('Kritičko mišljenje', -2)->prepend('HNTA Alumni program', -3),
             'post' => Blog::where('id', '=', $id)->first()
         ]);
     }
@@ -67,7 +67,7 @@ class BlogController extends Controller{
             'edit' => true,
             'other' => Program::whereHas('seasonRel', function ($q){
                 $q->where('active', '=', 1);
-            })->pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', -1)->prepend('Kritičko mišljenje', -2),
+            })->pluck('title', 'id')->prepend('Globalni post', 0)->prepend('Interni postovi', -1)->prepend('Kritičko mišljenje', -2)->prepend('HNTA Alumni program', -3),
             'post' => Blog::where('id', '=', $id)->first()
         ]);
     }

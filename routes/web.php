@@ -130,6 +130,15 @@ Route::prefix('')->group(function () {
         Route::post ('/fetch-images',          [BlogController::class, 'fetchImages'])->name('public-part.blog.fetch-images');
     });
 
+    Route::prefix('alumni')->group(function () {
+        Route::get ('/',                       [BlogController::class, 'alumni'])->name('public-part.alumni');
+        Route::get ('preview/{id}',            [BlogController::class, 'alumniPreview'])->name('public-part.alumni.preview');
+        Route::post ('/load-more',             [BlogController::class, 'alumniLoadMore'])->name('public-part.alumni.load-more');
+
+        /* Fetch images */
+        Route::post ('/fetch-images',          [BlogController::class, 'alumniFetchImages'])->name('public-part.alumni.fetch-images');
+    });
+
     /*
      *  Other single pages
      */
@@ -144,8 +153,6 @@ Route::prefix('')->group(function () {
 
     Route::get ('/critical-thinking',                        [HomepageController::class, 'criticalThinking'])->name('public-part.critical-thinking');
     Route::get ('/critical-thinking-preview/{id}',           [HomepageController::class, 'criticalThinkingPreview'])->name('public-part.critical-thinking.preview');
-
-    Route::get ('/alumni',                                   [HomepageController::class, 'alumni'])->name('public-part.alumni');
     /**
      *  Archive
      */

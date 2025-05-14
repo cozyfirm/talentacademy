@@ -1,0 +1,42 @@
+.alumni__wrapper{
+    position: relative; width: 100%; padding: 64px 0px; background: $dark; display: flex; justify-content: center; flex-wrap: wrap;
+
+    @media only screen and (max-width: 800px){
+        padding: 24px 0px 48px 0px;
+    }
+
+    .alumni__inner{
+        position: relative; display: flex; flex-wrap: wrap; gap: 64px; width: $container-width;
+
+        @media only screen and (max-width: 1500px){
+            width: calc(100% - 80px)
+        }
+        @media only screen and (max-width: 1200px){
+            width: calc(100% - 40px);
+        }
+        @media only screen and (max-width: 800px){
+            gap: 32px;
+        }
+
+        .ai__image_wrapper{
+            position: relative; width: 100%;
+            img{width: 100%;}
+        }
+
+        .ai__text__wrapper{
+            position: relative; width: 100%; display: flex; gap: 64px; justify-content: center; flex-wrap: wrap;
+            @media only screen and (max-width: 800px){
+                gap: 32px;
+            }
+            h1{
+                @media (max-width: 800px){
+                    font-size: 40px;
+                }
+                position: relative; width: 100%; text-align: center; color: $white; font-size: 56px; font-style: normal; font-weight: 500; line-height: 120%;
+            }
+            .ai__tw__text{
+                position: relative; width: 1200px;
+            }
+        }
+    }
+}

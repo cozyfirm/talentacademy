@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PublicPart;
 use App\Http\Controllers\Controller;
 use App\Models\Other\Blog\Blog;
 use App\Models\Other\Blog\BlogImage;
+use App\Models\Other\SinglePage;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
@@ -17,12 +18,12 @@ class BlogController extends Controller{
     public function blog(): View{
         $last = Blog::whereHas('seasonRel', function ($q){
             $q->where('active', '=', 1);
-        })->where('published', '=', 1)->where('category', '!=', -1)->where('category', '!=', '-2')->orderBy('id', 'desc')->first();
+        })->where('published', '=', 1)->where('category', '!=', -1)->where('category', '!=', '-2')->where('category', '!=', '-3')->orderBy('id', 'desc')->first();
 
         return view($this->_path . 'blog', [
             'posts' => Blog::whereHas('seasonRel', function ($q){
                 $q->where('active', '=', 1);
-            })->where('published', '=', 1)->where('category', '!=', -1)->where('category', '!=', '-2')->where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(3)->get(),
+            })->where('published', '=', 1)->where('category', '>=', '0')->where('category', '<', 6)->where('id', '!=', $last->id)->orderBy('id', 'DESC')->take(3)->get(),
             'last' => $last
         ]);
     }
@@ -31,10 +32,12 @@ class BlogController extends Controller{
         return view($this->_path . 'single-blog');
     }
     public function preview($id): View{
-        $post = Blog::where('id', $id)->first();
+        $post = Blog::where('id', '=', $id)->first();
         return view($this->_path . 'single-blog', [
             'post' => $post,
-            'blogPosts' => Blog::where('published', '=', 1)->where('category', '<', 6)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get()
+            'blogPosts' => Blog::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('published', '=', 1)->where('category', '>=', '0')->where('category', '<', 6)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get()
         ]);
     }
     public function loadMore(Request $request): bool|string{
@@ -69,5 +72,28 @@ class BlogController extends Controller{
         }catch (\Exception $e){
             return $this->jsonResponse('1200', __('Desila se greška'));
         }
+    }
+
+    /**
+     * Homepage for alumni
+     *
+     * @return View
+     */
+    public function alumni(): View{
+        return view('public-part.app.alumni.home', [
+            'page' => SinglePage::where('id', 20)->first(),
+            'posts' => Blog::whereHas('seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('published', '=', 1)->where('category', '=', '-3')->orderBy('id', 'DESC')->get(),
+            'alumni' => true
+        ]);
+    }
+    public function alumniPreview($id): View{
+        $post = Blog::where('id', '=', $id)->first();
+        return view($this->_path . 'single-blog', [
+            'post' => $post,
+            'blogPosts' => Blog::where('published', '=', 1)->where('category', '=', -3)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get(),
+            'alumni' => true
+        ]);
     }
 }

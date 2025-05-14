@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static where(string $string, string $string1, int $int)
  * @method static take(int $int)
  * @method static orderBy(string $string, string $string1)
+ * @method static whereHas(string $string, \Closure $param)
  */
 class Blog extends Model{
     use HasFactory;

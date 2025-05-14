@@ -24,7 +24,7 @@ class OtherController extends Controller{
      *  Single pages CRUD
      */
     public function index (): View{
-        $pages = SinglePage::where('id', '>', 0);
+        $pages = SinglePage::orderBy('id', 'desc');
         $pages = Filters::filter($pages);
         $filters = [ 'title' => __('Naziv') ];
 

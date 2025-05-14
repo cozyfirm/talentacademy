@@ -36,7 +36,7 @@ class HomeController extends Controller{
         return view($this->_path . 'home', [
             'blogPosts' => Blog::whereHas('seasonRel', function ($q){
                 $q->where('active', '=', 1);
-            })->where('published', '=', 1)->where('category', '<', 6)->orderBy('id', 'DESC')->take(6)->get(),
+            })->where('published', '=', 1)->where('category', '>=', 0)->where('category', '<', 6)->orderBy('id', 'DESC')->take(6)->get(),
             'locations' => $locations,
             'faqs' => FAQ::where('what', 0)->get(),
             'lecturers' => User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
@@ -46,42 +46,42 @@ class HomeController extends Controller{
             'appTimePassed' => $appTimePassed
         ]);
     }
-    public function scholarship (){
+    public function scholarship(): View{
         return view($this->_path . 'single-page', [
             'page' => SinglePage::where('id', 1)->first()
         ]);
     }
-    public function aboutUs (){
+    public function aboutUs(): View{
         return view($this->_path . 'single-page', [
             'page' => SinglePage::where('id', 2)->first()
         ]);
     }
-    public function howToApply (){
+    public function howToApply(): View{
         return view($this->_path . 'single-page', [
             'page' => SinglePage::where('id', 3)->first()
         ]);
     }
-    public function hotToReachUs (){
+    public function hotToReachUs(): View{
         return view($this->_path . 'single-page', [
             'page' => SinglePage::where('id', 4)->first()
         ]);
     }
-    public function privacy (){
+    public function privacy(): View{
         return view($this->_path . 'single-page', [
             'page' => SinglePage::where('id', 5)->first()
         ]);
     }
-    public function terms (){
+    public function terms(): View{
         return view($this->_path . 'single-page', [
             'page' => SinglePage::where('id', 6)->first()
         ]);
     }
-    public function cookies (){
+    public function cookies(): View{
         return view($this->_path . 'single-page', [
             'page' => SinglePage::where('id', 7)->first()
         ]);
     }
-    public function criticalThinking (){
+    public function criticalThinking(): View{
         // $last = Blog::where('published', '=', 1)->where('category', '=', 6)->orderBy('id', 'desc')->first();
 
         return view('public-part.app.blog.blog', [
@@ -103,11 +103,6 @@ class HomeController extends Controller{
             })->where('published', '=', 1)->where('category', '=', -2)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get(),
             'showAll' => true,
             'criticalThinking' => true,
-        ]);
-    }
-    public function alumni (){
-        return view($this->_path . 'single-page', [
-            'page' => SinglePage::where('id', 7)->first()
         ]);
     }
 }

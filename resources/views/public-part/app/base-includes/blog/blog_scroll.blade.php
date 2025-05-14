@@ -2,18 +2,14 @@
     <div class="news__container">
         <div class="news__title-container">
             <h2 class="news__title">{{ __('Vijesti') }}</h2>
-            <a href="{{ route('public-part.blog.blog') }}" class="news__all-news-button">{{ __('Sve vijesti') }}</a>
+            <a href="@if(isset($criticalThinking)) {{ route('public-part.critical-thinking') }} @else @if(isset($alumni)) {{ route('public-part.alumni') }} @else {{ route('public-part.blog.blog') }} @endif @endif" class="news__all-news-button">{{ __('Sve vijesti') }}</a>
         </div>
         <div class="news__list slider_w_2">
             @foreach($blogPosts as $post)
-                <div class="news__list-item" uri="@if(isset($criticalThinking)) {{ route('public-part.critical-thinking.preview', ['id' => $post->id ]) }} @else @if(!isset($showAll)) {{ route('public-part.blog.preview', ['id' => $post->id ]) }} @else {{ route('dashboard.latest-new', ['id' => $post->id ]) }} @endif @endif">
+                <div class="news__list-item" uri="@if(isset($criticalThinking)) {{ route('public-part.critical-thinking.preview', ['id' => $post->id ]) }} @else @if(isset($alumni)) {{ route('public-part.alumni.preview', ['id' => $post->id ]) }} @else @if(!isset($showAll)) {{ route('public-part.blog.preview', ['id' => $post->id ]) }} @else {{ route('dashboard.latest-new', ['id' => $post->id ]) }} @endif @endif @endif">
                     <div class="img_ww">
                         <img src="{{ isset($post->mainImg) ? asset($post->mainImg->getFile()) : '' }}" alt="{{ __('News image') }}" class="news__list-item-image">
                     </div>
-{{--                    <div class="news__list-item-info">--}}
-{{--                        <a href="#" class="news__list-item-info-category">{{ $post->getCategory() }}</a>--}}
-{{--                        <div class="news__list-item-info-reading-time">{{ $post->getDateTime() }}</div>--}}
-{{--                    </div>--}}
                     <h2 class="news__list-item-heading"> {{ $post->title }} </h2>
                     <p class="news__list-item-content"> {{ $post->short_desc }} </p>
                 </div>
