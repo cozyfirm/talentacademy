@@ -355,9 +355,12 @@ class PublicUserController extends Controller{
     public function checkMyEvaluation ($session_id): View | RedirectResponse{
         if(!Auth::user()->myProgram()) return redirect()->route('dashboard.my-profile');
 
+        $session = ProgramSession::where('id', $session_id)->first();
+
         return view($this->_path . 'user.my-evaluation-check', [
             'questions' => FormQuestion::get(),
-            'session_id' => $session_id
+            'session_id' => $session_id,
+            'session' => $session
         ]);
     }
     public function updateEvaluation(Request $request): RedirectResponse{
