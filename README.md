@@ -50,11 +50,11 @@ ENV File should be defined as:
 
 Five different programs
 
-- [Kreativno pisanje: Komedija](https://talentakademija.ba/programs/preview-program/1)
-- [Novinarstvo: novinarstvo i novi mediji](https://talentakademija.ba/programs/preview-program/2)
-- [Muzika: Primijenjena muzička produkcija](https://talentakademija.ba/programs/preview-program/3)
-- [Informacijske tehnologije: odgovorno kodiranje](https://talentakademija.ba/programs/preview-program/4)
-- [https://talentakademija.ba/programs/preview-program/5](https://talentakademija.ba/programs/preview-program/5)
+- [Kreativno pisanje: Komedija](https://talentakademija.ba/programs/preview-program/6)
+- [Novinarstvo: novinarstvo i novi mediji](https://talentakademija.ba/programs/preview-program/7)
+- [Muzika: Primijenjena muzička produkcija](https://talentakademija.ba/programs/preview-program/8)
+- [Informacijske tehnologije: odgovorno kodiranje](https://talentakademija.ba/programs/preview-program/9)
+- [https://talentakademija.ba/programs/preview-program/5](https://talentakademija.ba/programs/preview-program/10)
 
 ## Messaging system
 
