@@ -36,7 +36,7 @@
                 </div>
                 <div class="footer__helem-nejse">
                     <h3>Podržano od:</h3>
-                    <img src="{{ asset('files/images/public-part/embassy.png') }}" alt="British embassy">
+                    <img class="embassy-logo" src="{{ asset('files/images/public-part/embassy_2025.svg') }}" alt="British embassy">
                 </div>
             </div>
         </div>

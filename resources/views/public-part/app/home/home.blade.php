@@ -65,7 +65,7 @@
 
                 <a href="#features" class="hero-section__bottom-section-learn-more">
                     {{ __('Saznaj više!') }}
-                    <img src="{{ asset('files/images/public-part/down-icon.svg') }}" alt="Down icon">
+                    <img src="{{ asset('files/images/public-part/down-icon-2025.svg') }}" alt="Down icon">
                 </a>
             </div>
         </div>
