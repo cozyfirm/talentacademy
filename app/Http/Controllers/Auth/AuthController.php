@@ -41,8 +41,9 @@ class AuthController extends Controller{
                 ]);
             }
 
+            /** ToDo:: Redirect to welcome page */
             $uri = route('system.home');
-            if($user->role == 'user' or $user->role == 'presenter') $uri = route('dashboard.welcome');
+            if($user->role == 'user' or $user->role == 'presenter') $uri = route('dashboard.my-profile');
 
             return json_encode([
                 'code' => '0000',

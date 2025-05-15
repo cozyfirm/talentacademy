@@ -9,7 +9,7 @@
     <div class="programs__wrapper">
         <div class="programs__wrapper_colored programs__wrapper_colored_1">
             @foreach($programs as $program)
-                <div class="single__program_wrapper single__program_wrapper-{{$program->id}}">
+                <div class="single__program_wrapper single__program_wrapper-{{CommonHelper::getBcgColor($program->id)}}">
                     <div class="single__program_wrapper_left">
                         <div class="text-wrapper">
                             <h1> {{ $program->title }} </h1>

@@ -243,7 +243,7 @@ class PublicUserController extends Controller{
         if($appTimePassed) return back();
 
         return view($this->_path . 'user.apply-for-scholarship', [
-            'programs' => Program::where('id', '<', 6)->get(),
+            'programs' => Program::where('id', '>', 5)->get(),
             'appTimePassed' => $appTimePassed
         ]);
     }
