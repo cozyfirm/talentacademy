@@ -46,6 +46,7 @@
                 <a href="{{ route('public-part.privacy') }}">Politika privatnosti</a>
                 <a href="{{ route('public-part.terms') }}">Uslovi korištenja</a>
                 <a href="{{ route('public-part.cookies') }}">Kolačići</a>
+                <a href="https://github.com/cozyfirm/talentacademy">Github Repo</a>
             </div>
             <div class="footer__icons">
                 <a href="https://www.facebook.com/people/Helem-Nejse-Talent-Akademija/61559380710858/">
