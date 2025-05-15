@@ -125,10 +125,10 @@
             align-items: center;
 
             .hero-section__arrow {
-                width: 100%; margin: 64px 0px;
+                width: 100%; margin: 32px 0px;
 
                 @media (max-width: 1200px) {
-                    margin-top: 16px;
+                    margin-top: 32px; margin-bottom: 0px;
                 }
 
                 @media (max-width: $mobile-width) {

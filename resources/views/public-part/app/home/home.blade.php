@@ -37,8 +37,8 @@
                 </div>
             </div>
             <div class="hero-section__arrows">
-                <img src="{{ asset('files/images/public-part/hnta_d_2.svg') }}" alt="Arrow" class="hero-section__arrow hero-section__arrow_d">
-                <img src="{{ asset('files/images/public-part/hnta--03- mob.svg') }}" alt="Arrow" class="hero-section__arrow hero-section__arrow_m">
+                <img src="{{ asset('files/images/public-part/hnta_2025_home.svg') }}" alt="Arrow" class="hero-section__arrow hero-section__arrow_d">
+                <img src="{{ asset('files/images/public-part/hnta_2025_mob.svg') }}" alt="Arrow" class="hero-section__arrow hero-section__arrow_m">
 {{--                <img src="{{ asset('files/images/public-part/arrow.svg') }}" alt="Arrow" class="hero-section__arrow">--}}
 {{--                <img src="{{ asset('files/images/public-part/arrow.svg') }}" alt="Arrow" class="hero-section__arrow">--}}
 {{--                <img src="{{ asset('files/images/public-part/arrow.svg') }}" alt="Arrow" class="hero-section__arrow">--}}
