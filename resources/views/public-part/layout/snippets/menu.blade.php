@@ -38,31 +38,31 @@
     <div class="header__submenu">
         <a href="{{ route('public-part.programs.preview-program', ['id' => 6]) }}">
             <div class="header__submenu_elem">
-                <img src="{{ asset('files/images/public-part/writing_svg.svg') }}" alt="{{ __('Programs image #1') }}" class="programs__program-image">
+                <img src="{{ asset('files/images/public-part/2025/writing_svg.svg') }}" alt="{{ __('Programs image #1') }}" class="programs__program-image">
                 <p>{{ __('Pisanje za 21. stoljeće') }}</p>
             </div>
         </a>
         <a href="{{ route('public-part.programs.preview-program', ['id' => 7]) }}">
             <div class="header__submenu_elem">
-                <img src="{{ asset('/files/images/public-part/jurnalism.svg') }}" alt="{{ __('Programs image #2') }}" class="programs__program-image">
-                <p>{{ __('Novinarstvo i društvene mreže') }}</p>
+                <img src="{{ asset('/files/images/public-part/2025/jurnalism.svg') }}" alt="{{ __('Programs image #2') }}" class="programs__program-image">
+                <p>{{ __('Novinarstvo i dokumentarni film') }}</p>
             </div>
         </a>
         <a href="{{ route('public-part.programs.preview-program', ['id' => 8]) }}">
             <div class="header__submenu_elem">
-                <img src="{{ asset('/files/images/public-part/prod.svg') }}" alt="{{ __('Programs image #3') }}" class="programs__program-image">
+                <img src="{{ asset('/files/images/public-part/2025/prod.svg') }}" alt="{{ __('Programs image #3') }}" class="programs__program-image">
                 <p>{{ __('Primijenjena muzička produkcija') }}</p>
             </div>
         </a>
         <a href="{{ route('public-part.programs.preview-program', ['id' => 9]) }}">
             <div class="header__submenu_elem">
-                <img src="{{ asset('/files/images/public-part/coding.svg') }}" alt="{{ __('Programs image #4') }}" class="programs__program-image">
-                <p>{{ __('Odgovorno kodiranje i Civic Tech') }}</p>
+                <img src="{{ asset('/files/images/public-part/2025/coding.svg') }}" alt="{{ __('Programs image #4') }}" class="programs__program-image">
+                <p>{{ __('Razvoj računarskih igara') }}</p>
             </div>
         </a>
         <a href="{{ route('public-part.programs.preview-program', ['id' => 10]) }}">
             <div class="header__submenu_elem">
-                <img src="{{ asset('/files/images/public-part/graphic_design.svg') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
+                <img src="{{ asset('/files/images/public-part/2025/graphic_design.svg') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
                 <p>{{ __('Grafički dizajn i animacije') }}</p>
             </div>
         </a>
@@ -90,31 +90,31 @@
         <div class="mobile-menu__submenu">
             <a href="{{ route('public-part.programs.preview-program', ['id' => 6]) }}">
                 <div class="mobile-menu__submenu-item">
-                    <img src="{{ asset('files/images/public-part/writing_svg.svg') }}" alt="{{ __('Programs image #1') }}" class="programs__program-image">
+                    <img src="{{ asset('files/images/public-part/2025/writing_svg.svg') }}" alt="{{ __('Programs image #1') }}" class="programs__program-image">
                     <p>{{ __('	Pisanje za 21. stoljeće') }}</p>
                 </div>
             </a>
             <a href="{{ route('public-part.programs.preview-program', ['id' => 7]) }}">
                 <div class="mobile-menu__submenu-item">
-                    <img src="{{ asset('/files/images/public-part/jurnalism.svg') }}" alt="{{ __('Programs image #2') }}" class="programs__program-image">
-                    <p>{{ __('Novinarstvo i društvene mreže') }}</p>
+                    <img src="{{ asset('/files/images/public-part/2025/jurnalism.svg') }}" alt="{{ __('Programs image #2') }}" class="programs__program-image">
+                    <p>{{ __('Novinarstvo i dokumentarni film') }}</p>
                 </div>
             </a>
             <a href="{{ route('public-part.programs.preview-program', ['id' => 8]) }}">
                 <div class="mobile-menu__submenu-item">
-                    <img src="{{ asset('/files/images/public-part/prod.svg') }}" alt="{{ __('Programs image #3') }}" class="programs__program-image">
+                    <img src="{{ asset('/files/images/public-part/2025/prod.svg') }}" alt="{{ __('Programs image #3') }}" class="programs__program-image">
                     <p>{{ __('Primijenjena muzička produkcija') }}</p>
                 </div>
             </a>
             <a href="{{ route('public-part.programs.preview-program', ['id' => 9]) }}">
                 <div class="mobile-menu__submenu-item">
-                    <img src="{{ asset('/files/images/public-part/coding.svg') }}" alt="{{ __('Programs image #4') }}" class="programs__program-image">
-                    <p>{{ __('Odgovorno kodiranje i Civic Tech') }}</p>
+                    <img src="{{ asset('/files/images/public-part/2025/coding.svg') }}" alt="{{ __('Programs image #4') }}" class="programs__program-image">
+                    <p>{{ __('Razvoj računarskih igara') }}</p>
                 </div>
             </a>
             <a href="{{ route('public-part.programs.preview-program', ['id' => 10]) }}">
                 <div class="mobile-menu__submenu-item">
-                    <img src="{{ asset('/files/images/public-part/graphic_design.svg') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
+                    <img src="{{ asset('/files/images/public-part/2025/graphic_design.svg') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
                     <p>{{ __('Grafički dizajn i animacije') }}</p>
                 </div>
             </a>

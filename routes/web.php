@@ -164,7 +164,7 @@ Route::prefix('')->group(function () {
             Route::get ('/',                       [ArchiveLecturersController::class, 'lecturers'])->name('public-part.archive.lecturers.lecturers');
             Route::get ('/filter/{program_id}',    [ArchiveLecturersController::class, 'filter'])->name('public-part.archive.lecturers.filter');
             Route::get ('/preview/{id}',           [ArchiveLecturersController::class, 'single_lecturer'])->name('public-part.archive.lecturers.single-lecturer');
-            Route::get ('/preview/{id}/{date}',    [ArchiveLecturersController::class, 'single_lecturer'])->name('public-part.archive.lecturers.single-lecturer-date');
+            Route::get ('/preview/{id}/{page}',    [ArchiveLecturersController::class, 'single_lecturer'])->name('public-part.archive.lecturers.single-lecturer.page');
             Route::post('/load-more',              [ArchiveLecturersController::class, 'loadMore'])->name('public-part.archive.lecturers.load-more');
             Route::post('/filter-by-name',         [ArchiveLecturersController::class, 'filterByName'])->name('public-part.archive.lecturers.filter-by-name');
         });

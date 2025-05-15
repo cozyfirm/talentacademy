@@ -10,15 +10,17 @@ use App\Models\User;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\View\View;
 
 class ArchiveLecturersController extends Controller{
     use ResponseTrait;
-    protected string $_path = 'public-part.app.lecturers.';
+    protected string $_path = 'public-part.app.archive.lecturers.';
     protected int $_take = 6;
+    protected int $_pages = 6;
 
     public function getData($lecturers, int $program_id = 0): View{
-        return view($this->_path . 'lecturers', [
+        return view('public-part.app.lecturers.lecturers', [
             'lecturers' => $lecturers,
             'lecPrograms' => Program::whereHas('seasonRel', function ($q){
                 $q->where('id', '=', 1);
@@ -45,36 +47,35 @@ class ArchiveLecturersController extends Controller{
         return $this->getData($lecturers, $program_id);
     }
 
-    public function single_lecturer($id, $date = null): View | RedirectResponse{
+    public function single_lecturer($id, $page = 1): View | RedirectResponse{
         $lecturer = User::where('id', $id)->first();
-        if($lecturer->role != 'presenter') return redirect()->route('public-part.lecturers.lecturers');
+        if($lecturer->role != 'presenter') return redirect()->route('public-part.archive');
 
-        /* ToDo:: Check if user is not at current active season, do not show it's data */
+        // Make sure that you call the static method currentPageResolver()
+        // before querying users
+        Paginator::currentPageResolver(function () use ($page) {
+            return $page;
+        });
 
-        if($date){
-            $currentDay = ProgramSession::whereHas('presentersRel', function ($q) use($id){
-                $q->where('presenter_id', '=', $id);
-            })->whereHas('programRel.seasonRel', function ($q){
-                $q->where('id', '=', 1);
-            })->whereDate('date', $date)->orderBy('date')->first();
-        }else{
-            $currentDay = ProgramSession::whereHas('presentersRel', function ($q) use($id){
-                $q->where('presenter_id', '=', $id);
-            })->whereHas('programRel.seasonRel', function ($q){
-                $q->where('id', '=', 1);
-            })->orderBy('date')->first();
+        $offlineSessions = ProgramSession::whereHas('presentersRel', function ($q) use($id){
+            $q->where('presenter_id', '=', $id);
+        })->whereHas('programRel.seasonRel', function ($q){
+            $q->where('id', '=', 1);
+        })->paginate($this->_pages);
+
+        foreach ($offlineSessions as $session){
+            $program = Program::where('id', $session->programRel->id)->first();
+            break;
         }
 
-        return view($this->_path . 'single-lecturer', [
-            'program' => Program::where('id', $currentDay->program_id)->first(),
+        if(!isset($program)) return redirect()->route('public-part.archive');
+
+        return view($this->_path . 'preview', [
             'blogPosts' => Blog::orderBy('id', 'DESC')->take(6)->get(),
-            'currentDay' => $currentDay,
-            'sessions' => ProgramSession::whereHas('presentersRel', function ($q) use($id){
-                $q->where('presenter_id', '=', $id);
-            })->whereHas('programRel.seasonRel', function ($q){
-                $q->where('id', '=', 1);
-            })->where('date', $currentDay->date)->get(),
-            'lecturer' => $lecturer
+            'offlineSessions' => $offlineSessions,
+            'lecturer' => $lecturer,
+            'program' => $program,
+            'page' => $page
         ]);
     }
 

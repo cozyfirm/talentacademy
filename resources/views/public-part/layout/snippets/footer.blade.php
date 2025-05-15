@@ -8,9 +8,9 @@
                 <div class="footer__nav">
                     <div class="footer__nav-title">Programi</div>
                     <a href="{{ route('public-part.programs.preview-program', ['id' => 6]) }}" class="footer__nav-link">Pisanje za 21. stoljeće</a>
-                    <a href="{{ route('public-part.programs.preview-program', ['id' => 7]) }}" class="footer__nav-link">Novinarstvo i društvene mreže</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 7]) }}" class="footer__nav-link">Novinarstvo i dokumentarni film</a>
                     <a href="{{ route('public-part.programs.preview-program', ['id' => 8]) }}" class="footer__nav-link">Primijenjena muzička produkcija</a>
-                    <a href="{{ route('public-part.programs.preview-program', ['id' => 9]) }}" class="footer__nav-link">Odgovorno kodiranje i Civic Tech</a>
+                    <a href="{{ route('public-part.programs.preview-program', ['id' => 9]) }}" class="footer__nav-link">Razvoj računarskih igara</a>
                     <a href="{{ route('public-part.programs.preview-program', ['id' => 10]) }}" class="footer__nav-link">Grafički dizajn i animacija</a>
                 </div>
                 <div class="footer__nav">
@@ -25,7 +25,6 @@
                     <div class="footer__nav-title">O nama</div>
                     <a href="{{ route('public-part.blog.blog') }}" class="footer__nav-link">Vijesti</a>
                     <a href="{{ route('public-part.how-to-reach-us') }}" class="footer__nav-link">Kontakt</a>
-{{--                    <a href="#" class="footer__nav-link">Partneri</a>--}}
                     <a href="https://helemnejse.ba" class="footer__nav-link">Helem Nejse</a>
                     <a href="https://fondacijaekipa.ba" class="footer__nav-link">Fondacija EKIPA</a>
                 </div>
@@ -44,8 +43,6 @@
         <div class="footer__lower">
             <div class="footer__copyright">
                 <p> Crafted by <a href="https://fondacijaekipa.ba/">Fondacija Ekipa</a> & <a href="https://cozyfirm.com">Cozy Firm</a> </p>
-
-{{--                <p>© {{ date('Y') }} Fondacija Ekipa. All rights reserved.</p>--}}
                 <a href="{{ route('public-part.privacy') }}">Politika privatnosti</a>
                 <a href="{{ route('public-part.terms') }}">Uslovi korištenja</a>
                 <a href="{{ route('public-part.cookies') }}">Kolačići</a>

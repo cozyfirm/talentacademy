@@ -17,7 +17,7 @@
                 </div>
                 <div class="pp_v2_content">
                     <img src="{{ asset('/files/images/public-part/jurnalism_2025.svg') }}" alt="{{ __('Program image') }}">
-                    <h1> Novinarstvo i <br> društvene mreže </h1>
+                    <h1> Novinarstvo i <br> dokumentarni film </h1>
                 </div>
             </a>
             <a href="{{ route('public-part.programs.preview-program', ['id' => 8]) }}" class="programs__program_v2 program--3">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="pp_v2_content">
                     <img src="{{ asset('/files/images/public-part/coding_2025.svg') }}" alt="{{ __('Program image') }}">
-                    <h1> Odgovorno <br> kodiranje i Civic Tech </h1>
+                    <h1> Razvoj <br> računarskih igara </h1>
                 </div>
             </a>
             <a href="{{ route('public-part.programs.preview-program', ['id' => 10]) }}" class="programs__program_v2 program--5">

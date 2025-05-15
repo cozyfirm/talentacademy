@@ -1,95 +1,125 @@
 .archive__home__wrapper{
-    position: relative; width: 100%; padding: 64px 0px; background: $dark;
+    position: relative; width: 100%; padding: 64px 0px; background: $dark; display: flex; justify-content: center; flex-wrap: wrap;
+
+    @media only screen and (max-width: 800px){
+        padding: 24px 0px 48px 0px;
+    }
 
     &.archive__home__wrapper_pb0{padding-bottom: 0px;}
 
     .ahw__inner{
-        position: relative; display: flex; flex-wrap: wrap; gap: 32px; max-width: $container-width; left: calc(50% - ($container-width / 2));
-    }
-    .archive__home__header{
-        position: relative; width: 100%;
-
-        h1{
-            font-size: 56px; font-style: normal; font-weight: 500; line-height: 120%; margin: 0px; padding: 0px; color: $white;
+        position: relative; display: flex; flex-wrap: wrap; gap: 32px; width: $container-width;
+        @media only screen and (max-width: 1500px){
+            width: calc(100% - 80px)
         }
-        p{
-            font-size: 18px; font-style: normal; color: $primary;
+        @media only screen and (max-width: 1200px){
+            width: calc(100% - 40px);
         }
-    }
+        @media only screen and (max-width: 800px){
+            gap: 32px;
+        }
 
-    .archive__body{
-        position: relative; width: 100%; display: flex; justify-content: flex-start; gap: 36px;
-        .ab__link{
-            position: relative; width: calc(33% - 24px);
-            .ab__wrapper{
-                position: relative; width: 100%; border: 1px solid $primary; border-radius: 16px; overflow: hidden;
-                .ab__w__img{
-                    position: relative; width: 100%; height: 360px; overflow: hidden; border-top-right-radius: 16px; border-top-left-radius: 16px;
-                    img{
-                        object-fit: contain;
-                    }
+
+        .archive__home__header{
+            position: relative; width: 100%;
+
+            h1{
+                font-size: 56px; font-style: normal; font-weight: 500; line-height: 120%; margin: 0px; padding: 0px; color: $white;
+            }
+            p{
+                font-size: 18px; font-style: normal; color: $primary;
+            }
+        }
+
+        .archive__body{
+            position: relative; width: 100%; display: flex; justify-content: flex-start; gap: 36px;
+            @media only screen and (max-width: 1200px){
+                flex-wrap: wrap;
+            }
+            .ab__link{
+                position: relative; width: calc(33% - 24px);
+                @media only screen and (max-width: 1200px){
+                    width: calc(50% - 18px);
                 }
-                .ab__w__text{
-                    position: relative; width: 100%; padding: 16px 32px;
-                    h4{
-                        font-style: normal; font-weight: 500; color: $white;
+                @media only screen and (max-width: 800px){
+                    width: 100%;
+                }
+                .ab__wrapper{
+                    position: relative; width: 100%; border: 1px solid $primary; border-radius: 16px; overflow: hidden;
+                    .ab__w__img{
+                        position: relative; width: 100%; height: 360px; overflow: hidden; border-top-right-radius: 16px; border-top-left-radius: 16px;
+                        img{
+                            object-fit: contain;
+                        }
+                    }
+                    .ab__w__text{
+                        position: relative; width: 100%; padding: 16px 32px;
+                        h4{
+                            font-style: normal; font-weight: 500; color: $white;
+                        }
                     }
                 }
             }
         }
-    }
 
-    .photo-gallery-wrapper{
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        padding: 32px 0;
-
-        @media (max-width: 1000px){
+        .photo-gallery-wrapper{
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
             flex-wrap: wrap;
-        }
-
-        .img__gallery__wrapper{
-            width: 33.33%; height: 360px; overflow: hidden; position: relative;
+            padding: 32px 0;
 
             @media (max-width: 1000px){
-                width: 50%;
+                flex-wrap: wrap;
+            }
+            @media (max-width: 1000px){
+                gap: 20px; padding: 20px 0px;
             }
 
-            @media (max-width: 800px){
-                width: 100%;
-            }
+            .img__gallery__wrapper{
+                width: 33.33%; height: 360px; overflow: hidden; position: relative;
 
-            img {
-                object-fit: contain; min-width: 100%; min-height: 100%; max-height: 120%;
-            }
-            .gallery_shadow{
-                position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background: rgba(0,0,0,0.4);
-                z-index: 100; transition: 0.2s all; opacity: 0;
-                .open_icon_w{
-                    position: absolute; right: 32px; top: 32px; width: 32px; height: 32px;
-                    text-align: center;
+                @media (max-width: 1000px){
+                    width: 50%;
+                }
 
-                    i{
-                        font-size: 32px; color: $white;
+                @media (max-width: 800px){
+                    width: 100%; height: auto;
+                }
+
+                img {
+                    @media (max-width: 800px){
+                        min-width: 100%; min-height: unset; max-height: unset; width: 100%;
+                    }
+                    object-fit: contain; min-width: 100%; min-height: 100%; max-height: 120%;
+                }
+                .gallery_shadow{
+                    position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background: rgba(0,0,0,0.4);
+                    z-index: 100; transition: 0.2s all; opacity: 0;
+                    .open_icon_w{
+                        position: absolute; right: 32px; top: 32px; width: 32px; height: 32px;
+                        text-align: center;
+
+                        i{
+                            font-size: 32px; color: $white;
+                        }
                     }
                 }
             }
-        }
-        .img__gallery__wrapper:hover{
-            cursor: pointer;
-            .gallery_shadow{
-                opacity: 1;
+            .img__gallery__wrapper:hover{
+                cursor: pointer;
+                .gallery_shadow{
+                    opacity: 1;
+                }
             }
         }
-    }
 
-    .gallery__load_more_w{
-        position: relative; width: 100%; height: 40px; display: inline-flex; justify-content: center; //  margin-bottom: 64px;
-        .load__more_gallery_btn{
-            position: relative; background: $primary; color:$dark; padding: 6px 32px; border-radius: 8px; height: 36px;
+        .gallery__load_more_w{
+            position: relative; width: 100%; height: 40px; display: inline-flex; justify-content: center; //  margin-bottom: 64px;
+            .load__more_gallery_btn{
+                position: relative; background: $primary; color:$dark; padding: 6px 32px; border-radius: 8px; height: 36px;
+            }
+            .load__more_gallery_btn:hover{cursor: pointer;}
         }
-        .load__more_gallery_btn:hover{cursor: pointer;}
     }
 }

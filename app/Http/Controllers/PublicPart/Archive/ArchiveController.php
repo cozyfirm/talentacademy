@@ -31,7 +31,7 @@ class ArchiveController extends Controller{
      * @return View
      */
     public function criticalThinking(): View{
-        return view('public-part.app.blog.blog', [
+        return view('public-part.app.archive.critical-thinking.home', [
             'posts' => Blog::whereHas('seasonRel', function ($q){
                 $q->where('id', '=', 1);
             })->where('published', '=', 1)->where('category', '=', -2)->orderBy('id', 'DESC')->take(30)->get(),
@@ -50,13 +50,14 @@ class ArchiveController extends Controller{
     public function criticalThinkingPreview($id): View{
         $post = Blog::where('id', '=', $id)->first();
 
-        return view('public-part.app.blog.single-blog', [
+        return view('public-part.app.archive.critical-thinking.preview', [
             'post' => $post,
             'blogPosts' => Blog::whereHas('seasonRel', function ($q){
                 $q->where('id', '=', 1);
             })->where('published', '=', 1)->where('category', '=', -2)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get(),
             'showAll' => true,
             'criticalThinking' => true,
+            'archive' => true
         ]);
     }
 
@@ -67,7 +68,7 @@ class ArchiveController extends Controller{
      */
     public function gallery(): View{
         return view($this->_path . 'gallery', [
-            'images' => Gallery::orderBy('id', 'desc')->take(3)->get()
+            'images' => Gallery::orderBy('id', 'desc')->take(9)->get()
         ]);
     }
 
@@ -79,7 +80,7 @@ class ArchiveController extends Controller{
     public function loadMoreImages(Request $request): bool|string{
         try{
             $last = Gallery::orderBy('id', 'ASC')->first();
-            $images = Gallery::where('id', '<', $request->lastID)->orderBy('id', 'desc')->take(3)->get();
+            $images = Gallery::where('id', '<', $request->lastID)->orderBy('id', 'desc')->take(6)->get();
             $isLast = false;
 
             foreach ($images as $image) {
