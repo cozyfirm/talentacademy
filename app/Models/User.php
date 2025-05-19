@@ -103,7 +103,9 @@ class User extends Authenticatable{
     }
     public function submitted(): bool{
         try{
-            $app = ProgramApplication::where('attendee_id', $this->id)->where('status', 'submitted')->count();
+            $app = ProgramApplication::whereHas('programRel.seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('attendee_id', $this->id)->where('status', 'submitted')->count();
             return (bool)$app;
         }catch (\Exception $e){ return false; }
     }
