@@ -39,7 +39,7 @@
         <a href="{{ route('public-part.programs.preview-program', ['id' => 6]) }}">
             <div class="header__submenu_elem">
                 <img src="{{ asset('files/images/public-part/2025/writing_svg.svg') }}" alt="{{ __('Programs image #1') }}" class="programs__program-image">
-                <p>{{ __('Pisanje za 21. stoljeće') }}</p>
+                <p>{{ __('Pisanje komedije') }}</p>
             </div>
         </a>
         <a href="{{ route('public-part.programs.preview-program', ['id' => 7]) }}">
@@ -91,7 +91,7 @@
             <a href="{{ route('public-part.programs.preview-program', ['id' => 6]) }}">
                 <div class="mobile-menu__submenu-item">
                     <img src="{{ asset('files/images/public-part/2025/writing_svg.svg') }}" alt="{{ __('Programs image #1') }}" class="programs__program-image">
-                    <p>{{ __('	Pisanje za 21. stoljeće') }}</p>
+                    <p>{{ __('Pisanje za komedije') }}</p>
                 </div>
             </a>
             <a href="{{ route('public-part.programs.preview-program', ['id' => 7]) }}">

@@ -8,7 +8,7 @@
                 </div>
                 <div class="pp_v2_content">
                     <img src="{{ asset('/files/images/public-part/writing_2025.svg') }}" alt="{{ __('Program image') }}">
-                    <h1> Pisanje za <br> 21. stoljeće </h1>
+                    <h1> Pisanje <br> komedije </h1>
                 </div>
             </a>
             <a href="{{ route('public-part.programs.preview-program', ['id' => 7]) }}" class="programs__program_v2 program--2">
