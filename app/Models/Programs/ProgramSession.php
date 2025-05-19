@@ -82,4 +82,14 @@ class ProgramSession extends Model{
     public function evaluationsByUserRel($attendee_id): HasMany{
         return $this->hasMany(ProgramSessionEvaluation::class, 'session_id', 'id')->where('attendee_id', $attendee_id);
     }
+    public function getPresenters(): string{
+        $presenters = ""; $total = 0;
+
+        foreach($this->presentersRel as $presenter){
+            $presenters .= $presenter->presenterRel->name;
+            if($total++ < ($this->presentersRel->count() - 1)) $presenters .= ", ";
+        }
+
+        return $presenters;
+    }
 }

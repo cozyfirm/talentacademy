@@ -40,8 +40,7 @@ class PublicUserController extends Controller{
     public function myProfile(): View{
         return view($this->_path . 'my-profile', [
             'countries' => Country::orderBy('name_ba')->get()->pluck('name_ba', 'id'),
-            'myProfile' => true,
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+            'myProfile' => true
         ]);
     }
     public function welcome(): View{
@@ -119,13 +118,12 @@ class PublicUserController extends Controller{
 
         return view($this->_path . 'edit-links', [
             'link' => ucfirst($link),
-            'value' => $value,
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+            'value' => $value
         ]);
     }
     public function changePassword (): View{
         return view($this->_path . 'change-password', [
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+
         ]);
     }
 
@@ -142,8 +140,7 @@ class PublicUserController extends Controller{
                 $q->where('presenter_id', '=', Auth::user()->id);
             })->whereHas('programRel.seasonRel', function ($q){
                 $q->where('active', '=', 1);
-            })->get(),
-            'appTimePassed' => $this->appTimePassed('2025-06-04 00:00:00')
+            })->get()
         ]);
     }
     public function previewSession ($id): View | RedirectResponse{
@@ -153,8 +150,7 @@ class PublicUserController extends Controller{
         if(!Auth::user()->presenterHasAccess($id)) return redirect()->route('dashboard.my-profile');
 
         return view($this->_path . 'presenter.preview-session', [
-            'session' => $session,
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+            'session' => $session
         ]);
     }
     public function updateSessions(Request $request): JsonResponse{
@@ -173,8 +169,7 @@ class PublicUserController extends Controller{
         $session = ProgramSession::where('id', $session_id)->first();
 
         return view($this->_path . 'presenter.add-new-file', [
-            'session' => $session,
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+            'session' => $session
         ]);
     }
     public function saveNewFile (Request $request): RedirectResponse{
@@ -206,8 +201,7 @@ class PublicUserController extends Controller{
         $session = ProgramSession::where('id', $session_id)->first();
 
         return view($this->_path . 'presenter.add-new-link', [
-            'session' => $session,
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+            'session' => $session
         ]);
     }
     public function saveNewLink  (Request $request): JsonResponse{
@@ -239,18 +233,15 @@ class PublicUserController extends Controller{
     public function applyForScholarship (): View | RedirectResponse{
         /* Redirect if not user */
         if(Auth::user()->role != 'user') return redirect()->route('dashboard.my-profile');
-        $appTimePassed = $this->appTimePassed($this->getSeasonData('app_date') . ' 00:00:00');
-        if($appTimePassed) return back();
+        if($this->appTimePassed()) return back();
 
         return view($this->_path . 'user.apply-for-scholarship', [
-            'programs' => Program::where('id', '>', 5)->get(),
-            'appTimePassed' => $appTimePassed
+            'programs' => Program::where('id', '>', 5)->get()
         ]);
     }
     public function inbox(){
         return view($this->_path . 'user.inbox', [
-            'messages' => InboxTo::where('to', Auth::user()->id)->orderBy('id', 'DESC')->paginate($this->_notification_count),
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+            'messages' => InboxTo::where('to', Auth::user()->id)->orderBy('id', 'DESC')->paginate($this->_notification_count)
         ]);
     }
     public function markMessageAsRead(Request $request): JsonResponse|bool|string {
@@ -291,8 +282,7 @@ class PublicUserController extends Controller{
         return view($this->_path . 'user.my-schedule', [
             'program' => $program,
             'sessions' => $sessions,
-            'currentDay' => $currentDay,
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
+            'currentDay' => $currentDay
         ]);
     }
 

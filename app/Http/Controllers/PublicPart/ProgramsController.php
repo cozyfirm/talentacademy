@@ -44,7 +44,6 @@ class ProgramsController extends Controller{
             'sessions' => $this->getSessionsByDate($id, $date ?? $currentDay->date),
             // 'offlineSessions' => $offlineSessions,
             'faqs' => FAQ::where('what', $id)->get(),
-            'appTimePassed' => $this->appTimePassed($this->getSeasonData('app_date') . ' 00:00:00')
         ]);
     }
     public function sneakAndPeak($id, $page = 1): View | RedirectResponse{
@@ -61,7 +60,6 @@ class ProgramsController extends Controller{
             'blogPosts' => Blog::where('published', '=', 1)->where('category', '<', 6)->orderBy('id', 'DESC')->take(6)->get(),
             'offlineSessions' => $offlineSessions,
             'faqs' => FAQ::where('what', $id)->get(),
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00'),
             'page' => $page
         ]);
     }
@@ -157,7 +155,6 @@ class ProgramsController extends Controller{
             'program' => $program,
             'session' => $session,
             'otherSessions' => ProgramSession::where('id', '!=', $id)->where('program_id', $program->id)->take(6)->get(),
-            'appTimePassed' => $this->appTimePassed('2024-06-04 00:00:00')
         ]);
     }
 
@@ -211,11 +208,12 @@ class ProgramsController extends Controller{
     }
     public function applyForScholarship ($id): View | RedirectResponse{
         if(!Auth::check()) return redirect()->route('auth');
-        $appTimePassed = $this->appTimePassed($this->getSeasonData('app_date') . ' 00:00:00');
-        if($appTimePassed) return back();
+        if($this->appTimePassed()) return back();
 
         /* Check does user have other applications */
-        $submittedOther = ProgramApplication::where('program_id', '!=', $id)->where('attendee_id', Auth::user()->id)
+        $submittedOther = ProgramApplication::whereHas('programRel.seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->where('program_id', '!=', $id)->where('attendee_id', Auth::user()->id)
             ->where('status', 'submitted')
             ->first();
 
@@ -228,14 +226,13 @@ class ProgramsController extends Controller{
             'program' => Program::where('id', $id)->first(),
             'application' => $application,
             'submittedOther' => $submittedOther,
-            'submitted' => $submitted,
-            'appTimePassed' => $appTimePassed
+            'submitted' => $submitted
         ]);
     }
 
     public function updateScholarship(Request $request): RedirectResponse{
         try{
-            if($this->appTimePassed('2024-06-04 00:00:00')) return back()->with('message', __('Rok za prijavu je istekao!'));
+            if($this->appTimePassed()) return back()->with('message', __('Rok za prijavu je istekao!'));
 
             $scholarship = $this->getScholarshipApplication($request->program_id);
 

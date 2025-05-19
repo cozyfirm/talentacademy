@@ -18,11 +18,11 @@
             <label for="contact__form-program" class="contact__form-label">{{ __('Program') }}</label>
             <select class="contact__form-input" id="contact__form-program">
                 <option value="Pisanje za 21. stoljeće">{{ __('Pisanje za 21. stoljeće') }}</option>
-                <option value="Novinarstvo i društvene mreže">{{ __('Novinarstvo i društvene mreže') }}</option>
+                <option value="Novinarstvo i dokumentarni film">{{ __('Novinarstvo i dokumentarni film') }}</option>
                 <option value="Primijenjena muzička produkcija">{{ __('Primijenjena muzička produkcija') }}</option>
-                <option value="Odgovorno kodiranje i Civic Tech">{{ __('Odgovorno kodiranje i Civic Tech') }}</option>
+                <option value="Razvoj računarskih igara">{{ __('Razvoj računarskih igara') }}</option>
                 <option value="Grafički dizajn i animacija">{{ __('Grafički dizajn i animacija') }}</option>
-                <option value="Angažovani rad  i kritičko razmišljanje">{{ __('Angažovani rad  i kritičko razmišljanje') }}</option>
+                <option value="Angažovani rad i kritičko razmišljanje">{{ __('Angažovani rad  i kritičko razmišljanje') }}</option>
             </select>
         </div>
         <div class="contact__form-input-container contact__form-input-container-2">

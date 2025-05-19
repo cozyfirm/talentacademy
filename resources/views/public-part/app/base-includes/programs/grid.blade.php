@@ -15,11 +15,7 @@
 
                         <h5>
                             @if($session->presentersRel->count())
-                                @php $total = 0; @endphp
-                                @foreach($session->presentersRel as $presenter)
-                                    {{ $presenter->presenterRel->name ?? '' }}
-                                    @if($total++ < ($session->presentersRel->count() - 1)), @endif
-                                @endforeach
+                                {{ $session->getPresenters() }}
                             @endif
                         </h5>
                     </div>

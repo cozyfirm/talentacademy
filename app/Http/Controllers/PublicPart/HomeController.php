@@ -21,16 +21,15 @@ class HomeController extends Controller{
     public function home(): View{
         $daysTil = Carbon::now()->diffInDays(Carbon::parse($this->getSeasonData('app_date') . ' 23:59:59'));
 
-        $appTimePassed = $this->appTimePassed($this->getSeasonData('app_date') . ' 00:00:00');
-        if($appTimePassed){
+        if($this->appTimePassed()){
             $daysTil = Carbon::now()->diffInDays(Carbon::parse($this->getSeasonData('start_date') . ' 08:00:00'));
         }
         if($daysTil < 0) $daysTil = 0;
 
         if(Auth::check()){
-            $locations = Location::inRandomOrder()->take(6)->get();
+            $locations = Location::where('active', '=', 1)->inRandomOrder()->take(6)->get();
         }else{
-            $locations = Location::where('public', '=', 1)->inRandomOrder()->take(6)->get();
+            $locations = Location::where('active', '=', 1)->where('public', '=', 1)->inRandomOrder()->take(6)->get();
         }
 
         return view($this->_path . 'home', [
@@ -42,8 +41,7 @@ class HomeController extends Controller{
             'lecturers' => User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
                 $q->where('active', '=', 1);
             })->where('role', 'presenter')->inRandomOrder()->take(4)->get(),
-            'daysTill' => $daysTil,
-            'appTimePassed' => $appTimePassed
+            'daysTill' => $daysTil
         ]);
     }
     public function scholarship(): View{
