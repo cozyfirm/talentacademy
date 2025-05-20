@@ -4,7 +4,7 @@
         <img src="{{ asset('/files/images/public-part/numbers/1_' . (isset($program) ? CommonHelper::getBcgColor($program->id) : 5)) .'.png' }}" alt="{{ __('How to apply image') }}" class="how-to-apply__step-image">
         <div class="how-to-apply__step-content">
             <h3 class="how-to-apply__step-heading">{{ __('Pronađi program koji ti najviše odgovara') }}</h3>
-            <p class="how-to-apply__step-text">{{ __('Pogledaj pet programa Helem Nejse Talent Akademije, njihove predavače i sadržaj i pronađi onaj koji ti najviše odgovara. Nudimo ljetnu školu iz oblasti kreativnog pisanja, novinarstva, muzičke produkcije, informacionih tehnologija, te grafičkog dizajna i animacije.') }}</p>
+            <p class="how-to-apply__step-text">{{ __('Pogledaj pet programa Helem Nejse Talent Akademije, njihove predavače i sadržaj i pronađi onaj koji ti najviše odgovara. Nudimo ljetnu školu iz oblasti pisanja komedije, novinarstva i dokumentarnog filma, primijenjene muzičke produkcije, razvoja računarskih igara, te grafičkog dizajna i animacije.') }}</p>
         </div>
     </div>
     <div class="how-to-apply__pagination">
@@ -20,7 +20,7 @@
         <img src="{{ asset('/files/images/public-part/numbers/2_' . (isset($program) ? CommonHelper::getBcgColor($program->id) : 5)) .'.png' }}" alt="{{ __('How to apply image') }}" class="how-to-apply__step-image">
         <div class="how-to-apply__step-content">
             <h3 class="how-to-apply__step-heading">{{ __('Registrujte se i aplicirajte na program koji vas zanima') }}</h3>
-            <p class="how-to-apply__step-text">{{ __('Nakon registracije na stranicu, aplicirajte za program koji vas najviše interesuje. U aplikaciji trebate odgovoriti na pet jednostavnih pitanja, priložiti biografiju, motivacijsko pismo i prijašnje radove iz ove oblasti, ukoliko ih imate.') }}</p>
+            <p class="how-to-apply__step-text">{{ __('Nakon registracije na stranicu, aplicirajte za program koji vas najviše interesuje. U aplikaciji trebate odgovoriti na tri jednostavna pitanja, priložiti biografiju i prijašnje radove iz ove oblasti, ukoliko ih imate.') }}</p>
         </div>
     </div>
     <div class="how-to-apply__pagination">

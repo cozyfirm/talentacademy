@@ -18,9 +18,6 @@
                         <div class="ab__w__img">
                             <img src="{{ asset('files/images/public-part/archive/gallery-2.svg') }}" alt="">
                         </div>
-{{--                        <div class="ab__w__text">--}}
-{{--                            <h4>{{ __('Galerija fotografija') }}</h4>--}}
-{{--                        </div>--}}
                     </div>
                 </a>
                 <a href="{{ route('public-part.archive.lecturers.lecturers') }}" class="ab__link">
@@ -28,9 +25,6 @@
                         <div class="ab__w__img">
                             <img src="{{ asset('files/images/public-part/archive/lecturers-2.svg') }}" alt="">
                         </div>
-{{--                        <div class="ab__w__text">--}}
-{{--                            <h4>{{ __('Predavači') }}</h4>--}}
-{{--                        </div>--}}
                     </div>
                 </a>
                 <a href="{{ route('public-part.archive.critical-thinking') }}" class="ab__link">
@@ -38,9 +32,6 @@
                         <div class="ab__w__img">
                             <img src="{{ asset('files/images/public-part/archive/thinking-2.svg') }}" alt="">
                         </div>
-{{--                        <div class="ab__w__text">--}}
-{{--                            <h4>{{ __('Kritičko mišljenje') }}</h4>--}}
-{{--                        </div>--}}
                     </div>
                 </a>
             </div>
