@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\Users\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,9 @@ Route::prefix('auth')->group(function () {
  *      1. Fetch user info
  *      2. Update user profile
  */
-Route::prefix('user')->group(function () {
-    Route::post('/',                         [AuthController::class, 'auth'])->name('api.auth');
+Route::prefix('users')->middleware('api-auth')->group(function () {
+    Route::post('/fetch-info',                         [UsersController::class, 'fetchInfo'])->name('api.users.fetch-info');
+
+    /** Update basic data */
+    Route::post('/update-basic-data',                  [UsersController::class, 'updateBasicData'])->name('api.users.update-basic-data');
 });

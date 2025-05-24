@@ -51,14 +51,71 @@ trait UserBaseTrait{
      * @param $user
      * @return array|false
      */
-    public function getUserData($user): array | false{
+    public function getUserData($user, $fullData = false): array | false{
         try{
             $this->_user_info =  [
                 'name' => $user->name,
                 'username' => $user->username,
                 'email' => $user->email,
-                'email_verified_at' => $user->emailVerifiedAt(),
-                'api_token' => $user->api_token,
+                'role' => $user->role,
+                'phone' => $user->phone,
+                'birth_date' => $user->birthDate(),
+                'address' => $user->address,
+                'city' => $user->city,
+                'country' => [
+                    'name' => $user->countryRel->name_ba,
+                    'code' => $user->countryRel->code,
+                    'flag' => $user->countryRel->flag
+                ],
+                'about' => $user->about,
+                'photo' => [
+                    'hasPhoto' => isset($user->photo_uri),
+                    'photo_uri' => $user->photo_uri,
+                    'path' => '/files/images/public-part/users/'
+                ],
+                'social' => [
+                    'instagram' => $user->instagram,
+                    'facebook' => $user->facebook,
+                    'twitter' => $user->twitter,
+                    'linkedin' => $user->linkedin,
+                    'web' => $user->web,
+                ]
+            ];
+
+            /**
+             *  If we need full user data, then append to it
+             */
+            if($fullData){
+                $this->_user_info['email_verified_at'] = $user->emailVerifiedAt();
+                $this->_user_info['api_token'] = $user->api_token;
+            }
+
+            if($user->role == 'presenter'){
+                $this->_user_info['presenter'] = [
+                    'title' => $user->title,
+                    'institution' => $user->institution,
+                    'presenter_role' => $user->presenter_role,
+                    'short_description' => nl2br($user->short_description),
+                    'description' => nl2br($user->description)
+                ];
+            }
+
+            return $this->_user_info;
+        }catch (\Exception $e){
+            return false;
+        }
+    }
+
+    /**
+     * Get user basic data (not hidden ones)
+     * @param $user
+     * @return array|false
+     */
+    public function getUserBasicData($user): array | false{
+        try{
+            $this->_user_info =  [
+                'name' => $user->name,
+                'username' => $user->username,
                 'role' => $user->role,
                 'phone' => $user->phone,
                 'birth_date' => $user->birthDate(),

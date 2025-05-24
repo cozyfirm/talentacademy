@@ -25,7 +25,7 @@ class AuthController extends Controller{
             if(empty($request->password)) return $this->apiResponse('5002', __('Molimo da unesete Vašu šifru'));
 
             $user = User::where('email', '=', $request->email)->first();
-            if(!$user) return $this->apiResponse('5002', __('Nepoznat email'));
+            if(!$user) return $this->apiResponse('5003', __('Nepoznat email'));
 
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
                 $user = Auth::user();
@@ -35,7 +35,7 @@ class AuthController extends Controller{
 
                 return $this->apiResponse('0000', __('Success'), $this->getUserData($user) );
             }else {
-                return $this->apiResponse('1105', __('You have entered wrong password'));
+                return $this->apiResponse('5004', __('You have entered wrong password'));
             }
         }catch (\Exception $e){
             return $this->apiResponse('5000', __('Desila se greška. Molimo da kontaktirate administratore'));
