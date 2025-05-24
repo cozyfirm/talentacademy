@@ -24,9 +24,9 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @property mixed $email
  * @property mixed $name
- * @method static where(string $string, string $string1)
  * @method static whereHas(string $string, \Closure $param)
  * @method static orderBy(string $string, string $string1)
+ * @method static where(string $string, string $string1, mixed $email)
  */
 class User extends Authenticatable{
     use HasApiTokens, HasFactory, Notifiable;
@@ -90,6 +90,9 @@ class User extends Authenticatable{
     }
     public function birthDate(): string {
         return Carbon::parse($this->birth_date)->format('d.m.Y');
+    }
+    public function emailVerifiedAt(): string {
+        return Carbon::parse($this->email_verified_at)->format('d.m.Y H:i:s');
     }
     public function countryRel(): HasOne{
         return $this->hasOne(Country::class, 'id', 'country');
