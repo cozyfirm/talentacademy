@@ -43,6 +43,9 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
 
     /** Change user password */
     Route::post('/change-password',                    [UsersController::class, 'changePassword'])->name('api.users.change-password');
+
+    /** Upload photo */
+    Route::post('/upload-photo',                       [UsersController::class, 'uploadPhoto'])->name('api.users.upload-photo');
 });
 
 /**

@@ -8,7 +8,9 @@ use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller{
@@ -55,10 +57,18 @@ class UsersController extends Controller{
         }
     }
 
+    /**
+     * Change password; Password check included
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function changePassword(Request $request): JsonResponse{
         try{
             if($request->password != $request->repeat) return $this->apiResponse('5031', __('Lozinke se ne podudaraju'));
 
+            /**
+             *  Check password (Defined in UserBaseTrait)
+             */
             try{
                 $passwordCheck = $this->passwordCheck($request);
 
@@ -74,8 +84,32 @@ class UsersController extends Controller{
 
             return $this->apiResponse('0000', __('Success'), $this->getUserData(User::where('id', '=', $request->user_id)->first(), false) );
         }catch (\Exception $e){
-            return $this->apiResponse('5010', __('Desila se greška. Molimo da kontaktirate administratore'));
+            return $this->apiResponse('5030', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
 
+    /**
+     * Upload photo; Change profile image of user
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function uploadPhoto (Request $request): JsonResponse{
+        try{
+            $file = $request->file('photo');
+            $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+
+            if($ext != 'png' and $ext != 'jpg' and $ext != 'jpeg') return $this->apiResponse('5041', __('Format fotografije nije podržan'));
+
+            $name = md5($file->getClientOriginalName().time()).'.'.$ext;
+            $file->move(public_path('files/images/public-part/users'), $name);
+
+            /* Update file name */
+            User::where('id', '=', $request->user_id)->update(['photo_uri' => $name ]);
+
+            return $this->apiResponse('0000', __('Success'), $this->getUserData(User::where('id', '=', $request->user_id)->first(), false) );
+        }catch (\Exception $e){
+            return $this->apiResponse('5040', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
 }
