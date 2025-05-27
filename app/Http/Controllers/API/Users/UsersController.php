@@ -32,6 +32,12 @@ class UsersController extends Controller{
         }
     }
 
+    /**
+     * Update basic info about user
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function updateBasicData(Request $request): JsonResponse{
         try{
             /** Change date format */

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\Common\CountriesController;
 use App\Http\Controllers\API\Users\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,4 +40,16 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
 
     /** Update basic data */
     Route::post('/update-basic-data',                  [UsersController::class, 'updateBasicData'])->name('api.users.update-basic-data');
+});
+
+/**
+ *  Common routes:
+ *      1. Fetch countries
+ */
+Route::prefix('common-routes')->middleware('api-auth')->group(function () {
+    /** Countries */
+    Route::prefix('countries')->group(function () {
+        Route::post('/fetch',                           [CountriesController::class, 'fetch'])->name('api.common-routes.countries.fetch');
+        Route::post('/fetch-by-id',                     [CountriesController::class, 'fetchByID'])->name('api.common-routes.countries.fetch-by-id');
+    });
 });
