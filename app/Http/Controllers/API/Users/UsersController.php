@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Chat\Message;
 use App\Models\Chat\Participant;
+use App\Models\Other\Inbox\InboxTo;
 use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSessionEvaluation;
 use App\Models\Programs\ProgramSessionNote;
@@ -118,22 +119,41 @@ class UsersController extends Controller{
         }
     }
 
+    /**
+     * Delete profile and all other data (if user), such as:
+     *      1. Applications
+     *      2. Evaluations
+     *      3. Notes
+     *      4. Chat messages
+     *      5. Inbox data
+     *
+     *  else just do soft delete
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function deleteProfile(Request $request): JsonResponse{
         try{
-            /**
-             *  Lets delete all relationships from user
-             */
-            $application = ProgramApplication::where('attendee_id', '=', $request->user_id)->delete();
+            if(Auth::user()->role == 'user'){
+                /**
+                 *  Lets delete all relationships from user
+                 */
+                $application = ProgramApplication::where('attendee_id', '=', $request->user_id)->delete();
 
-            $evaluations = ProgramSessionEvaluation::where('attendee_id', '=', $request->user_id)->delete();
+                $evaluations = ProgramSessionEvaluation::where('attendee_id', '=', $request->user_id)->delete();
 
-            $notes = ProgramSessionNote::where('attendee_id', '=', $request->user_id)->delete();
+                $notes = ProgramSessionNote::where('attendee_id', '=', $request->user_id)->delete();
 
-            $participants = Participant::where('user_id', '=', $request->user_id)->delete();
-            $messages     = Message::where('sender_id', '=', $request->user_id)->delete();
+                $participants = Participant::where('user_id', '=', $request->user_id)->delete();
+                $messages     = Message::where('sender_id', '=', $request->user_id)->delete();
 
-            /** Update user info */
-            User::where('id', '=', $request->user_id)->forceDelete();
+                $inbox        = InboxTo::where('to', '=', $request->user_id)->delete();
+
+                /** Update user info */
+                User::where('id', '=', $request->user_id)->forceDelete();
+            }else{
+                User::where('id', '=', $request->user_id)->delete();
+            }
 
             return $this->apiResponse('0000', __('Success'));
         }catch (\Exception $e){
