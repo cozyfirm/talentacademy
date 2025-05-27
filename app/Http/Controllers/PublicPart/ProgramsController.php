@@ -19,6 +19,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class ProgramsController extends Controller{
@@ -298,6 +299,8 @@ class ProgramsController extends Controller{
 
             return back()->with('success', __('Uspješno spremljeno!'))->with('message', __('Vaše izmjene uspješno sačuvane!'));
         }catch (\Exception $e){
+
+            Log::alert("ProgramsController::updateScholarship(): " . $e->getMessage());
             return back()->with('error', __('Desila se greška!'))->with('message', __('Desila se greška!'));
         }
     }
