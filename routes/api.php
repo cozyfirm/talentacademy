@@ -40,6 +40,9 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
 
     /** Update basic data */
     Route::post('/update-basic-data',                  [UsersController::class, 'updateBasicData'])->name('api.users.update-basic-data');
+
+    /** Change user password */
+    Route::post('/change-password',                    [UsersController::class, 'changePassword'])->name('api.users.change-password');
 });
 
 /**

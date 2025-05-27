@@ -2,6 +2,7 @@
 namespace App\Traits\Users;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 
 trait UserBaseTrait{
     protected array $_user_info = [];
@@ -154,6 +155,27 @@ trait UserBaseTrait{
             return $this->_user_info;
         }catch (\Exception $e){
             return false;
+        }
+    }
+
+    /**
+     * Password check
+     *
+     * @param Request $request
+     * @param $code
+     * @return array|string[]
+     */
+    protected function passwordCheck(Request $request, string $code = '5032'): array {
+        try{
+            if(!isset($request->password)) throw new \Exception(__('Lozinka ne može biti prazna'), $code);
+            if (strlen($request->password) < 8) throw new \Exception(__('Lozinka mora sadržavati minimalno 8 karaktera'), $code);
+            if (!preg_match("/\d/", $request->password)) throw new \Exception(__('Lozinka mora sadržavati minimalno jednu cifru'), $code);
+            if (!preg_match("/[A-Z]/", $request->password) and !preg_match("/[a-z]/", $request->password)) throw new \Exception(__('Lozinka mora sadržavati karaktere'), $code);
+            if (!preg_match("/\W/", $request->password)) throw new \Exception(__('Lozinka mora sadržavati minimalno jedan specijalni karakter'), $code);
+
+            return ["code" => "0000", "message" => "OK!"];
+        }catch (\Exception $e){
+            return ["code" => $e->getCode(), "message" => $e->getMessage()];
         }
     }
 }

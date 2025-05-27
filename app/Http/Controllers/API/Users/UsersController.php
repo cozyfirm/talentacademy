@@ -9,6 +9,7 @@ use App\Traits\Users\UserBaseTrait;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller{
     use ResponseTrait, UserBaseTrait;
@@ -53,4 +54,28 @@ class UsersController extends Controller{
             return $this->apiResponse('5010', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
+
+    public function changePassword(Request $request): JsonResponse{
+        try{
+            if($request->password != $request->repeat) return $this->apiResponse('5031', __('Lozinke se ne podudaraju'));
+
+            try{
+                $passwordCheck = $this->passwordCheck($request);
+
+                if($passwordCheck['code'] != '0000'){
+                    return $this->apiResponse($passwordCheck['code'], $passwordCheck['message']);
+                }
+            }catch (\Exception $e){ return $this->apiResponse('5033', __('Error while processing your request. Please contact an administrator')); }
+
+            $request['password'] = Hash::make($request->password);
+
+            /** Update user info */
+            User::where('id', '=', $request->user_id)->update(['password' => $request->password ]);
+
+            return $this->apiResponse('0000', __('Success'), $this->getUserData(User::where('id', '=', $request->user_id)->first(), false) );
+        }catch (\Exception $e){
+            return $this->apiResponse('5010', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
+
 }
