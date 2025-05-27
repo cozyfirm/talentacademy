@@ -299,7 +299,6 @@ class ProgramsController extends Controller{
 
             return back()->with('success', __('Uspješno spremljeno!'))->with('message', __('Vaše izmjene uspješno sačuvane!'));
         }catch (\Exception $e){
-
             Log::alert("ProgramsController::updateScholarship(): " . $e->getMessage());
             return back()->with('error', __('Desila se greška!'))->with('message', __('Desila se greška!'));
         }

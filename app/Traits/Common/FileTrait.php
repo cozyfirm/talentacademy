@@ -4,6 +4,7 @@ namespace App\Traits\Common;
 
 use App\Models\Core\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 trait FileTrait{
     /**
@@ -30,7 +31,10 @@ trait FileTrait{
                     'type' => $type,
                     'path' => $request->path
                 ]);
-            }catch (\Exception $e){ return null; }
+            }catch (\Exception $e){
+                Log::alert("FileTrait::saveFile(): " . $e->getMessage());
+                return null;
+            }
         }else return null;
     }
     public function remove($id){
