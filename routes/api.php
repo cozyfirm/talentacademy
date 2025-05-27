@@ -46,6 +46,9 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
 
     /** Upload photo */
     Route::post('/upload-photo',                       [UsersController::class, 'uploadPhoto'])->name('api.users.upload-photo');
+
+    /** Delete profile */
+    Route::post('/delete-profile',                     [UsersController::class, 'deleteProfile'])->name('api.users.delete-profile');
 });
 
 /**

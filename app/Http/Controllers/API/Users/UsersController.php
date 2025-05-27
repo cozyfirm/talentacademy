@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\API\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat\Message;
+use App\Models\Chat\Participant;
+use App\Models\Programs\ProgramApplication;
+use App\Models\Programs\ProgramSessionEvaluation;
+use App\Models\Programs\ProgramSessionNote;
 use App\Models\User;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
@@ -110,6 +115,29 @@ class UsersController extends Controller{
             return $this->apiResponse('0000', __('Success'), $this->getUserData(User::where('id', '=', $request->user_id)->first(), false) );
         }catch (\Exception $e){
             return $this->apiResponse('5040', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
+
+    public function deleteProfile(Request $request): JsonResponse{
+        try{
+            /**
+             *  Lets delete all relationships from user
+             */
+            $application = ProgramApplication::where('attendee_id', '=', $request->user_id)->delete();
+
+            $evaluations = ProgramSessionEvaluation::where('attendee_id', '=', $request->user_id)->delete();
+
+            $notes = ProgramSessionNote::where('attendee_id', '=', $request->user_id)->delete();
+
+            $participants = Participant::where('user_id', '=', $request->user_id)->delete();
+            $messages     = Message::where('sender_id', '=', $request->user_id)->delete();
+
+            /** Update user info */
+            User::where('id', '=', $request->user_id)->forceDelete();
+
+            return $this->apiResponse('0000', __('Success'));
+        }catch (\Exception $e){
+            return $this->apiResponse('5030', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
 }
