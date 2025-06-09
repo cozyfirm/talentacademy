@@ -48,6 +48,13 @@
                     <td> {{ $user->countryRel->name_ba ?? ''}} </td>
                     <td> {{ $user->title ?? ''}} </td>
                     <td> {{ $user->institution ?? ''}} </td>
+                    <td>
+                        <ul class="pl-0">
+                            @foreach($user->acceptedAppRel as $app)
+                                <li>{{ $app->programRel->title ?? '' }} ( {{ $app->programRel->seasonRel->title ?? '' }} )</li>
+                            @endforeach
+                        </ul>
+                    </td>
 
                     <td class="text-center">
                         <a href="{{route('system.admin.users.preview', ['username' => $user->username] )}}" title="Pregled korisnika">

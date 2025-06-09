@@ -55,7 +55,7 @@
 
                     <div class="col-md-1 text-center" style="padding-top:7px;">
                         <select form="filter-form" class="form-control form-control-sm col-md-2 d-inline-block filters-select" name="limit" onchange="this.form.submit()">
-                            @foreach([12, 24, 48, 96] as $k)
+                            @foreach([12, 24, 48, 96, $var->total() ] as $k)
                                 <option class="text-center p-0 m-0" {{ (request()->get('limit') == $k) ? 'selected="selected"' : '' }} value="{{ $k }}">{{ $k }}</option>
                             @endforeach
                         </select>

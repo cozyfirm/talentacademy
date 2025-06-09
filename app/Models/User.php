@@ -105,6 +105,10 @@ class User extends Authenticatable{
     public function applicationRel(): HasMany{
         return $this->hasMany(ProgramApplication::class, 'attendee_id', 'id');
     }
+    public function acceptedAppRel(): HasMany{
+        return $this->hasMany(ProgramApplication::class, 'attendee_id', 'id')->where('app_status', '=', 'accepted');
+    }
+
     public function submitted(): bool{
         try{
             $app = ProgramApplication::whereHas('programRel.seasonRel', function ($q){

@@ -33,7 +33,8 @@ class UsersController extends Controller{
             'city' => __('Grad'),
             'countryRel->name_ba' => __('Država'),
             'title' => __('Titula'),
-            'institution' => __('Institucija')
+            'institution' => __('Institucija'),
+            'acceptedAppRel.programRel.title' => __('Program')
         ];
 
         return view($this->_path . 'index', [
