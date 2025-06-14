@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Traits\Common\LogTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Illuminate\Http\JsonResponse;
@@ -11,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller{
-    use ResponseTrait, UserBaseTrait;
+    use ResponseTrait, UserBaseTrait, LogTrait;
 
     /**
      * Authenticate and return all user data
@@ -38,6 +39,7 @@ class AuthController extends Controller{
                 return $this->apiResponse('5004', __('You have entered wrong password'));
             }
         }catch (\Exception $e){
+            $this->write('API: AuthController::auth()', $e->getCode(), $e->getMessage(), $request);
             return $this->apiResponse('5000', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }

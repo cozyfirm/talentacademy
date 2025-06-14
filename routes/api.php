@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Common\CountriesController;
+use App\Http\Controllers\API\Schedule\SchedulerController;
 use App\Http\Controllers\API\Users\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,7 @@ Route::prefix('auth')->group(function () {
  */
 Route::prefix('users')->middleware('api-auth')->group(function () {
     Route::post('/fetch-info',                         [UsersController::class, 'fetchInfo'])->name('api.users.fetch-info');
+    Route::post('/fetch-my-info',                      [UsersController::class, 'fetchMyInfo'])->name('api.users.fetch-my-info');
 
     /** Update basic data */
     Route::post('/update-basic-data',                  [UsersController::class, 'updateBasicData'])->name('api.users.update-basic-data');
@@ -60,5 +62,21 @@ Route::prefix('common-routes')->middleware('api-auth')->group(function () {
     Route::prefix('countries')->group(function () {
         Route::post('/fetch',                           [CountriesController::class, 'fetch'])->name('api.common-routes.countries.fetch');
         Route::post('/fetch-by-id',                     [CountriesController::class, 'fetchByID'])->name('api.common-routes.countries.fetch-by-id');
+    });
+});
+
+
+/**
+ *  Schedule:
+ *
+ *      1. Fetch schedule
+ *      2. Sessions
+ */
+Route::prefix('schedule')->middleware('api-auth')->group(function () {
+    Route::post('/fetch',                               [SchedulerController::class, 'fetch'])->name('api.schedule.fetch');
+
+    /* Fetch sessions */
+    Route::prefix('sessions')->middleware('api-auth')->group(function () {
+
     });
 });

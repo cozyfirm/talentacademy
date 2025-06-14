@@ -86,6 +86,16 @@ class User extends Authenticatable{
         'password' => 'hashed',
     ];
 
+    /* Automatically append img_path when serializing */
+    protected $appends = ['photo_path'];
+
+    /**
+     * Accessor for a fixed image path prefix + stored filename
+     */
+    public function getPhotoPathAttribute(): string{
+        return 'files/images/public-part/users/' . ($this->photo_uri ?? 'default.png');
+    }
+
     public function photoUri(){
         return ($this->photo_uri) ? $this->photo_uri : 'silhouette.png';
     }

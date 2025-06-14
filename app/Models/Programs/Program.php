@@ -24,6 +24,16 @@ class Program extends Model{
     protected $table = 'programs';
     protected $guarded = ['id'];
 
+    /* Automatically append img_path when serializing */
+    protected $appends = ['image_path'];
+
+    /**
+     * Accessor for a fixed image path prefix + stored filename
+     */
+    public function getImagePathAttribute(): string{
+        return 'files/programs/' . ($this->imageRel->name ?? 'default.png');
+    }
+
     public function seasonRel(): HasOne{
         return $this->hasOne(Season::class, 'id', 'season_id');
     }

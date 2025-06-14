@@ -10,6 +10,7 @@ use App\Models\Programs\ProgramApplication;
 use App\Models\Programs\ProgramSessionEvaluation;
 use App\Models\Programs\ProgramSessionNote;
 use App\Models\User;
+use App\Traits\Common\LogTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Carbon\Carbon;
@@ -20,10 +21,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller{
-    use ResponseTrait, UserBaseTrait;
+    use ResponseTrait, UserBaseTrait, LogTrait;
 
     /**
-     * Fetch basic user info (without sensitive data)
+     * Fetch basic user info (without sensitive data) for given username
      *
      * @param Request $request
      * @return JsonResponse
@@ -37,6 +38,21 @@ class UsersController extends Controller{
 
             return $this->apiResponse('0000', __('Success'), $this->getUserData($user, false) );
         }catch (\Exception $e){
+            $this->write('API: UsersController::fetchInfo()', $e->getCode(), $e->getMessage(), $request);
+            return $this->apiResponse('5010', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
+
+    /**
+     * Fetch my info (full info) for provided api_token ($request->user_id)
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function fetchMyInfo(Request $request): JsonResponse{
+        try{
+            return $this->apiResponse('0000', __('Success'), $this->getUserData(Auth::user(), true) );
+        }catch (\Exception $e){
+            $this->write('API: UsersController::fetchMyInfo()', $e->getCode(), $e->getMessage(), $request);
             return $this->apiResponse('5010', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
@@ -59,6 +75,7 @@ class UsersController extends Controller{
 
             return $this->apiResponse('0000', __('Success'), $this->getUserData(User::where('id', '=', $request->user_id)->first(), false) );
         }catch (\Exception $e){
+            $this->write('API: UsersController::updateBasicData()', $e->getCode(), $e->getMessage(), $request);
             return $this->apiResponse('5010', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
@@ -81,7 +98,10 @@ class UsersController extends Controller{
                 if($passwordCheck['code'] != '0000'){
                     return $this->apiResponse($passwordCheck['code'], $passwordCheck['message']);
                 }
-            }catch (\Exception $e){ return $this->apiResponse('5033', __('Error while processing your request. Please contact an administrator')); }
+            }catch (\Exception $e){
+                $this->write('API: UsersController::changePassword()', $e->getCode(), $e->getMessage(), $request);
+                return $this->apiResponse('5033', __('Error while processing your request. Please contact an administrator'));
+            }
 
             $request['password'] = Hash::make($request->password);
 
@@ -90,6 +110,7 @@ class UsersController extends Controller{
 
             return $this->apiResponse('0000', __('Success'), $this->getUserData(User::where('id', '=', $request->user_id)->first(), false) );
         }catch (\Exception $e){
+            $this->write('API: UsersController::changePassword()', $e->getCode(), $e->getMessage(), $request);
             return $this->apiResponse('5030', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
@@ -100,7 +121,7 @@ class UsersController extends Controller{
      * @param Request $request
      * @return JsonResponse
      */
-    public function uploadPhoto (Request $request): JsonResponse{
+    public function uploadPhoto(Request $request): JsonResponse{
         try{
             $file = $request->file('photo');
             $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
@@ -115,6 +136,7 @@ class UsersController extends Controller{
 
             return $this->apiResponse('0000', __('Success'), $this->getUserData(User::where('id', '=', $request->user_id)->first(), false) );
         }catch (\Exception $e){
+            $this->write('API: UsersController::uploadPhoto()', $e->getCode(), $e->getMessage(), $request);
             return $this->apiResponse('5040', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
@@ -157,6 +179,7 @@ class UsersController extends Controller{
 
             return $this->apiResponse('0000', __('Success'));
         }catch (\Exception $e){
+            $this->write('API: UsersController::deleteProfile()', $e->getCode(), $e->getMessage(), $request);
             return $this->apiResponse('5030', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
