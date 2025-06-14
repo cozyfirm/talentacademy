@@ -77,6 +77,6 @@ Route::prefix('schedule')->middleware('api-auth')->group(function () {
 
     /* Fetch sessions */
     Route::prefix('sessions')->middleware('api-auth')->group(function () {
-
+        Route::post('/fetch',                           [SchedulerController::class, 'fetchSession'])->name('api.schedule.sessions.fetch');
     });
 });

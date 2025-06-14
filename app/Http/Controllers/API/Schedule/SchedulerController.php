@@ -54,17 +54,6 @@ class SchedulerController extends Controller{
     }
 
     /**
-     * Get current date we're searching for
-     * @param Request $request
-     * @param $currentDay
-     * @param string $format
-     * @return void
-     */
-    public function getCurrentDate(Request $request, $currentDay, string $format = 'bs'): void{
-
-    }
-
-    /**
      * Fetch info about my schedule with:
      *
      *      1. Programs
@@ -108,24 +97,51 @@ class SchedulerController extends Controller{
                 ->with('presentersRel:id,session_id,presenter_id')
                 ->with('locationRel:id,title');
 
-            if(!$application){
-                /* Only public sessions */
-                $sessions = $sessions->where('public', '=', 1);
-            }
+            /** If there is no active application, then return only public sessions */
+            if(!$application){ $sessions = $sessions->where('public', '=', 1); }
 
+            /** Fetch sessions */
             $sessions = $sessions->get(['id', 'program_id', 'title', 'type', 'time_from', 'time_to', 'duration', 'date', 'datetime_from', 'public', 'location_id', 'short_description', 'description', 'presenter_id', 'presenter_data']);
 
+            /** Get dates */
+            $dates = $this->getUniqueDates($this->_selected_program);
+
             return $this->apiResponse('0000', 'Success', [
-                'selected_date' => $date,
+                'selected_date' => $dates[$date],
                 'selected_program' => $this->_selected_program,
                 'programs' => $this->_programs,
-                'dates' =>  $this->getUniqueDates($this->_selected_program),
+                'dates' => $dates,
                 'sessions' => $sessions
             ]);
 
         }catch (\Exception $e){
             $this->write('API: SchedulerController::fetch()', $e->getCode(), $e->getMessage(), $request);
             return $this->apiResponse('5010', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
+
+
+    public function fetchSession(Request $request): JsonResponse{
+        try{
+            if(!isset($request->session_id)) return $this->apiResponse('5221', __('Sesija nije pronađena'));
+            $session = ProgramSession::where('id', '=', $request->session_id)
+                ->with('presentersRel.presenterRel:id,name,photo_uri')
+                ->with('presentersRel:id,session_id,presenter_id')
+                ->with('locationRel:id,title')
+                ->first(['id', 'program_id', 'title', 'type', 'time_from', 'time_to', 'duration', 'date', 'datetime_from', 'public', 'location_id', 'short_description', 'description', 'presenter_id', 'presenter_data']);
+
+            /* Get dates */
+            $dates = $this->getUniqueDates($session->program_id);
+
+            return $this->apiResponse('0000', 'Success', [
+                'selected_date' => $dates[$session->date],
+                'selected_program' => $session->program_id,
+                'programs' => $this->_programs,
+                'session' => $session
+            ]);
+        }catch (\Exception $e) {
+            $this->write('API: SchedulerController::fetchSession()', $e->getCode(), $e->getMessage(), $request);
+            return $this->apiResponse('5220', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
 }
