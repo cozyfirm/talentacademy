@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Common\CountriesController;
+use App\Http\Controllers\API\Common\PagesController;
 use App\Http\Controllers\API\PublicPart\AttendeesController;
 use App\Http\Controllers\API\PublicPart\BlogController;
 use App\Http\Controllers\API\PublicPart\LecturersController;
@@ -61,12 +62,21 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
 /**
  *  Common routes:
  *      1. Fetch countries
+ *      2. Pages
  */
 Route::prefix('common-routes')->middleware('api-auth')->group(function () {
     /** Countries */
     Route::prefix('countries')->group(function () {
         Route::post('/fetch',                           [CountriesController::class, 'fetch'])->name('api.common-routes.countries.fetch');
         Route::post('/fetch-by-id',                     [CountriesController::class, 'fetchByID'])->name('api.common-routes.countries.fetch-by-id');
+    });
+
+    /** Get pages */
+    Route::prefix('pages')->middleware('api-auth')->group(function () {
+        Route::post('/privacy-policy',                           [PagesController::class, 'privacy'])->name('api.common-routes.pages.privacy');
+        Route::post('/terms-and-conditions',                     [PagesController::class, 'terms'])->name('api.common-routes.pages.terms');
+        Route::post('/cookies',                                  [PagesController::class, 'cookies'])->name('api.common-routes.pages.cookies');
+        Route::post('/important-numbers',                        [PagesController::class, 'importantNumbers'])->name('api.common-routes.pages.important-numbers');
     });
 });
 
