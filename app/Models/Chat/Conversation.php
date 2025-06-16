@@ -23,8 +23,12 @@ class Conversation extends Model{
     public function mySide(): HasOne{
         return $this->hasOne(Participant::class, 'conversation_id', 'id')->where('user_id', Auth::user()->id);
     }
-
     public function getOtherSide(){
         return Participant::where('conversation_id', $this->id)->where('user_id', '!=', Auth::user()->id)->first();
+    }
+
+    /** Mobile chat app */
+    public function userRel(): HasOne{
+        return $this->hasOne(Participant::class, 'conversation_id', 'id')->where('user_id', '!=', Auth::user()->id);
     }
 }

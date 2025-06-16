@@ -8,6 +8,7 @@ use App\Http\Controllers\API\PublicPart\BlogController;
 use App\Http\Controllers\API\PublicPart\LocationsController;
 use App\Http\Controllers\API\PublicPart\PresentersController;
 use App\Http\Controllers\API\Schedule\SchedulerController;
+use App\Http\Controllers\API\Users\ChatController;
 use App\Http\Controllers\API\Users\InboxController;
 use App\Http\Controllers\API\Users\UsersController;
 use Illuminate\Http\Request;
@@ -66,6 +67,10 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
         });
 
         /** Conversations */
+        Route::prefix('chat')->group(function () {
+            Route::post('/',                                      [ChatController::class, 'fetch'])->name('api.users.dashboard.chat');
+            Route::post('/preview',                               [ChatController::class, 'preview'])->name('api.users.dashboard.chat.preview');
+        });
     });
 });
 
