@@ -24,6 +24,11 @@ class Blog extends Model{
     protected $table = 'blog';
     protected $guarded = ['id'];
 
+    /** Automatically append img_path when serializing */
+    protected $appends = ['photo_path'];
+    /** Accessor for a fixed image path prefix + stored filename */
+    public function getPhotoPathAttribute(): string{ return 'files/blog/'; }
+
     public function getDate(){
         return Carbon::parse($this->created_at)->format('d.m.Y');
     }

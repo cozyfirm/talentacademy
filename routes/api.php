@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Common\CountriesController;
+use App\Http\Controllers\API\PublicPart\AttendeesController;
+use App\Http\Controllers\API\PublicPart\BlogController;
+use App\Http\Controllers\API\PublicPart\LecturersController;
+use App\Http\Controllers\API\PublicPart\LocationsController;
+use App\Http\Controllers\API\PublicPart\PresentersController;
 use App\Http\Controllers\API\Schedule\SchedulerController;
 use App\Http\Controllers\API\Users\UsersController;
 use Illuminate\Http\Request;
@@ -78,5 +83,42 @@ Route::prefix('schedule')->middleware('api-auth')->group(function () {
     /* Fetch sessions */
     Route::prefix('sessions')->middleware('api-auth')->group(function () {
         Route::post('/fetch',                           [SchedulerController::class, 'fetchSession'])->name('api.schedule.sessions.fetch');
+    });
+});
+
+/**
+ *  Public part, which includes:
+ *
+ *      1. Locations
+ *      2. Blog
+ *      3. Presenters
+ */
+Route::prefix('public-part')->middleware('api-auth')->group(function () {
+    /** Locations */
+    Route::prefix('locations')->middleware('api-auth')->group(function () {
+        Route::post('/',                                [LocationsController::class, 'fetch'])->name('api.public-part.locations');
+        /** Preview single location */
+        Route::post('/preview',                         [LocationsController::class, 'preview'])->name('api.public-part.locations.preview');
+    });
+
+    Route::prefix('blog')->middleware('api-auth')->group(function () {
+        Route::post('/',                                [BlogController::class, 'fetch'])->name('api.public-part.blog');
+        /** Preview single post */
+        Route::post('/preview',                         [BlogController::class, 'preview'])->name('api.public-part.blog.preview');
+    });
+
+    /**
+     *  Presenters && Attendees
+     */
+
+    Route::prefix('presenters')->middleware('api-auth')->group(function () {
+        Route::post('/',                                [PresentersController::class, 'fetch'])->name('api.public-part.presenters');
+        /** Preview single lecturer */
+        Route::post('/preview',                         [PresentersController::class, 'preview'])->name('api.public-part.presenters.preview');
+    });
+    Route::prefix('attendees')->middleware('api-auth')->group(function () {
+        Route::post('/',                                [AttendeesController::class, 'fetch'])->name('api.public-part.attendees');
+        /** Preview single lecturer */
+        Route::post('/preview',                         [AttendeesController::class, 'preview'])->name('api.public-part.attendees.preview');
     });
 });

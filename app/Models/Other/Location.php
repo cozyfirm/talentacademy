@@ -21,6 +21,11 @@ class Location extends Model{
     protected $table = '__locations';
     protected $guarded = ['id'];
 
+    /** Automatically append img_path when serializing */
+    protected $appends = ['photo_path'];
+    /** Accessor for a fixed image path prefix + stored filename */
+    public function getPhotoPathAttribute(): string{ return 'files/images/public-part/locations/'; }
+
     public function countryRel(): HasOne{
         return $this->hasOne(Country::class, 'id', 'country');
     }

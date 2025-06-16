@@ -17,12 +17,11 @@ class Filters extends Controller{
 
     public static function getLimit(){ return self::$limit; }
 
-    public static function filter($query, $frontRequest = NULL){
-
+    public static function filter($query, $limit = NULL){
         $filters = request()->get('filter');
         $filter_values = request()->get('filter_values');
 
-
+        if($limit) self::$limit = $limit;
 
         $controller = self::class;
         if(request()->has('limit')){
