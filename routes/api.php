@@ -5,10 +5,10 @@ use App\Http\Controllers\API\Common\CountriesController;
 use App\Http\Controllers\API\Common\PagesController;
 use App\Http\Controllers\API\PublicPart\AttendeesController;
 use App\Http\Controllers\API\PublicPart\BlogController;
-use App\Http\Controllers\API\PublicPart\LecturersController;
 use App\Http\Controllers\API\PublicPart\LocationsController;
 use App\Http\Controllers\API\PublicPart\PresentersController;
 use App\Http\Controllers\API\Schedule\SchedulerController;
+use App\Http\Controllers\API\Users\InboxController;
 use App\Http\Controllers\API\Users\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,15 +48,25 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
 
     /** Update basic data */
     Route::post('/update-basic-data',                  [UsersController::class, 'updateBasicData'])->name('api.users.update-basic-data');
-
     /** Change user password */
     Route::post('/change-password',                    [UsersController::class, 'changePassword'])->name('api.users.change-password');
-
     /** Upload photo */
     Route::post('/upload-photo',                       [UsersController::class, 'uploadPhoto'])->name('api.users.upload-photo');
-
     /** Delete profile */
     Route::post('/delete-profile',                     [UsersController::class, 'deleteProfile'])->name('api.users.delete-profile');
+
+    /**
+     *  Notifications and messaging system
+     */
+    Route::prefix('dashboard')->group(function () {
+        /** Fetch notifications (inbox messages) */
+        Route::prefix('inbox')->group(function () {
+            Route::post('/',                                      [InboxController::class, 'fetch'])->name('api.users.dashboard.inbox');
+            Route::post('/preview',                               [InboxController::class, 'preview'])->name('api.users.dashboard.inbox.preview');
+        });
+
+        /** Conversations */
+    });
 });
 
 /**
