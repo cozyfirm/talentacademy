@@ -58,6 +58,7 @@ class ChatController extends Controller{
             ->get()
             ->reverse();
 
+
         $conversations = Conversation::whereHas('participantsRel', function ($q){
             $q->where('user_id', Auth::user()->id);
         })->where('is_group', 0)->orderBy('updated_at', 'DESC')->get();

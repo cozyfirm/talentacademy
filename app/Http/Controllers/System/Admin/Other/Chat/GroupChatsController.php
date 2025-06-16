@@ -84,12 +84,20 @@ class GroupChatsController extends Controller{
         return view($this->_path . 'add-participant', [
             'create' => true,
             'conversation' => $conversation,
-            'users' => User::orderBy('name', 'ASC')->get()->pluck('name', 'id')
+            'users' => User::whereHas('applicationRel', function ($q){
+                $q->where('app_status', '=', 'accepted')
+                    ->whereHas('programRel.seasonRel', function ($q){
+                        $q->where('active', '=', 1);
+                    });
+            })->orWhere('role', 'presenter')->orderBy('name', 'ASC')->get()->mapWithKeys(function ($user) {
+                $label = $user->name . ' (' . ($user->role == 'user' ? 'Korisnik' : 'Predavač') . ')';
+                return [$user->id => $label];
+            })
         ]);
     }
     public function saveParticipant(Request $request): JsonResponse{
         try{
-            $conversation = Conversation::where('id', $request->id)->first();
+            $conversation = Conversation::where('id', '=', $request->id)->first();
             $participant = Participant::where('conversation_id', '=', $conversation->id)->where('user_id', $request->user_id)->first();
 
             if(!$participant){

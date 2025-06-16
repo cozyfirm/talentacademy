@@ -30,8 +30,8 @@ class createConversations extends Command
      */
     public function createNewConversation($base_user_id, $user_id): Conversation | bool{
         try{
-            $baseUser = User::where('id', $base_user_id)->first();
-            $user = User::where('id', $user_id)->first();
+            $baseUser = User::where('id', '=', $base_user_id)->first();
+            $user = User::where('id', '=', $user_id)->first();
 
             $conversation = Conversation::create([
                 'hash' =>  Hash::make($base_user_id . '-' . $user_id . '-' . time()),
@@ -61,24 +61,34 @@ class createConversations extends Command
             }
         }
 
-        for($i=1; $i<=5; $i++){
+        for($i=6; $i<=10; $i++){
             $usersFromProgram = User::whereHas('applicationRel', function ($q) use ($i){
-                $q->where('program_id', $i)->where('app_status', 'accepted');
-            })->orWhereHas('sessionsRel', function ($q) use ($i){
+                $q->where('app_status', '=', 'accepted')
+                    ->whereHas('programRel', function ($q) use($i){
+                        $q->where('id', '=', $i);
+                    });
+            })->orWhereHas('sessionsRel.sessionRel', function ($q) use ($i){
                 $q->where('program_id', $i);
             })->orderBy('name')->get();
+
 
             foreach ($usersFromProgram as $userFromProgram){
                 if($userFromProgram->role == 'user'){
                     $usersByUser = User::whereHas('applicationRel', function ($q) use ($i){
-                        $q->where('program_id', $i)->where('app_status', 'accepted');
-                    })->orWhereHas('sessionsRel', function ($q) use ($i){
+                        $q->where('app_status', '=', 'accepted')
+                            ->whereHas('programRel', function ($q) use($i){
+                                $q->where('id', '=', $i);
+                            });
+                    })->orWhereHas('sessionsRel.sessionRel', function ($q) use ($i){
                         $q->where('program_id', $i);
                     })->orderBy('name')->get();
                 }else{
                     $usersByUser = User::whereHas('applicationRel', function ($q) use ($i){
-                        $q->where('program_id', $i)->where('app_status', 'accepted');
-                    })->orWhereHas('sessionsRel', function ($q) use ($i){
+                        $q->where('app_status', '=', 'accepted')
+                            ->whereHas('programRel', function ($q) use($i){
+                                $q->where('id', '=', $i);
+                            });
+                    })->orWhereHas('sessionsRel.sessionRel', function ($q) use ($i){
                         $q->where('program_id', $i);
                     })->orderBy('name')->get();
                 }

@@ -25,7 +25,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 {{ html()->label(__('Odaberite korisnika'))->for('user_id')->class('bold') }}
-                                {{ html()->select('user_id', $users)->class('form-control form-control-sm mt-1 select-2')->required()->disabled(isset($preview)) }}
+                                {{ html()->select('user_id', $users)->class('form-control form-control-sm mt-1 select2')->required()->disabled(isset($preview)) }}
                             </div>
                         </div>
                     </div>
