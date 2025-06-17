@@ -73,6 +73,9 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
             Route::post('/send-message',                          [ChatController::class, 'sendMessage'])->name('api.users.dashboard.chat.send-message');
         });
     });
+
+    /** Notifications centre */
+    Route::post('/notifications-info',                            [UsersController::class, 'notificationsInfo'])->name('api.users.notifications-info');
 });
 
 /**

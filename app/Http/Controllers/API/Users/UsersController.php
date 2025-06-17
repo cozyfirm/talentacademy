@@ -183,4 +183,27 @@ class UsersController extends Controller{
             return $this->apiResponse('5030', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
+
+    /**
+     * Fetch info about new messages and new notifications;
+     * Get total number of unread notifications and messages
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function notificationsInfo(Request $request): JsonResponse{
+        try{
+            return $this->apiResponse('0000', __('Success'), [
+                'inbox' => [
+                    'unread' => InboxTo::where('to', $request->user_id)->where('read', 0)->count()
+                ],
+                'chat' => [
+                    'unread' => Participant::where('user_id', $request->user_id)->where('unread', '!=', 0)->count()
+                ]
+            ]);
+        }catch (\Exception $e){
+            $this->write('API: UsersController::deleteProfile()', $e->getCode(), $e->getMessage(), $request);
+            return $this->apiResponse('5030', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
 }
