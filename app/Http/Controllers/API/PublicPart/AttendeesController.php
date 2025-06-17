@@ -10,6 +10,7 @@ use App\Traits\Common\LogTrait;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AttendeesController extends Controller
 {
@@ -41,6 +42,7 @@ class AttendeesController extends Controller
                         $q->where('active', '=', 1);
                     });
             })->where('role', 'user')->orderBy('id', 'DESC')
+                ->where('id', '!=', $request->user_id)
                 ->select('id', 'name', 'username', 'role', 'about', 'photo_uri');
 
             /** If program ID is provided, filter by program ID */
@@ -74,6 +76,7 @@ class AttendeesController extends Controller
     public function preview(Request $request): JsonResponse{
         try{
             if(!isset($request->id)) return $this->apiResponse('5361', __('Nepoznat polaznik'));
+            $canSendMessage = false;
 
             $attendee = User::whereHas('applicationRel', function ($q){
                 $q->where('app_status', '=', 'accepted')
@@ -82,10 +85,23 @@ class AttendeesController extends Controller
                     });
             })->where('role', 'user')
                 ->where('id', '=', $request->id)
+                ->with('applicationRel.programRel')
                 ->first(['id', 'name', 'username', 'role', 'about', 'photo_uri']);
 
+            if(!$attendee) return $this->apiResponse('5362', __('Nepoznat polaznik'));
+
+            /** Check does user have privilege to send message to another user */
+            try{
+                $attendeeProgram = Program::whereHas('appRel', function ($q) use($attendee){
+                    $q->where('attendee_id', $attendee->id)->where('app_status', 'accepted');
+                })->first();
+
+                if(isset($attendeeProgram->id) and ($attendeeProgram->id == Auth::user()->whatIsMyProgram('id'))) $canSendMessage = true;
+            }catch(\Exception $e){}
+
             return $this->apiResponse('0000', 'Success', [
-                'attendee' => $attendee->toArray()
+                'attendee' => $attendee->toArray(),
+                'canSendMessage' => $canSendMessage
             ]);
         }catch (\Exception $e) {
             $this->write('API: AttendeesController::preview()', $e->getCode(), $e->getMessage(), $request);

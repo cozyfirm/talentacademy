@@ -11,6 +11,7 @@ use App\Traits\Common\LogTrait;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PresentersController extends Controller{
     use ResponseTrait, LogTrait;
@@ -68,6 +69,7 @@ class PresentersController extends Controller{
     public function preview(Request $request): JsonResponse{
         try{
             if(!isset($request->id)) return $this->apiResponse('5361', __('Nepoznat predavač'));
+            $canSendMessage = false;
 
             $presenter = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
                 $q->where('active', '=', 1);
@@ -75,8 +77,22 @@ class PresentersController extends Controller{
                 ->where('id', '=', $request->id)
                 ->first(['id', 'name', 'username', 'role', 'about', 'photo_uri', 'title', 'institution', 'presenter_role', 'short_description', 'description', 'interview', 'instagram', 'facebook', 'twitter', 'linkedin', 'web']);
 
+            if(!$presenter) return $this->apiResponse('5362', __('Nepoznat predavač'));
+
+            /** Check does user have privilege to send message to another user */
+            try{
+                $presenterProgram = Program::whereHas('sessionsRel.presentersRel', function ($q) use($presenter){
+                    $q->where('presenter_id', $presenter->id);
+                })->whereHas('seasonRel', function ($q){
+                    $q->where('active', '=', 1);
+                })->first();
+
+                if(isset($presenterProgram->id) and ($presenterProgram->id == Auth::user()->whatIsMyProgram('id'))) $canSendMessage = true;
+            }catch(\Exception $e){}
+
             return $this->apiResponse('0000', 'Success', [
-                'presenter' => $presenter->toArray()
+                'presenter' => $presenter->toArray(),
+                'canSendMessage' => $canSendMessage
             ]);
         }catch (\Exception $e) {
             $this->write('API: PresentersController::preview()', $e->getCode(), $e->getMessage(), $request);

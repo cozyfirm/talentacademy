@@ -160,6 +160,7 @@ class User extends Authenticatable{
                 $q->where('active', '=', 1);
             })->first();
 
+            dd("wee", $program);
             if($param){
                 return $program->$param;
             }else return $program;
