@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\PublicPart;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\Core\Filters;
+use App\Models\Chat\Conversation;
+use App\Models\Chat\Participant;
 use App\Models\Other\Blog\Blog;
 use App\Models\Programs\Program;
 use App\Models\User;
@@ -69,7 +71,7 @@ class PresentersController extends Controller{
     public function preview(Request $request): JsonResponse{
         try{
             if(!isset($request->id)) return $this->apiResponse('5361', __('Nepoznat predavač'));
-            $canSendMessage = false;
+            $canSendMessage = false; $chat = null;
 
             $presenter = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
                 $q->where('active', '=', 1);
@@ -87,12 +89,28 @@ class PresentersController extends Controller{
                     $q->where('active', '=', 1);
                 })->first();
 
-                if(isset($presenterProgram->id) and ($presenterProgram->id == Auth::user()->whatIsMyProgram('id'))) $canSendMessage = true;
+                if(isset($presenterProgram->id) and ($presenterProgram->id == Auth::user()->whatIsMyProgram('id'))) {
+                    $canSendMessage = true;
+
+                    $conversation = Participant::whereIn('user_id', [$request->user_id, $presenter->id])
+                        ->whereHas('conversationRel', function ($query) {
+                            $query->where('is_group', 0);
+                        })
+                        ->select('conversation_id')
+                        ->groupBy('conversation_id')
+                        ->havingRaw('COUNT(DISTINCT user_id) = 2')
+                        ->first();
+
+                    $chat = Conversation::where('id', '=', $conversation->conversation_id)->first(['id', 'hash', 'name', 'image', 'is_group', 'updated_at']);
+                }
             }catch(\Exception $e){}
 
             return $this->apiResponse('0000', 'Success', [
                 'presenter' => $presenter->toArray(),
-                'canSendMessage' => $canSendMessage
+                'chat' => [
+                    'canSendMessage' => $canSendMessage,
+                    'conversation' => $chat?->toArray(),
+                ]
             ]);
         }catch (\Exception $e) {
             $this->write('API: PresentersController::preview()', $e->getCode(), $e->getMessage(), $request);
