@@ -70,6 +70,7 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
         Route::prefix('chat')->group(function () {
             Route::post('/',                                      [ChatController::class, 'fetch'])->name('api.users.dashboard.chat');
             Route::post('/preview',                               [ChatController::class, 'preview'])->name('api.users.dashboard.chat.preview');
+            Route::post('/send-message',                          [ChatController::class, 'sendMessage'])->name('api.users.dashboard.chat.send-message');
         });
     });
 });

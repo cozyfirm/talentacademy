@@ -6,18 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\Core\Filters;
 use App\Models\Chat\Conversation;
 use App\Models\Chat\Message;
+use App\Models\Chat\Participant;
 use App\Models\Other\Inbox\InboxTo;
+use App\Models\User;
 use App\Traits\Common\LogTrait;
 use App\Traits\Http\ResponseTrait;
+use App\Traits\Mqtt\MqttTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller{
-    use ResponseTrait, LogTrait;
+    use ResponseTrait, LogTrait, MqttTrait;
 
     /* Number of messages */
     protected int $_msg_number = 10;
+
+    protected array $_chat_info = [];
 
     /**
      * Fetch all conversations for logged user:
@@ -25,31 +30,38 @@ class ChatController extends Controller{
      *  1. Group conversations
      *  2. Single conversations with another users
      *
+     *  Explain: If is_group = 1, then for image use img_path + image; If is_group = 0, then for image
+     *  use user_rel -> user_rel -> photo_path + photo uri;
+     *  For name, is_group = 1 => name; For name is_group = 0 => user_rel -> user_rel -> name
+     *
      * @param Request $request
      * @return JsonResponse
      */
     public function fetch(Request $request): JsonResponse{
         try{
             /** First, let's collect all group chat that user is member */
-            $groupChats = Conversation::whereHas('participantsRel', function ($q) use($request){
-                $q->where('user_id', $request->user_id);
-            })->where('is_group', 1)->orderBy('id')->get(['id', 'hash', 'name', 'description', 'image', 'participants', 'updated_at']);
+            // $groupChats = Conversation::whereHas('participantsRel', function ($q) use($request){
+            //    $q->where('user_id', $request->user_id);
+            // })->where('is_group', 1)->orderBy('id')->get(['id', 'hash', 'name', 'description', 'image', 'participants', 'updated_at']);
 
             $chats = Conversation::whereHas('participantsRel', function ($q) use($request){
                 $q->where('user_id', '=', $request->user_id);
-            })->where('is_group', 0)
+            })
                 ->with('userRel.userRel:id,name,username,photo_uri')
                 ->with('userRel:conversation_id,user_id')
                 ->with('mySide:conversation_id,user_id,unread')
                 ->orderBy('updated_at', 'DESC')
-                ->get(['id', 'hash', 'updated_at']);
+                ->get(['id', 'hash', 'name', 'description', 'image', 'participants', 'is_group', 'updated_at']);
 
             return $this->apiResponse('0000', __('Success'), [
-                'group_chats' => [
+                // 'group_chats' => [
+                //    'img_path' => '/files/images/public-part/',
+                //    'chats' => $groupChats->toArray()
+                // ],
+                'chats' => [
                     'img_path' => '/files/images/public-part/',
-                    'chats' => $groupChats->toArray()
+                    'data' => $chats->toArray()
                 ],
-                'chats' => $chats->toArray()
             ]);
         }catch (\Exception $e){
             $this->write('API: ChatController::fetch()', $e->getCode(), $e->getMessage(), $request);
@@ -57,6 +69,45 @@ class ChatController extends Controller{
         }
     }
 
+    /**
+     * Set conversation info
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function setConversationInfo(Request $request): array{
+        $this->_chat_info = [];
+        /* Display data for conversation */
+        $conversation = Conversation::where('id', '=', $request->conversation_id)->first();
+
+        $this->_chat_info['conversation_id'] = $request->conversation_id;
+        $this->_chat_info['hash'] = $conversation->hash;
+
+        if($conversation->is_group == 0){
+            /* It's one to one */
+            $this->_chat_info['name'] = $conversation->userRel->userRel->name ?? 'John Doe';
+            $this->_chat_info['description'] = __('Privatni razgovor');
+            $this->_chat_info['img_path'] = '/files/images/public-part/users/' . ($conversation->userRel->userRel->photo_uri ?? 'default.png');
+
+            /* Update number of unread messages */
+            Participant::where('conversation_id', $request->conversation_id)
+                ->where('user_id', '=', $request->user_id)->update(['unread' => 0]);
+        }else{
+            /* Group chat */
+            $this->_chat_info['name'] = $conversation->name;
+            $this->_chat_info['description'] = $conversation->description;
+            $this->_chat_info['img_path'] = '/files/images/public-part/' . $conversation->image;
+        }
+
+        return $this->_chat_info;
+    }
+
+    /**
+     * Fetch messages from chat; Preview chat info
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function preview(Request $request): JsonResponse{
         try{
             if(!isset($request->conversation_id)) return $this->apiResponse('5026', __('Nepoznat razgovor'));
@@ -69,12 +120,53 @@ class ChatController extends Controller{
             $messages = Filters::filter($messages, $this->_msg_number);
 
             return $this->apiResponse('0000', __('Success'), [
-                'chat' => [],
+                'chat' => $this->setConversationInfo($request),
                 'messages' => $messages->toArray()
             ]);
         }catch (\Exception $e){
             $this->write('API: ChatController::preview()', $e->getCode(), $e->getMessage(), $request);
             return $this->apiResponse('5025', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
+
+    /**
+     * Send message to user
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function sendMessage(Request $request): JsonResponse{
+        try{
+            if(!isset($request->conversation_id)) return $this->apiResponse('5029', __('Nepoznat razgovor'));
+            if(!isset($request->message)) return $this->apiResponse('5029', __('Poruka ne može biti prazna'));
+
+            /** Add new messages */
+            $message = Message::create([
+                'conversation_id' => $request->conversation_id,
+                'sender_id' => $request->user_id,
+                'body' => $request->message
+            ]);
+
+            try{
+                /** Broadcast over MQTT */
+                $user = User::where('id', '=', $request->user_id)->first(['id', 'email', 'name', 'api_token', 'username','photo_uri']);
+                $user->photo = $user->photoUri();
+
+                $this->publishChatMessage($request->hash, $user, Message::where('id', '=', $message->id)->with('senderRel')->first());
+            }catch (\Exception $e){}
+
+            $messages = Message::where('conversation_id', '=', $request->conversation_id)
+                ->orderBy('id','desc')
+                ->with('senderRel:id,name,username,photo_uri')
+                ->select('id', 'conversation_id', 'sender_id', 'body', 'read');
+            $messages = Filters::filter($messages, $this->_msg_number);
+
+            return $this->apiResponse('0000', __('Success'), [
+                'chat' => $this->setConversationInfo($request),
+                'messages' => $messages->toArray()
+            ]);
+        }catch (\Exception $e){
+            $this->write('API: ChatController::fetch()', $e->getCode(), $e->getMessage(), $request);
+            return $this->apiResponse('5028', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
 }
