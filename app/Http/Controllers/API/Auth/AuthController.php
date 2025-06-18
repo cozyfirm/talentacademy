@@ -34,7 +34,7 @@ class AuthController extends Controller{
                 /** ToDo:: Update FCM token when logged */
                 // User::where('email', '=', $request->email)->update(['fcm_token' => $request->fcm_token]);
 
-                return $this->apiResponse('0000', __('Success'), $this->getUserData($user) );
+                return $this->apiResponse('0000', __('Success'), $this->getUserData($user, true) );
             }else {
                 return $this->apiResponse('5004', __('You have entered wrong password'));
             }
