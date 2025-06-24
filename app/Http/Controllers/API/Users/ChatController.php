@@ -15,6 +15,7 @@ use App\Traits\Mqtt\MqttTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ChatController extends Controller{
     use ResponseTrait, LogTrait, MqttTrait;
@@ -167,6 +168,82 @@ class ChatController extends Controller{
         }catch (\Exception $e){
             $this->write('API: ChatController::fetch()', $e->getCode(), $e->getMessage(), $request);
             return $this->apiResponse('5028', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
+
+    /**
+     * Create new conversation between two users
+     *
+     * @param $user_id
+     * @param $another_user_id
+     * @return Conversation|bool
+     */
+    public function createNewConversation($user_id, $another_user_id): Conversation | bool{
+        try{
+            $anotherUser = User::where('id', '=', $another_user_id)->first();
+            $user = User::where('id', '=', $user_id)->first();
+
+            $conversation = Conversation::create([
+                'hash' =>  Hash::make($another_user_id . '-' . $user_id . '-' . time()),
+                'name' => $anotherUser->name . ' - ' . $user->name
+            ]);
+            Participant::create([
+                'conversation_id' => $conversation->id,
+                'user_id' => $another_user_id
+            ]);
+            Participant::create([
+                'conversation_id' => $conversation->id,
+                'user_id' => $user_id
+            ]);
+
+            return $conversation;
+        }catch (\Exception $e){ return false; }
+    }
+
+    /**
+     * Get or create chat
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getOrCreate(Request $request): JsonResponse{
+        try{
+            if(!isset($request->other_user_id)) return $this->apiResponse('5029', __('Nepoznat korisnik'));
+
+            /* First, let's check if there is a conversation between users */
+            $conversation = Conversation::where('is_group', '=', 0)
+                ->whereHas('participantsRel', function ($q) use ($request) {
+                    $q->where('user_id', $request->user_id);
+                })
+                ->whereHas('participantsRel', function ($q) use ($request) {
+                    $q->where('user_id', $request->other_user_id);
+                })
+                ->whereHas('participantsRel', function ($q) {
+                    $q->select('conversation_id')
+                        ->groupBy('conversation_id')
+                        ->havingRaw('COUNT(*) = 2'); // samo 2 učesnika
+                })
+                ->first();
+
+            if(!$conversation){
+                $conversation = $this->createNewConversation($request->user_id, $request->other_user_id);
+            }
+
+            $request['conversation_id'] = $conversation->id ?? 0;
+
+            $messages = Message::where('conversation_id', '=', $conversation->id)
+                ->orderBy('id','desc')
+                ->with('senderRel:id,name,username,photo_uri')
+                ->select('id', 'conversation_id', 'sender_id', 'body', 'read');
+            $messages = Filters::filter($messages, $this->_msg_number);
+
+            return $this->apiResponse('0000', __('Success'), [
+                'chat' => $this->setConversationInfo($request),
+                'messages' => $messages->toArray()
+            ]);
+        }catch (\Exception $e){
+            $this->write('API: ChatController::getOrCreate()', $e->getCode(), $e->getMessage(), $request);
+            return $this->apiResponse('5025', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
 }

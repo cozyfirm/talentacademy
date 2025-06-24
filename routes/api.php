@@ -71,6 +71,9 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
             Route::post('/',                                      [ChatController::class, 'fetch'])->name('api.users.dashboard.chat');
             Route::post('/preview',                               [ChatController::class, 'preview'])->name('api.users.dashboard.chat.preview');
             Route::post('/send-message',                          [ChatController::class, 'sendMessage'])->name('api.users.dashboard.chat.send-message');
+
+            /** Fetch chat if exists, if not create the new one */
+            Route::post('/get-or-create',                         [ChatController::class, 'getOrCreate'])->name('api.users.dashboard.chat.get-or-create');
         });
     });
 
