@@ -5,12 +5,13 @@ namespace App\Console\Commands\chat;
 use App\Models\Chat\Conversation;
 use App\Models\Chat\Participant;
 use App\Models\User;
+use App\Traits\Common\CommonTrait;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class createConversations extends Command
-{
+class createConversations extends Command{
+    use CommonTrait;
     /**
      * The name and signature of the console command.
      *
@@ -34,7 +35,7 @@ class createConversations extends Command
             $user = User::where('id', '=', $user_id)->first();
 
             $conversation = Conversation::create([
-                'hash' =>  Hash::make($base_user_id . '-' . $user_id . '-' . time()),
+                'hash' => $this->getCustomHash($base_user_id . '-' . $user_id . '-' . time()),
                 'name' => $baseUser->name . ' - ' . $user->name
             ]);
             Participant::create([
@@ -47,7 +48,7 @@ class createConversations extends Command
             ]);
 
             return $conversation;
-        }catch (\Exception $e){ dd($e); return false; }
+        }catch (\Exception $e){ return false; }
     }
 
     public function handle(){

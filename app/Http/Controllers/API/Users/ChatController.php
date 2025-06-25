@@ -9,6 +9,7 @@ use App\Models\Chat\Message;
 use App\Models\Chat\Participant;
 use App\Models\Other\Inbox\InboxTo;
 use App\Models\User;
+use App\Traits\Common\CommonTrait;
 use App\Traits\Common\LogTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Mqtt\MqttTrait;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ChatController extends Controller{
-    use ResponseTrait, LogTrait, MqttTrait;
+    use ResponseTrait, LogTrait, MqttTrait, CommonTrait;
 
     /* Number of messages */
     protected int $_msg_number = 10;
@@ -51,6 +52,8 @@ class ChatController extends Controller{
                 ->with('userRel.userRel:id,name,username,photo_uri')
                 ->with('userRel:conversation_id,user_id')
                 ->with('mySide:conversation_id,user_id,unread')
+                ->with('lastMessageRel.senderRel:id,name,username,photo_uri')
+                ->with('lastMessageRel:id,conversation_id,sender_id,body,read')
                 ->orderBy('updated_at', 'DESC')
                 ->get(['id', 'hash', 'name', 'description', 'image', 'participants', 'is_group', 'updated_at']);
 
@@ -184,7 +187,7 @@ class ChatController extends Controller{
             $user = User::where('id', '=', $user_id)->first();
 
             $conversation = Conversation::create([
-                'hash' =>  Hash::make($another_user_id . '-' . $user_id . '-' . time()),
+                'hash' => $this->getCustomHash($another_user_id . '-' . $user_id . '-' . time()),
                 'name' => $anotherUser->name . ' - ' . $user->name
             ]);
             Participant::create([

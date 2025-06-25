@@ -31,4 +31,7 @@ class Conversation extends Model{
     public function userRel(): HasOne{
         return $this->hasOne(Participant::class, 'conversation_id', 'id')->where('user_id', '!=', Auth::user()->id);
     }
+    public function lastMessageRel(): HasOne{
+        return $this->hasOne(Message::class, 'conversation_id', 'id')->latest();
+    }
 }

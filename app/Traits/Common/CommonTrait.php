@@ -25,4 +25,22 @@ trait CommonTrait{
             return "";
         }
     }
+
+    /**
+     * Generate custom hash, contained only english alphabet,
+     * @param $input
+     * @return string
+     */
+    public function getCustomHash($input): string {
+        // Get SHA-256 hash in base64, which includes + and / by default
+        $hash = base64_encode(hash('sha256', $input, true));
+
+        // Replace + and / with allowed characters, remove = padding
+        $hash = strtr($hash, '+/', 'AB');  // Replace + with A, / with B
+        $hash = rtrim($hash, '=');
+
+        // Add dashes at fixed or random positions (optional)
+        $hash = substr($hash, 0, 60); // Ensure 60 characters
+        return $hash;
+    }
 }
