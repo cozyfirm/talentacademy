@@ -185,6 +185,24 @@ class UsersController extends Controller{
     }
 
     /**
+     * Update users online status
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updateOnlineStatus(Request $request): JsonResponse{
+        try{
+            /** Update last online status */
+            Auth::user()->update(['last_online' => Carbon::now()]);
+
+            return $this->apiResponse('0000', __('Success'));
+        }catch (\Exception $e){
+            $this->write('API: UsersController::updateOnlineStatus()', $e->getCode(), $e->getMessage(), $request);
+            return $this->apiResponse('5030', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
+
+    /**
      * Fetch info about new messages and new notifications;
      * Get total number of unread notifications and messages
      *
@@ -205,7 +223,7 @@ class UsersController extends Controller{
                 ]
             ]);
         }catch (\Exception $e){
-            $this->write('API: UsersController::deleteProfile()', $e->getCode(), $e->getMessage(), $request);
+            $this->write('API: UsersController::notificationsInfo()', $e->getCode(), $e->getMessage(), $request);
             return $this->apiResponse('5030', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }

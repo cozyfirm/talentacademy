@@ -64,6 +64,7 @@ import "./public-part/core/menu.js";
 /* Import push notifications */
 
 import "./public-part/notifications/push-not.js";
+import "./public-part/notifications/online-status.js";
 // import "./public-part/chat/chat.js";
 
 

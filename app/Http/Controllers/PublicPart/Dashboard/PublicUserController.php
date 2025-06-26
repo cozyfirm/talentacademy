@@ -384,4 +384,24 @@ class PublicUserController extends Controller{
 
         return redirect()->route('public-part.home');
     }
+
+    /**
+     * Update users online status
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updateOnlineStatus(Request $request): JsonResponse{
+        try{
+            /** Update last online status */
+            if (auth()->check()) {
+                Auth::user()->update(['last_online' => Carbon::now()]);
+            }
+
+            return $this->apiResponse('0000', __('Success'));
+        }catch (\Exception $e){
+            $this->write('API: PublicUserController::updateOnlineStatus()', $e->getCode(), $e->getMessage(), $request);
+            return $this->apiResponse('5030', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
 }

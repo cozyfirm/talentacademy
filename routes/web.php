@@ -253,8 +253,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::post('/fetch-old-messages',                       [ChatController::class, 'fetchOldMessages'])->name('dashboard.fetch-old-messages');
     });
 
-    /* Sign out */
-    Route::get ('/sign-out',                                [PublicUserController::class, 'signOut'])->name('dashboard.sing-out');
+    /** Sign out */
+    Route::get ('/sign-out',                                     [PublicUserController::class, 'signOut'])->name('dashboard.sing-out');
+    /** Update online user status */
+    Route::post('/update-online-status',                         [PublicUserController::class, 'updateOnlineStatus'])->name('dashboard.update-online-status');
 });
 
 /**

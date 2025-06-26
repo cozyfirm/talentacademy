@@ -77,6 +77,9 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
         });
     });
 
+    /** Update online user status */
+    Route::post('/update-online-status',                          [UsersController::class, 'updateOnlineStatus'])->name('api.users.update-online-status');
+
     /** Notifications centre */
     Route::post('/notifications-info',                            [UsersController::class, 'notificationsInfo'])->name('api.users.notifications-info');
 });
