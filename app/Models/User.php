@@ -64,7 +64,8 @@ class User extends Authenticatable{
         'presenter_role',
         'short_description',
         'description',
-        'interview'
+        'interview',
+        'last_online'
     ];
 
     /**
@@ -95,6 +96,15 @@ class User extends Authenticatable{
      */
     public function getPhotoPathAttribute(): string{
         return 'files/images/public-part/users/' . ($this->photo_uri ?? 'default.png');
+    }
+
+    /** Check if user is online */
+    public function isOnline(): bool{
+        return $this->last_online && Carbon::parse($this->last_online)->gt(now()->subMinutes(1));
+    }
+    /** Check if user is offline */
+    public function isOffline(): bool{
+        return !$this->last_online || Carbon::parse($this->last_online)->lt(now()->subMinutes(1));
     }
 
     public function photoUri(){
@@ -161,7 +171,6 @@ class User extends Authenticatable{
                 $q->where('active', '=', 1);
             })->first();
 
-            dd("wee", $program);
             if($param){
                 return $program->$param;
             }else return $program;

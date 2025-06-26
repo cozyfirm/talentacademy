@@ -193,6 +193,9 @@ class UsersController extends Controller{
      */
     public function notificationsInfo(Request $request): JsonResponse{
         try{
+            /** Update last online status */
+            Auth::user()->update(['last_online' => Carbon::now()]);
+
             return $this->apiResponse('0000', __('Success'), [
                 'inbox' => [
                     'unread' => InboxTo::where('to', $request->user_id)->where('read', 0)->count()

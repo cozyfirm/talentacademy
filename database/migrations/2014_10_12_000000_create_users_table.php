@@ -56,6 +56,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('interview')->nullable();
 
+            $table->dateTime('last_online')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });

@@ -175,16 +175,19 @@ class ChatController extends Controller{
                 /** @var $receiver; Get user object */
                 $receiver = User::findOrFail($participant->user_id);
 
-                /** @var $message; Format message */
-                $message = (object)[
-                    'id' => $message->id,
-                    'content' => $request->message,
-                    'sender' => auth()->user(),
-                    'chat' => $conversationInfo
-                ];
+                /** Send message only if receiver is offline */
+                if ($receiver->isOffline()) {
+                    /** @var $message; Format message */
+                    $message = (object)[
+                        'id' => $message->id,
+                        'content' => $request->message,
+                        'sender' => auth()->user(),
+                        'chat' => $conversationInfo
+                    ];
 
-                /** Send message and create database sample */
-                $receiver->notify(new NewMessageNotification($message));
+                    /** Send message and create database sample */
+                    $receiver->notify(new NewMessageNotification($message));
+                }
             }catch (\Exception $e){
                 $this->write('API: ChatController::fetch() - Create notification', $e->getCode(), $e->getMessage(), $request);
             }

@@ -21,11 +21,13 @@ class NewMessageNotification extends Notification{
 
     /**
      * Get the notification's delivery channels.
+     * For chat messages, do not create database sample, only create push notification
      *
      * @return array<int, string>
      */
     public function via(object $notifiable): array{
-        return ['database', 'firebase'];
+        // return ['database', 'firebase'];
+        return ['firebase'];
     }
 
     /**
