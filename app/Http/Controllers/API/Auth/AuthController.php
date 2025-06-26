@@ -32,7 +32,7 @@ class AuthController extends Controller{
                 $user = Auth::user();
 
                 /** ToDo:: Update FCM token when logged */
-                // User::where('email', '=', $request->email)->update(['fcm_token' => $request->fcm_token]);
+                User::where('email', '=', $request->email)->update(['fcm_token' => $request->fcm_token]);
 
                 return $this->apiResponse('0000', __('Success'), $this->getUserData($user, true) );
             }else {

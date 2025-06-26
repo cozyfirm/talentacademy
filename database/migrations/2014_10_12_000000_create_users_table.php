@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('api_token')->nullable();
+            $table->string('fcm_token', '128')->nullable();
             $table->rememberToken();
 
             /* Role data */
