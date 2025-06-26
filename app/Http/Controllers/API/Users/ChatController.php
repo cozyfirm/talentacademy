@@ -7,8 +7,11 @@ use App\Http\Controllers\System\Core\Filters;
 use App\Models\Chat\Conversation;
 use App\Models\Chat\Message;
 use App\Models\Chat\Participant;
+use App\Models\Notifications\Notification;
 use App\Models\Other\Inbox\InboxTo;
 use App\Models\User;
+use App\Notifications\NewMessageNotification;
+use App\Services\FirebaseNotificationService;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Common\LogTrait;
 use App\Traits\Http\ResponseTrait;
@@ -150,13 +153,41 @@ class ChatController extends Controller{
                 'body' => $request->message
             ]);
 
+            /** Get conversation info */
+            $conversationInfo = $this->setConversationInfo($request);
+
             try{
                 /** Broadcast over MQTT */
                 $user = User::where('id', '=', $request->user_id)->first(['id', 'email', 'name', 'api_token', 'username','photo_uri']);
                 $user->photo = $user->photoUri();
 
                 $this->publishChatMessage($request->hash, $user, Message::where('id', '=', $message->id)->with('senderRel')->first());
-            }catch (\Exception $e){}
+            }catch (\Exception $e){
+                $this->write('API: ChatController::fetch() - Broadcast over socket', $e->getCode(), $e->getMessage(), $request);
+            }
+
+            /**
+             *  Create new notification and new push notification
+             */
+            try{
+                /** @var $participant; Get participant object to extract receiver ID */
+                $participant  = Participant::where('conversation_id', $request->conversation_id)->where('user_id', '!=', $request->user_id)->first();
+                /** @var $receiver; Get user object */
+                $receiver = User::findOrFail($participant->user_id);
+
+                /** @var $message; Format message */
+                $message = (object)[
+                    'id' => $message->id,
+                    'content' => $request->message,
+                    'sender' => auth()->user(),
+                    'chat' => $conversationInfo
+                ];
+
+                /** Send message and create database sample */
+                $receiver->notify(new NewMessageNotification($message));
+            }catch (\Exception $e){
+                $this->write('API: ChatController::fetch() - Create notification', $e->getCode(), $e->getMessage(), $request);
+            }
 
             $messages = Message::where('conversation_id', '=', $request->conversation_id)
                 ->orderBy('id','desc')
@@ -165,7 +196,7 @@ class ChatController extends Controller{
             $messages = Filters::filter($messages, $this->_msg_number);
 
             return $this->apiResponse('0000', __('Success'), [
-                'chat' => $this->setConversationInfo($request),
+                'chat' => $conversationInfo,
                 'messages' => $messages->toArray()
             ]);
         }catch (\Exception $e){

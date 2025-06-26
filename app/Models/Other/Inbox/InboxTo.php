@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @method static where(string $string, $id)
+ * @method static create(array $array)
  */
 class InboxTo extends Model{
     use HasFactory;

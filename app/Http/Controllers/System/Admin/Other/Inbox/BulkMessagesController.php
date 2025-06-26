@@ -4,6 +4,7 @@ namespace App\Http\Controllers\System\Admin\Other\Inbox;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\Core\Filters;
+use App\Models\Chat\Participant;
 use App\Models\Models\Core\Country;
 use App\Models\Other\Inbox\Inbox;
 use App\Models\Other\Inbox\InboxTo;
@@ -11,6 +12,9 @@ use App\Models\Other\Location;
 use App\Models\Programs\Program;
 use App\Models\Programs\ProgramApplication;
 use App\Models\User;
+use App\Notifications\NewInboxNotification;
+use App\Notifications\NewMessageNotification;
+use App\Traits\Common\LogTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Illuminate\Http\JsonResponse;
@@ -19,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class BulkMessagesController extends Controller{
-    use UserBaseTrait, ResponseTrait;
+    use UserBaseTrait, ResponseTrait, LogTrait;
     protected string $_path = 'admin.other.inbox.bulk-messages.';
 
     public function index (){
@@ -43,6 +47,41 @@ class BulkMessagesController extends Controller{
             'other' => Program::pluck('title', 'id')->prepend('Svim korisnicima', 0)->prepend('Draft', 7)
         ]);
     }
+
+
+    /**
+     * Create database and firebase notification
+     *
+     * @param Request $request
+     * @param User $receiver
+     * @param Inbox $inbox
+     * @param InboxTo $inboxTo
+     * @return void
+     */
+    public function createNotification(Request $request, User $receiver, Inbox $inbox, InboxTo $inboxTo): void{
+        try{
+            /** @var $notification; Format message */
+            $notification = (object)[
+                'id' => $inboxTo->id,
+                'title' => $inbox->title,
+                'content' => $inbox->content,
+                'sender' => auth()->user(),
+                'inbox_to' => [
+                    'id' => $inboxTo->id,
+                    'inbox_id' => $inboxTo->inbox_id,
+                    'read_at' => $inboxTo->read_at,
+                    'created_at' => $inboxTo->created_at
+                ]
+            ];
+
+            /** Send message and create database sample */
+            $receiver->notify(new NewInboxNotification($notification));
+        }catch (\Exception $e){
+            $this->write('API: BulkMessagesController::createNotification()', $e->getCode(), $e->getMessage(), $request);
+        }
+
+    }
+
     public function save(Request $request): JsonResponse{
         try{
             $request['from'] = Auth::user()->id;
@@ -50,12 +89,16 @@ class BulkMessagesController extends Controller{
 
             if($request->what == 0){
                 /* Sent to all users */
-                $users = User::where('role', 'user')->get();
+                $users = User::where('role', '=','user')->get();
                 foreach ($users as $user){
-                    InboxTo::create([
+                    $inboxTo = InboxTo::create([
                         'inbox_id' => $inbox->id,
                         'to' => $user->id
                     ]);
+
+                    $this->createNotification($request, $user, $inbox, $inboxTo);
+
+                    dd("wee");
                 }
             }else if($request->what >= 1 and $request->what <= 6){
                 /* Sent to users from specific program */
@@ -71,6 +114,7 @@ class BulkMessagesController extends Controller{
 
             return $this->jsonSuccess(__('Uspješno ste unijeli lokaciju!'), route('system.admin.inbox.bulk-messages.preview', ['id' => $inbox->id]));
         }catch (\Exception $e){
+            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
