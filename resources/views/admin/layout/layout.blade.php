@@ -15,6 +15,10 @@
         @vite(['resources/css/app.scss', 'resources/css/admin/admin.scss', 'resources/js/app.js'])
     </head>
     <body>
+        <div class="loading">
+            <img src="{{ asset('files/images/default/loading-cubes.gif') }}" alt="">
+        </div>
+
         @include('admin.layout.snippets.menu')
 
         <!-- Main page content -->

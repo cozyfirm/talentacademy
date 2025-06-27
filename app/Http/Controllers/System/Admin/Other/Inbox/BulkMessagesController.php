@@ -44,7 +44,7 @@ class BulkMessagesController extends Controller{
     public function create (): View{
         return view($this->_path . 'create', [
             'create' => true,
-            'other' => Program::pluck('title', 'id')->prepend('Svim korisnicima', 0)->prepend('Draft', 7)
+            'other' => Program::where('id', '>', 5)->pluck('title', 'id')->prepend('Svim korisnicima', 0)->prepend('Draft', 11)
         ]);
     }
 
@@ -95,26 +95,24 @@ class BulkMessagesController extends Controller{
                         'inbox_id' => $inbox->id,
                         'to' => $user->id
                     ]);
-
                     $this->createNotification($request, $user, $inbox, $inboxTo);
-
-                    dd("wee");
                 }
-            }else if($request->what >= 1 and $request->what <= 6){
+            }else if($request->what >= 6 and $request->what <= 10){
                 /* Sent to users from specific program */
                 $applications = ProgramApplication::where('program_id', $request->what)->where('app_status', 'accepted')->get();
 
                 foreach ($applications as $application){
-                    InboxTo::create([
+                    $inboxTo = InboxTo::create([
                         'inbox_id' => $inbox->id,
                         'to' => $application->attendee_id
                     ]);
+
+                    $this->createNotification($request, $application->userRel, $inbox, $inboxTo);
                 }
             }
 
             return $this->jsonSuccess(__('Uspješno ste unijeli lokaciju!'), route('system.admin.inbox.bulk-messages.preview', ['id' => $inbox->id]));
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
