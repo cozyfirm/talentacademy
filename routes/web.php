@@ -94,6 +94,8 @@ Route::prefix('')->group(function () {
      */
     Route::prefix('contact-us')->group(function () {
         Route::post('/send-us-a-message',                   [ContactUsController::class, 'sendUsAMessage'])->name('public-part.contact-us.send-us-a-message');
+
+        Route::get ('/remove-my-profile',                   [ContactUsController::class, 'removeMyProfile'])->name('public-part.contact-us.remove-my-profile');
     });
 
     /*
