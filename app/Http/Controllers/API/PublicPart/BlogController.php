@@ -28,7 +28,7 @@ class BlogController extends Controller{
 
             $news = Blog::whereHas('seasonRel', function ($q){
                 $q->where('active', '=', 1);
-            })->where('published', '=', 1)->where('category', '>=', '0')->where('category', '<', 6)->orderBy('id', 'DESC')
+            })->where('published', '=', 1)->where('category', '>=', '-1')->where('category', '<', 6)->orderBy('id', 'DESC')
                 ->with('mainImg:id,file,name,ext')
                 ->with('imgOne:id,file,name,ext')
                 ->select('id', 'title', 'short_desc', 'category', 'published', 'main_img', 'img_one', 'img_two');

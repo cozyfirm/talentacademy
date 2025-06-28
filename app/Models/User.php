@@ -140,7 +140,9 @@ class User extends Authenticatable{
     }
     public function myProgram(): bool{
         try{
-            $app = ProgramApplication::where('attendee_id', $this->id)->where('app_status', 'accepted')->count();
+            $app = ProgramApplication::whereHas('programRel.seasonRel', function ($q){
+                $q->where('active', '=', 1);
+            })->where('attendee_id', $this->id)->where('app_status', 'accepted')->count();
             return (bool)$app;
         }catch (\Exception $e){ return false; }
     }
@@ -248,7 +250,9 @@ class User extends Authenticatable{
         return InboxTo::where('to', $this->id)->whereNull('read_at')->count();
     }
     public function totalNotes(){
-        return ProgramSessionNote::where('attendee_id', $this->id)->count();
+        return ProgramSessionNote::whereHas('sessionRel.programRel.seasonRel', function ($q){
+            $q->where('active', '=', 1);
+        })->where('attendee_id', $this->id)->count();
     }
 
     /* -------------------------------------------------------------------------------------------------------------- */
