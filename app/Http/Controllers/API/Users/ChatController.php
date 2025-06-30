@@ -177,17 +177,21 @@ class ChatController extends Controller{
 
                 /** Send message only if receiver is offline */
                 if ($receiver->isOffline() or true) {
-                    /** @var $message; Format message */
-                    $message = (object)[
-                        'id' => $message->id,
-                        'content' => $request->message,
-                        'sender' => auth()->user(),
-                        'chat' => $conversationInfo
-                    ];
 
-                    /** Send message and create database sample */
-                    $receiver->notify(new NewMessageNotification($message));
                 }
+
+                /** @var $message; Format message */
+                $message = (object)[
+                    'id' => $message->id,
+                    'content' => $request->message,
+                    'sender' => auth()->user(),
+                    'chat' => $conversationInfo
+                ];
+
+                $this->write('API: ChatController::fetch() - Sending message to', $receiver->id, json_encode($message), $request);
+
+                /** Send message and create database sample */
+                $receiver->notify(new NewMessageNotification($message));
             }catch (\Exception $e){
                 $this->write('API: ChatController::fetch() - Create notification', $e->getCode(), $e->getMessage(), $request);
             }
