@@ -176,7 +176,7 @@ class ChatController extends Controller{
                 $receiver = User::findOrFail($participant->user_id);
 
                 /** Send message only if receiver is offline */
-                if ($receiver->isOffline()) {
+                if ($receiver->isOffline() or true) {
                     /** @var $message; Format message */
                     $message = (object)[
                         'id' => $message->id,
