@@ -191,12 +191,9 @@ class ChatController extends Controller{
                 /** Send message and create database sample */
                 $receiver->notify(new NewMessageNotification($message));
             }catch (\Exception $e){
-                dd($e);
                 $this->write('API: ChatController::fetch() - Create notification', $e->getCode(), $e->getMessage(), $request);
             }
 
-
-            dd("WEEE");
             $messages = Message::where('conversation_id', '=', $request->conversation_id)
                 ->orderBy('id','desc')
                 ->with('senderRel:id,name,username,photo_uri')
