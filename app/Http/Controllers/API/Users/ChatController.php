@@ -7,19 +7,14 @@ use App\Http\Controllers\System\Core\Filters;
 use App\Models\Chat\Conversation;
 use App\Models\Chat\Message;
 use App\Models\Chat\Participant;
-use App\Models\Notifications\Notification;
-use App\Models\Other\Inbox\InboxTo;
 use App\Models\User;
 use App\Notifications\NewMessageNotification;
-use App\Services\FirebaseNotificationService;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Common\LogTrait;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Mqtt\MqttTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class ChatController extends Controller{
     use ResponseTrait, LogTrait, MqttTrait, CommonTrait;
@@ -165,6 +160,9 @@ class ChatController extends Controller{
             }catch (\Exception $e){
                 $this->write('API: ChatController::fetch() - Broadcast over socket', $e->getCode(), $e->getMessage(), $request);
             }
+
+
+            $this->write('API: ChatController::fetch() - Prije slanja oca mu jebem', "0000", "Jel ovo radi??", $request);
 
             /**
              *  Create new notification and new push notification
