@@ -138,6 +138,9 @@ class ChatController extends Controller{
      */
     public function sendMessage(Request $request): JsonResponse{
         try{
+            /** Log request */
+            $this->write('API: ChatController::sendMessage()', "5028", "Request data", $request);
+
             if(!isset($request->conversation_id)) return $this->apiResponse('5029', __('Nepoznat razgovor'));
             if(!isset($request->message)) return $this->apiResponse('5029', __('Poruka ne može biti prazna'));
 
@@ -194,7 +197,7 @@ class ChatController extends Controller{
                     }catch (\Exception $e){}
                 }
             }catch (\Exception $e){
-                $this->write('API: ChatController::fetch() - Create notification', $e->getCode(), $e->getMessage(), $request);
+                $this->write('API: ChatController::sendMessage() - Create notification', $e->getCode(), $e->getMessage(), $request);
             }
 
             $messages = Message::where('conversation_id', '=', $request->conversation_id)
