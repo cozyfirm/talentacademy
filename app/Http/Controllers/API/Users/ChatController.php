@@ -161,9 +161,7 @@ class ChatController extends Controller{
                 $this->write('API: ChatController::fetch() - Broadcast over socket', $e->getCode(), $e->getMessage(), $request);
             }
 
-
-            // $this->write('API: ChatController::fetch() - Prije slanja oca mu jebem', "0000", "Jel ovo radi??", $request);
-
+            $this->write('Chat::sendMessage()', "5029", json_encode($message), $request);
             /**
              *  Create new notification and new push notification
              */
@@ -191,6 +189,8 @@ class ChatController extends Controller{
 
                         /** Send message and create database sample */
                         $receiver->notify(new NewMessageNotification($message));
+
+                        $this->write('Chat::sendMessage()', "5030", json_encode($message), $request);
                     }catch (\Exception $e){}
                 }
             }catch (\Exception $e){
