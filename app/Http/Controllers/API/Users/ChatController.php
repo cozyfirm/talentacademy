@@ -159,7 +159,7 @@ class ChatController extends Controller{
                 $user = User::where('id', '=', $request->user_id)->first(['id', 'email', 'name', 'api_token', 'username','photo_uri']);
                 $user->photo = $user->photoUri();
 
-                $this->publishChatMessage($request->hash, $user, Message::where('id', '=', $message->id)->with('senderRel')->first());
+                $this->publishChatMessage($conversationInfo['hash'], $user, Message::where('id', '=', $message->id)->with('senderRel')->first());
             }catch (\Exception $e){
                 $this->write('API: ChatController::fetch() - Broadcast over socket', $e->getCode(), $e->getMessage(), $request);
             }
