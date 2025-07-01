@@ -58,7 +58,9 @@ class NewBlogPostNotification extends Notification{
     public function toFirebase(object $notifiable): array{
         return [
             'title' => $this->post->title,
-            'body' => substr($this->post->content, 0, 100),
+            'body' => strlen($this->post->content) > 100
+                ? substr($this->post->content, 0, 100) . '...'
+                : $this->post->content,
             'data' => [
                 'type' => 'blog',
                 'inbox_to_id' => (string) ($this->post->id),

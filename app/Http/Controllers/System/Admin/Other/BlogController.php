@@ -67,14 +67,14 @@ class BlogController extends Controller{
                     'title' => $post->title,
                     'content' => $post->short_desc,
                     'sender' => auth()->user(),
-                    'post' => $post
-                        ->with('mainImg:id,file,name,ext')
-                        ->with('imgOne:id,file,name,ext')
-                        ->first(['id', 'title', 'short_desc', 'description', 'category', 'published', 'main_img', 'img_one', 'img_two'])->toArray()
+                    'post' => $post->toArray()
                 ];
 
                 /** Send message and create database sample */
                 $attendee->notify(new NewBlogPostNotification($notification));
+
+                /** Log notification after sending */
+                // $this->write('Firebase Info', "8000", json_encode(['fcm_token' => $attendee->fcm_token, '']));
             }catch (\Exception $e){
                 $this->write('API: BlogController::sendNotification()', $e->getCode(), $e->getMessage());
             }
@@ -120,9 +120,11 @@ class BlogController extends Controller{
             $postBefore = Blog::where('id', '=', $request->id)->first();
 
             Blog::where('id', '=', $request->id)->update($request->except(['id', 'undefined', 'files']));
-            $postAfter = Blog::where('id', '=', $request->id)->first();
+            $postAfter = Blog::where('id', '=', $request->id)->first(['id', 'title', 'short_desc', 'published', 'created_by']);
 
-            if($postBefore->published == 0 and $postAfter->published == 1) $this->sendNotification($postAfter);
+            if($postBefore->published == 0 and $postAfter->published == 1) {
+                $this->sendNotification($postAfter);
+            }
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.blog.preview', ['id' => $request->id]));
         }catch (\Exception $e){

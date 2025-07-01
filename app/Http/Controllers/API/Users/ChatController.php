@@ -162,34 +162,37 @@ class ChatController extends Controller{
             }
 
 
-            $this->write('API: ChatController::fetch() - Prije slanja oca mu jebem', "0000", "Jel ovo radi??", $request);
+            // $this->write('API: ChatController::fetch() - Prije slanja oca mu jebem', "0000", "Jel ovo radi??", $request);
 
             /**
              *  Create new notification and new push notification
              */
             try{
-                /** @var $participant; Get participant object to extract receiver ID */
-                $participant  = Participant::where('conversation_id', $request->conversation_id)->where('user_id', '!=', $request->user_id)->first();
-                /** @var $receiver; Get user object */
-                $receiver = User::findOrFail($participant->user_id);
+                /** @var $participants; Get participant object to extract receiver ID */
+                $participants  = Participant::where('conversation_id', $request->conversation_id)->where('user_id', '!=', $request->user_id)->get();
 
-                /** Send message only if receiver is offline */
-                if ($receiver->isOffline() or true) {
+                foreach ($participants as $participant) {
+                    try{
+                        /** @var $receiver; Get user object */
+                        $receiver = User::findOrFail($participant->user_id);
 
+                        /** Send message only if receiver is offline */
+                        if ($receiver->isOffline()) {}
+
+                        /** @var $message; Format message */
+                        $message = (object)[
+                            'id' => $message->id,
+                            'content' => $request->message,
+                            'sender' => auth()->user(),
+                            'chat' => $conversationInfo
+                        ];
+
+                        // $this->write('API: ChatController::fetch() - Sending message to', $receiver->id, json_encode($message), $request);
+
+                        /** Send message and create database sample */
+                        $receiver->notify(new NewMessageNotification($message));
+                    }catch (\Exception $e){}
                 }
-
-                /** @var $message; Format message */
-                $message = (object)[
-                    'id' => $message->id,
-                    'content' => $request->message,
-                    'sender' => auth()->user(),
-                    'chat' => $conversationInfo
-                ];
-
-                $this->write('API: ChatController::fetch() - Sending message to', $receiver->id, json_encode($message), $request);
-
-                /** Send message and create database sample */
-                $receiver->notify(new NewMessageNotification($message));
             }catch (\Exception $e){
                 $this->write('API: ChatController::fetch() - Create notification', $e->getCode(), $e->getMessage(), $request);
             }

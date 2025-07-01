@@ -61,7 +61,9 @@ class FirebaseNotificationService{
                 ->post($url, $payload);
             return $response->json();
         }catch (\Exception $e){
+            dd($e);
             $this->write('API: FirebaseNotificationService::sendToDevice()', $e->getCode(), $e->getMessage());
+            return null;
         }
     }
 }

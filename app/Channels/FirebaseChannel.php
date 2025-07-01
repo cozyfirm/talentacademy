@@ -11,7 +11,7 @@ class FirebaseChannel{
     public function send($notifiable, Notification $notification): void{
         /* Skip if fcm_token is unknown */
         if (!$notifiable->fcm_token) {
-            $this->write('FirebaseChannel::send()', '8001', "No token to sent");
+            $this->write('FirebaseChannel::send()', '8001', json_encode(['message' => "FMC Token unknown", 'receiver_token' => $notifiable->fcm_token, 'receiver_id' => $notifiable->id, 'receiver_name' => $notifiable->name ]));
             return;
         }
 
@@ -26,9 +26,13 @@ class FirebaseChannel{
                 $message['data'] ?? []
             );
 
-            if (isset($response['name']))$this->write('Notifications: FirebaseChannel::send()', '0000', json_encode($response));
-            else $this->write('FirebaseChannel::send()', '8002', json_encode([
+            if (isset($response['name'])) $code = '0000';
+            else $code = '8002';
+
+            $this->write('FirebaseChannel::send()', $code, json_encode([
                 'fcm_token' => $notifiable->fcm_token,
+                'receiver_id' => $notifiable->id,
+                'receiver_name' => $notifiable->name,
                 'title' => $message['title'],
                 'body' => $message['body'],
                 'data' => $message['data'],
