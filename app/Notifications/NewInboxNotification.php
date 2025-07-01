@@ -69,7 +69,9 @@ class NewInboxNotification extends Notification{
     public function toFirebase(object $notifiable): array{
         return [
             'title' => $this->inbox->title,
-            'body' => substr($this->inbox->content, 0, 100),
+            'body' => strlen($this->inbox->content) > 100
+                ? substr($this->inbox->content, 0, 100) . '...'
+                : $this->inbox->content,
             'data' => [
                 'type' => 'inbox',
                 'inbox_to_id' => (string) ($this->inbox->id),

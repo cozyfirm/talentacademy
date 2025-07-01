@@ -61,7 +61,9 @@ class NewMessageNotification extends Notification{
     public function toFirebase(object $notifiable): array{
         return [
             'title' => $this->message->sender->name,
-            'body' => substr($this->message->content, 0, 100),
+            'body' => strlen($this->message->content) > 100
+                ? substr($this->message->content, 0, 100) . '...'
+                : $this->message->content,
             'data' => [
                 'type' => 'message',
                 'message_id' => (string) ($this->message->id),
