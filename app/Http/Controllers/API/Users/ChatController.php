@@ -115,6 +115,12 @@ class ChatController extends Controller{
             if(!isset($request->conversation_id)) return $this->apiResponse('5026', __('Nepoznat razgovor'));
             if(isset($request->number)) $this->_msg_number = $request->number;
 
+            try{
+                /** Set messages as read */
+                $participant = Participant::where('conversation_id', $request->conversation_id)->where('user_id', '=', $request->user_id)->first();
+                $participant->update(['unread' => 0]);
+            }catch (\Exception $e){}
+
             $messages = Message::where('conversation_id', '=', $request->conversation_id)
                 ->orderBy('id','desc')
                 ->with('senderRel:id,name,username,photo_uri')
@@ -176,6 +182,11 @@ class ChatController extends Controller{
                     try{
                         /** @var $receiver; Get user object */
                         $receiver = User::findOrFail($participant->user_id);
+
+                        try{
+                            /** Update number of unread messages */
+                            $participant->update(['unread' => ($participant->unread + 1)]);
+                        }catch (\Exception $e){}
 
                         /** Send message only if receiver is offline */
                         if ($receiver->isOffline()) {}
@@ -272,6 +283,14 @@ class ChatController extends Controller{
 
             if(!$conversation){
                 $conversation = $this->createNewConversation($request->user_id, $request->other_user_id);
+            }else{
+                try{
+                    /** Set messages as read */
+                    $participant = Participant::where('conversation_id', $conversation->id)->where('user_id', '=', $request->user_id)->first();
+                    $participant->update(['unread' => 0]);
+                }catch (\Exception $e){
+                    $this->write('API: ChatController::getOrCreate() - Update unread', $e->getCode(), $e->getMessage(), $request);
+                }
             }
 
             $request['conversation_id'] = $conversation->id ?? 0;

@@ -56,7 +56,7 @@ class BlogController extends Controller{
             $post = Blog::where('id', '=', $request->id)
                 ->with('mainImg:id,file,name,ext')
                 ->with('imgOne:id,file,name,ext')
-                ->first(['id', 'title', 'short_desc', 'description', 'category', 'published', 'main_img', 'img_one', 'img_two']);
+                ->first(['id', 'title', 'short_desc', 'description', 'category', 'published', 'main_img', 'img_one', 'img_two', 'video', 'created_at']);
 
             return $this->apiResponse('0000', 'Success', [
                 'post' => $post->toArray()
