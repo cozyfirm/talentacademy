@@ -56,7 +56,7 @@ class ChatController extends Controller{
                 ->get(['id', 'hash', 'name', 'description', 'image', 'participants', 'is_group', 'updated_at']);
 
             foreach ($chats as $chat){
-                if(!$chat->is_group) $chat->name = $chat->userRel->name ?? 'John Doe';
+                if(!$chat->is_group) $chat->name = $chat->userRel->userRel->name ?? 'John Doe';
             }
 
             return $this->apiResponse('0000', __('Success'), [
