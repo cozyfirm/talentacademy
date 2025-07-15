@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\Common\CommonController;
 use App\Http\Controllers\API\Common\CountriesController;
 use App\Http\Controllers\API\Common\PagesController;
 use App\Http\Controllers\API\PublicPart\AttendeesController;
@@ -90,6 +91,8 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
  *      2. Pages
  */
 Route::prefix('common-routes')->middleware('api-auth')->group(function () {
+    Route::post('/app-stage',                           [CommonController::class, 'appStage'])->name('api.common-routes.app-stage');
+
     /** Countries */
     Route::prefix('countries')->group(function () {
         Route::post('/fetch',                           [CountriesController::class, 'fetch'])->name('api.common-routes.countries.fetch');
