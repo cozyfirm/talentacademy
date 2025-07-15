@@ -161,6 +161,12 @@ class ChatController extends Controller{
                 'body' => $request->message
             ]);
 
+            try{
+                Conversation::where('id', '=', $request->conversation_id)->update(['updated_at' => date('Y-m-d H:i:s')]);
+            }catch (\Exception $e){
+                $this->write('API: ChatController::fetch() - Update updated at', $e->getCode(), $e->getMessage(), $request);
+            }
+
             /** Get conversation info */
             $conversationInfo = $this->setConversationInfo($request);
 
