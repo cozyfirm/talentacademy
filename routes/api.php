@@ -91,8 +91,6 @@ Route::prefix('users')->middleware('api-auth')->group(function () {
  *      2. Pages
  */
 Route::prefix('common-routes')->middleware('api-auth')->group(function () {
-    Route::post('/app-stage',                           [CommonController::class, 'appStage'])->name('api.common-routes.app-stage');
-
     /** Countries */
     Route::prefix('countries')->group(function () {
         Route::post('/fetch',                           [CountriesController::class, 'fetch'])->name('api.common-routes.countries.fetch');
@@ -108,6 +106,12 @@ Route::prefix('common-routes')->middleware('api-auth')->group(function () {
     });
 });
 
+/**
+ *  Common unauthenticated routes; Do not require any tokens
+ */
+Route::prefix('common-unauthenticated')->group(function () {
+    Route::post('/app-stage',                           [CommonController::class, 'appStage'])->name('api.common-routes.app-stage');
+});
 
 /**
  *  Schedule:
