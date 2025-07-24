@@ -12,7 +12,7 @@
             <div class="profile__wrapper_right profile__wrapper_right_my_notes">
                 <div class="my__evaluations__wrapper">
                     @foreach($sessions as $session)
-                        @if($session->presenter_id and ($session->type == 'Radionica' or $session->type == 'Predavanje' or $session->type == 'Keynote Predavanje' or $session->type == 'Projekcija filma' or $session->type == 'Posjeta' or $session->type == 'Hakaton'))
+                        @if((isset($session->presentersRel) and $session->presentersRel->count()) and ($session->type == 'Radionica' or $session->type == 'Predavanje' or $session->type == 'Keynote Predavanje' or $session->type == 'Projekcija filma' or $session->type == 'Posjeta' or $session->type == 'Hakaton'))
                             <div class="single__evaluation @if(Auth()->user()->isSessionEvaluated($session->id, true)) single__evaluation_greyed @else @endif single__evaluation_{{ $session->programRel->id }}">
                                 <div class="session__w">
                                     <div class="session_name__w">
@@ -21,7 +21,13 @@
 
                                     <div class="presenter__w">
                                         <img src="{{ asset('files/images/svg-icons/speaker.svg') }}" alt="IG icon">
-                                        <p>{{ $session->presenterRel->name ?? '' }}</p>
+                                        <p>
+                                            @php $total = 0 @endphp
+                                            @foreach($session->presentersRel as $presenter)
+                                                {{ $presenter->presenterRel->name ?? '' }}
+                                                @if($total++ < ($session->presentersRel->count() - 1)), @endif
+                                            @endforeach
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="evaluation__btn__w">

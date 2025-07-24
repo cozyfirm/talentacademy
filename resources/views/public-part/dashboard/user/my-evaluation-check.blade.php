@@ -23,6 +23,7 @@
                                 <div class="presenter__w">
                                     <img src="{{ asset('files/images/svg-icons/speaker.svg') }}" alt="IG icon">
                                     <p>
+                                        @php $total = 0 @endphp
                                         @foreach($session->presentersRel as $presenter)
                                             {{ $presenter->presenterRel->name ?? '' }}
                                             @if($total++ < ($session->presentersRel->count() - 1)), @endif

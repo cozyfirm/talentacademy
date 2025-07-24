@@ -54,25 +54,66 @@ class createConversations extends Command{
     /**
      * @return void
      */
-    public function addParticipantsToConversation($conversation_id){
+    public function addParticipantsToConversation(int $conversation_id, array $programs): void{
+        foreach ($programs as $program){
+            $attendees = User::whereHas('applicationRel', function ($q) use ($program){
+                $q->where('app_status', '=', 'accepted')
+                    ->whereHas('programRel', function ($q) use($program){
+                        $q->where('id', '=', $program);
+                    });
+            })->get();
 
+            $presenters = User::WhereHas('sessionsRel.sessionRel', function ($q) use ($program){
+                $q->where('program_id', $program);
+            })->orderBy('name')->get();
+
+            // Add attendees to group chat
+            foreach ($attendees as $attendee){
+                $participation = Participant::where('conversation_id', '=', $conversation_id)
+                    ->where('user_id', '=', $attendee->id)
+                    ->first();
+
+                if(!$participation){
+                    Participant::create([
+                        'conversation_id' => $conversation_id,
+                        'user_id' => $attendee->id
+                    ]);
+                }
+            }
+
+            // Add presenter to group chat
+            foreach ($presenters as $presenter){
+                $participation = Participant::where('conversation_id', '=', $conversation_id)
+                    ->where('user_id', '=', $presenter->id)
+                    ->first();
+
+                if(!$participation){
+                    Participant::create([
+                        'conversation_id' => $conversation_id,
+                        'user_id' => $presenter->id
+                    ]);
+                }
+            }
+        }
     }
 
-    public function handle(){
-        $conversations = Conversation::get();
+    public function handle(): void{
+        $conversations = Conversation::where('is_group', '=', 1)->get();
 
         // Update conversation hashes
         foreach ($conversations as $conversation){
-            // $hash = str_replace('/', '-', $conversation->hash);
-            // $hash = str_replace('&', '-', $hash);
-            // $this->getCustomHash($conversation->id . '-' . time());
-
             $conversation->update(['hash' => $this->getCustomHash($conversation->id . '-' . time())]);
-
-            // if (str_contains($conversation->hash, '/')){
-            //     $conversation->update(['hash' => $hash]);
-            // }
         }
+
+        // Add users to group chats
+        $this->addParticipantsToConversation(1, [6,7,8,9,10]);
+        $this->addParticipantsToConversation(2, [6,7,8,9,10]);
+
+        $this->addParticipantsToConversation(3, [6]);
+        $this->addParticipantsToConversation(4, [7]);
+        $this->addParticipantsToConversation(5, [8]);
+        $this->addParticipantsToConversation(6, [9]);
+        $this->addParticipantsToConversation(7, [10]);
 
         for($i=6; $i<=10; $i++){
             $usersFromProgram = User::whereHas('applicationRel', function ($q) use ($i){
