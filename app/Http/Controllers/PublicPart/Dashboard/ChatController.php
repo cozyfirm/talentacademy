@@ -34,7 +34,7 @@ class ChatController extends Controller{
         })->where('is_group', 1)->orderBy('id')->get();
 
         /* If user is not a member of single group, redirect to main profile */
-        if($groups->count() < 1) return redirect()->route('dashboard.my-profile');
+        // if($groups->count() < 1) return redirect()->route('dashboard.my-profile');
 
         if(isset($hash)){
             $firstConversation = Conversation::where('hash', '=', $hash)->first();

@@ -51,15 +51,27 @@ class createConversations extends Command{
         }catch (\Exception $e){ return false; }
     }
 
+    /**
+     * @return void
+     */
+    public function addParticipantsToConversation($conversation_id){
+
+    }
+
     public function handle(){
         $conversations = Conversation::get();
-        foreach ($conversations as $conversation){
-            $hash = str_replace('/', '-', $conversation->hash);
-            $hash = str_replace('&', '-', $hash);
 
-            if (str_contains($conversation->hash, '/')){
-                $conversation->update(['hash' => $hash]);
-            }
+        // Update conversation hashes
+        foreach ($conversations as $conversation){
+            // $hash = str_replace('/', '-', $conversation->hash);
+            // $hash = str_replace('&', '-', $hash);
+            // $this->getCustomHash($conversation->id . '-' . time());
+
+            $conversation->update(['hash' => $this->getCustomHash($conversation->id . '-' . time())]);
+
+            // if (str_contains($conversation->hash, '/')){
+            //     $conversation->update(['hash' => $hash]);
+            // }
         }
 
         for($i=6; $i<=10; $i++){
