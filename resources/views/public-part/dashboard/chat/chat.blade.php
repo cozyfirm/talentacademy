@@ -15,7 +15,7 @@
         <div class="conversations__wrapper__first">
             <div class="left__conversations__wrapper group__chats__wrapper">
                 <div class="lcw__header">
-                    <p>{{ __('Info i group chats') }}</p>
+                    <p>{{ __('Info i grupni razgovori') }}</p>
                 </div>
 
                 <div class="lcw__body gcw__body">
@@ -42,7 +42,7 @@
 
             <div class="my__contacts__wrapper">
                 <div class="lcw__header">
-                    <p>{{ __('Info i group chats') }}</p>
+                    <p>{{ __('Moj odsjek') }}</p>
                 </div>
 
                 <div class="all__chats">
