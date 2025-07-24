@@ -4,15 +4,19 @@ namespace App\Http\Controllers\System\Admin\Users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\Core\Filters;
+use App\Mail\Users\ConfirmEmail;
+use App\Mail\Users\GeneratePresenterPassword;
 use App\Models\Models\Core\Country;
 use App\Models\User;
 use App\Traits\Http\ResponseTrait;
 use App\Traits\Users\UserBaseTrait;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class UsersController extends Controller{
@@ -48,7 +52,7 @@ class UsersController extends Controller{
             'countries' => Country::pluck('name_ba', 'id')
         ]);
     }
-    public function save(Request $request){
+    public function save(Request $request): JsonResponse{
         try{
             $request['birth_date'] = Carbon::parse($request->birth_date)->format('Y-m-d');
 
@@ -58,7 +62,7 @@ class UsersController extends Controller{
                 $request['presenter_role'] = '';
             }
 
-            $kurac = User::where('email', $request->email)->first();
+            $kurac = User::where('email', '=', $request->email)->first();
             if($kurac){
                 return $this->jsonError('1500', __('Odabrani email već postoji :D'));
             }
@@ -76,7 +80,6 @@ class UsersController extends Controller{
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.users.preview', ['username' => $user->username]));
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonError('1500', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }
@@ -84,21 +87,21 @@ class UsersController extends Controller{
     public function preview ($username): View{
         return view($this->_path . 'create', [
             'preview' => true,
-            'user' => User::where('username', $username)->first(),
+            'user' => User::where('username', '=', $username)->first(),
             'countries' => Country::pluck('name_ba', 'id')
         ]);
     }
     public function edit ($username): View{
         return view($this->_path . 'create', [
             'edit' => true,
-            'user' => User::where('username', $username)->first(),
+            'user' => User::where('username', '=', $username)->first(),
             'countries' => Country::pluck('name_ba', 'id')
         ]);
     }
-    public function update(Request $request){
+    public function update(Request $request): JsonResponse{
         try{
             $request['birth_date'] = Carbon::parse($request->birth_date)->format('Y-m-d');
-            $user = User::where('id', $request->id)->first();
+            $user = User::where('id', '=', $request->id)->first();
 
             if($request->role != 'presenter'){
                 $request['title'] = '';
@@ -123,10 +126,32 @@ class UsersController extends Controller{
             $file->move(public_path('files/images/public-part/users'), $name);
 
             /* Update file name */
-            User::where('id', $request->id)->update(['photo_uri' => $name]);
+            User::where('id', '=', $request->id)->update(['photo_uri' => $name]);
 
         }catch (\Exception $e){}
 
         return back();
+    }
+
+    /**
+     * Generate new password to presenter and send via an email;
+     * This is used only for presenter
+     *
+     * @param $username
+     * @return RedirectResponse
+     */
+    public function generateNewPassword  ($username): RedirectResponse{
+        try{
+            $user = User::where('username', '=', $username)->first();
+            $password = $this->generateRandomPassword();
+
+            $user->update(['password' => Hash::make($password)]);
+
+            Mail::to($user->email)->send(new GeneratePresenterPassword($user->name, $user->email, $password));
+        }catch (\Exception $e){
+            dd($e);
+            return redirect()->back()->with('error', __('Greška. Molimo da kontaktirate administratore'));
+        }
+        return redirect()->back()->with('success', __('Šifra uspješno generisana i poslana putem email-a!!'));
     }
 }

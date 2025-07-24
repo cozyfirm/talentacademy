@@ -280,6 +280,9 @@ Route::prefix('system')->middleware('auth')->group(function () {
             Route::get ('/edit/{username}',           [UsersController::class, 'edit'])->name('system.admin.users.edit');
             Route::post('/update',                    [UsersController::class, 'update'])->name('system.admin.users.update');
             Route::post('/update-profile-image',      [UsersController::class, 'updateProfileImage'])->name('system.admin.users.update-profile-image');
+
+            // Generate new password; Used only for presenters
+            Route::get ('/generate-new-password/{username}',           [UsersController::class, 'generateNewPassword'])->name('system.admin.users.generate-new-password');
         });
 
         /**

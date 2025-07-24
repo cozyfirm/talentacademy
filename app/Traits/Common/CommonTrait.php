@@ -43,4 +43,15 @@ trait CommonTrait{
         $hash = substr($hash, 0, 60); // Ensure 60 characters
         return $hash;
     }
+
+    /**
+     * Generate random string, with given length
+     *
+     * @param $length
+     * @return string
+     */
+    function generateRandomPassword($length = 8) :string{
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        return substr(str_shuffle(str_repeat($characters, $length)), 0, $length);
+    }
 }

@@ -25,6 +25,14 @@
                 <i class="fas fa-edit"></i>
             </button>
         </a>
+
+        @if($user->role == 'presenter')
+            <a href="{{ route('system.admin.users.generate-new-password', ['username' => $user->username ]) }}" title="{{ __('Generišite novu šifru') }}">
+                <button class="pm-btn btn pm-btn-edit">
+                    <i class="fas fa-lock-open"></i>
+                </button>
+            </a>
+        @endif
     @endif
 @endsection
 
