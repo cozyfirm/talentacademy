@@ -149,7 +149,6 @@ class UsersController extends Controller{
 
             Mail::to($user->email)->send(new GeneratePresenterPassword($user->name, $user->email, $password));
         }catch (\Exception $e){
-            dd($e);
             return redirect()->back()->with('error', __('Greška. Molimo da kontaktirate administratore'));
         }
         return redirect()->back()->with('success', __('Šifra uspješno generisana i poslana putem email-a!!'));

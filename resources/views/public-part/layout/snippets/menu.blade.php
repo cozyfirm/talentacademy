@@ -63,7 +63,7 @@
         <a href="{{ route('public-part.programs.preview-program', ['id' => 10]) }}">
             <div class="header__submenu_elem">
                 <img src="{{ asset('/files/images/public-part/2025/graphic_design.svg') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
-                <p>{{ __('Grafički dizajn i animacije') }}</p>
+                <p>{{ __('Grafički dizajn i animacija') }}</p>
             </div>
         </a>
     </div>
@@ -115,7 +115,7 @@
             <a href="{{ route('public-part.programs.preview-program', ['id' => 10]) }}">
                 <div class="mobile-menu__submenu-item">
                     <img src="{{ asset('/files/images/public-part/2025/graphic_design.svg') }}" alt="{{ __('Programs image #5') }}" class="programs__program-image">
-                    <p>{{ __('Grafički dizajn i animacije') }}</p>
+                    <p>{{ __('Grafički dizajn i animacija') }}</p>
                 </div>
             </a>
         </div>
