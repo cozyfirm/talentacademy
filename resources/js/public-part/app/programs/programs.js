@@ -99,7 +99,7 @@ $( document ).ready(function() {
                                                    return $("<div>").attr('class', 'program__timeline-item-left-rectangle')
                                                })
                                                .append(function (){
-                                                   return $("<div>").attr('class', 'program__timeline-item-left-duration').text(sessions[i]['duration'])
+                                                   return $("<div>").attr('class', 'program__timeline-item-left-duration').text(sessions[i]['duration'] + " min")
                                                })
                                        })
                                })
@@ -119,7 +119,7 @@ $( document ).ready(function() {
                                            }
                                        })
                                        .append(function (){
-                                           if(sessions[i]['presenters'] !== 'Nije dostupno'){
+                                           if(sessions[i]['lecturer'] !== 'Nije dostupno'){
                                                return $("<div>").attr('class', 'program__timeline-item-right-item')
                                                    .append(function (){
                                                        return $("<div>").attr('class', 'program__timeline-item-right-item-icon')
@@ -128,7 +128,7 @@ $( document ).ready(function() {
                                                            })
                                                    })
                                                    .append(function (){
-                                                       return $("<div>").attr('class', 'program__timeline-item-right-item-text').text(sessions[i]['presenters'])
+                                                       return $("<div>").attr('class', 'program__timeline-item-right-item-text').text(sessions[i]['lecturer'])
                                                    })
                                            }
                                        })

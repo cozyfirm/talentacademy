@@ -37,14 +37,14 @@ class BlogController extends Controller{
             'post' => $post,
             'blogPosts' => Blog::whereHas('seasonRel', function ($q){
                 $q->where('active', '=', 1);
-            })->where('published', '=', 1)->where('category', '>=', '0')->where('category', '<', 6)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get()
+            })->where('published', '=', 1)->where('category', '>=', '0')->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get()
         ]);
     }
     public function loadMore(Request $request): bool|string{
         try{
             $posts = Blog::whereHas('seasonRel', function ($q){
                 $q->where('active', '=', 1);
-            })->where('published', '=', 1)->where('category', '!=', -1)->where('category', '!=', '-2')->where('id', '<', $request->lastID)->orderBy('id', 'DESC')->take(3)->get();
+            })->where('published', '=', 1)->where('category', '!=', -1)->where('category', '!=', '-2')->where('category', '!=', '-3')->where('id', '<', $request->lastID)->orderBy('id', 'DESC')->take(3)->get();
             foreach ($posts as $post){
                 $post->img = $post->mainImg->getFile();
                 $post->categoryVal = $post->getCategory();

@@ -198,7 +198,7 @@ $(document).ready(function (){
                                                     return $("<div>").attr('class', 'program__timeline-item-left-rectangle')
                                                 })
                                                 .append(function (){
-                                                    return $("<div>").attr('class', 'program__timeline-item-left-duration').text(sessions[i]['duration'])
+                                                    return $("<div>").attr('class', 'program__timeline-item-left-duration').text(sessions[i]['duration'] + " min")
                                                 })
                                         })
                                 })

@@ -75,11 +75,19 @@ class ProgramsController extends Controller{
             $sessions = $this->getSessionsByDate($request->program, $currentDay->date);
 
             foreach ($sessions as $session){
-                $session->lecturer = $session->presenterRel->name ?? __('Nije dostupno');
+                $lecturer = "Nije dostupno"; $counter = 0;
+
+                foreach ($session->presentersRel as $presenter){
+                    $lecturer .= $presenter->presenterRel->name ?? 'Nije dostupno';
+                    if($counter++ < ($session->presentersRel->count() - 1)) $lecturer .= ", ";
+                }
+
+                $session->lecturer    = $lecturer;
+                // $session->lecturer = $session->presenterRel->name ?? __('Nije dostupno');
                 $session->location = $session->locationRel->title ?? '';
                 $session->time_from_f = $session->timeFrom();
 
-                $session->presenters = $session->getPresenters();
+                // $session->presenters = $session->getPresenters();
             }
 
             return $this->jsonResponse('0000', __('Bilješka obrisana!'), [

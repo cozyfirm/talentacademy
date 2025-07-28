@@ -60,7 +60,11 @@ class Blog extends Model{
 
     /* Get category */
     public function getCategory(){
-        return (!$this->category) ? __('Globalni post') : $this->categoryRel->title;
+        if($this->category == -3) return __('HNTA Alumni program');
+        if($this->category == -2) return __('Kritičko mišljenje');
+        if($this->category == -1) return __('Interni postovi');
+        if($this->category == 0 ) return __('Globalni post');
+        else return $this->categoryRel->title ?? '';
     }
 
     public function seasonRel(): HasOne{
