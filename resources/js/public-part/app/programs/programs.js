@@ -119,7 +119,7 @@ $( document ).ready(function() {
                                            }
                                        })
                                        .append(function (){
-                                           if(sessions[i]['lecturer'] !== 'Nije dostupno'){
+                                           if(sessions[i]['lecturer'] !== ''){
                                                return $("<div>").attr('class', 'program__timeline-item-right-item')
                                                    .append(function (){
                                                        return $("<div>").attr('class', 'program__timeline-item-right-item-icon')

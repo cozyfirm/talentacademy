@@ -75,10 +75,10 @@ class ProgramsController extends Controller{
             $sessions = $this->getSessionsByDate($request->program, $currentDay->date);
 
             foreach ($sessions as $session){
-                $lecturer = "Nije dostupno"; $counter = 0;
+                $lecturer = ""; $counter = 0;
 
                 foreach ($session->presentersRel as $presenter){
-                    $lecturer .= $presenter->presenterRel->name ?? 'Nije dostupno';
+                    $lecturer .= $presenter->presenterRel->name ?? '';
                     if($counter++ < ($session->presentersRel->count() - 1)) $lecturer .= ", ";
                 }
 
@@ -122,7 +122,7 @@ class ProgramsController extends Controller{
                 $lecturer = ""; $counter = 0;
 
                 foreach ($session->presentersRel as $presenter){
-                    $lecturer .= $presenter->presenterRel->name ?? 'Nije dostupno';
+                    $lecturer .= $presenter->presenterRel->name ?? '';
                     if($counter++ < ($session->presentersRel->count() - 1)) $lecturer .= ", ";
                 }
 
