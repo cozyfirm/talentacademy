@@ -31,7 +31,7 @@ class ProgramsController extends Controller{
         return ProgramSession::where('program_id', $program_id)->whereDate('date', $date)->orderBy('datetime_from')->get();
     }
     public function preview($id, $date = null): View | RedirectResponse{
-        return redirect()->route('public-part.programs.sneak-and-peak', ['id' => $id, 'page' => 1]);
+        // return redirect()->route('public-part.programs.sneak-and-peak', ['id' => $id, 'page' => 1]);
         if(!Auth::check()) return redirect()->route('public-part.programs.sneak-and-peak', ['id' => $id, 'page' => 1]);
 
         if($date){
@@ -78,6 +78,8 @@ class ProgramsController extends Controller{
                 $session->lecturer = $session->presenterRel->name ?? __('Nije dostupno');
                 $session->location = $session->locationRel->title ?? '';
                 $session->time_from_f = $session->timeFrom();
+
+                $session->presenters = $session->getPresenters();
             }
 
             return $this->jsonResponse('0000', __('Bilješka obrisana!'), [

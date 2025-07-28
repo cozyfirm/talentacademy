@@ -145,7 +145,8 @@ class UsersController extends Controller{
             $user = User::where('username', '=', $username)->first();
             $password = $this->generateRandomPassword();
 
-            $user->update(['password' => Hash::make($password)]);
+            // Set new password and verify email
+            $user->update(['password' => Hash::make($password), 'email_verified_at' => Carbon::now()]);
 
             Mail::to($user->email)->send(new GeneratePresenterPassword($user->name, $user->email, $password));
         }catch (\Exception $e){

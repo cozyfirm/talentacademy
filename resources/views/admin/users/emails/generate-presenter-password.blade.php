@@ -15,8 +15,8 @@ Za prijavu koristite sljedeće podatke:
 Sa istim nalogom moći ćete pristupiti i mobilnoj aplikaciji Akademije, dostupnoj na:
 
 <ul>
-    <li>Google Play</li>
-    <li>App Store</li>
+    <li><a href="https://play.google.com/store/apps/details?id=ba.talentakademija.app">Google Play</a></li>
+    <li><a href="https://apps.apple.com/app/id6747880569">App Store</a></li>
 </ul>
 
 U slučaju poteškoća s prijavom ili podešavanjem profila, slobodno nam se javite na mail akademija@fondacijaekipa.ba.

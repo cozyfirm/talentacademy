@@ -46,15 +46,15 @@
 
     @include('public-part.app.base-includes.presenters.presenters_scroll')
 
-    @include('public-part.app.base-includes.programs.grid')
+{{--    @include('public-part.app.base-includes.programs.grid')--}}
 
-{{--    @if(Auth()->check())--}}
-{{--        <!-- Sessions for logged user -->--}}
-{{--        @include('public-part.app.programs.includes.sessions')--}}
-{{--    @else--}}
-{{--        <!-- Programs preview -->--}}
-{{--        @include('public-part.app.base-includes.programs.grid')--}}
-{{--    @endif--}}
+    @if(Auth()->check())
+        <!-- Sessions for logged user -->
+        @include('public-part.app.programs.includes.sessions')
+    @else
+        <!-- Programs preview -->
+        @include('public-part.app.base-includes.programs.grid')
+    @endif
 
     <!-- Blog section; Scroll-bar lattest news -->
     @include('public-part.app.base-includes.blog.blog_scroll')

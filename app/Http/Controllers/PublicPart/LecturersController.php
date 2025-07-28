@@ -64,15 +64,15 @@ class LecturersController extends Controller{
          */
 
         /* Always redirect */
-        return redirect()->route('public-part.lecturers.single-lecturer.sneak-and-peek', ['id' => $id, 'page' => 1]);
+        // return redirect()->route('public-part.lecturers.single-lecturer.sneak-and-peek', ['id' => $id, 'page' => 1]);
 
         if(!Auth::check()) return redirect()->route('public-part.lecturers.single-lecturer.sneak-and-peek', ['id' => $id, 'page' => 1]);
-        else{
-            /* ToDo : Uncomment this one */
-            if(Auth::user()->role != 'presenter' or Auth::user()->role != 'admin'){
-                if(!Auth::user()->hasAcceptedApp()) return redirect()->route('public-part.lecturers.single-lecturer.sneak-and-peek', ['id' => $id, 'page' => 1]);
-            }
-        }
+        // else{
+        //     /* ToDo : Uncomment this one */
+        //     if(Auth::user()->role != 'presenter' or Auth::user()->role != 'admin'){
+        //         if(!Auth::user()->hasAcceptedApp()) return redirect()->route('public-part.lecturers.single-lecturer.sneak-and-peek', ['id' => $id, 'page' => 1]);
+        //     }
+        // }
 
         /* ToDo:: Check if user is not at current active season, do not show it's data */
 
@@ -98,13 +98,13 @@ class LecturersController extends Controller{
                 $q->where('presenter_id', '=', $id);
             })->whereHas('programRel.seasonRel', function ($q){
                 $q->where('active', '=', 1);
-            })->where('date', $currentDay->date)->get(),
+            })->where('date', $currentDay->date)->orderBy('datetime_from')->get(),
             'lecturer' => $lecturer
         ]);
     }
 
     public function sneakAndPeak($id, $page = 1): View | RedirectResponse{
-        $lecturer = User::where('id', $id)->first();
+        $lecturer = User::where('id', '=', $id)->first();
         if($lecturer->role != 'presenter') return redirect()->route('public-part.lecturers.lecturers');
 
         // Make sure that you call the static method currentPageResolver()
