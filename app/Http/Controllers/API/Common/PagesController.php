@@ -71,4 +71,19 @@ class PagesController extends Controller{
             return $this->apiResponse('5010', __('Desila se greška. Molimo da kontaktirate administratore'));
         }
     }
+
+    /**
+     * Get about us page
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function about(Request $request): JsonResponse{
+        try {
+            return $this->apiResponse('0000', __('Success'), SinglePage::where('id', 2)->first()->toArray());
+        } catch (\Exception $e) {
+            $this->write('API: PagesController::about()', $e->getCode(), $e->getMessage(), $request);
+            return $this->apiResponse('5010', __('Desila se greška. Molimo da kontaktirate administratore'));
+        }
+    }
 }

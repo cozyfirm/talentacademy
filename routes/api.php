@@ -103,6 +103,7 @@ Route::prefix('common-routes')->middleware('api-auth')->group(function () {
         Route::post('/terms-and-conditions',                     [PagesController::class, 'terms'])->name('api.common-routes.pages.terms');
         Route::post('/cookies',                                  [PagesController::class, 'cookies'])->name('api.common-routes.pages.cookies');
         Route::post('/important-numbers',                        [PagesController::class, 'importantNumbers'])->name('api.common-routes.pages.important-numbers');
+        Route::post('/about',                                    [PagesController::class, 'about'])->name('api.common-routes.pages.about');
     });
 });
 
