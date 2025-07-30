@@ -112,7 +112,8 @@ class SchedulerController extends Controller{
                 }
 
                 return $data;
-            })->values();
+            })->values()->all(); // <- KLJUČ: ovo pretvara kolekciju u čisti niz
+
 
 
             /** Get dates */
