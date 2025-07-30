@@ -103,6 +103,18 @@ class SchedulerController extends Controller{
             /** Fetch sessions */
             $sessions = $sessions->get(['id', 'program_id', 'title', 'type', 'time_from', 'time_to', 'duration', 'date', 'datetime_from', 'public', 'location_id', 'short_description', 'description', 'presenter_id', 'presenter_data']);
 
+
+            $sessions = $sessions->map(function ($session) {
+                $data = $session->toArray(); // pretvori u niz
+
+                if (isset($data['presenters_rel']) && count($data['presenters_rel']) === 0) {
+                    unset($data['presenters_rel']);
+                }
+
+                return $data;
+            })->values();
+
+
             /** Get dates */
             $dates = $this->getUniqueDates($this->_selected_program);
 
