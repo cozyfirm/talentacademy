@@ -55,9 +55,33 @@ class ChatController extends Controller{
                 ->orderBy('updated_at', 'DESC')
                 ->get(['id', 'hash', 'name', 'description', 'image', 'participants', 'is_group', 'updated_at']);
 
-            foreach ($chats as $chat){
-                if(!$chat->is_group) $chat->name = $chat->userRel->userRel->name ?? 'John Doe';
-            }
+//            foreach ($chats as $chat){
+//                if(!$chat->is_group) $chat->name = $chat->userRel->userRel->name ?? 'John Doe';
+//                else{
+//                    try{
+//                        if (isset($chat->userRel) && isset($chat->userRel->userRel)) {
+//                            $chat->userRel->userRel->setAttribute('photo_path', 'files/images/public-part/' . ($chat->image ?? ''));
+//
+//                            dd($chat->userRel->userRel);
+//                        }
+//                    }catch (\Exception $e){dd($e);}
+//                }
+//            }
+
+            $chatArray = $chats->map(function ($chat) {
+                $chatData = $chat->toArray();
+
+                if (!$chat->is_group) {
+                    $chatData['name'] = $chat->userRel->userRel->name ?? 'John Doe';
+                } else {
+                    // Ako postoji userRel.userRel — dodaj photo_path
+                    if (isset($chatData['user_rel']['user_rel'])) {
+                        $chatData['user_rel']['user_rel']['photo_path'] = 'files/images/public-part/' . ($chat->image ?? '');
+                    }
+                }
+
+                return $chatData;
+            })->values()->all();
 
             return $this->apiResponse('0000', __('Success'), [
                 // 'group_chats' => [
@@ -66,7 +90,7 @@ class ChatController extends Controller{
                 // ],
                 'chats' => [
                     'img_path' => '/files/images/public-part/',
-                    'data' => $chats->toArray()
+                    'data' => $chatArray
                 ],
             ]);
         }catch (\Exception $e){
