@@ -93,8 +93,8 @@ class SchedulerController extends Controller{
 
             $sessions = ProgramSession::where('program_id', $this->_selected_program)
                 ->whereDate('date', $date)->orderBy('datetime_from')
-                ->with('presentersRel.presenterRel:id,name,photo_uri')
-                ->with('presentersRel:id,session_id,presenter_id')
+//                ->with('presentersRel.presenterRel:id,name,photo_uri')
+//                ->with('presentersRel:id,session_id,presenter_id')
                 ->with('locationRel:id,title');
 
             /** If there is no active application, then return only public sessions */
@@ -103,16 +103,37 @@ class SchedulerController extends Controller{
             /** Fetch sessions */
             $sessions = $sessions->get(['id', 'program_id', 'title', 'type', 'time_from', 'time_to', 'duration', 'date', 'datetime_from', 'public', 'location_id', 'short_description', 'description', 'presenter_id', 'presenter_data']);
 
-
+// Ručno dodaj presenters_rel samo ako postoji
             $sessions = $sessions->map(function ($session) {
-                $data = $session->toArray(); // pretvori u niz
+                $data = $session->toArray();
 
-                if (isset($data['presenters_rel']) && count($data['presenters_rel']) === 0) {
-                    unset($data['presenters_rel']);
+                $presenters = $session->presentersRel()
+                    ->with('presenterRel:id,name,photo_uri')
+                    ->get(['id', 'session_id', 'presenter_id']);
+
+                if ($presenters->isNotEmpty()) {
+                    $data['presenters_rel'] = $presenters->map(function ($pr) {
+                        return [
+                            'id' => $pr->id,
+                            'session_id' => $pr->session_id,
+                            'presenter_id' => $pr->presenter_id,
+                            'presenter_rel' => optional($pr->presenterRel)->only(['id', 'name', 'photo_uri']),
+                        ];
+                    })->all();
                 }
 
                 return $data;
-            })->values()->all(); // <- KLJUČ: ovo pretvara kolekciju u čisti niz
+            })->values()->all(); // all() konvertuje kolekciju u čisti array
+
+//            $sessions = $sessions->map(function ($session) {
+//                $data = $session->toArray(); // pretvori u niz
+//
+//                if (isset($data['presenters_rel']) && count($data['presenters_rel']) === 0) {
+//                    unset($data['presenters_rel']);
+//                }
+//
+//                return $data;
+//            })->values()->all(); // <- KLJUČ: ovo pretvara kolekciju u čisti niz
 
 
 
