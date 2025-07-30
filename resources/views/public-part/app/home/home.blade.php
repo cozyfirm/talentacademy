@@ -48,14 +48,14 @@
                     <h2 class="hero-section__heading"> {{ __('Helem Nejse Talent Akademija') }} </h2>
                     <div class="hero-section__subheading">{{ __('Sedmodnevna ljetna škola iz oblasti kreativnih industrija u Sarajevu!') }}</div>
                 </div>
-                @if(auth()->check())
-                    <a href="{{ route('dashboard.my-profile') }}" class="hero-section__bottom-section-button">
-                        {{ __('Apliciraj za stipendiju') }}
+                @if(auth()->check() and ((Auth()->user()->role == 'user' and Auth()->user()->myProgram())))
+                    <a href="{{ route('dashboard.my-schedule') }}" class="hero-section__bottom-section-button">
+                        {{ __('Moj raspored') }}
                     </a>
-                @else
-                    <a href="{{ route('auth.create-account') }}" class="hero-section__bottom-section-button">
-                        {{ __('Apliciraj za stipendiju') }}
-                    </a>
+{{--                @else--}}
+{{--                    <a href="{{ route('auth.create-account') }}" class="hero-section__bottom-section-button">--}}
+{{--                        {{ __('Apliciraj za stipendiju') }}--}}
+{{--                    </a>--}}
                 @endif
             </div>
             <div class="hero-section__bottom-section">
