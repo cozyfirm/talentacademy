@@ -91,6 +91,8 @@ class SchedulerController extends Controller{
                 $date = $currentDay->date;
             }
 
+//            dd($this->_selected_program);
+
             $sessions = ProgramSession::where('program_id', $this->_selected_program)
                 ->whereDate('date', $date)->orderBy('datetime_from')
 //                ->with('presentersRel.presenterRel:id,name,photo_uri')
@@ -98,7 +100,7 @@ class SchedulerController extends Controller{
                 ->with('locationRel:id,title');
 
             /** If there is no active application, then return only public sessions */
-            if(!$application){ $sessions = $sessions->where('public', '=', 1); }
+            // if(!$application){ $sessions = $sessions->where('public', '=', 1); }
 
             /** Fetch sessions */
             $sessions = $sessions->get(['id', 'program_id', 'title', 'type', 'time_from', 'time_to', 'duration', 'date', 'datetime_from', 'public', 'location_id', 'short_description', 'description', 'presenter_id', 'presenter_data']);
