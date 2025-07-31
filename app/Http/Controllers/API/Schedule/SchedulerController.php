@@ -170,7 +170,8 @@ class SchedulerController extends Controller{
             $dates = $this->getUniqueDates($session->program_id);
 
             if(isset($session->locationRel->title)){
-                $session->description = $session->description . "\n\n Lokacija: " . $session->locationRel->title;
+                if(strlen($session->description) > 20) $session->description = $session->description . "\n\n Lokacija: " . $session->locationRel->title;
+                else $session->description = $session->description . "Lokacija: " . $session->locationRel->title;
             }
 
             return $this->apiResponse('0000', 'Success', [
