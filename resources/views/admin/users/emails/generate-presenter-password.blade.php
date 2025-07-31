@@ -22,5 +22,5 @@ Sa istim nalogom moći ćete pristupiti i mobilnoj aplikaciji Akademije, dostupn
 U slučaju poteškoća s prijavom ili podešavanjem profila, slobodno nam se javite na mail akademija@fondacijaekipa.ba.
 
 Srdačno,
-<a href="{{ env('APP_DOMAIN') }}"> Helem Nejse Talent akademija </a>
+<a href="{{ route('auth') }}"> Helem Nejse Talent akademija </a>
 @endcomponent
