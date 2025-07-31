@@ -169,6 +169,10 @@ class SchedulerController extends Controller{
             /* Get dates */
             $dates = $this->getUniqueDates($session->program_id);
 
+            if(isset($session->locationRel->title)){
+                $session->description = $session->description . "<br><br> Lokacija: " . $session->locationRel->title;
+            }
+
             return $this->apiResponse('0000', 'Success', [
                 'selected_date' => $dates[$session->date],
                 'selected_program' => $session->program_id,
