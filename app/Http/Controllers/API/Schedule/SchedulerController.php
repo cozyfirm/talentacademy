@@ -105,7 +105,7 @@ class SchedulerController extends Controller{
             /** Fetch sessions */
             $sessions = $sessions->get(['id', 'program_id', 'title', 'type', 'time_from', 'time_to', 'duration', 'date', 'datetime_from', 'public', 'location_id', 'short_description', 'description', 'presenter_id', 'presenter_data']);
 
-// Ručno dodaj presenters_rel samo ako postoji
+            // Ručno dodaj presenters_rel samo ako postoji
             $sessions = $sessions->map(function ($session) {
                 $data = $session->toArray();
 
@@ -114,14 +114,26 @@ class SchedulerController extends Controller{
                     ->get(['id', 'session_id', 'presenter_id']);
 
                 if ($presenters->isNotEmpty()) {
-                    $data['presenters_rel'] = $presenters->map(function ($pr) {
-                        return [
-                            'id' => $pr->id,
-                            'session_id' => $pr->session_id,
-                            'presenter_id' => $pr->presenter_id,
-                            'presenter_rel' => optional($pr->presenterRel)->only(['id', 'name', 'photo_uri']),
-                        ];
-                    })->all();
+                      $data['presenters_rel'] = [
+                          'presenter_rel' => [
+                              'name' => $session->getPresenters()
+                          ]
+                      ];
+
+//                    $data['presenters_rel'] = $presenters->map(function ($pr) {
+//                        return [
+//                            'id' => $pr->id,
+//                            'session_id' => $pr->session_id,
+//                            'presenter_id' => $pr->presenter_id,
+//                            'presenter_rel' => optional($pr->presenterRel)->only(['id', 'name', 'photo_uri']),
+//                        ];
+//                    })->all();
+                }else{
+                    $data['presenters_rel'] = [
+                        'presenter_rel' => [
+                            'name' => ' '
+                        ]
+                    ];
                 }
 
                 return $data;
