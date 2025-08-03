@@ -114,11 +114,24 @@ class SchedulerController extends Controller{
                     ->get(['id', 'session_id', 'presenter_id']);
 
                 if ($presenters->isNotEmpty()) {
-                      $data['presenters_rel'] = [
-                          'presenter_rel' => [
-                              'name' => $session->getPresenters()
-                          ]
-                      ];
+//                      $data['presenters_rel_2'] = [
+//                          'presenter_rel' => [
+//                              'name' => $session->getPresenters()
+//                          ]
+//                      ];
+
+                    $data['presenters_rel'] = $presenters->map(function ($pr) use($session) {
+                        return [
+                            'id' => $pr->id,
+                            'session_id' => $pr->session_id,
+                            'presenter_id' => $pr->presenter_id,
+                            'presenter_rel' => [
+                                'id' => '0',
+                                'name' => $session->getPresenters(),
+                                'photo_uri' => ''
+                            ],
+                        ];
+                    })->all();
 
 //                    $data['presenters_rel'] = $presenters->map(function ($pr) {
 //                        return [
