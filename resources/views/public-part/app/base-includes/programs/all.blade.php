@@ -2,25 +2,16 @@
     <div class="programs__container">
         <h2 class="programs__heading">{{ __('Programi') }}</h2>
         <div class="programs__content">
-            <a href="{{ route('public-part.programs.preview-program', ['id' => 6]) }}" class="programs__program_v2 program--1">
-                <div class="pp_v2_header">
-                    <img src="{{ asset('/files/images/public-part/program_arrow.svg') }}" alt="{{ __('Arrow') }}">
-                </div>
-                <div class="pp_v2_content">
-                    <img src="{{ asset('/files/images/public-part/writing_2025.svg') }}" alt="{{ __('Program image') }}">
-                    <h1> Pisanje <br> komedije </h1>
-                </div>
-            </a>
-            <a href="{{ route('public-part.programs.preview-program', ['id' => 7]) }}" class="programs__program_v2 program--2">
-                <div class="pp_v2_header">
-                    <img src="{{ asset('/files/images/public-part/program_arrow.svg') }}" alt="{{ __('Arrow') }}">
-                </div>
-                <div class="pp_v2_content">
-                    <img src="{{ asset('/files/images/public-part/jurnalism_2025.svg') }}" alt="{{ __('Program image') }}">
-                    <h1> Novinarstvo i <br> dokumentarni film </h1>
-                </div>
-            </a>
-            <a href="{{ route('public-part.programs.preview-program', ['id' => 8]) }}" class="programs__program_v2 program--3">
+{{--            <a href="{{ route('public-part.programs.preview-program', ['id' => 6]) }}" class="programs__program_v2 program--1">--}}
+{{--                <div class="pp_v2_header">--}}
+{{--                    <img src="{{ asset('/files/images/public-part/program_arrow.svg') }}" alt="{{ __('Arrow') }}">--}}
+{{--                </div>--}}
+{{--                <div class="pp_v2_content">--}}
+{{--                    <img src="{{ asset('/files/images/public-part/writing_2025.svg') }}" alt="{{ __('Program image') }}">--}}
+{{--                    <h1> Pisanje <br> komedije </h1>--}}
+{{--                </div>--}}
+{{--            </a>--}}
+            <a href="{{ route('public-part.programs.preview-program', ['id' => 11]) }}" class="programs__program_v2 program--3">
                 <div class="pp_v2_header">
                     <img src="{{ asset('/files/images/public-part/program_arrow.svg') }}" alt="{{ __('Arrow') }}">
                 </div>
@@ -29,16 +20,7 @@
                     <h1> Primijenjena muzička <br> produkcija </h1>
                 </div>
             </a>
-            <a href="{{ route('public-part.programs.preview-program', ['id' => 9]) }}" class="programs__program_v2 program--4">
-                <div class="pp_v2_header">
-                    <img src="{{ asset('/files/images/public-part/program_arrow.svg') }}" alt="{{ __('Arrow') }}">
-                </div>
-                <div class="pp_v2_content">
-                    <img src="{{ asset('/files/images/public-part/coding_2025.svg') }}" alt="{{ __('Program image') }}">
-                    <h1> Razvoj <br> računarskih igara </h1>
-                </div>
-            </a>
-            <a href="{{ route('public-part.programs.preview-program', ['id' => 10]) }}" class="programs__program_v2 program--5">
+            <a href="{{ route('public-part.programs.preview-program', ['id' => 12]) }}" class="programs__program_v2 program--5">
                 <div class="pp_v2_header">
                     <img src="{{ asset('/files/images/public-part/program_arrow.svg') }}" alt="{{ __('Arrow') }}">
                 </div>
@@ -47,15 +29,33 @@
                     <h1> Grafički dizajn i <br> animacija </h1>
                 </div>
             </a>
-            <a href="{{ route('public-part.critical-thinking') }}" class="programs__program_v2 program--6">
+            <a href="{{ route('public-part.programs.preview-program', ['id' => 13]) }}" class="programs__program_v2 program--2">
                 <div class="pp_v2_header">
                     <img src="{{ asset('/files/images/public-part/program_arrow.svg') }}" alt="{{ __('Arrow') }}">
                 </div>
                 <div class="pp_v2_content">
-                    <img src="{{ asset('/files/images/public-part/think_2025.svg') }}" alt="{{ __('Program image') }}">
-                    <h1> Angažovani rad i <br> kritičko razmišljanje </h1>
+                    <img src="{{ asset('/files/images/public-part/creative_production.svg') }}" alt="{{ __('Program image') }}">
+                    <h1> Kreativna <br> produkcija </h1>
                 </div>
             </a>
+{{--            <a href="{{ route('public-part.programs.preview-program', ['id' => 9]) }}" class="programs__program_v2 program--4">--}}
+{{--                <div class="pp_v2_header">--}}
+{{--                    <img src="{{ asset('/files/images/public-part/program_arrow.svg') }}" alt="{{ __('Arrow') }}">--}}
+{{--                </div>--}}
+{{--                <div class="pp_v2_content">--}}
+{{--                    <img src="{{ asset('/files/images/public-part/coding_2025.svg') }}" alt="{{ __('Program image') }}">--}}
+{{--                    <h1> Razvoj <br> računarskih igara </h1>--}}
+{{--                </div>--}}
+{{--            </a>--}}
+{{--            <a href="{{ route('public-part.critical-thinking') }}" class="programs__program_v2 program--6">--}}
+{{--                <div class="pp_v2_header">--}}
+{{--                    <img src="{{ asset('/files/images/public-part/program_arrow.svg') }}" alt="{{ __('Arrow') }}">--}}
+{{--                </div>--}}
+{{--                <div class="pp_v2_content">--}}
+{{--                    <img src="{{ asset('/files/images/public-part/think_2025.svg') }}" alt="{{ __('Program image') }}">--}}
+{{--                    <h1> Angažovani rad i <br> kritičko razmišljanje </h1>--}}
+{{--                </div>--}}
+{{--            </a>--}}
 
 {{--            <a href="{{ route('public-part.programs.preview-program', ['id' => 1]) }}" class="programs__program program--1">--}}
 {{--                <div class="programs__program_h">--}}

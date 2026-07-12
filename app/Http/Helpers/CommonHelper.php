@@ -26,6 +26,10 @@ class CommonHelper{
     }
 
     public static function getBcgColor($program_id): int{
-        return (int)($program_id - self::getCurrentSeason()->subtract);
+        // Make it a little bit dummy for effective :D
+        if($program_id == 11) return 3;
+        else if($program_id == 12) return 5;
+        else return 2;
+        // return (int)($program_id - self::getCurrentSeason()->subtract);
     }
 }

@@ -46,7 +46,7 @@
             <div class="hero__heading">
                 <div class="boris_wrapper">
                     <h2 class="hero-section__heading"> {{ __('Helem Nejse Talent Akademija') }} </h2>
-                    <div class="hero-section__subheading">{{ __('Sedmodnevna ljetna škola iz oblasti kreativnih industrija u Sarajevu!') }}</div>
+                    <div class="hero-section__subheading">{{ __('Ljetna škola iz oblasti kreativnih industrija u Sarajevu!') }}</div>
                 </div>
                 @if(auth()->check() and ((Auth()->user()->role == 'user' and Auth()->user()->myProgram())))
                     <a href="{{ route('dashboard.my-schedule') }}" class="hero-section__bottom-section-button">
@@ -60,7 +60,7 @@
             </div>
             <div class="hero-section__bottom-section">
                 <div class="hero-section__bottom-section-text">
-                    {{ __('Početak 02. augusta 2025. godine!') }}
+                    {{ __('Početak 17. septembar 2026. godine.') }}
                 </div>
 
                 <a href="#features" class="hero-section__bottom-section-learn-more">
@@ -78,7 +78,7 @@
         <div class="features__container">
             <div class="features__content">
                 <h2 class="features__heading">{{ __('Proširi svoja znanja i napravi prvi korak prema budućoj karijeri') }}</h2>
-                <p class="features__text">{{ __('Kroz sedmodnevni program Akademije, uz učešće preko 50 predavača iz oblasti književnosti, informacionih tehnologija, dizajna, animacije, novinarstva i muzičke produkcije pomažemo vam u razvoju vaših vještina i pružamo vam stvarni uvid u svijet kreativnih industrija.') }}</p>
+                <p class="features__text">{{ __('Program Akademije okuplja predavače iz oblasti kreativne produkcije, festivalskog života, filmova, serija i predstava, kao i iz oblasti muzičke produkcije, dizajna i animacije, koji kroz praktičan rad i razmjenu iskustava pomažu polaznicima da razviju svoje vještine i steknu stvarni uvid u svijet kreativnih industrija.') }}</p>
                 <a href="#programs" class="features__button">
                     <img src="{{ asset('files/images/public-part/twisted-arrow.svg') }}" alt="Twisted arrow">
                     {{ __('Programi Akademije') }}
@@ -92,8 +92,8 @@
     <div class="features features--variant-one">
         <div class="features__container">
             <div class="features__content">
-                <h2 class="features__heading">{{ __('Posjete studijima, redakcijama i firmama') }}</h2>
-                <p class="features__text">{{ __('Pored teoretskih predavanja, polaznici Akademije imaju priliku slušati iskustva i razgovarati s etabliranim profesionalcima iz industrije, raditi praktične radove i posjetiti muzičke studije, novinarske redakcije svih vrsta, moderno opremljene univerzitetske prostorije, te neke od najuspješnijih regionalnih firmi.') }}</p>
+                <h2 class="features__heading">{{ __('Posjete studijima, pozorištima i firmama') }}</h2>
+                <p class="features__text">{{ __('Pored teoretskih predavanja, polaznici Akademije imaju priliku slušati iskustva i razgovarati s etabliranim profesionalcima iz industrije, raditi praktične radove i posjetiti muzičke studije, teatarske i festivalske prostore, moderno opremljene univerzitetske prostorije, te neke od najuspješnijih regionalnih firmi.') }}</p>
                 <a href="{{ route('public-part.locations.locations') }}" class="features__button">
                     <img src="{{ asset('files/images/public-part/twisted-arrow.svg') }}" alt="Twisted arrow">
                     {{ __('Lokacije Akademije') }}
@@ -108,7 +108,7 @@
         <div class="features__container">
             <div class="features__content">
                 <h2 class="features__heading">{{ __('Kritičko mišljenje') }}</h2>
-                <p class="features__text">{{ __('Pored pet programa Akademiji, svi polaznici slušaju i šesti program nazvan Kritičko mišljenje koji stavlja akcenat na vezu između kreativnih industrija i građanskog aktivizma, spajanja tehnologije i umjetnosti, te stvaranju boljeg društva i zajednice.') }}</p>
+                <p class="features__text">{{ __('Pored zvaničnih programa Akademije, svi polaznici slušaju i zasebni program nazvan Kritičko mišljenje koji stavlja akcenat na vezu između kreativnih industrija i građanskog aktivizma, spajanja tehnologije i umjetnosti, te stvaranju boljeg društva i zajednice.') }}</p>
                 <a href="{{ route('public-part.critical-thinking') }}" class="features__button">
                     <img src="{{ asset('files/images/public-part/twisted-arrow.svg') }}" alt="Twisted arrow">
                     {{ __('Više') }}

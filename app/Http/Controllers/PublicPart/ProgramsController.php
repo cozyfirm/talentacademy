@@ -65,9 +65,19 @@ class ProgramsController extends Controller{
         ]);
     }
     public function moreAbout ($id){
-        return view('public-part.app.home.single-page', [
-            'page' => SinglePage::where('id', $id + 9)->first()
-        ]);
+        if($id == 11 or $id == 12 or $id == 13){
+            if($id == 11) $pageId = 17;
+            if($id == 12) $pageId = 19;
+            if($id == 13) $pageId = 22;
+
+            return view('public-part.app.home.single-page', [
+                'page' => SinglePage::where('id', $pageId)->first()
+            ]);
+        }else{
+            return view('public-part.app.home.single-page', [
+                'page' => SinglePage::where('id', $id + 9)->first()
+            ]);
+        }
     }
     public function getAjaxPrivateSessions(Request $request){
         try{
