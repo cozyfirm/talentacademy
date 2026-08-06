@@ -41,6 +41,4 @@ Prijave su otvorene do desetog augusta. Ne propustite priliku da budete dio ovog
 Ako znaš da imaš šta reći, pokazati ili stvoriti, a tražiš prostor, znanje i podršku – Helem Nejse Talent Akademija 2026. je prava prilika. Prijavi se, nauči nešto novo, poveži se s ljudima sličnih interesa i provedi tri dana koja ti mogu promijeniti tok karijere.
 
 Vidimo se u Sarajevu!
-
-<a href="{{ env('APP_DOMAIN') }}"> Helem Nejse Talent akademija </a>
 @endcomponent
