@@ -32,7 +32,7 @@ class SendEmail extends Command
     public function handle()
     {
         $users = User::where('role', '=','user')
-            ->where('id', '>', 387)
+            ->where('id', '>', 470)
             ->where('created_at', '<', '2026-07-01')
             ->get();
 
@@ -44,10 +44,21 @@ class SendEmail extends Command
                 try{
                     // Send an email
 
-                    Mail::to($user->email)->send(new NotifyAttendees());
+                    // Mail::to($user->email)->send(new NotifyAttendees());
                     // Mail::to('kaapiic@gmail.com')->send(new NotifyAttendees());
                     sleep(5);
                     dump(Carbon::now()->format('H:i:s') . " [SENT] Email sent to: (" . $user->id . ") " . $user->email);
+
+                    $message = Carbon::now()->format('H:i:s')
+                        . " [SENT] Email sent to: ({$user->id}) {$user->email}";
+
+                    file_put_contents(
+                        storage_path('logs/email-sending.log'),
+                        $message . PHP_EOL,
+                        FILE_APPEND | LOCK_EX
+                    );
+
+                    break;
                 }catch (\Exception $e){
                     dump(Carbon::now()->format('H:i:s') . " [ERROR] Error while sending email to: " . $user->email);
                 }
