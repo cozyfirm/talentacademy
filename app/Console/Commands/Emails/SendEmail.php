@@ -58,9 +58,18 @@ class SendEmail extends Command
                         FILE_APPEND | LOCK_EX
                     );
 
-                    break;
                 }catch (\Exception $e){
-                    dump(Carbon::now()->format('H:i:s') . " [ERROR] Error while sending email to: " . $user->email);
+                    $message = Carbon::now()->format('H:i:s')
+                        . " [ERROR] Error while sending email to: ({$user->id}) {$user->email}"
+                        . " | " . $e->getMessage();
+
+                    dump($message);
+
+                    file_put_contents(
+                        storage_path('logs/email-sending.log'),
+                        $message . PHP_EOL,
+                        FILE_APPEND | LOCK_EX
+                    );
                 }
             }
         }
