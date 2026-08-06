@@ -31,7 +31,10 @@ class SendEmail extends Command
      */
     public function handle()
     {
-        $users = User::where('role', '=', 'user')->get();
+        $users = User::where('role', '=','user')
+            ->where('id', '>', 387)
+            ->where('created_at', '<', '2026-07-01')
+            ->get();
 
         $counter = 0;
         foreach ($users as $user){
@@ -44,7 +47,7 @@ class SendEmail extends Command
                     Mail::to($user->email)->send(new NotifyAttendees());
                     // Mail::to('kaapiic@gmail.com')->send(new NotifyAttendees());
                     sleep(5);
-                    dump(Carbon::now()->format('H:i:s') . " [SENT] Email sent to: " . $user->email);
+                    dump(Carbon::now()->format('H:i:s') . " [SENT] Email sent to: (" . $user->id . ") " . $user->email);
                 }catch (\Exception $e){
                     dump(Carbon::now()->format('H:i:s') . " [ERROR] Error while sending email to: " . $user->email);
                 }
