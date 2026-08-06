@@ -44,7 +44,7 @@ class SendEmail extends Command
                 try{
                     // Send an email
 
-                    // Mail::to($user->email)->send(new NotifyAttendees());
+                    Mail::to($user->email)->send(new NotifyAttendees());
                     // Mail::to('kaapiic@gmail.com')->send(new NotifyAttendees());
                     sleep(5);
                     dump(Carbon::now()->format('H:i:s') . " [SENT] Email sent to: (" . $user->id . ") " . $user->email);
