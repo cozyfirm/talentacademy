@@ -2,7 +2,7 @@
 
 <!-- Title of page -->
 @section('title'){{ $post->title }}@endsection
-@section('meta_uri'){{ route('public-part.archive.critical-thinking.preview', ['id' => $post->id]) }}@endsection
+@section('meta_uri'){{ route('public-part.archive.critical-thinking.preview', ['year' => $year, 'id' => $post->id]) }}@endsection
 @section('meta_title'){{ $post->title }}@endsection
 @section('meta_desc'){{ $post->short_desc }}@endsection
 @section('meta_img'){{ isset($post->imgOne) ? asset( $post->imgOne->getFile() ) : '' }}@endsection
@@ -115,7 +115,7 @@
             </div>
             <div class="news__list slider_w_2">
                 @foreach($blogPosts as $post)
-                    <div class="news__list-item" uri="{{ route('public-part.archive.critical-thinking.preview', ['id' => $post->id ]) }}">
+                    <div class="news__list-item" uri="{{ route('public-part.archive.critical-thinking.preview', ['year' => $year, 'id' => $post->id ]) }}">
                         <div class="img_ww">
                             <img src="{{ isset($post->mainImg) ? asset($post->mainImg->getFile()) : '' }}" alt="{{ __('News image') }}" class="news__list-item-image">
                         </div>

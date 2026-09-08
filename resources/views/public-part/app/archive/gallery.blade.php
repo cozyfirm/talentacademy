@@ -35,7 +35,7 @@
                 <p>{{ __('Ovdje možete pronaći arhivske materijale prethodnih izdanja HNTA.') }}</p>
             </div>
 
-            <div class="photo-gallery-wrapper">
+            <div class="photo-gallery-wrapper" year="{{ $year }}">
                 @foreach($images as $image)
                     <div class="img__gallery__wrapper" attr-id="{{ $image->id }}" title="{{ __('Pregledajte fotografiju') }}">
                         <img src="{{ asset($image->path . '/' . $image->name) }}">

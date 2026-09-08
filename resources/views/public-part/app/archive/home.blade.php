@@ -13,21 +13,21 @@
             </div>
 
             <div class="archive__body">
-                <a href="{{ route('public-part.archive.photo-gallery') }}" class="ab__link">
+                <a href="{{ route('public-part.archive.photo-gallery', ['year' => $year]) }}" class="ab__link">
                     <div class="ab__wrapper">
                         <div class="ab__w__img">
                             <img src="{{ asset('files/images/public-part/archive/gallery-2.svg') }}" alt="">
                         </div>
                     </div>
                 </a>
-                <a href="{{ route('public-part.archive.lecturers.lecturers') }}" class="ab__link">
+                <a href="{{ route('public-part.archive.lecturers.lecturers', ['year' => $year]) }}" class="ab__link">
                     <div class="ab__wrapper">
                         <div class="ab__w__img">
                             <img src="{{ asset('files/images/public-part/archive/lecturers-2.svg') }}" alt="">
                         </div>
                     </div>
                 </a>
-                <a href="{{ route('public-part.archive.critical-thinking') }}" class="ab__link">
+                <a href="{{ route('public-part.archive.critical-thinking', ['year' => $year]) }}" class="ab__link">
                     <div class="ab__wrapper">
                         <div class="ab__w__img">
                             <img src="{{ asset('files/images/public-part/archive/thinking-2.svg') }}" alt="">

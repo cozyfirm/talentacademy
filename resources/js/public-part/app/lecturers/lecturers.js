@@ -85,6 +85,7 @@ $(document).ready(function (){
         });
 
         if(loadMoreLocked) return;
+        let year = ($("#archive").val() === "true") ? $(".lecturers").attr('year') : null;
 
         $.ajax({
             url: ($("#archive").val() === "true") ? loadMoreArchiveUri : loadMoreUri,
@@ -92,7 +93,8 @@ $(document).ready(function (){
             dataType: "json",
             data: {
                 lastID: lastID,
-                program_id : $("#program_id").val()
+                program_id : $("#program_id").val(),
+                year: year
             },
             success: function success(response) {
                 let code = response['code'];

@@ -23,7 +23,8 @@ $(document).ready(function (){
             method: 'POST',
             dataType: "json",
             data: {
-                lastID: lastID
+                lastID: lastID,
+                year: $(".photo-gallery-wrapper").attr('year')
             },
             success: function success(response) {
                 let code = response['code'];
@@ -75,6 +76,7 @@ $(document).ready(function (){
             dataType: "json",
             data: {
                 attrID: attrID,
+                year: $(".photo-gallery-wrapper").attr('year')
             },
             success: function success(response) {
                 let data = response['data'];

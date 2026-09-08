@@ -27,15 +27,19 @@
         <a href="{{ route('public-part.scholarship') }}">{{ __('Stipendije') }}</a>
         <a href="{{ route('public-part.blog.blog') }}">{{ __('Blog') }}</a>
         <a href="{{ route('public-part.locations.locations') }}">{{ __('Lokacije') }}</a>
-        <a href="{{ route('public-part.archive') }}">{{ __('Arhiva') }}</a>
+{{--        <a href="{{ route('public-part.archive') }}">{{ __('Arhiva') }}</a>--}}
+        <a class="show-header-submenu" submenu="archive">
+            {{ __('Arhiva') }}
+            <i class="fas fa-chevron-down"></i>
+        </a>
         <a href="{{ route('public-part.alumni') }}">{{ __('Alumni') }}</a>
-        <a class="show-header-submenu">
+        <a class="show-header-submenu" submenu="programs">
             {{ __('Programi') }}
             <i class="fas fa-chevron-down"></i>
         </a>
     </div>
 
-    <div class="header__submenu">
+    <div class="header__submenu" id="programs-submenu">
         <a href="{{ route('public-part.programs.preview-program', ['id' => 11]) }}">
             <div class="header__submenu_elem">
                 <img src="{{ asset('/files/images/public-part/2025/prod.svg') }}" alt="{{ __('Programs image #1') }}" class="programs__program-image">
@@ -55,6 +59,19 @@
             </div>
         </a>
     </div>
+
+    <div class="header__submenu header__submenu_archive" id="archive-submenu">
+        <a href="{{ route('public-part.archive', ['year' => '2024']) }}">
+            <div class="header__submenu_elem">
+                <p>{{ __('2024 godina') }}</p>
+            </div>
+        </a>
+        <a href="{{ route('public-part.archive', ['year' => '2025']) }}">
+            <div class="header__submenu_elem">
+                <p>{{ __('2025 godina') }}</p>
+            </div>
+        </a>
+    </div>
 </header>
 <div class="mobile-menu">
     <div class="mobile-menu__header">
@@ -69,25 +86,29 @@
         <a href="{{ route('public-part.scholarship') }}" class="mobile-menu__content-link">{{ __('Stipendije') }}</a>
         <a href="{{ route('public-part.blog.blog') }}" class="mobile-menu__content-link">{{ __('Blog') }}</a>
         <a href="{{ route('public-part.locations.locations') }}" class="mobile-menu__content-link">{{ __('Lokacije') }}</a>
-        <a href="{{ route('public-part.archive') }}" class="mobile-menu__content-link">{{ __('Arhiva') }}</a>
+{{--        <a href="{{ route('public-part.archive') }}" class="mobile-menu__content-link">{{ __('Arhiva') }}</a>--}}
+        <a class="mobile-menu__content-link open-mobile-submenu" data-submenu="archive">
+            {{ __('Arhiva') }}
+            <i class="fas fa-chevron-down"></i>
+        </a>
+        <div class="mobile-menu__submenu" id="mobile-archive-submenu">
+            <a href="{{ route('public-part.archive', ['year' => '2024']) }}">
+                <div class="mobile-menu__submenu-item">
+                    <p>{{ __('2024 godina') }}</p>
+                </div>
+            </a>
+            <a href="{{ route('public-part.archive', ['year' => '2025']) }}">
+                <div class="mobile-menu__submenu-item">
+                    <p>{{ __('2025 godina') }}</p>
+                </div>
+            </a>
+        </div>
         <a href="{{ route('public-part.alumni') }}" class="mobile-menu__content-link">{{ __('Alumni') }}</a>
-        <a class="mobile-menu__content-link" id="open-mobile-submenu">
+        <a class="mobile-menu__content-link open-mobile-submenu" data-submenu="programs">
             {{ __('Programi akademije') }}
             <i class="fas fa-chevron-down"></i>
         </a>
-        <div class="mobile-menu__submenu">
-{{--            <a href="{{ route('public-part.programs.preview-program', ['id' => 6]) }}">--}}
-{{--                <div class="mobile-menu__submenu-item">--}}
-{{--                    <img src="{{ asset('files/images/public-part/2025/writing_svg.svg') }}" alt="{{ __('Programs image #1') }}" class="programs__program-image">--}}
-{{--                    <p>{{ __('Pisanje komedije') }}</p>--}}
-{{--                </div>--}}
-{{--            </a>--}}
-{{--            <a href="{{ route('public-part.programs.preview-program', ['id' => 9]) }}">--}}
-{{--                <div class="mobile-menu__submenu-item">--}}
-{{--                    <img src="{{ asset('/files/images/public-part/2025/coding.svg') }}" alt="{{ __('Programs image #4') }}" class="programs__program-image">--}}
-{{--                    <p>{{ __('Razvoj računarskih igara') }}</p>--}}
-{{--                </div>--}}
-{{--            </a>--}}
+        <div class="mobile-menu__submenu" id="mobile-programs-submenu">
             <a href="{{ route('public-part.programs.preview-program', ['id' => 11]) }}">
                 <div class="mobile-menu__submenu-item">
                     <img src="{{ asset('/files/images/public-part/2025/prod.svg') }}" alt="{{ __('Programs image #3') }}" class="programs__program-image">

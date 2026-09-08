@@ -21,8 +21,10 @@ class ArchiveController extends Controller{
      *
      * @return View
      */
-    public function home(): View{
-        return view($this->_path . 'home');
+    public function home($year): View{
+        return view($this->_path . 'home', [
+            'year' => $year
+        ]);
     }
 
     /**
@@ -30,14 +32,19 @@ class ArchiveController extends Controller{
      *
      * @return View
      */
-    public function criticalThinking(): View{
+    public function criticalThinking($year): View{
+        $season = 1;
+        if($year == 2025) $season = 2;
+        else if($year == 2026) $season = 3;
+
         return view('public-part.app.archive.critical-thinking.home', [
-            'posts' => Blog::whereHas('seasonRel', function ($q){
-                $q->where('id', '=', 1);
+            'posts' => Blog::whereHas('seasonRel', function ($q) use ($season) {
+                $q->where('id', '=', $season);
             })->where('published', '=', 1)->where('category', '=', -2)->orderBy('id', 'DESC')->take(30)->get(),
             'showAll' => true,
             'criticalThinking' => true,
-            'page' => SinglePage::where('id', 8)->first()
+            'page' => SinglePage::where('id', 8)->first(),
+            'year' => $year
         ]);
     }
 
@@ -47,17 +54,22 @@ class ArchiveController extends Controller{
      * @param $id
      * @return View
      */
-    public function criticalThinkingPreview($id): View{
+    public function criticalThinkingPreview($year, $id): View{
         $post = Blog::where('id', '=', $id)->first();
+
+        $season = 1;
+        if($year == 2025) $season = 2;
+        else if($year == 2026) $season = 3;
 
         return view('public-part.app.archive.critical-thinking.preview', [
             'post' => $post,
-            'blogPosts' => Blog::whereHas('seasonRel', function ($q){
-                $q->where('id', '=', 1);
+            'blogPosts' => Blog::whereHas('seasonRel', function ($q) use ($season){
+                $q->where('id', '=', $season);
             })->where('published', '=', 1)->where('category', '=', -2)->where('id', '!=', $post->id)->orderBy('id', 'DESC')->take(6)->get(),
             'showAll' => true,
             'criticalThinking' => true,
-            'archive' => true
+            'archive' => true,
+            'year' => $year
         ]);
     }
 
@@ -66,9 +78,14 @@ class ArchiveController extends Controller{
      *
      * @return View
      */
-    public function gallery(): View{
+    public function gallery($year): View{
+        $season_id = 1;
+        if($year == 2025) $season_id = 2;
+        else if($year == 2026) $season_id = 3;
+
         return view($this->_path . 'gallery', [
-            'images' => Gallery::orderBy('id', 'desc')->take(9)->get()
+            'images' => Gallery::where('season_id', '=', $season_id)->orderBy('id', 'desc')->take(9)->get(),
+            'year' => $year
         ]);
     }
 
@@ -79,13 +96,20 @@ class ArchiveController extends Controller{
      */
     public function loadMoreImages(Request $request): bool|string{
         try{
-            $last = Gallery::orderBy('id', 'ASC')->first();
-            $images = Gallery::where('id', '<', $request->lastID)->orderBy('id', 'desc')->take(6)->get();
+            $year = (int)$request->get('year');
+            $season_id = 1;
+            if($year == 2025) $season_id = 2;
+            else if($year == 2026) $season_id = 3;
+
+            $last = Gallery::where('season_id', '=', $season_id)->orderBy('id', 'ASC')->first();
+            $images = Gallery::where('season_id', '=', $season_id)->where('id', '<', $request->lastID)->orderBy('id', 'desc')->take(6)->get();
             $isLast = false;
 
             foreach ($images as $image) {
                 if($image->id == $last->id) $isLast = true;
             }
+
+            if(!$images->count()) $isLast = true;
 
             return $this->jsonResponse('0000', 'Success', [
                 'images' => $images,
@@ -101,9 +125,14 @@ class ArchiveController extends Controller{
      */
     public function fetchImage(Request $request): bool|string{
         try{
-            $previous = Gallery::where('id', '>', $request->attrID)->orderBy('id', 'asc')->first();
-            $image    = Gallery::where('id', '=', $request->attrID)->first();
-            $next     = Gallery::where('id', '<', $request->attrID)->orderBy('id', 'desc')->first();
+            $year = (int)$request->get('year');
+            $season_id = 1;
+            if($year == 2025) $season_id = 2;
+            else if($year == 2026) $season_id = 3;
+
+            $previous = Gallery::where('season_id', '=', $season_id)->where('id', '>', $request->attrID)->orderBy('id', 'asc')->first();
+            $image    = Gallery::where('season_id', '=', $season_id)->where('id', '=', $request->attrID)->first();
+            $next     = Gallery::where('season_id', '=', $season_id)->where('id', '<', $request->attrID)->orderBy('id', 'desc')->first();
 
             if(!$previous){
                 $previous = Gallery::orderBy('id', 'asc')->first();

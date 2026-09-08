@@ -95,13 +95,16 @@
     /* Menu second part */
     .header__submenu{
         position: relative; width: $container-width; left: calc(50% - 750px); display: inline-flex; justify-content: space-between; background: $dark;
+        &.header__submenu_archive{
+            justify-content: flex-start;
+        }
         a{
             .header__submenu_elem{
                 display: flex; align-items: center; gap: 24px;
                 img{
                     height: 30px;
                 }
-                p{
+                p, a{
                     color: #ffffff; font-weight: bold; margin: 0px;
                 }
             }

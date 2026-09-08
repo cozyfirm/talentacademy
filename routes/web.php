@@ -160,24 +160,25 @@ Route::prefix('')->group(function () {
      *  Archive
      */
     Route::prefix('archive')->group(function () {
-        Route::get ('/',                       [ArchiveController::class, 'home'])->name('public-part.archive');
+        Route::get ('/year/{year}',                     [ArchiveController::class, 'home'])->name('public-part.archive');
 
         Route::prefix('lecturers')->group(function () {
-            Route::get ('/',                       [ArchiveLecturersController::class, 'lecturers'])->name('public-part.archive.lecturers.lecturers');
-            Route::get ('/filter/{program_id}',    [ArchiveLecturersController::class, 'filter'])->name('public-part.archive.lecturers.filter');
+            Route::get ('/year/{year}',            [ArchiveLecturersController::class, 'lecturers'])->name('public-part.archive.lecturers.lecturers');
+            Route::get ('/filter/{year}/{program_id}',    [ArchiveLecturersController::class, 'filter'])->name('public-part.archive.lecturers.filter');
+
             Route::get ('/preview/{id}',           [ArchiveLecturersController::class, 'single_lecturer'])->name('public-part.archive.lecturers.single-lecturer');
             Route::get ('/preview/{id}/{page}',    [ArchiveLecturersController::class, 'single_lecturer'])->name('public-part.archive.lecturers.single-lecturer.page');
             Route::post('/load-more',              [ArchiveLecturersController::class, 'loadMore'])->name('public-part.archive.lecturers.load-more');
             Route::post('/filter-by-name',         [ArchiveLecturersController::class, 'filterByName'])->name('public-part.archive.lecturers.filter-by-name');
         });
 
-        Route::prefix('critical-thinking')->group(function () {
+        Route::prefix('critical-thinking/{year}')->group(function () {
             Route::get ('/',                       [ArchiveController::class, 'criticalThinking'])->name('public-part.archive.critical-thinking');
             Route::get ('/preview/{id}',           [ArchiveController::class, 'criticalThinkingPreview'])->name('public-part.archive.critical-thinking.preview');
         });
 
         Route::prefix('photo-gallery')->group(function () {
-            Route::get ('/',                       [ArchiveController::class, 'gallery'])->name('public-part.archive.photo-gallery');
+            Route::get ('/year/{year}',            [ArchiveController::class, 'gallery'])->name('public-part.archive.photo-gallery');
             Route::post('/load-more',              [ArchiveController::class, 'loadMoreImages'])->name('public-part.archive.photo-gallery.load-more');
             Route::post('/fetch-image',            [ArchiveController::class, 'fetchImage'])->name('public-part.archive.photo-gallery.fetch-image');
         });

@@ -19,36 +19,49 @@ class ArchiveLecturersController extends Controller{
     protected int $_take = 6;
     protected int $_pages = 6;
 
-    public function getData($lecturers, int $program_id = 0): View{
+    public function getData($year, $season_id, $lecturers, int $program_id = 0): View{
+
+
         return view('public-part.app.lecturers.lecturers', [
             'lecturers' => $lecturers,
-            'lecPrograms' => Program::whereHas('seasonRel', function ($q){
-                $q->where('id', '=', 1);
+            'lecPrograms' => Program::whereHas('seasonRel', function ($q) use ($season_id){
+                $q->where('id', '=', $season_id);
             })->get(),
             'program_id' => $program_id,
-            'archive' => true
+            'archive' => true,
+            'year' => $year
         ]);
     }
-    public function lecturers(): View{
-        $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
-            $q->where('id', '=', 1);
+    public function lecturers($year): View{
+        $season_id = 1;
+        if($year == 2025) $season_id = 2;
+        else if($year == 2026) $season_id = 3;
+
+        $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q) use ($season_id){
+            $q->where('id', '=', $season_id);
         })->where('role', 'presenter')->orderBy('id', 'DESC')->take($this->_take)->get();
-        return $this->getData($lecturers);
+
+
+        return $this->getData($year, $season_id, $lecturers);
     }
-    public function filter ($program_id): View | RedirectResponse{
+    public function filter ($year, $program_id): View | RedirectResponse{
+        $season_id = 1;
+        if($year == 2025) $season_id = 2;
+        else if($year == 2026) $season_id = 3;
+
         /**
          *  Get only lecturers from active season; User can be in two different seasons
          */
-        $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
-            $q->where('id', '=', 1);
+        $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q) use ($season_id){
+            $q->where('id', '=', $season_id);
         })->whereHas('sessionsPresenterRel.sessionRel.programRel', function ($query) use($program_id){
             $query->where('id', $program_id);
         })->where('role', 'presenter')->orderBy('id', 'DESC')->take($this->_take)->get();
-        return $this->getData($lecturers, $program_id);
+        return $this->getData($year, $season_id, $lecturers, $program_id);
     }
 
     public function single_lecturer($id, $page = 1): View | RedirectResponse{
-        $lecturer = User::where('id', $id)->first();
+        $lecturer = User::where('id', '=', $id)->first();
         if($lecturer->role != 'presenter') return redirect()->route('public-part.archive');
 
         // Make sure that you call the static method currentPageResolver()
@@ -84,17 +97,22 @@ class ArchiveLecturersController extends Controller{
      */
     public function loadMore(Request $request): bool|string{
         try{
+            $year = (int)$request->get('year');
+            $season_id = 1;
+            if($year == 2025) $season_id = 2;
+            else if($year == 2026) $season_id = 3;
+
             if($request->program_id == 0){
-                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
-                    $q->where('id', '=', 1);
+                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q) use($season_id){
+                    $q->where('id', '=', $season_id);
                 })->where('role', 'presenter')
                     ->where('id', '<', $request->lastID)
                     ->orderBy('id', 'DESC')
                     ->take($this->_take)
                     ->get();
             }else{
-                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
-                    $q->where('id', '=', 1);
+                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q) use ($season_id){
+                    $q->where('id', '=', $season_id);
                 })->whereHas('sessionsPresenterRel.sessionRel.programRel', function ($query) use($request){
                     $query->where('id', $request->program_id);
                 })->where('role', 'presenter')->where('id', '<', $request->lastID)->orderBy('id', 'DESC')->take($this->_take)->get();
