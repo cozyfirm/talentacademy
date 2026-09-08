@@ -125,6 +125,7 @@ $(document).ready(function (){
 
         /* If empty, then allow load more */
         loadMoreLocked = value !== '';
+        let year = ($("#archive").val() === "true") ? $(".lecturers").attr('year') : null;
 
         $.ajax({
             url: ($("#archive").val() === "true") ? filterByNameArchive : filterByName,
@@ -132,7 +133,8 @@ $(document).ready(function (){
             dataType: "json",
             data: {
                 value: value,
-                program_id : $("#program_id").val()
+                program_id : $("#program_id").val(),
+                year: year
             },
             success: function success(response) {
                 let code = response['code'];

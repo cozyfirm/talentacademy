@@ -125,17 +125,22 @@ class ArchiveLecturersController extends Controller{
     }
     public function filterByName(Request $request){
         try{
+            $year = (int)$request->get('year');
+            $season_id = 1;
+            if($year == 2025) $season_id = 2;
+            else if($year == 2026) $season_id = 3;
+
             if($request->program_id == 0){
-                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
-                    $q->where('id', '=', 1);
+                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q) use($season_id){
+                    $q->where('id', '=', $season_id);
                 })->where('role', 'presenter')
                     ->where('name', 'LIKE', '%'. $request->value . '%')
                     ->orderBy('id', 'ASC')
                     ->take($this->_take)
                     ->get();
             }else{
-                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q){
-                    $q->where('id', '=', 1);
+                $lecturers = User::whereHas('sessionsPresenterRel.sessionRel.programRel.seasonRel', function ($q) use($season_id){
+                    $q->where('id', '=', $season_id);
                 })->whereHas('sessionsPresenterRel.sessionRel.programRel', function ($query) use($request){
                     $query->where('id', $request->program_id);
                 })->where('name', 'LIKE', '%'. $request->value . '%')->where('role', 'presenter')->orderBy('id', 'DESC')->take($this->_take)->get();
