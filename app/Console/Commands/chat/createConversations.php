@@ -106,16 +106,16 @@ class createConversations extends Command{
         }
 
         // Add users to group chats
-        $this->addParticipantsToConversation(1, [6,7,8,9,10]);
-        $this->addParticipantsToConversation(2, [6,7,8,9,10]);
+        $this->addParticipantsToConversation(1, [11,12,13]);
+        $this->addParticipantsToConversation(2, [11,12,13]);
 
-        $this->addParticipantsToConversation(3, [6]);
-        $this->addParticipantsToConversation(4, [7]);
-        $this->addParticipantsToConversation(5, [8]);
-        $this->addParticipantsToConversation(6, [9]);
-        $this->addParticipantsToConversation(7, [10]);
+        $this->addParticipantsToConversation(3, [11]);
+        $this->addParticipantsToConversation(4, [12]);
+        $this->addParticipantsToConversation(5, [13]);
+        // $this->addParticipantsToConversation(6, [9]);
+        // $this->addParticipantsToConversation(7, [10]);
 
-        for($i=6; $i<=10; $i++){
+        for($i=11; $i<=13; $i++){
             $usersFromProgram = User::whereHas('applicationRel', function ($q) use ($i){
                 $q->where('app_status', '=', 'accepted')
                     ->whereHas('programRel', function ($q) use($i){
