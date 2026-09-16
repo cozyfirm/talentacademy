@@ -44,7 +44,7 @@ class BulkMessagesController extends Controller{
     public function create (): View{
         return view($this->_path . 'create', [
             'create' => true,
-            'other' => Program::where('id', '>', 5)->pluck('title', 'id')->prepend('Svim korisnicima', 0)->prepend('Draft', 11)
+            'other' => Program::where('id', '>', 10)->pluck('title', 'id')->prepend('Svim korisnicima', 0)->prepend('Draft', 20)
         ]);
     }
 
@@ -97,7 +97,7 @@ class BulkMessagesController extends Controller{
                     ]);
                     $this->createNotification($request, $user, $inbox, $inboxTo);
                 }
-            }else if($request->what >= 6 and $request->what <= 10){
+            }else if($request->what >= 11 and $request->what <= 13){
                 /* Sent to users from specific program */
                 $applications = ProgramApplication::where('program_id', $request->what)->where('app_status', 'accepted')->get();
 
